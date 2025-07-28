@@ -9,7 +9,6 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fiap.itmoura.tech_challenge_restaurant.model.data.OperationDaysTimeData;
-import org.bson.types.ObjectId;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

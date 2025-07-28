@@ -1,7 +1,5 @@
 package com.fiap.itmoura.tech_challenge_restaurant.controller.interfaces;
 
-import java.util.UUID;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;

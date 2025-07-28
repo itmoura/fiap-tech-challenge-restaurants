@@ -19,7 +19,7 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ValidationErrorDTO> handlerMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
         var status = HttpStatus.BAD_REQUEST;
-        List<String> errors = new ArrayList<String>();
+        List<String> errors = new ArrayList<>();
         for (var error : ex.getBindingResult().getFieldErrors()) {
             errors.add(error.getField() + ": " + error.getDefaultMessage());
         }
