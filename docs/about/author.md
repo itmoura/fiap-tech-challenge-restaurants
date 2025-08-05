@@ -14,21 +14,37 @@
 
 ## 🚀 Sobre Mim
 
-Sou um desenvolvedor apaixonado por tecnologia com experiência em desenvolvimento full-stack, arquitetura de software e boas práticas de desenvolvimento. Atualmente cursando **Pós-graduação em Arquitetura de Software** na FIAP, sempre em busca de aprender novas tecnologias e aplicar os melhores padrões de desenvolvimento.
+Sou Engenheiro de Software com mais de 7 anos de experiência em desenvolvimento backend, especializado em Java, Spring Boot, microsserviços e arquitetura escalável. Ao longo da minha trajetória, atuei em empresas de diferentes segmentos como logística, finanças, educação e varejo, sempre com foco em performance, qualidade de código e entrega de valor para o negócio.
+
+Tenho forte vivência com bancos relacionais e não relacionais, mensageria (Kafka, SQS, RabbitMQ), APIs RESTful, CI/CD, e já trabalhei em ambientes que exigem alta disponibilidade e integrações complexas com serviços em nuvem (AWS). Também atuo como full stack quando necessário, utilizando tecnologias como React e Node.js, mas meu foco principal é backend e arquitetura.
+
+Sou movido por desafios técnicos, gosto de contribuir em decisões de arquitetura, e busco constantemente evoluir como referência em engenharia backend, com visão de produto, boas práticas e impacto real.
 
 ### 💼 Experiência Profissional
 
-- **Software Engineer** com foco em desenvolvimento backend
-- Experiência em **arquiteturas distribuídas** e **microservices**
-- Especialista em **Java/Spring Boot** e **Node.js**
-- Conhecimento sólido em **bancos de dados** relacionais e NoSQL
-- Práticas de **DevOps** e **CI/CD**
+### SmartEnvios
+**Software Engineer** | Mar 2022 - Presente
+Engenheiro de Software • Abr/2025 – Atual
+  - Atuação no desenvolvimento de sistemas logísticos com foco em rastreamento em tempo real, performance e escalabilidade. 
+  - Responsável pela arquitetura e desenvolvimento do serviço de Pick and Pack, utilizando Java (Spring Boot), AWS (SQS, Lambda, S3) e Kafka. 
+  - Criação de microsserviços orientados a eventos e APIs RESTful de alta disponibilidade. 
+  - Participação ativa em decisões técnicas, testes automatizados (JUnit, Cucumber) e integração contínua via GitLab CI. 
+  - Apoio ao frontend com React, em telas operacionais para logística.
+**Stack: Java, Spring Boot, AWS, Kafka, PostgreSQL, MongoDB, Docker, GitLab CI, React, RESTful APIs**
+
+### NTT DATA (Projeto: Banco Pan)
+**Desenvolvedor Backend Sênior** | Set 2024 - Abr 2025
+Consultoria técnica no desenvolvimento de microsserviços críticos para processos financeiros.
+- Criação de um gerador de PDFs dinâmicos para cartões, com HTML + conversão sob demanda via BFF. 
+- Desenvolvimento de processo batch para ingestão e transformação de arquivos com envio a fila FIFO e persistência em banco após cálculos. 
+- Aplicação de arquitetura orientada a eventos, boas práticas (Clean Code, SOLID, CI/CD).
+**Stack: Java, Spring Boot, Kafka, filas FIFO, HTML dinâmico, SQL Server, MongoDB, mensageria**
 
 ### 🎓 Formação Acadêmica
 
 - **Pós-graduação em Arquitetura de Software** - FIAP (em andamento)
-- **Bacharelado em Sistemas de Informação**
-- Diversas certificações em tecnologias cloud e desenvolvimento
+- **Pós-graduação Lato Sensu em Liderança e Gestão em Tecnologia**
+- **Bacharelado em Engenharia de Software** - INATEL
 
 ## 🛠️ Stack Tecnológica
 
