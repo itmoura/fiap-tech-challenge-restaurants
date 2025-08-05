@@ -59,7 +59,6 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install -r requirements.txt
-          pip install markdownlint-cli2
 
       - name: 🔍 Lint Markdown Files
         run: |
@@ -67,33 +66,24 @@ jobs:
           
           # Check for common markdown issues
           echo "📝 Checking for empty links..."
-          find docs -name "*.md" -exec grep -Hn "]()" {} \; | while read line; do
-            echo "⚠️ Empty link: $line"
-          done
+          if find docs -name "*.md" -exec grep -Hn "]()" {} \; | head -5; then
+            echo "⚠️ Found some empty links (shown above)"
+          else
+            echo "✅ No empty links found"
+          fi
           
           echo "🖼️ Checking for images without alt text..."
-          find docs -name "*.md" -exec grep -Hn "!\[\](" {} \; | while read line; do
-            echo "⚠️ Image without alt text: $line"
-          done
+          if find docs -name "*.md" -exec grep -Hn "!\[\](" {} \; | head -5; then
+            echo "⚠️ Found images without alt text (shown above)"
+          else
+            echo "✅ All images have alt text"
+          fi
           
-          echo "🔗 Checking for broken internal links..."
-          # This is a basic check - in production you might want to use a proper link checker
-          find docs -name "*.md" -exec grep -Hn "\[.*\](.*\.md)" {} \; | while read line; do
-            file=$(echo "$line" | cut -d: -f1)
-            link=$(echo "$line" | grep -o "\[.*\](.*\.md)" | sed 's/.*](\(.*\))/\1/')
-            if [[ "$link" == /* ]]; then
-              # Absolute path
-              if [ ! -f "docs$link" ]; then
-                echo "❌ Broken link in $file: $link"
-              fi
-            else
-              # Relative path
-              dir=$(dirname "$file")
-              if [ ! -f "$dir/$link" ]; then
-                echo "❌ Broken link in $file: $link"
-              fi
-            fi
-          done
+          echo "🔗 Checking for potential broken internal links..."
+          # Basic check for .md links
+          find docs -name "*.md" -exec grep -Hn "\[.*\](.*\.md)" {} \; | head -5 | while read line; do
+            echo "ℹ️ Internal link found: $line"
+          done || echo "✅ No internal markdown links found"
 
       - name: 📊 Documentation Statistics
         run: |

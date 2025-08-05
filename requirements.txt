@@ -20,6 +20,3 @@ cairocffi>=1.6.0
 # Additional utilities
 Pillow>=10.0.0
 requests>=2.31.0
-
-# Development tools (optional)
-markdownlint-cli2>=0.10.0
