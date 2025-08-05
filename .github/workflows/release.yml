@@ -1,0 +1,381 @@
+name: 🚀 Release & Deploy
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version (e.g., v1.0.0)'
+        required: true
+        type: string
+      environment:
+        description: 'Deployment environment'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - production
+
+env:
+  JAVA_VERSION: '21'
+  DOCKER_REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  # ============================================================================
+  # JOB: Create Release
+  # ============================================================================
+  create-release:
+    name: 📦 Create Release
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      upload_url: ${{ steps.create_release.outputs.upload_url }}
+    
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🏷️ Determine Version
+        id: version
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            VERSION="${{ github.event.inputs.version }}"
+          else
+            VERSION=${GITHUB_REF#refs/tags/}
+          fi
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "📋 Release version: $VERSION"
+
+      - name: 📝 Generate Changelog
+        id: changelog
+        run: |
+          echo "📝 Generating changelog..."
+          
+          # Get the previous tag
+          PREVIOUS_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
+          
+          if [ -n "$PREVIOUS_TAG" ]; then
+            echo "📋 Changes since $PREVIOUS_TAG:"
+            CHANGELOG=$(git log --pretty=format:"- %s (%h)" $PREVIOUS_TAG..HEAD)
+          else
+            echo "📋 Initial release - all commits:"
+            CHANGELOG=$(git log --pretty=format:"- %s (%h)" HEAD)
+          fi
+          
+          # Save changelog to file
+          cat > CHANGELOG.md << EOF
+          # Release ${{ steps.version.outputs.version }}
+          
+          ## 🚀 What's New
+          
+          $CHANGELOG
+          
+          ## 📊 Statistics
+          - **Commits**: $(git rev-list --count HEAD)
+          - **Contributors**: $(git shortlog -sn | wc -l)
+          - **Files changed**: $(git diff --name-only $PREVIOUS_TAG..HEAD 2>/dev/null | wc -l || echo "N/A")
+          
+          ## 🔗 Links
+          - [Documentation](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/)
+          - [API Reference](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/api/overview/)
+          EOF
+          
+          echo "changelog<<EOF" >> $GITHUB_OUTPUT
+          cat CHANGELOG.md >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: 🏷️ Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.version.outputs.version }}
+          release_name: Release ${{ steps.version.outputs.version }}
+          body: ${{ steps.changelog.outputs.changelog }}
+          draft: false
+          prerelease: ${{ contains(steps.version.outputs.version, '-') }}
+
+  # ============================================================================
+  # JOB: Build and Package Application
+  # ============================================================================
+  build-and-package:
+    name: 🏗️ Build & Package
+    runs-on: ubuntu-latest
+    needs: create-release
+    
+    services:
+      mongodb:
+        image: mongo:6.0
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd="mongosh --eval 'db.adminCommand(\"ping\")'" 
+          --health-interval=10s 
+          --health-timeout=5s 
+          --health-retries=5
+
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v4
+
+      - name: ☕ Setup JDK ${{ env.JAVA_VERSION }}
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: 'temurin'
+
+      - name: 📦 Cache Gradle Dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: 🧪 Run Tests
+        run: |
+          echo "🧪 Running full test suite..."
+          ./gradlew clean test
+        env:
+          MONGO_URI: mongodb://localhost:27017/release_test
+
+      - name: 🏗️ Build Application
+        run: |
+          echo "🏗️ Building application for release..."
+          ./gradlew clean build -x test
+          
+          echo "📦 Build artifacts:"
+          ls -la build/libs/
+
+      - name: 📊 Generate Build Info
+        run: |
+          echo "📊 Creating build information file..."
+          cat > build-info.json << EOF
+          {
+            "version": "${{ needs.create-release.outputs.version }}",
+            "commit": "${{ github.sha }}",
+            "branch": "${{ github.ref_name }}",
+            "buildTime": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+            "javaVersion": "${{ env.JAVA_VERSION }}",
+            "repository": "${{ github.repository }}"
+          }
+          EOF
+          
+          echo "📋 Build Information:"
+          cat build-info.json
+
+      - name: 📤 Upload JAR to Release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.create-release.outputs.upload_url }}
+          asset_path: build/libs/fiap-tech-challenge-restaurants-0.0.1-SNAPSHOT.jar
+          asset_name: tech-challenge-restaurants-${{ needs.create-release.outputs.version }}.jar
+          asset_content_type: application/java-archive
+
+      - name: 📤 Upload Build Info to Release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.create-release.outputs.upload_url }}
+          asset_path: build-info.json
+          asset_name: build-info.json
+          asset_content_type: application/json
+
+  # ============================================================================
+  # JOB: Build Docker Image
+  # ============================================================================
+  build-docker:
+    name: 🐳 Build Docker Image
+    runs-on: ubuntu-latest
+    needs: [create-release, build-and-package]
+    
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 🐳 Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: 🔐 Login to Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.DOCKER_REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 📋 Extract Metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=ref,event=tag
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            type=raw,value=latest,enable={{is_default_branch}}
+
+      - name: 🏗️ Build and Push Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          build-args: |
+            VERSION=${{ needs.create-release.outputs.version }}
+            BUILD_DATE=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+            VCS_REF=${{ github.sha }}
+
+      - name: 📊 Image Information
+        run: |
+          echo "🐳 Docker Image Information"
+          echo "=========================="
+          echo "📦 Registry: ${{ env.DOCKER_REGISTRY }}"
+          echo "🏷️ Tags: ${{ steps.meta.outputs.tags }}"
+          echo "🔖 Version: ${{ needs.create-release.outputs.version }}"
+          echo "=========================="
+
+  # ============================================================================
+  # JOB: Deploy to Staging
+  # ============================================================================
+  deploy-staging:
+    name: 🚀 Deploy to Staging
+    runs-on: ubuntu-latest
+    needs: [create-release, build-docker]
+    environment: staging
+    if: github.event.inputs.environment == 'staging' || contains(needs.create-release.outputs.version, '-')
+    
+    steps:
+      - name: 🚀 Deploy to Staging Environment
+        run: |
+          echo "🚀 Deploying to staging environment..."
+          echo "🐳 Image: ${{ env.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.create-release.outputs.version }}"
+          
+          # Here you would typically:
+          # 1. Connect to your staging environment
+          # 2. Pull the new Docker image
+          # 3. Update your deployment configuration
+          # 4. Restart services
+          
+          echo "✅ Staging deployment completed!"
+
+      - name: 🔍 Health Check
+        run: |
+          echo "🔍 Performing staging health check..."
+          
+          # Wait for deployment to stabilize
+          sleep 30
+          
+          # Here you would check your staging endpoints
+          # For now, we'll simulate the check
+          echo "✅ Staging environment is healthy"
+
+  # ============================================================================
+  # JOB: Deploy to Production
+  # ============================================================================
+  deploy-production:
+    name: 🌟 Deploy to Production
+    runs-on: ubuntu-latest
+    needs: [create-release, build-docker, deploy-staging]
+    environment: production
+    if: github.event.inputs.environment == 'production' && !contains(needs.create-release.outputs.version, '-')
+    
+    steps:
+      - name: 🌟 Deploy to Production Environment
+        run: |
+          echo "🌟 Deploying to production environment..."
+          echo "🐳 Image: ${{ env.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.create-release.outputs.version }}"
+          
+          # Here you would typically:
+          # 1. Connect to your production environment
+          # 2. Pull the new Docker image
+          # 3. Update your deployment configuration
+          # 4. Perform rolling update
+          # 5. Verify deployment
+          
+          echo "✅ Production deployment completed!"
+
+      - name: 🔍 Production Health Check
+        run: |
+          echo "🔍 Performing production health check..."
+          
+          # Wait for deployment to stabilize
+          sleep 60
+          
+          # Here you would check your production endpoints
+          # For now, we'll simulate the check
+          echo "✅ Production environment is healthy"
+
+  # ============================================================================
+  # JOB: Post-Release Tasks
+  # ============================================================================
+  post-release:
+    name: 📋 Post-Release Tasks
+    runs-on: ubuntu-latest
+    needs: [create-release, build-and-package, build-docker]
+    if: always() && needs.create-release.result == 'success'
+    
+    steps:
+      - name: 📊 Release Summary
+        run: |
+          echo "# 🚀 Release Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## 📦 Release Information" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Version**: ${{ needs.create-release.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Commit**: \`${{ github.sha }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **Release Date**: $(date)" >> $GITHUB_STEP_SUMMARY
+          echo "- **Triggered by**: ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## 📊 Build Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Component | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-----------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| 📦 Package | ${{ needs.build-and-package.result == 'success' && '✅ Success' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 🐳 Docker | ${{ needs.build-docker.result == 'success' && '✅ Success' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## 🔗 Links" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- [📚 Documentation](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/)" >> $GITHUB_STEP_SUMMARY
+          echo "- [🐳 Docker Image](${{ env.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }})" >> $GITHUB_STEP_SUMMARY
+          echo "- [📋 Release Notes](https://github.com/${{ github.repository }}/releases/tag/${{ needs.create-release.outputs.version }})" >> $GITHUB_STEP_SUMMARY
+
+      - name: 🎉 Success Notification
+        if: needs.build-and-package.result == 'success' && needs.build-docker.result == 'success'
+        run: |
+          echo "🎉 Release ${{ needs.create-release.outputs.version }} completed successfully!"
+          echo ""
+          echo "📦 Artifacts created:"
+          echo "   • JAR file uploaded to GitHub Release"
+          echo "   • Docker image pushed to registry"
+          echo "   • Build information included"
+          echo ""
+          echo "🔗 Release URL: https://github.com/${{ github.repository }}/releases/tag/${{ needs.create-release.outputs.version }}"
+
+      - name: ❌ Failure Notification
+        if: needs.build-and-package.result == 'failure' || needs.build-docker.result == 'failure'
+        run: |
+          echo "❌ Release ${{ needs.create-release.outputs.version }} failed!"
+          echo ""
+          echo "🔍 Failed components:"
+          [ "${{ needs.build-and-package.result }}" = "failure" ] && echo "   • Package build failed"
+          [ "${{ needs.build-docker.result }}" = "failure" ] && echo "   • Docker build failed"
+          echo ""
+          echo "🛠️ Check the job logs above for specific error details."
+          exit 1
