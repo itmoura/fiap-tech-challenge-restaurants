@@ -1,0 +1,93 @@
+name: 🧪 Test GitHub Pages
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  test-pages:
+    name: 🧪 Test Pages Setup
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🔍 Check Repository Settings
+        run: |
+          echo "🔍 Checking GitHub Pages configuration..."
+          echo "Repository: ${{ github.repository }}"
+          echo "Branch: ${{ github.ref_name }}"
+          echo "Actor: ${{ github.actor }}"
+          echo "Event: ${{ github.event_name }}"
+
+      - name: 📄 Create Simple Test Page
+        run: |
+          mkdir -p test-site
+          cat > test-site/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html>
+          <head>
+              <title>Test GitHub Pages</title>
+              <meta charset="utf-8">
+              <style>
+                  body { font-family: Arial, sans-serif; margin: 40px; }
+                  .container { max-width: 800px; margin: 0 auto; }
+                  .success { color: #28a745; }
+                  .info { color: #17a2b8; }
+              </style>
+          </head>
+          <body>
+              <div class="container">
+                  <h1 class="success">✅ GitHub Pages Test</h1>
+                  <p class="info">🎉 If you can see this page, GitHub Pages is working correctly!</p>
+                  <hr>
+                  <h2>📊 Build Information</h2>
+                  <ul>
+                      <li><strong>Repository:</strong> ${{ github.repository }}</li>
+                      <li><strong>Branch:</strong> ${{ github.ref_name }}</li>
+                      <li><strong>Commit:</strong> ${{ github.sha }}</li>
+                      <li><strong>Build Time:</strong> $(date)</li>
+                  </ul>
+                  <hr>
+                  <p>🔗 <a href="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/">Expected URL</a></p>
+              </div>
+          </body>
+          </html>
+          EOF
+
+      - name: 🚀 Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: 📤 Upload Test Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./test-site
+
+  deploy-test:
+    name: 🚀 Deploy Test
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: test-pages
+    
+    steps:
+      - name: 🚀 Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: 📢 Success Message
+        run: |
+          echo "🎉 Test page deployed successfully!"
+          echo "🔗 URL: ${{ steps.deployment.outputs.page_url }}"
