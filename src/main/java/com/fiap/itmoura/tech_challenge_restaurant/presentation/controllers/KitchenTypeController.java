@@ -1,8 +1,11 @@
 package com.fiap.itmoura.tech_challenge_restaurant.presentation.controllers;
 
-import java.util.List;
-import java.util.UUID;
-
+import com.fiap.itmoura.tech_challenge_restaurant.application.models.group.OnCreateGroup;
+import com.fiap.itmoura.tech_challenge_restaurant.application.models.kitchentype.KitchenTypeRequest;
+import com.fiap.itmoura.tech_challenge_restaurant.application.models.kitchentype.KitchenTypeResponse;
+import com.fiap.itmoura.tech_challenge_restaurant.application.usecases.KitchenTypeUseCase;
+import com.fiap.itmoura.tech_challenge_restaurant.presentation.contracts.KitchenTypeControllerInterface;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -15,16 +18,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fiap.itmoura.tech_challenge_restaurant.application.models.group.OnCreateGroup;
-import com.fiap.itmoura.tech_challenge_restaurant.application.models.kitchentype.KitchenTypeRequest;
-import com.fiap.itmoura.tech_challenge_restaurant.application.models.kitchentype.KitchenTypeResponse;
-import com.fiap.itmoura.tech_challenge_restaurant.application.usecases.KitchenTypeUseCase;
-import com.fiap.itmoura.tech_challenge_restaurant.presentation.contracts.KitchenTypeControllerInterface;
-
-import lombok.RequiredArgsConstructor;
+import java.util.List;
+import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/kitchen_types")
+@RequestMapping("/api/kitchen-types")
 @RequiredArgsConstructor
 public class KitchenTypeController implements KitchenTypeControllerInterface {
 
