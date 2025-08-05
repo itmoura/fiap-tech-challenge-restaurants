@@ -1,39 +1,66 @@
 # 🍽️ Tech Challenge - Sistema de Gerenciamento de Restaurantes
 
+![API Status](https://img.shields.io/badge/status-active-brightgreen)
+![Java](https://img.shields.io/badge/Java-21-orange)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.4-brightgreen)
+![MongoDB](https://img.shields.io/badge/MongoDB-7.0-green)
+![License](https://img.shields.io/badge/license-MIT-blue)
+![Documentation](https://img.shields.io/badge/docs-online-blue)
+
 Sistema de gerenciamento de restaurantes desenvolvido com **Spring Boot + MongoDB**, focado em alta performance de leitura através de estrutura de documentos aninhados com **endpoints específicos** para gerenciamento transparente de menu e itens.
 
-## 📋 Índice
+## 📚 Documentação Completa
 
-- [Visão Geral](#-visão-geral)
-- [Arquitetura](#-arquitetura)
-- [Estrutura do Projeto](#-estrutura-do-projeto)
-- [Modelagem de Dados](#-modelagem-de-dados)
-- [Endpoints da API](#-endpoints-da-api)
-- [Como Executar](#-como-executar)
-- [Testes](#-testes)
-- [Tecnologias Utilizadas](#-tecnologias-utilizadas)
+### 🌐 [**Acesse a Documentação Online**](https://itmoura.github.io/fiap-tech-challenge-restaurants/)
 
-## 🎯 Visão Geral
+A documentação completa está disponível online e inclui:
 
-O sistema permite o gerenciamento completo de restaurantes com suas informações básicas e menus estruturados em categorias. A modelagem foi pensada para MongoDB (NoSQL), evitando abordagens relacionais e priorizando performance de leitura através de documentos aninhados.
+- 🔧 **[Guia de Instalação](https://itmoura.github.io/fiap-tech-challenge-restaurants/installation/prerequisites/)** - Pré-requisitos e configuração
+- 📚 **[API Reference](https://itmoura.github.io/fiap-tech-challenge-restaurants/api/overview/)** - Documentação detalhada de todos os endpoints
+- 🏗️ **[Arquitetura](https://itmoura.github.io/fiap-tech-challenge-restaurants/architecture/overview/)** - Clean Architecture e modelagem de dados
+- 👤 **[Sobre o Autor](https://itmoura.github.io/fiap-tech-challenge-restaurants/about/author/)** - Informações do desenvolvedor
 
-### ✨ Principais Funcionalidades
+### 📄 Download PDF
+
+Você também pode baixar a documentação completa em PDF:
+[📥 Download Documentation.pdf](https://itmoura.github.io/fiap-tech-challenge-restaurants/pdf/documentation.pdf)
+
+## 🚀 Quick Start
+
+### Pré-requisitos
+
+- **Java 21** ou superior
+- **Docker** e **Docker Compose**
+- **Git**
+
+### Execução Rápida
+
+```bash
+# Clone o repositório
+git clone https://github.com/itmoura/fiap-tech-challenge-restaurants.git
+cd fiap-tech-challenge-restaurants
+
+# Execute com Docker
+docker-compose up -d
+
+# Ou execute localmente
+./gradlew bootRun
+```
+
+A API estará disponível em: `http://localhost:8081`
+
+Swagger UI: `http://localhost:8081/swagger-ui.html`
+
+## ✨ Principais Funcionalidades
 
 - ✅ **Gerenciamento de Restaurantes**: CRUD completo com informações básicas
+- ✅ **Kitchen Types**: Gerenciamento de tipos de cozinha
 - ✅ **Menu Estruturado**: Categorias e itens organizados hierarquicamente
 - ✅ **Endpoints Específicos**: Gerenciamento transparente de menu e itens
 - ✅ **Consultas Otimizadas**: Endpoints específicos para diferentes necessidades
 - ✅ **Busca por Item**: Localização de itens específicos com contexto completo
 - ✅ **UUIDs**: Identificadores únicos para todos os recursos
 - ✅ **Documentação OpenAPI**: Swagger UI integrado
-
-### 🔄 Abstração Transparente
-
-O cliente da API interage com menu e itens de forma **independente**, como se fossem entidades externas, mas internamente o sistema mantém tudo **aninhado no documento do restaurante** no MongoDB. Isso garante:
-
-- **Performance**: Uma única consulta retorna todos os dados necessários
-- **Simplicidade**: Interface limpa e intuitiva para o cliente
-- **Eficiência**: Estrutura otimizada para NoSQL
 
 ## 🏗️ Arquitetura
 
@@ -43,9 +70,6 @@ O projeto segue os princípios da **Arquitetura Hexagonal (Ports & Adapters)** c
 src/main/java/com/fiap/itmoura/tech_challenge_restaurant/
 ├── application/          # Camada de Aplicação
 │   ├── models/          # DTOs e modelos de transferência
-│   │   ├── kitchentype/ # DTOs para tipos de cozinha
-│   │   ├── menu/        # DTOs específicos para menu
-│   │   └── restaurant/  # DTOs específicos para restaurante
 │   ├── ports/           # Interfaces (Ports)
 │   └── usecases/        # Casos de uso (Services)
 │       ├── KitchenTypeUseCase.java
