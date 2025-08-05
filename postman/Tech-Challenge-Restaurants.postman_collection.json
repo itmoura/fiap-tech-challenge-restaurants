@@ -7,257 +7,6 @@
 	},
 	"item": [
 		{
-			"name": "User Types",
-			"item": [
-				{
-					"name": "Create User Type",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"name\": \"Cliente\"\n}"
-						},
-						"url": {
-							"raw": "{{baseUrl}}/api/user-types/create",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"api",
-								"user-types",
-								"create"
-							]
-						}
-					}
-				},
-				{
-					"name": "Get All User Types",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/api/user-types",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"api",
-								"user-types"
-							]
-						}
-					}
-				},
-				{
-					"name": "Get User Type by ID",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/api/user-types/{{userTypeId}}",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"api",
-								"user-types",
-								"{{userTypeId}}"
-							]
-						}
-					}
-				},
-				{
-					"name": "Update User Type",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"name\": \"Dono de Restaurante\"\n}"
-						},
-						"url": {
-							"raw": "{{baseUrl}}/api/user-types/{{userTypeId}}/update",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"api",
-								"user-types",
-								"{{userTypeId}}",
-								"update"
-							]
-						}
-					}
-				},
-				{
-					"name": "Delete User Type",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/api/user-types/{{userTypeId}}/delete",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"api",
-								"user-types",
-								"{{userTypeId}}",
-								"delete"
-							]
-						}
-					}
-				}
-			]
-		},
-		{
-			"name": "Users",
-			"item": [
-				{
-					"name": "Create User",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"name\": \"João Silva\",\n  \"email\": \"joao@email.com\",\n  \"userTypeId\": \"{{userTypeId}}\"\n}"
-						},
-						"url": {
-							"raw": "{{baseUrl}}/api/users/create",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"api",
-								"users",
-								"create"
-							]
-						}
-					}
-				},
-				{
-					"name": "Get All Users",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/api/users",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"api",
-								"users"
-							]
-						}
-					}
-				},
-				{
-					"name": "Get Users by Type",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/api/users?userTypeId={{userTypeId}}",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"api",
-								"users"
-							],
-							"query": [
-								{
-									"key": "userTypeId",
-									"value": "{{userTypeId}}"
-								}
-							]
-						}
-					}
-				},
-				{
-					"name": "Get User by ID",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/api/users/{{userId}}",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"api",
-								"users",
-								"{{userId}}"
-							]
-						}
-					}
-				},
-				{
-					"name": "Update User",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"name\": \"João Santos\",\n  \"email\": \"joao.santos@email.com\",\n  \"userTypeId\": \"{{userTypeId}}\"\n}"
-						},
-						"url": {
-							"raw": "{{baseUrl}}/api/users/{{userId}}/update",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"api",
-								"users",
-								"{{userId}}",
-								"update"
-							]
-						}
-					}
-				},
-				{
-					"name": "Delete User",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/api/users/{{userId}}/delete",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"api",
-								"users",
-								"{{userId}}",
-								"delete"
-							]
-						}
-					}
-				}
-			]
-		},
-		{
 			"name": "Kitchen Types",
 			"item": [
 				{
@@ -288,7 +37,7 @@
 					}
 				},
 				{
-					"name": "Get Kitchen Type",
+					"name": "Get Kitchen Type by ID or Name",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -301,6 +50,53 @@
 								"api",
 								"kitchen-types",
 								"{{kitchenTypeId}}"
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Kitchen Type",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Italiana\",\n  \"description\": \"Cozinha italiana autêntica\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/kitchen-types/{{kitchenTypeId}}/update",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"kitchen-types",
+								"{{kitchenTypeId}}",
+								"update"
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Kitchen Type",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/kitchen-types/{{kitchenTypeId}}/delete",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"kitchen-types",
+								"{{kitchenTypeId}}",
+								"delete"
 							]
 						}
 					}
@@ -322,7 +118,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"Restaurante do João\",\n  \"address\": \"Rua das Flores, 123\",\n  \"kitchenType\": \"Brasileira\",\n  \"daysOperation\": [\n    {\n      \"day\": \"MONDAY\",\n      \"openTime\": \"08:00\",\n      \"closeTime\": \"22:00\"\n    },\n    {\n      \"day\": \"TUESDAY\",\n      \"openTime\": \"08:00\",\n      \"closeTime\": \"22:00\"\n    }\n  ],\n  \"ownerId\": \"{{userId}}\",\n  \"isActive\": true,\n  \"rating\": 4.5\n}"
+							"raw": "{\n  \"name\": \"Restaurante do João\",\n  \"address\": \"Rua das Flores, 123\",\n  \"kitchenType\": \"Brasileira\",\n  \"daysOperation\": [\n    {\n      \"day\": \"MONDAY\",\n      \"openTime\": \"08:00\",\n      \"closeTime\": \"22:00\"\n    },\n    {\n      \"day\": \"TUESDAY\",\n      \"openTime\": \"08:00\",\n      \"closeTime\": \"22:00\"\n    },\n    {\n      \"day\": \"WEDNESDAY\",\n      \"openTime\": \"08:00\",\n      \"closeTime\": \"22:00\"\n    },\n    {\n      \"day\": \"THURSDAY\",\n      \"openTime\": \"08:00\",\n      \"closeTime\": \"22:00\"\n    },\n    {\n      \"day\": \"FRIDAY\",\n      \"openTime\": \"08:00\",\n      \"closeTime\": \"23:00\"\n    },\n    {\n      \"day\": \"SATURDAY\",\n      \"openTime\": \"10:00\",\n      \"closeTime\": \"23:00\"\n    }\n  ],\n  \"ownerId\": \"owner123\",\n  \"isActive\": true,\n  \"rating\": 4.5\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/api/restaurants/create",
@@ -368,6 +164,72 @@
 								"api",
 								"restaurants",
 								"{{restaurantId}}"
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Restaurant",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Restaurante Atualizado\",\n  \"address\": \"Nova Rua, 456\",\n  \"kitchenType\": \"Italiana\",\n  \"daysOperation\": [\n    {\n      \"day\": \"MONDAY\",\n      \"openTime\": \"09:00\",\n      \"closeTime\": \"22:00\"\n    },\n    {\n      \"day\": \"TUESDAY\",\n      \"openTime\": \"09:00\",\n      \"closeTime\": \"22:00\"\n    }\n  ],\n  \"ownerId\": \"owner456\",\n  \"isActive\": true,\n  \"rating\": 5.0\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/restaurants/{{restaurantId}}/update",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"restaurants",
+								"{{restaurantId}}",
+								"update"
+							]
+						}
+					}
+				},
+				{
+					"name": "Disable Restaurant",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/restaurants/{{restaurantId}}/disable",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"restaurants",
+								"{{restaurantId}}",
+								"disable"
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Restaurant",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/restaurants/{{restaurantId}}/delete",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"restaurants",
+								"{{restaurantId}}",
+								"delete"
 							]
 						}
 					}
@@ -468,6 +330,33 @@
 					}
 				},
 				{
+					"name": "Get Active Menu Items by Restaurant",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/menu-items?restaurantId={{restaurantId}}&activeOnly=true",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"menu-items"
+							],
+							"query": [
+								{
+									"key": "restaurantId",
+									"value": "{{restaurantId}}"
+								},
+								{
+									"key": "activeOnly",
+									"value": "true"
+								}
+							]
+						}
+					}
+				},
+				{
 					"name": "Get Menu Item by ID",
 					"request": {
 						"method": "GET",
@@ -558,16 +447,6 @@
 		{
 			"key": "baseUrl",
 			"value": "http://localhost:8081",
-			"type": "string"
-		},
-		{
-			"key": "userTypeId",
-			"value": "",
-			"type": "string"
-		},
-		{
-			"key": "userId",
-			"value": "",
 			"type": "string"
 		},
 		{

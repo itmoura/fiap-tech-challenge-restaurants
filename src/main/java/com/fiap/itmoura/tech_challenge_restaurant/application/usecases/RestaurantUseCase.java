@@ -24,7 +24,6 @@ public class RestaurantUseCase {
 
     private final RestaurantRepository restaurantRepository;
     private final KitchenTypeUseCase kitchenTypeService;
-    private final UserUseCase userUseCase;
 
     @Transactional
     public RestaurantResponse createRestaurant(RestaurantRequest restaurantRequest) {
@@ -34,11 +33,6 @@ public class RestaurantUseCase {
 
         if (kitchenType == null) {
             throw new NotFoundException("Kitchen type not found");
-        }
-
-        // Validar se o usuário (dono) existe
-        if (restaurantRequest.ownerId() != null && !restaurantRequest.ownerId().trim().isEmpty()) {
-            userUseCase.getUserById(restaurantRequest.ownerId());
         }
 
         RestaurantEntity restaurantEntity = RestaurantEntity.builder()
@@ -82,13 +76,7 @@ public class RestaurantUseCase {
         restaurantEntity.setKitchenType(kitchenTypeService.getKitchenTypeByIdOrName(restaurantRequest.kitchenType().toUpperCase()));
         restaurantEntity.setAddress(restaurantRequest.address());
         restaurantEntity.setDaysOperation(restaurantRequest.daysOperation());
-        
-        // Validar se o usuário (dono) existe quando for alterado
-        if (restaurantRequest.ownerId() != null && !restaurantRequest.ownerId().trim().isEmpty()) {
-            userUseCase.getUserById(restaurantRequest.ownerId());
-        }
         restaurantEntity.setOwnerId(restaurantRequest.ownerId());
-        
         restaurantEntity.setIsActive(Boolean.TRUE.equals(restaurantRequest.isActive()) || restaurantRequest.isActive() == null);
         restaurantEntity.setRating(restaurantRequest.rating());
         restaurantEntity.setLastUpdate(LocalDateTime.now());
@@ -128,10 +116,6 @@ public class RestaurantUseCase {
             restaurantEntity.setDaysOperation(restaurantRequest.daysOperation());
         }
         if (Objects.nonNull(restaurantEntity.getOwnerId()) && !restaurantEntity.getOwnerId().equals(restaurantRequest.ownerId())) {
-            // Validar se o usuário (dono) existe quando for alterado
-            if (restaurantRequest.ownerId() != null && !restaurantRequest.ownerId().trim().isEmpty()) {
-                userUseCase.getUserById(restaurantRequest.ownerId());
-            }
             restaurantEntity.setOwnerId(restaurantRequest.ownerId());
         }
         if (Objects.nonNull(restaurantEntity.getIsActive()) && !restaurantEntity.getIsActive().equals(restaurantRequest.isActive())) {
