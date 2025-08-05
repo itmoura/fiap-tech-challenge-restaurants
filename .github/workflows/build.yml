@@ -10,6 +10,21 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    services:
+      mongo:
+        image: mongo:6.0
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd="mongosh --eval 'db.adminCommand(\"ping\")'" 
+          --health-interval=10s 
+          --health-timeout=5s 
+          --health-retries=5
+
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v4
+
     steps:
       - uses: actions/checkout@v4
 
@@ -31,6 +46,8 @@ jobs:
 
       - name: Build com gradle
         run: ./gradlew clean build
+        env:
+          MONGO_URI: mongodb://localhost:27017/test
 
       - name: Upload artefatos de build
         uses: actions/upload-artifact@v4
