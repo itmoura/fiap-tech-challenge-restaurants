@@ -1,0 +1,139 @@
+site_name: Tech Challenge - Restaurant Management API
+site_description: Sistema de gerenciamento de restaurantes desenvolvido com Spring Boot + MongoDB
+site_author: Ítalo Moura
+site_url: https://itmoura.github.io/fiap-tech-challenge-restaurants/
+
+repo_name: itmoura/fiap-tech-challenge-restaurants
+repo_url: https://github.com/itmoura/fiap-tech-challenge-restaurants
+edit_uri: edit/main/docs/
+
+copyright: Copyright &copy; 2024 Ítalo Moura - Licensed under MIT License
+
+theme:
+  name: material
+  language: pt
+  palette:
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.path
+    - navigation.top
+    - search.highlight
+    - search.share
+    - toc.follow
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+  icon:
+    repo: fontawesome/brands/github
+    edit: material/pencil
+    view: material/eye
+  favicon: assets/favicon.ico
+  logo: assets/logo.png
+
+extra:
+  social:
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/itmoura/
+      name: LinkedIn
+    - icon: fontawesome/brands/instagram
+      link: https://www.instagram.com/it_moura/
+      name: Instagram
+    - icon: fontawesome/brands/github
+      link: https://github.com/itmoura
+      name: GitHub
+  generator: false
+
+extra_css:
+  - assets/extra.css
+
+extra_javascript:
+  - assets/extra.js
+
+plugins:
+  - search:
+      lang: pt
+  - minify:
+      minify_html: true
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      repo_url_shorthand: true
+      user: itmoura
+      repo: fiap-tech-challenge-restaurants
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+nav:
+  - Home: index.md
+  - 🔧 Instalação:
+    - Pré-requisitos: installation/prerequisites.md
+    - Configuração Local: installation/local-setup.md
+    - Docker: installation/docker.md
+    - Testes: installation/testing.md
+  - 📚 API Reference:
+    - Visão Geral: api/overview.md
+    - Kitchen Types: api/kitchen-types.md
+    - Restaurants: api/restaurants.md
+    - Menu Categories: api/menu-categories.md
+    - Menu Items: api/menu-items.md
+    - Códigos de Status: api/status-codes.md
+  - 🏗️ Arquitetura:
+    - Visão Geral: architecture/overview.md
+    - Clean Architecture: architecture/clean-architecture.md
+    - Modelagem de Dados: architecture/data-modeling.md
+  - 👤 Sobre:
+    - Autor: about/author.md
+    - Licença: about/license.md
+    - Changelog: about/changelog.md

@@ -1,0 +1,379 @@
+/* Custom CSS for Tech Challenge Restaurant API Documentation */
+
+/* Root variables for consistent theming */
+:root {
+  --primary-color: #3f51b5;
+  --secondary-color: #ff4081;
+  --success-color: #4caf50;
+  --warning-color: #ff9800;
+  --error-color: #f44336;
+  --info-color: #2196f3;
+  
+  --code-bg: #f5f5f5;
+  --code-border: #e0e0e0;
+  --highlight-bg: #fff3cd;
+  --highlight-border: #ffeaa7;
+}
+
+/* Dark theme variables */
+[data-md-color-scheme="slate"] {
+  --code-bg: #2d2d2d;
+  --code-border: #404040;
+  --highlight-bg: #3d3d00;
+  --highlight-border: #666600;
+}
+
+/* Enhanced code blocks */
+.highlight {
+  border-radius: 8px;
+  border: 1px solid var(--code-border);
+  overflow: hidden;
+}
+
+.highlight pre {
+  margin: 0;
+  padding: 1rem;
+  background-color: var(--code-bg);
+}
+
+/* Inline code styling */
+code {
+  background-color: var(--code-bg);
+  border: 1px solid var(--code-border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 0.9em;
+}
+
+/* API endpoint styling */
+.api-endpoint {
+  display: flex;
+  align-items: center;
+  margin: 1rem 0;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border-left: 4px solid var(--primary-color);
+  background-color: rgba(63, 81, 181, 0.1);
+}
+
+.api-method {
+  font-weight: bold;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  margin-right: 0.5rem;
+  font-size: 0.8em;
+  text-transform: uppercase;
+}
+
+.api-method.get { background-color: var(--success-color); color: white; }
+.api-method.post { background-color: var(--info-color); color: white; }
+.api-method.put { background-color: var(--warning-color); color: white; }
+.api-method.delete { background-color: var(--error-color); color: white; }
+
+.api-path {
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 500;
+}
+
+/* Status code badges */
+.status-code {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 0.8em;
+  margin: 0.25rem;
+}
+
+.status-code.success { background-color: var(--success-color); color: white; }
+.status-code.error { background-color: var(--error-color); color: white; }
+.status-code.warning { background-color: var(--warning-color); color: white; }
+
+/* Enhanced tables */
+.md-typeset table:not([class]) {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.md-typeset table:not([class]) th {
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: 600;
+}
+
+.md-typeset table:not([class]) tr:nth-child(even) {
+  background-color: rgba(63, 81, 181, 0.05);
+}
+
+/* Author profile styling */
+.author-profile {
+  text-align: center;
+  padding: 2rem;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(63, 81, 181, 0.1), rgba(255, 64, 129, 0.1));
+  margin: 2rem 0;
+}
+
+.author-profile img {
+  border-radius: 50%;
+  border: 4px solid var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.social-links a {
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: transform 0.2s ease;
+}
+
+.social-links a:hover {
+  transform: translateY(-2px);
+}
+
+/* Technology badges */
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.tech-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 20px;
+  font-size: 0.8em;
+  font-weight: 500;
+}
+
+/* Highlight boxes */
+.highlight-box {
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+  border-left: 4px solid;
+}
+
+.highlight-box.info {
+  background-color: rgba(33, 150, 243, 0.1);
+  border-color: var(--info-color);
+}
+
+.highlight-box.success {
+  background-color: rgba(76, 175, 80, 0.1);
+  border-color: var(--success-color);
+}
+
+.highlight-box.warning {
+  background-color: rgba(255, 152, 0, 0.1);
+  border-color: var(--warning-color);
+}
+
+.highlight-box.error {
+  background-color: rgba(244, 67, 54, 0.1);
+  border-color: var(--error-color);
+}
+
+/* Architecture diagrams */
+.architecture-diagram {
+  text-align: center;
+  margin: 2rem 0;
+  padding: 1rem;
+  background-color: rgba(63, 81, 181, 0.05);
+  border-radius: 8px;
+}
+
+/* Code examples with language labels */
+.code-example {
+  position: relative;
+  margin: 1rem 0;
+}
+
+.code-example::before {
+  content: attr(data-lang);
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.7em;
+  text-transform: uppercase;
+  border-radius: 0 8px 0 8px;
+  z-index: 1;
+}
+
+/* Responsive design improvements */
+@media (max-width: 768px) {
+  .api-endpoint {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .api-method {
+    margin-bottom: 0.5rem;
+  }
+  
+  .social-links {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .tech-stack {
+    justify-content: center;
+  }
+}
+
+/* Print styles */
+@media print {
+  .md-header,
+  .md-sidebar,
+  .md-footer {
+    display: none !important;
+  }
+  
+  .md-content {
+    margin: 0 !important;
+  }
+  
+  .highlight-box {
+    border: 1px solid #ccc;
+    background-color: #f9f9f9 !important;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #303f9f;
+}
+
+/* Animation for loading states */
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+.loading {
+  animation: pulse 2s infinite;
+}
+
+/* Enhanced navigation */
+.md-nav__item--active > .md-nav__link {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+/* Custom admonitions */
+.md-typeset .admonition.example {
+  border-color: var(--success-color);
+}
+
+.md-typeset .admonition.example > .admonition-title {
+  background-color: rgba(76, 175, 80, 0.1);
+  border-color: var(--success-color);
+}
+
+.md-typeset .admonition.example > .admonition-title::before {
+  background-color: var(--success-color);
+  -webkit-mask-image: var(--md-admonition-icon--example);
+  mask-image: var(--md-admonition-icon--example);
+}
+
+/* Footer customization */
+.md-footer {
+  background-color: var(--primary-color);
+}
+
+.md-footer-meta {
+  background-color: rgba(63, 81, 181, 0.8);
+}
+
+/* Search improvements */
+.md-search__input {
+  border-radius: 20px;
+}
+
+.md-search__input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Version badge */
+.version-badge {
+  display: inline-block;
+  background-color: var(--success-color);
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.7em;
+  font-weight: bold;
+  margin-left: 0.5rem;
+}
+
+/* Mermaid diagram styling */
+.mermaid {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+/* Copy button for code blocks */
+.md-clipboard {
+  border-radius: 4px;
+}
+
+.md-clipboard:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Enhanced blockquotes */
+.md-typeset blockquote {
+  border-left: 4px solid var(--primary-color);
+  background-color: rgba(63, 81, 181, 0.05);
+  border-radius: 0 8px 8px 0;
+}
+
+/* Custom icons for different sections */
+.md-nav__item[data-md-level="1"] > .md-nav__link[href*="installation"]::before {
+  content: "🔧";
+  margin-right: 0.5rem;
+}
+
+.md-nav__item[data-md-level="1"] > .md-nav__link[href*="api"]::before {
+  content: "📚";
+  margin-right: 0.5rem;
+}
+
+.md-nav__item[data-md-level="1"] > .md-nav__link[href*="architecture"]::before {
+  content: "🏗️";
+  margin-right: 0.5rem;
+}
+
+.md-nav__item[data-md-level="1"] > .md-nav__link[href*="about"]::before {
+  content: "👤";
+  margin-right: 0.5rem;
+}
