@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arquitetura - Tech Challenge Restaurant API</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍽️</text></svg>">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <a href="../" class="logo">
+                    <span class="logo-icon">🍽️</span>
+                    <div>
+                        <div class="logo-text">Tech Challenge</div>
+                        <div class="logo-subtitle">Restaurant API</div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="nav-menu">
+                <div class="nav-section">
+                    <div class="nav-section-title">Início</div>
+                    <a href="../" class="nav-item">
+                        <span class="nav-item-icon">🏠</span>
+                        Visão Geral
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Instalação</div>
+                    <a href="prerequisites.html" class="nav-item">
+                        <span class="nav-item-icon">📋</span>
+                        Pré-requisitos
+                    </a>
+                    <a href="local-setup.html" class="nav-item">
+                        <span class="nav-item-icon">⚙️</span>
+                        Configuração Local
+                    </a>
+                    <a href="docker.html" class="nav-item">
+                        <span class="nav-item-icon">🐳</span>
+                        Docker
+                    </a>
+                    <a href="testing.html" class="nav-item">
+                        <span class="nav-item-icon">🧪</span>
+                        Testes
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">API Reference</div>
+                    <a href="api-overview.html" class="nav-item">
+                        <span class="nav-item-icon">📚</span>
+                        Visão Geral
+                    </a>
+                    <a href="kitchen-types.html" class="nav-item">
+                        <span class="nav-item-icon">👨‍🍳</span>
+                        Kitchen Types
+                    </a>
+                    <a href="restaurants.html" class="nav-item">
+                        <span class="nav-item-icon">🏪</span>
+                        Restaurants
+                    </a>
+                    <a href="menu-categories.html" class="nav-item">
+                        <span class="nav-item-icon">📂</span>
+                        Menu Categories
+                    </a>
+                    <a href="menu-items.html" class="nav-item">
+                        <span class="nav-item-icon">🍕</span>
+                        Menu Items
+                    </a>
+                    <a href="status-codes.html" class="nav-item">
+                        <span class="nav-item-icon">📊</span>
+                        Status Codes
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Arquitetura</div>
+                    <a href="architecture-overview.html" class="nav-item active">
+                        <span class="nav-item-icon">🏗️</span>
+                        Visão Geral
+                    </a>
+                    <a href="clean-architecture.html" class="nav-item">
+                        <span class="nav-item-icon">🎯</span>
+                        Clean Architecture
+                    </a>
+                    <a href="data-modeling.html" class="nav-item">
+                        <span class="nav-item-icon">🗄️</span>
+                        Modelagem de Dados
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Sobre</div>
+                    <a href="author.html" class="nav-item">
+                        <span class="nav-item-icon">👤</span>
+                        Autor
+                    </a>
+                    <a href="license.html" class="nav-item">
+                        <span class="nav-item-icon">📄</span>
+                        Licença
+                    </a>
+                    <a href="changelog.html" class="nav-item">
+                        <span class="nav-item-icon">📝</span>
+                        Changelog
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <nav class="breadcrumb">
+                    <a href="../">Home</a>
+                    <span>/</span>
+                    <a href="#">Arquitetura</a>
+                    <span>/</span>
+                    <span>Visão Geral</span>
+                </nav>
+                <h1 class="page-title">🏗️ Arquitetura do Sistema</h1>
+                <p class="page-description">Visão geral da arquitetura e design patterns utilizados</p>
+            </header>
+
+            <div class="content-body">
+                <!-- Architecture Overview -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🎯</span>
+                        <h2 class="card-title">Princípios Arquiteturais</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>O sistema foi desenvolvido seguindo os princípios da <strong>Clean Architecture</strong> e <strong>Domain-Driven Design (DDD)</strong>:</p>
+                        
+                        <div class="feature-cards">
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🎯</div>
+                                <h3 class="feature-card-title">Clean Architecture</h3>
+                                <p class="feature-card-description">
+                                    Separação clara de responsabilidades em camadas bem definidas
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🏢</div>
+                                <h3 class="feature-card-title">Domain-Driven Design</h3>
+                                <p class="feature-card-description">
+                                    Modelagem focada no domínio do negócio de restaurantes
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🔧</div>
+                                <h3 class="feature-card-title">SOLID Principles</h3>
+                                <p class="feature-card-description">
+                                    Código flexível, testável e de fácil manutenção
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🧪</div>
+                                <h3 class="feature-card-title">Test-Driven Development</h3>
+                                <p class="feature-card-description">
+                                    Desenvolvimento orientado por testes automatizados
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- System Architecture Diagram -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">📊</span>
+                        <h2 class="card-title">Diagrama da Arquitetura</h2>
+                    </div>
+                    <div class="card-content">
+                        <div style="background: var(--bg-tertiary); border-radius: 8px; padding: 2rem; text-align: center; margin: 1rem 0;">
+                            <div style="font-family: monospace; font-size: 0.9rem; line-height: 1.8;">
+                                <div style="color: var(--accent-primary); font-weight: bold; margin-bottom: 1rem;">
+                                    ┌─────────────────────────────────────────────────────────────┐<br>
+                                    │                    🌐 REST API Layer                        │<br>
+                                    │              (Controllers + Exception Handlers)             │<br>
+                                    └─────────────────────────────────────────────────────────────┘
+                                </div>
+                                <div style="margin: 0.5rem 0;">⬇️</div>
+                                <div style="color: var(--accent-secondary); font-weight: bold; margin-bottom: 1rem;">
+                                    ┌─────────────────────────────────────────────────────────────┐<br>
+                                    │                   ⚙️ Application Layer                      │<br>
+                                    │                  (Use Cases + Services)                     │<br>
+                                    └─────────────────────────────────────────────────────────────┘
+                                </div>
+                                <div style="margin: 0.5rem 0;">⬇️</div>
+                                <div style="color: var(--accent-success); font-weight: bold; margin-bottom: 1rem;">
+                                    ┌─────────────────────────────────────────────────────────────┐<br>
+                                    │                    🏢 Domain Layer                          │<br>
+                                    │              (Entities + Domain Services)                   │<br>
+                                    └─────────────────────────────────────────────────────────────┘
+                                </div>
+                                <div style="margin: 0.5rem 0;">⬇️</div>
+                                <div style="color: var(--accent-warning); font-weight: bold;">
+                                    ┌─────────────────────────────────────────────────────────────┐<br>
+                                    │                 🗄️ Infrastructure Layer                     │<br>
+                                    │            (Repositories + External Services)               │<br>
+                                    └─────────────────────────────────────────────────────────────┘
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Layer Details -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🏗️</span>
+                        <h2 class="card-title">Detalhes das Camadas</h2>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="mb-1">🌐 REST API Layer (Presentation)</h3>
+                        <div class="code-block">
+                            <pre>src/main/java/com/fiap/itmoura/tech_challenge/
+├── controller/
+│   ├── RestaurantController.java
+│   ├── KitchenTypeController.java
+│   └── MenuController.java
+├── dto/
+│   ├── request/
+│   └── response/
+└── exception/
+    ├── GlobalExceptionHandler.java
+    └── custom/</pre>
+                        </div>
+                        <ul>
+                            <li><strong>Controllers</strong>: Endpoints REST com validação de entrada</li>
+                            <li><strong>DTOs</strong>: Objetos de transferência de dados</li>
+                            <li><strong>Exception Handlers</strong>: Tratamento centralizado de erros</li>
+                        </ul>
+
+                        <h3 class="mb-1 mt-3">⚙️ Application Layer (Use Cases)</h3>
+                        <div class="code-block">
+                            <pre>src/main/java/com/fiap/itmoura/tech_challenge/
+├── usecases/
+│   ├── restaurant/
+│   │   ├── CreateRestaurantUseCase.java
+│   │   ├── FindRestaurantUseCase.java
+│   │   └── UpdateRestaurantUseCase.java
+│   ├── menu/
+│   └── kitchentype/
+└── service/
+    ├── RestaurantService.java
+    └── MenuService.java</pre>
+                        </div>
+                        <ul>
+                            <li><strong>Use Cases</strong>: Casos de uso específicos do negócio</li>
+                            <li><strong>Services</strong>: Orquestração de operações complexas</li>
+                            <li><strong>Validation</strong>: Regras de negócio e validações</li>
+                        </ul>
+
+                        <h3 class="mb-1 mt-3">🏢 Domain Layer (Business Logic)</h3>
+                        <div class="code-block">
+                            <pre>src/main/java/com/fiap/itmoura/tech_challenge/
+├── model/
+│   ├── entity/
+│   │   ├── Restaurant.java
+│   │   ├── Menu.java
+│   │   ├── MenuCategory.java
+│   │   ├── MenuItem.java
+│   │   └── KitchenType.java
+│   ├── valueobject/
+│   │   ├── Address.java
+│   │   └── Price.java
+│   └── enums/
+└── domain/
+    ├── service/
+    └── specification/</pre>
+                        </div>
+                        <ul>
+                            <li><strong>Entities</strong>: Objetos de negócio com identidade</li>
+                            <li><strong>Value Objects</strong>: Objetos imutáveis sem identidade</li>
+                            <li><strong>Domain Services</strong>: Lógica de negócio complexa</li>
+                        </ul>
+
+                        <h3 class="mb-1 mt-3">🗄️ Infrastructure Layer (Data Access)</h3>
+                        <div class="code-block">
+                            <pre>src/main/java/com/fiap/itmoura/tech_challenge/
+├── repository/
+│   ├── RestaurantRepository.java
+│   ├── KitchenTypeRepository.java
+│   └── impl/
+│       └── RestaurantRepositoryImpl.java
+├── config/
+│   ├── MongoConfig.java
+│   ├── WebConfig.java
+│   └── SwaggerConfig.java
+└── external/
+    └── integration/</pre>
+                        </div>
+                        <ul>
+                            <li><strong>Repositories</strong>: Acesso a dados com MongoDB</li>
+                            <li><strong>Configuration</strong>: Configurações de infraestrutura</li>
+                            <li><strong>External Services</strong>: Integrações externas</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Design Patterns -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🎨</span>
+                        <h2 class="card-title">Design Patterns Utilizados</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="feature-cards">
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🏭</div>
+                                <h3 class="feature-card-title">Repository Pattern</h3>
+                                <p class="feature-card-description">
+                                    Abstração do acesso a dados com interfaces bem definidas
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🎯</div>
+                                <h3 class="feature-card-title">Use Case Pattern</h3>
+                                <p class="feature-card-description">
+                                    Encapsulamento de regras de negócio em casos de uso específicos
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🔄</div>
+                                <h3 class="feature-card-title">Builder Pattern</h3>
+                                <p class="feature-card-description">
+                                    Construção fluente de objetos complexos com Lombok
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🎭</div>
+                                <h3 class="feature-card-title">Strategy Pattern</h3>
+                                <p class="feature-card-description">
+                                    Diferentes estratégias de busca e validação
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🏗️</div>
+                                <h3 class="feature-card-title">Factory Pattern</h3>
+                                <p class="feature-card-description">
+                                    Criação de objetos complexos com factories especializadas
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">📋</div>
+                                <h3 class="feature-card-title">Specification Pattern</h3>
+                                <p class="feature-card-description">
+                                    Critérios de busca e validação reutilizáveis
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technology Stack -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🛠️</span>
+                        <h2 class="card-title">Stack Tecnológico</h2>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="mb-1">☕ Backend</h3>
+                        <table>
+                            <tr>
+                                <td><strong>Java</strong></td>
+                                <td>21 (LTS)</td>
+                                <td>Linguagem principal com recursos modernos</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Spring Boot</strong></td>
+                                <td>3.5.4</td>
+                                <td>Framework principal para desenvolvimento</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Spring Data MongoDB</strong></td>
+                                <td>3.5.4</td>
+                                <td>Abstração para acesso ao MongoDB</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Spring Security</strong></td>
+                                <td>6.x</td>
+                                <td>Segurança e autenticação (futuro)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Lombok</strong></td>
+                                <td>1.18.x</td>
+                                <td>Redução de boilerplate code</td>
+                            </tr>
+                        </table>
+
+                        <h3 class="mb-1 mt-2">🗄️ Database</h3>
+                        <table>
+                            <tr>
+                                <td><strong>MongoDB</strong></td>
+                                <td>7.0</td>
+                                <td>Banco NoSQL para alta performance</td>
+                            </tr>
+                            <tr>
+                                <td><strong>MongoDB Compass</strong></td>
+                                <td>Latest</td>
+                                <td>Interface gráfica para desenvolvimento</td>
+                            </tr>
+                        </table>
+
+                        <h3 class="mb-1 mt-2">🧪 Testing</h3>
+                        <table>
+                            <tr>
+                                <td><strong>JUnit 5</strong></td>
+                                <td>5.10.x</td>
+                                <td>Framework de testes unitários</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Mockito</strong></td>
+                                <td>5.x</td>
+                                <td>Mocking para testes isolados</td>
+                            </tr>
+                            <tr>
+                                <td><strong>TestContainers</strong></td>
+                                <td>1.19.x</td>
+                                <td>Testes de integração com containers</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Spring Boot Test</strong></td>
+                                <td>3.5.4</td>
+                                <td>Testes de integração Spring</td>
+                            </tr>
+                        </table>
+
+                        <h3 class="mb-1 mt-2">📚 Documentation</h3>
+                        <table>
+                            <tr>
+                                <td><strong>SpringDoc OpenAPI</strong></td>
+                                <td>2.x</td>
+                                <td>Documentação automática da API</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Swagger UI</strong></td>
+                                <td>Embedded</td>
+                                <td>Interface interativa da API</td>
+                            </tr>
+                        </table>
+
+                        <h3 class="mb-1 mt-2">🐳 DevOps</h3>
+                        <table>
+                            <tr>
+                                <td><strong>Docker</strong></td>
+                                <td>24.x</td>
+                                <td>Containerização da aplicação</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Docker Compose</strong></td>
+                                <td>2.x</td>
+                                <td>Orquestração de containers</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Gradle</strong></td>
+                                <td>8.x</td>
+                                <td>Build tool e gerenciamento de dependências</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Data Flow -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🔄</span>
+                        <h2 class="card-title">Fluxo de Dados</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>Exemplo do fluxo de uma requisição típica:</p>
+
+                        <div class="code-block">
+                            <pre>1. 🌐 HTTP Request → RestaurantController
+   ├── Validação de entrada (Bean Validation)
+   ├── Conversão DTO → Domain Object
+   └── Chamada para Use Case
+
+2. ⚙️ Use Case → RestaurantService
+   ├── Validações de negócio
+   ├── Aplicação de regras de domínio
+   └── Chamada para Repository
+
+3. 🗄️ Repository → MongoDB
+   ├── Conversão Entity → Document
+   ├── Execução da query
+   └── Retorno dos dados
+
+4. 🔄 Response Flow (inverso)
+   ├── Document → Entity
+   ├── Entity → DTO
+   └── DTO → JSON Response</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">📊 Exemplo Prático</h3>
+                        <div class="code-block">
+                            <pre>// 1. Controller recebe requisição
+@PostMapping("/restaurants")
+public ResponseEntity&lt;RestaurantResponse&gt; create(@RequestBody CreateRestaurantRequest request) {
+    Restaurant restaurant = createRestaurantUseCase.execute(request.toDomain());
+    return ResponseEntity.ok(RestaurantResponse.from(restaurant));
+}
+
+// 2. Use Case aplica regras de negócio
+public Restaurant execute(Restaurant restaurant) {
+    validateBusinessRules(restaurant);
+    return restaurantRepository.save(restaurant);
+}
+
+// 3. Repository persiste no MongoDB
+public Restaurant save(Restaurant restaurant) {
+    RestaurantDocument document = RestaurantDocument.from(restaurant);
+    RestaurantDocument saved = mongoTemplate.save(document);
+    return saved.toDomain();
+}</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Architecture -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🔒</span>
+                        <h2 class="card-title">Arquitetura de Segurança</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>Considerações de segurança implementadas e planejadas:</p>
+
+                        <div class="feature-cards">
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🛡️</div>
+                                <h3 class="feature-card-title">Input Validation</h3>
+                                <p class="feature-card-description">
+                                    Validação rigorosa de entrada com Bean Validation
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🔐</div>
+                                <h3 class="feature-card-title">Authentication</h3>
+                                <p class="feature-card-description">
+                                    JWT tokens para autenticação stateless (planejado)
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🎫</div>
+                                <h3 class="feature-card-title">Authorization</h3>
+                                <p class="feature-card-description">
+                                    Controle de acesso baseado em roles (planejado)
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🔍</div>
+                                <h3 class="feature-card-title">Audit Trail</h3>
+                                <p class="feature-card-description">
+                                    Rastreamento de operações críticas (planejado)
+                                </p>
+                            </div>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">🔧 Implementação Atual</h3>
+                        <div class="code-block">
+                            <pre>// Validação de entrada
+@Valid @RequestBody CreateRestaurantRequest request
+
+// Sanitização de dados
+@NotBlank @Size(max = 100) String name
+
+// Tratamento de exceções
+@ExceptionHandler(ValidationException.class)
+public ResponseEntity&lt;ErrorResponse&gt; handleValidation(ValidationException ex)</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Performance Considerations -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">⚡</span>
+                        <h2 class="card-title">Considerações de Performance</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="feature-cards">
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🗄️</div>
+                                <h3 class="feature-card-title">MongoDB Optimization</h3>
+                                <p class="feature-card-description">
+                                    Documentos aninhados para reduzir joins e queries
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">📇</div>
+                                <h3 class="feature-card-title">Indexing Strategy</h3>
+                                <p class="feature-card-description">
+                                    Índices otimizados para queries mais frequentes
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">💾</div>
+                                <h3 class="feature-card-title">Caching</h3>
+                                <p class="feature-card-description">
+                                    Cache de dados frequentemente acessados (planejado)
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">📊</div>
+                                <h3 class="feature-card-title">Pagination</h3>
+                                <p class="feature-card-description">
+                                    Paginação eficiente para grandes volumes de dados
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Next Steps -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🚀</span>
+                        <h2 class="card-title">Explore Mais</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>Aprofunde-se nos aspectos específicos da arquitetura:</p>
+
+                        <div class="feature-cards">
+                            <div class="feature-card" data-link="clean-architecture.html">
+                                <div class="feature-card-icon">🎯</div>
+                                <h3 class="feature-card-title">Clean Architecture</h3>
+                                <p class="feature-card-description">
+                                    Detalhes da implementação da Clean Architecture
+                                </p>
+                            </div>
+
+                            <div class="feature-card" data-link="data-modeling.html">
+                                <div class="feature-card-icon">🗄️</div>
+                                <h3 class="feature-card-title">Modelagem de Dados</h3>
+                                <p class="feature-card-description">
+                                    Estrutura dos documentos MongoDB
+                                </p>
+                            </div>
+
+                            <div class="feature-card" data-link="api-overview.html">
+                                <div class="feature-card-icon">📚</div>
+                                <h3 class="feature-card-title">API Reference</h3>
+                                <p class="feature-card-description">
+                                    Documentação completa dos endpoints
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

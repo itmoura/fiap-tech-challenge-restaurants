@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker Setup - Tech Challenge Restaurant API</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍽️</text></svg>">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <a href="../" class="logo">
+                    <span class="logo-icon">🍽️</span>
+                    <div>
+                        <div class="logo-text">Tech Challenge</div>
+                        <div class="logo-subtitle">Restaurant API</div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="nav-menu">
+                <div class="nav-section">
+                    <div class="nav-section-title">Início</div>
+                    <a href="../" class="nav-item">
+                        <span class="nav-item-icon">🏠</span>
+                        Visão Geral
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Instalação</div>
+                    <a href="prerequisites.html" class="nav-item">
+                        <span class="nav-item-icon">📋</span>
+                        Pré-requisitos
+                    </a>
+                    <a href="local-setup.html" class="nav-item">
+                        <span class="nav-item-icon">⚙️</span>
+                        Configuração Local
+                    </a>
+                    <a href="docker.html" class="nav-item active">
+                        <span class="nav-item-icon">🐳</span>
+                        Docker
+                    </a>
+                    <a href="testing.html" class="nav-item">
+                        <span class="nav-item-icon">🧪</span>
+                        Testes
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">API Reference</div>
+                    <a href="api-overview.html" class="nav-item">
+                        <span class="nav-item-icon">📚</span>
+                        Visão Geral
+                    </a>
+                    <a href="kitchen-types.html" class="nav-item">
+                        <span class="nav-item-icon">👨‍🍳</span>
+                        Kitchen Types
+                    </a>
+                    <a href="restaurants.html" class="nav-item">
+                        <span class="nav-item-icon">🏪</span>
+                        Restaurants
+                    </a>
+                    <a href="menu-categories.html" class="nav-item">
+                        <span class="nav-item-icon">📂</span>
+                        Menu Categories
+                    </a>
+                    <a href="menu-items.html" class="nav-item">
+                        <span class="nav-item-icon">🍕</span>
+                        Menu Items
+                    </a>
+                    <a href="status-codes.html" class="nav-item">
+                        <span class="nav-item-icon">📊</span>
+                        Status Codes
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Arquitetura</div>
+                    <a href="architecture-overview.html" class="nav-item">
+                        <span class="nav-item-icon">🏗️</span>
+                        Visão Geral
+                    </a>
+                    <a href="clean-architecture.html" class="nav-item">
+                        <span class="nav-item-icon">🎯</span>
+                        Clean Architecture
+                    </a>
+                    <a href="data-modeling.html" class="nav-item">
+                        <span class="nav-item-icon">🗄️</span>
+                        Modelagem de Dados
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Sobre</div>
+                    <a href="author.html" class="nav-item">
+                        <span class="nav-item-icon">👤</span>
+                        Autor
+                    </a>
+                    <a href="license.html" class="nav-item">
+                        <span class="nav-item-icon">📄</span>
+                        Licença
+                    </a>
+                    <a href="changelog.html" class="nav-item">
+                        <span class="nav-item-icon">📝</span>
+                        Changelog
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <nav class="breadcrumb">
+                    <a href="../">Home</a>
+                    <span>/</span>
+                    <a href="#">Instalação</a>
+                    <span>/</span>
+                    <span>Docker</span>
+                </nav>
+                <h1 class="page-title">🐳 Docker Setup</h1>
+                <p class="page-description">Execute o projeto usando Docker e Docker Compose</p>
+            </header>
+
+            <div class="content-body">
+                <!-- Quick Start -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">⚡</span>
+                        <h2 class="card-title">Quick Start com Docker</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>A forma mais rápida de executar o projeto:</p>
+
+                        <div class="code-block">
+                            <pre># 1. Clone o repositório
+git clone https://github.com/itmoura/fiap-tech-challenge-restaurants.git
+cd fiap-tech-challenge-restaurants
+
+# 2. Execute com Docker Compose
+docker-compose up -d
+
+# 3. Verifique os containers
+docker-compose ps
+
+# 4. Teste a API
+curl http://localhost:8080/api/restaurants</pre>
+                        </div>
+
+                        <p class="mt-2">
+                            🎉 <strong>Pronto!</strong> A aplicação estará rodando em 
+                            <code>http://localhost:8080</code>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Docker Compose Structure -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">📋</span>
+                        <h2 class="card-title">Estrutura do Docker Compose</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>O projeto inclui um <code>docker-compose.yml</code> completo:</p>
+
+                        <div class="code-block">
+                            <pre>version: '3.8'
+
+services:
+  # Aplicação Spring Boot
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - MONGO_URI=mongodb://mongodb:27017/restaurant_db
+    depends_on:
+      - mongodb
+    networks:
+      - restaurant-network
+
+  # Banco de dados MongoDB
+  mongodb:
+    image: mongo:7.0
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=restaurant_db
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - restaurant-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  restaurant-network:
+    driver: bridge</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Services Overview -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🏗️</span>
+                        <h2 class="card-title">Serviços Disponíveis</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="feature-cards">
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🍃</div>
+                                <h3 class="feature-card-title">Spring Boot App</h3>
+                                <p class="feature-card-description">
+                                    Aplicação principal rodando na porta 8080
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🍃</div>
+                                <h3 class="feature-card-title">MongoDB</h3>
+                                <p class="feature-card-description">
+                                    Banco de dados NoSQL na porta 27017
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🔗</div>
+                                <h3 class="feature-card-title">Network</h3>
+                                <p class="feature-card-description">
+                                    Rede isolada para comunicação entre serviços
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">💾</div>
+                                <h3 class="feature-card-title">Volume</h3>
+                                <p class="feature-card-description">
+                                    Persistência de dados do MongoDB
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Docker Commands -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">💻</span>
+                        <h2 class="card-title">Comandos Docker Essenciais</h2>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="mb-1">🚀 Inicialização</h3>
+                        <div class="code-block">
+                            <pre># Iniciar todos os serviços
+docker-compose up -d
+
+# Iniciar com logs visíveis
+docker-compose up
+
+# Iniciar apenas um serviço específico
+docker-compose up -d mongodb</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">📊 Monitoramento</h3>
+                        <div class="code-block">
+                            <pre># Ver status dos containers
+docker-compose ps
+
+# Ver logs de todos os serviços
+docker-compose logs
+
+# Ver logs de um serviço específico
+docker-compose logs app
+docker-compose logs mongodb
+
+# Seguir logs em tempo real
+docker-compose logs -f app</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">🔧 Gerenciamento</h3>
+                        <div class="code-block">
+                            <pre># Parar todos os serviços
+docker-compose stop
+
+# Parar e remover containers
+docker-compose down
+
+# Parar, remover containers e volumes
+docker-compose down -v
+
+# Rebuild da aplicação
+docker-compose build app
+docker-compose up -d app</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">🐛 Debug</h3>
+                        <div class="code-block">
+                            <pre># Executar comando dentro do container
+docker-compose exec app bash
+docker-compose exec mongodb mongosh
+
+# Ver informações detalhadas
+docker-compose config
+docker inspect &lt;container_id&gt;
+
+# Limpar recursos não utilizados
+docker system prune -a</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Environment Profiles -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">⚙️</span>
+                        <h2 class="card-title">Perfis de Ambiente</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>O projeto suporta diferentes perfis para diferentes ambientes:</p>
+
+                        <h3 class="mb-1">🐳 Perfil Docker</h3>
+                        <div class="code-block">
+                            <pre># application-docker.yml
+spring:
+  data:
+    mongodb:
+      uri: mongodb://mongodb:27017/restaurant_db
+  
+logging:
+  level:
+    com.fiap.itmoura.tech_challenge: INFO</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">🏠 Perfil Local</h3>
+                        <div class="code-block">
+                            <pre># application-local.yml
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/restaurant_db
+  
+logging:
+  level:
+    com.fiap.itmoura.tech_challenge: DEBUG</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">🧪 Perfil de Teste</h3>
+                        <div class="code-block">
+                            <pre># application-test.yml
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/restaurant_test_db
+  
+logging:
+  level:
+    com.fiap.itmoura.tech_challenge: DEBUG</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dockerfile -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">📄</span>
+                        <h2 class="card-title">Dockerfile</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>O projeto inclui um Dockerfile otimizado para produção:</p>
+
+                        <div class="code-block">
+                            <pre># Multi-stage build para otimização
+FROM openjdk:21-jdk-slim as builder
+
+WORKDIR /app
+COPY gradlew .
+COPY gradle gradle
+COPY build.gradle .
+COPY settings.gradle .
+COPY src src
+
+# Build da aplicação
+RUN ./gradlew clean build -x test
+
+# Imagem final otimizada
+FROM openjdk:21-jre-slim
+
+WORKDIR /app
+
+# Criar usuário não-root
+RUN addgroup --system spring && adduser --system spring --ingroup spring
+USER spring:spring
+
+# Copiar JAR da etapa de build
+COPY --from=builder /app/build/libs/*.jar app.jar
+
+# Configurações de JVM otimizadas
+ENV JAVA_OPTS="-Xmx512m -Xms256m -XX:+UseG1GC"
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=60s --retries=3 \
+  CMD curl -f http://localhost:8080/actuator/health || exit 1
+
+EXPOSE 8080
+
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Development Workflow -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🔄</span>
+                        <h2 class="card-title">Workflow de Desenvolvimento</h2>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="mb-1">🚀 Desenvolvimento Rápido</h3>
+                        <div class="code-block">
+                            <pre># 1. Iniciar apenas o MongoDB
+docker-compose up -d mongodb
+
+# 2. Executar aplicação localmente
+./gradlew bootRun
+
+# 3. Fazer alterações no código
+# 4. Reiniciar aplicação automaticamente (Spring DevTools)</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">🧪 Testes com Docker</h3>
+                        <div class="code-block">
+                            <pre># 1. Executar testes com MongoDB em container
+docker-compose up -d mongodb
+./gradlew test
+
+# 2. Ou executar tudo em containers
+docker-compose -f docker-compose.test.yml up --build</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">🏗️ Build e Deploy</h3>
+                        <div class="code-block">
+                            <pre># 1. Build da imagem
+docker-compose build app
+
+# 2. Tag para registry
+docker tag fiap-tech-challenge-restaurants_app:latest myregistry/restaurant-api:v1.0.0
+
+# 3. Push para registry
+docker push myregistry/restaurant-api:v1.0.0</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Troubleshooting -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🔧</span>
+                        <h2 class="card-title">Troubleshooting</h2>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="mb-1">❌ Problemas Comuns</h3>
+                        
+                        <h4 class="mb-1 mt-2">🔌 Porta já em uso</h4>
+                        <div class="code-block">
+                            <pre># Verificar o que está usando a porta
+lsof -i :8080
+lsof -i :27017
+
+# Parar processo específico
+kill -9 &lt;PID&gt;
+
+# Ou alterar porta no docker-compose.yml
+ports:
+  - "8081:8080"  # Usar porta 8081 externamente</pre>
+                        </div>
+
+                        <h4 class="mb-1 mt-2">🗄️ Problemas de conexão com MongoDB</h4>
+                        <div class="code-block">
+                            <pre># Verificar se MongoDB está rodando
+docker-compose ps mongodb
+
+# Ver logs do MongoDB
+docker-compose logs mongodb
+
+# Testar conexão manual
+docker-compose exec mongodb mongosh</pre>
+                        </div>
+
+                        <h4 class="mb-1 mt-2">🏗️ Problemas de build</h4>
+                        <div class="code-block">
+                            <pre># Limpar cache do Docker
+docker-compose build --no-cache app
+
+# Limpar volumes
+docker-compose down -v
+
+# Rebuild completo
+docker-compose down
+docker-compose build
+docker-compose up -d</pre>
+                        </div>
+
+                        <h4 class="mb-1 mt-2">💾 Problemas de persistência</h4>
+                        <div class="code-block">
+                            <pre># Verificar volumes
+docker volume ls
+
+# Inspecionar volume
+docker volume inspect fiap-tech-challenge-restaurants_mongodb_data
+
+# Backup do volume
+docker run --rm -v fiap-tech-challenge-restaurants_mongodb_data:/data -v $(pwd):/backup alpine tar czf /backup/mongodb-backup.tar.gz /data</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Production Considerations -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🏭</span>
+                        <h2 class="card-title">Considerações para Produção</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="feature-cards">
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🔒</div>
+                                <h3 class="feature-card-title">Segurança</h3>
+                                <p class="feature-card-description">
+                                    Use secrets, usuários não-root e redes isoladas
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">📊</div>
+                                <h3 class="feature-card-title">Monitoramento</h3>
+                                <p class="feature-card-description">
+                                    Configure health checks e métricas
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">💾</div>
+                                <h3 class="feature-card-title">Backup</h3>
+                                <p class="feature-card-description">
+                                    Implemente estratégia de backup dos volumes
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">⚡</div>
+                                <h3 class="feature-card-title">Performance</h3>
+                                <p class="feature-card-description">
+                                    Otimize recursos e configure limites
+                                </p>
+                            </div>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">🔧 Exemplo de Produção</h3>
+                        <div class="code-block">
+                            <pre># docker-compose.prod.yml
+version: '3.8'
+
+services:
+  app:
+    image: myregistry/restaurant-api:v1.0.0
+    deploy:
+      replicas: 3
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.5'
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - JAVA_OPTS=-Xmx400m -XX:+UseG1GC
+    secrets:
+      - mongodb_password
+    networks:
+      - restaurant-network
+
+  mongodb:
+    image: mongo:7.0
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: '1.0'
+    volumes:
+      - mongodb_data:/data/db
+      - ./mongodb.conf:/etc/mongod.conf
+    secrets:
+      - mongodb_password
+    networks:
+      - restaurant-network
+
+secrets:
+  mongodb_password:
+    external: true
+
+networks:
+  restaurant-network:
+    external: true</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Next Steps -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🚀</span>
+                        <h2 class="card-title">Próximos Passos</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>Agora que você tem o ambiente Docker configurado:</p>
+
+                        <div class="feature-cards">
+                            <div class="feature-card" data-link="testing.html">
+                                <div class="feature-card-icon">🧪</div>
+                                <h3 class="feature-card-title">Executar Testes</h3>
+                                <p class="feature-card-description">
+                                    Aprenda a executar testes no ambiente Docker
+                                </p>
+                            </div>
+
+                            <div class="feature-card" data-link="api-overview.html">
+                                <div class="feature-card-icon">📚</div>
+                                <h3 class="feature-card-title">Explorar API</h3>
+                                <p class="feature-card-description">
+                                    Conheça todos os endpoints disponíveis
+                                </p>
+                            </div>
+
+                            <div class="feature-card" data-link="architecture-overview.html">
+                                <div class="feature-card-icon">🏗️</div>
+                                <h3 class="feature-card-title">Arquitetura</h3>
+                                <p class="feature-card-description">
+                                    Entenda a estrutura do sistema
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>
