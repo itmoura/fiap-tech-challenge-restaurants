@@ -8,6 +8,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,16 +23,21 @@ import lombok.NoArgsConstructor;
 public class KitchenTypeDocumentEntity {
 
     @Id
+    @Field("_id")
     private UUID id;
 
     @Indexed(unique = true)
+    @Field("name")
     private String name;
 
+    @Field("description")
     private String description;
 
     @CreatedDate
+    @Field("createdAt")
     private LocalDateTime createdAt;
 
     @LastModifiedDate
+    @Field("lastUpdate")
     private LocalDateTime lastUpdate;
 }

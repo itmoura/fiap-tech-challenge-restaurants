@@ -17,4 +17,7 @@ public interface RestaurantRepository extends MongoRepository<RestaurantEntity, 
 
     @Query("{ 'menu.items.id': ?0 }")
     Optional<RestaurantEntity> findByMenuItemId(UUID itemId);
+    
+    @Query("{ 'kitchenType.id': ?0 }")
+    boolean existsByKitchenTypeId(UUID kitchenTypeId);
 }
