@@ -18,85 +18,59 @@ import com.fiap.itmoura.tech_challenge_restaurant.application.models.restaurant.
 import com.fiap.itmoura.tech_challenge_restaurant.application.models.restaurant.RestaurantFullResponse;
 import com.fiap.itmoura.tech_challenge_restaurant.application.models.restaurant.RestaurantRequest;
 import com.fiap.itmoura.tech_challenge_restaurant.application.usecases.RestaurantUseCase;
+import com.fiap.itmoura.tech_challenge_restaurant.presentation.contracts.RestaurantControllerInterface;
 
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/restaurants")
 @RequiredArgsConstructor
-@Tag(name = "Restaurants", description = "API para gerenciamento de restaurantes")
-public class RestaurantController {
+public class RestaurantController implements RestaurantControllerInterface {
 
     private final RestaurantUseCase restaurantService;
 
+    @Override
     @PostMapping
-    @Operation(summary = "Criar restaurante", description = "Cria um novo restaurante com menu")
-    @ApiResponses(value = {
-        @ApiResponse(responseCode = "201", description = "Restaurante criado com sucesso"),
-        @ApiResponse(responseCode = "400", description = "Dados inválidos")
-    })
     public ResponseEntity<RestaurantFullResponse> createRestaurant(
             @Valid @RequestBody RestaurantRequest restaurantRequest) {
         RestaurantFullResponse response = restaurantService.createRestaurant(restaurantRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    @Override
     @GetMapping
-    @Operation(summary = "Listar restaurantes", description = "Retorna todos os restaurantes sem menu")
-    @ApiResponse(responseCode = "200", description = "Lista de restaurantes retornada com sucesso")
     public ResponseEntity<List<RestaurantBasicResponse>> getAllRestaurants() {
         List<RestaurantBasicResponse> restaurants = restaurantService.getAllRestaurants();
         return ResponseEntity.ok(restaurants);
     }
 
+    @Override
     @GetMapping("/full")
-    @Operation(summary = "Listar restaurantes completos", description = "Retorna todos os restaurantes com menu completo")
-    @ApiResponse(responseCode = "200", description = "Lista de restaurantes completos retornada com sucesso")
     public ResponseEntity<List<RestaurantFullResponse>> getAllRestaurantsWithMenu() {
         List<RestaurantFullResponse> restaurants = restaurantService.getAllRestaurantsWithMenu();
         return ResponseEntity.ok(restaurants);
     }
 
+    @Override
     @GetMapping("/{id}")
-    @Operation(summary = "Buscar restaurante por ID", description = "Retorna um restaurante específico com menu completo")
-    @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Restaurante encontrado"),
-        @ApiResponse(responseCode = "404", description = "Restaurante não encontrado")
-    })
-    public ResponseEntity<RestaurantFullResponse> getRestaurantById(
-            @Parameter(description = "ID do restaurante") @PathVariable UUID id) {
+    public ResponseEntity<RestaurantFullResponse> getRestaurantById(@PathVariable UUID id) {
         RestaurantFullResponse restaurant = restaurantService.getRestaurantById(id);
         return ResponseEntity.ok(restaurant);
     }
 
+    @Override
     @PutMapping("/{id}")
-    @Operation(summary = "Atualizar restaurante", description = "Atualiza um restaurante existente")
-    @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Restaurante atualizado com sucesso"),
-        @ApiResponse(responseCode = "404", description = "Restaurante não encontrado"),
-        @ApiResponse(responseCode = "400", description = "Dados inválidos")
-    })
     public ResponseEntity<RestaurantFullResponse> updateRestaurant(
-            @Parameter(description = "ID do restaurante") @PathVariable UUID id,
+            @PathVariable UUID id,
             @Valid @RequestBody RestaurantRequest restaurantRequest) {
         RestaurantFullResponse response = restaurantService.updateRestaurant(id, restaurantRequest);
         return ResponseEntity.ok(response);
     }
 
+    @Override
     @DeleteMapping("/{id}")
-    @Operation(summary = "Excluir restaurante", description = "Exclui um restaurante")
-    @ApiResponses(value = {
-        @ApiResponse(responseCode = "204", description = "Restaurante excluído com sucesso"),
-        @ApiResponse(responseCode = "404", description = "Restaurante não encontrado")
-    })
-    public ResponseEntity<Void> deleteRestaurant(
-            @Parameter(description = "ID do restaurante") @PathVariable UUID id) {
+    public ResponseEntity<Void> deleteRestaurant(@PathVariable UUID id) {
         restaurantService.deleteRestaurant(id);
         return ResponseEntity.noContent().build();
     }

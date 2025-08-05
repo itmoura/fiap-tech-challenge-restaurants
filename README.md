@@ -37,16 +37,18 @@ O cliente da API interage com menu e itens de forma **independente**, como se fo
 
 ## 🏗️ Arquitetura
 
-O projeto segue os princípios da **Arquitetura Hexagonal (Ports & Adapters)**:
+O projeto segue os princípios da **Arquitetura Hexagonal (Ports & Adapters)** com **separação clara de responsabilidades**:
 
 ```
 src/main/java/com/fiap/itmoura/tech_challenge_restaurant/
 ├── application/          # Camada de Aplicação
 │   ├── models/          # DTOs e modelos de transferência
+│   │   ├── kitchentype/ # DTOs para tipos de cozinha
 │   │   ├── menu/        # DTOs específicos para menu
 │   │   └── restaurant/  # DTOs específicos para restaurante
 │   ├── ports/           # Interfaces (Ports)
 │   └── usecases/        # Casos de uso (Services)
+│       ├── KitchenTypeUseCase.java
 │       ├── RestaurantUseCase.java
 │       ├── MenuUseCase.java
 │       └── MenuItemUseCase.java
@@ -56,12 +58,28 @@ src/main/java/com/fiap/itmoura/tech_challenge_restaurant/
 ├── infrastructure/      # Camada de Infraestrutura
 │   └── MongoConfig.java # Configurações do MongoDB
 └── presentation/        # Camada de Apresentação
-    ├── controllers/     # Controllers REST
+    ├── contracts/       # Interfaces com anotações Swagger
+    │   ├── KitchenTypeControllerInterface.java
+    │   ├── RestaurantControllerInterface.java
+    │   ├── MenuControllerInterface.java
+    │   └── MenuItemControllerInterface.java
+    ├── controllers/     # Controllers REST (implementam interfaces)
+    │   ├── KitchenTypeController.java
     │   ├── RestaurantController.java
     │   ├── MenuController.java
     │   └── MenuItemController.java
     └── handlers/        # Tratamento de exceções
 ```
+
+### 🎯 **Padrão de Interfaces Contracts**
+
+O projeto implementa um padrão onde **todas as anotações Swagger/OpenAPI ficam nas interfaces** no diretório `contracts/`, e os **controllers apenas implementam essas interfaces**. Isso garante:
+
+- **Separação de Responsabilidades**: Documentação separada da implementação
+- **Reutilização**: Interfaces podem ser implementadas por diferentes controllers
+- **Manutenibilidade**: Mudanças na documentação não afetam a lógica
+- **Testabilidade**: Interfaces facilitam criação de mocks
+- **Padronização**: Documentação consistente em toda a API
 
 ## 📊 Modelagem de Dados
 
