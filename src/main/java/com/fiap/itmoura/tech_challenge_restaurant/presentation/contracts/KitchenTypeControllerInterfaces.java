@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.fiap.itmoura.tech_challenge_restaurant.application.models.kitchentype.KitchenTypeDTO;
-import com.fiap.itmoura.tech_challenge_restaurant.application.models.kitchentype.group.OnCreateGroup;
-import com.fiap.itmoura.tech_challenge_restaurant.application.models.kitchentype.group.OnUpdateGroup;
+import com.fiap.itmoura.tech_challenge_restaurant.application.models.group.OnCreateGroup;
+import com.fiap.itmoura.tech_challenge_restaurant.application.models.group.OnUpdateGroup;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

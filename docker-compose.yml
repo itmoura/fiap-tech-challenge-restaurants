@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: fiap-mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin123
+      MONGO_INITDB_DATABASE: tech_challenge
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - fiap-network
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fiap-tech-challenge-app
+    restart: always
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      MONGO_URI: mongodb://admin:admin123@mongodb:27017/tech_challenge?authSource=admin
+      APP_PORT: 8081
+    depends_on:
+      - mongodb
+    networks:
+      - fiap-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  fiap-network:
+    driver: bridge

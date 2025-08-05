@@ -1,0 +1,589 @@
+{
+	"info": {
+		"_postman_id": "12345678-1234-1234-1234-123456789012",
+		"name": "Tech Challenge - Restaurants API",
+		"description": "Collection para testar os endpoints da API de gestão de restaurantes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User Types",
+			"item": [
+				{
+					"name": "Create User Type",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Cliente\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/user-types/create",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"user-types",
+								"create"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get All User Types",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/user-types",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"user-types"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get User Type by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/user-types/{{userTypeId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"user-types",
+								"{{userTypeId}}"
+							]
+						}
+					}
+				},
+				{
+					"name": "Update User Type",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Dono de Restaurante\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/user-types/{{userTypeId}}/update",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"user-types",
+								"{{userTypeId}}",
+								"update"
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete User Type",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/user-types/{{userTypeId}}/delete",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"user-types",
+								"{{userTypeId}}",
+								"delete"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"João Silva\",\n  \"email\": \"joao@email.com\",\n  \"userTypeId\": \"{{userTypeId}}\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users/create",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"create"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Users by Type",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users?userTypeId={{userTypeId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "userTypeId",
+									"value": "{{userTypeId}}"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get User by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/{{userId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{userId}}"
+							]
+						}
+					}
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"João Santos\",\n  \"email\": \"joao.santos@email.com\",\n  \"userTypeId\": \"{{userTypeId}}\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users/{{userId}}/update",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{userId}}",
+								"update"
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/{{userId}}/delete",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{userId}}",
+								"delete"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Kitchen Types",
+			"item": [
+				{
+					"name": "Create Kitchen Type",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Brasileira\",\n  \"description\": \"Cozinha brasileira tradicional\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/kitchen-types/create",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"kitchen-types",
+								"create"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Kitchen Type",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/kitchen-types/{{kitchenTypeId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"kitchen-types",
+								"{{kitchenTypeId}}"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Restaurants",
+			"item": [
+				{
+					"name": "Create Restaurant",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Restaurante do João\",\n  \"address\": \"Rua das Flores, 123\",\n  \"kitchenType\": \"Brasileira\",\n  \"daysOperation\": [\n    {\n      \"day\": \"MONDAY\",\n      \"openTime\": \"08:00\",\n      \"closeTime\": \"22:00\"\n    },\n    {\n      \"day\": \"TUESDAY\",\n      \"openTime\": \"08:00\",\n      \"closeTime\": \"22:00\"\n    }\n  ],\n  \"ownerId\": \"{{userId}}\",\n  \"isActive\": true,\n  \"rating\": 4.5\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/restaurants/create",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"restaurants",
+								"create"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get All Restaurants",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/restaurants",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"restaurants"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Restaurant by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/restaurants/{{restaurantId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"restaurants",
+								"{{restaurantId}}"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Menu Items",
+			"item": [
+				{
+					"name": "Create Menu Item",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Hambúrguer Artesanal\",\n  \"description\": \"Hambúrguer com carne artesanal, queijo, bacon e molho especial\",\n  \"price\": 25.90,\n  \"onlyForLocalConsumption\": false,\n  \"imagePath\": \"/images/hamburguer-artesanal.jpg\",\n  \"restaurantId\": \"{{restaurantId}}\",\n  \"isActive\": true\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/menu-items/create",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"menu-items",
+								"create"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get All Menu Items",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/menu-items",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"menu-items"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Menu Items by Restaurant",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/menu-items?restaurantId={{restaurantId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"menu-items"
+							],
+							"query": [
+								{
+									"key": "restaurantId",
+									"value": "{{restaurantId}}"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Active Menu Items",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/menu-items?activeOnly=true",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"menu-items"
+							],
+							"query": [
+								{
+									"key": "activeOnly",
+									"value": "true"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Menu Item by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/menu-items/{{menuItemId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"menu-items",
+								"{{menuItemId}}"
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Menu Item",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Hambúrguer Premium\",\n  \"description\": \"Hambúrguer premium com ingredientes especiais\",\n  \"price\": 35.90,\n  \"onlyForLocalConsumption\": false,\n  \"imagePath\": \"/images/hamburguer-premium.jpg\",\n  \"restaurantId\": \"{{restaurantId}}\",\n  \"isActive\": true\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/menu-items/{{menuItemId}}/update",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"menu-items",
+								"{{menuItemId}}",
+								"update"
+							]
+						}
+					}
+				},
+				{
+					"name": "Toggle Menu Item Status",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/menu-items/{{menuItemId}}/toggle-status",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"menu-items",
+								"{{menuItemId}}",
+								"toggle-status"
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Menu Item",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/menu-items/{{menuItemId}}/delete",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"menu-items",
+								"{{menuItemId}}",
+								"delete"
+							]
+						}
+					}
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8081",
+			"type": "string"
+		},
+		{
+			"key": "userTypeId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "userId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "kitchenTypeId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "restaurantId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "menuItemId",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
