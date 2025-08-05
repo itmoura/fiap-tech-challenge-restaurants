@@ -9,11 +9,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
+import org.springframework.data.mongodb.config.EnableMongoAuditing;
 import org.springframework.data.mongodb.core.convert.MongoCustomConversions;
 
 import java.util.Arrays;
 
 @Configuration
+@EnableMongoAuditing
 public class MongoConfig extends AbstractMongoClientConfiguration {
 
     private static final Logger logger = LoggerFactory.getLogger(MongoConfig.class);
@@ -84,9 +86,17 @@ public class MongoConfig extends AbstractMongoClientConfiguration {
      * Conversor de UUID para String (sempre funciona)
      */
     static class UUIDToStringConverter implements Converter<UUID, String> {
+        
+        private static final Logger logger = LoggerFactory.getLogger(UUIDToStringConverter.class);
+        
         @Override
         public String convert(UUID source) {
-            return source != null ? source.toString() : null;
+            if (source == null) {
+                return null;
+            }
+            String result = source.toString();
+            logger.debug("Converting UUID {} to string: '{}'", source, result);
+            return result;
         }
     }
 }
