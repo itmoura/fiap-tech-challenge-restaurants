@@ -11,6 +11,8 @@ import com.fiap.itmoura.tech_challenge_restaurant.application.models.restaurant.
 import com.fiap.itmoura.tech_challenge_restaurant.application.models.restaurant.RestaurantFullResponse;
 import com.fiap.itmoura.tech_challenge_restaurant.application.models.restaurant.RestaurantRequest;
 import com.fiap.itmoura.tech_challenge_restaurant.application.ports.out.RestaurantRepository;
+import com.fiap.itmoura.tech_challenge_restaurant.domain.entities.KitchenTypeDocumentEntity;
+import com.fiap.itmoura.tech_challenge_restaurant.domain.entities.KitchenTypeEntity;
 import com.fiap.itmoura.tech_challenge_restaurant.domain.entities.MenuCategoryEntity;
 import com.fiap.itmoura.tech_challenge_restaurant.domain.entities.MenuItemEntity;
 import com.fiap.itmoura.tech_challenge_restaurant.domain.entities.RestaurantEntity;
@@ -25,10 +27,14 @@ import lombok.extern.log4j.Log4j2;
 public class RestaurantUseCase {
 
     private final RestaurantRepository restaurantRepository;
+    private final KitchenTypeUseCase kitchenTypeUseCase;
 
     @Transactional
     public RestaurantFullResponse createRestaurant(RestaurantRequest restaurantRequest) {
         log.info("Creating restaurant: {}", restaurantRequest);
+
+        // Buscar o tipo de cozinha
+        KitchenTypeEntity kitchenType = getKitchenTypeFromRequest(restaurantRequest);
 
         List<MenuCategoryEntity> menuCategories = restaurantRequest.menu() != null 
             ? restaurantRequest.menu().stream()
@@ -40,7 +46,7 @@ public class RestaurantUseCase {
             .id(UUID.randomUUID())
             .name(restaurantRequest.name())
             .address(restaurantRequest.address())
-            .kitchenType(restaurantRequest.kitchenType().toEntity())
+            .kitchenType(kitchenType)
             .daysOperation(restaurantRequest.daysOperation())
             .ownerId(restaurantRequest.ownerId())
             .isActive(Boolean.TRUE.equals(restaurantRequest.isActive()) || restaurantRequest.isActive() == null)
@@ -62,6 +68,9 @@ public class RestaurantUseCase {
         RestaurantEntity existingRestaurant = restaurantRepository.findById(id)
             .orElseThrow(() -> new NotFoundException("Restaurant not found with ID: " + id));
 
+        // Buscar o tipo de cozinha
+        KitchenTypeEntity kitchenType = getKitchenTypeFromRequest(restaurantRequest);
+
         List<MenuCategoryEntity> menuCategories = restaurantRequest.menu() != null 
             ? restaurantRequest.menu().stream()
                 .map(this::convertToMenuCategoryEntity)
@@ -72,7 +81,7 @@ public class RestaurantUseCase {
             .id(existingRestaurant.getId())
             .name(restaurantRequest.name())
             .address(restaurantRequest.address())
-            .kitchenType(restaurantRequest.kitchenType().toEntity())
+            .kitchenType(kitchenType)
             .daysOperation(restaurantRequest.daysOperation())
             .ownerId(restaurantRequest.ownerId())
             .isActive(restaurantRequest.isActive() != null ? restaurantRequest.isActive() : existingRestaurant.getIsActive())
@@ -136,6 +145,27 @@ public class RestaurantUseCase {
         
         restaurantRepository.deleteById(id);
         log.info("Restaurant deleted successfully with ID: {}", id);
+    }
+
+    private KitchenTypeEntity getKitchenTypeFromRequest(RestaurantRequest restaurantRequest) {
+        if (restaurantRequest.kitchenType().id() != null) {
+            // Se o ID foi fornecido, buscar por ID
+            var kitchenTypeResponse = kitchenTypeUseCase.getKitchenTypeById(restaurantRequest.kitchenType().id());
+            return KitchenTypeEntity.builder()
+                .id(kitchenTypeResponse.getId())
+                .name(kitchenTypeResponse.getName())
+                .description(kitchenTypeResponse.getDescription())
+                .createdAt(kitchenTypeResponse.getCreatedAt())
+                .lastUpdate(kitchenTypeResponse.getLastUpdate())
+                .build();
+        } else {
+            // Se apenas o nome foi fornecido, buscar por nome
+            KitchenTypeDocumentEntity kitchenTypeDoc = kitchenTypeUseCase.getKitchenTypeByIdOrName(restaurantRequest.kitchenType().name());
+            if (kitchenTypeDoc == null) {
+                throw new NotFoundException("Kitchen type not found: " + restaurantRequest.kitchenType().name());
+            }
+            return KitchenTypeEntity.fromDocument(kitchenTypeDoc);
+        }
     }
 
     private MenuCategoryEntity convertToMenuCategoryEntity(com.fiap.itmoura.tech_challenge_restaurant.application.models.menu.MenuCategoryDTO categoryDTO) {

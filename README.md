@@ -118,6 +118,16 @@ src/main/java/com/fiap/itmoura/tech_challenge_restaurant/
 
 ## 🔗 Endpoints da API
 
+### 🍳 **Tipos de Cozinha (Kitchen Types)**
+
+| Método | Endpoint | Descrição |
+|--------|----------|-----------|
+| `POST` | `/api/kitchen_types` | Cria novo tipo de cozinha |
+| `GET` | `/api/kitchen_types` | Lista todos os tipos de cozinha |
+| `GET` | `/api/kitchen_types/{id}` | Busca tipo de cozinha por ID |
+| `PUT` | `/api/kitchen_types/{id}` | Atualiza tipo de cozinha |
+| `DELETE` | `/api/kitchen_types/{id}` | Remove tipo de cozinha |
+
 ### 🏪 Restaurantes
 
 | Método | Endpoint | Descrição |
@@ -149,7 +159,18 @@ src/main/java/com/fiap/itmoura/tech_challenge_restaurant/
 
 ### 💡 Exemplos de Uso
 
-#### 1. Criar Restaurante
+#### 1. Criar Tipo de Cozinha
+
+```bash
+curl -X POST http://localhost:8081/api/kitchen_types \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Italiana",
+    "description": "Cozinha italiana tradicional com massas, pizzas e risotos"
+  }'
+```
+
+#### 2. Criar Restaurante
 
 ```bash
 curl -X POST http://localhost:8081/api/restaurants \
@@ -173,7 +194,7 @@ curl -X POST http://localhost:8081/api/restaurants \
   }'
 ```
 
-#### 2. Criar Categoria de Menu
+#### 3. Criar Categoria de Menu
 
 ```bash
 curl -X POST http://localhost:8081/api/restaurants/{restaurantId}/menu \
