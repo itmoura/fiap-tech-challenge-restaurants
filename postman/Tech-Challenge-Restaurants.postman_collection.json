@@ -24,9 +24,9 @@
 							"raw": "{\n  \"name\": \"Brasileira\",\n  \"description\": \"Cozinha brasileira tradicional\"\n}"
 						},
 						"url": {
-							"raw": "{{baseUrl}}/api/kitchen-types/create",
+							"raw": "{{baseUrlRestaurant}}/api/kitchen-types/create",
 							"host": [
-								"{{baseUrl}}"
+								"{{baseUrlRestaurant}}"
 							],
 							"path": [
 								"api",
@@ -42,9 +42,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/api/kitchen-types/{{kitchenTypeId}}",
+							"raw": "{{baseUrlRestaurant}}/api/kitchen-types/{{kitchenTypeId}}",
 							"host": [
-								"{{baseUrl}}"
+								"{{baseUrlRestaurant}}"
 							],
 							"path": [
 								"api",
@@ -69,9 +69,9 @@
 							"raw": "{\n  \"name\": \"Italiana\",\n  \"description\": \"Cozinha italiana autêntica\"\n}"
 						},
 						"url": {
-							"raw": "{{baseUrl}}/api/kitchen-types/{{kitchenTypeId}}/update",
+							"raw": "{{baseUrlRestaurant}}/api/kitchen-types/{{kitchenTypeId}}/update",
 							"host": [
-								"{{baseUrl}}"
+								"{{baseUrlRestaurant}}"
 							],
 							"path": [
 								"api",
@@ -88,9 +88,9 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/api/kitchen-types/{{kitchenTypeId}}/delete",
+							"raw": "{{baseUrlRestaurant}}/api/kitchen-types/{{kitchenTypeId}}/delete",
 							"host": [
-								"{{baseUrl}}"
+								"{{baseUrlRestaurant}}"
 							],
 							"path": [
 								"api",
@@ -121,9 +121,9 @@
 							"raw": "{\n  \"name\": \"Restaurante do João\",\n  \"address\": \"Rua das Flores, 123\",\n  \"kitchenType\": \"Brasileira\",\n  \"daysOperation\": [\n    {\n      \"day\": \"MONDAY\",\n      \"openTime\": \"08:00\",\n      \"closeTime\": \"22:00\"\n    },\n    {\n      \"day\": \"TUESDAY\",\n      \"openTime\": \"08:00\",\n      \"closeTime\": \"22:00\"\n    },\n    {\n      \"day\": \"WEDNESDAY\",\n      \"openTime\": \"08:00\",\n      \"closeTime\": \"22:00\"\n    },\n    {\n      \"day\": \"THURSDAY\",\n      \"openTime\": \"08:00\",\n      \"closeTime\": \"22:00\"\n    },\n    {\n      \"day\": \"FRIDAY\",\n      \"openTime\": \"08:00\",\n      \"closeTime\": \"23:00\"\n    },\n    {\n      \"day\": \"SATURDAY\",\n      \"openTime\": \"10:00\",\n      \"closeTime\": \"23:00\"\n    }\n  ],\n  \"ownerId\": \"owner123\",\n  \"isActive\": true,\n  \"rating\": 4.5\n}"
 						},
 						"url": {
-							"raw": "{{baseUrl}}/api/restaurants/create",
+							"raw": "{{baseUrlRestaurant}}/api/restaurants/create",
 							"host": [
-								"{{baseUrl}}"
+								"{{baseUrlRestaurant}}"
 							],
 							"path": [
 								"api",
@@ -139,9 +139,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/api/restaurants",
+							"raw": "{{baseUrlRestaurant}}/api/restaurants",
 							"host": [
-								"{{baseUrl}}"
+								"{{baseUrlRestaurant}}"
 							],
 							"path": [
 								"api",
@@ -156,9 +156,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/api/restaurants/{{restaurantId}}",
+							"raw": "{{baseUrlRestaurant}}/api/restaurants/{{restaurantId}}",
 							"host": [
-								"{{baseUrl}}"
+								"{{baseUrlRestaurant}}"
 							],
 							"path": [
 								"api",
@@ -183,9 +183,9 @@
 							"raw": "{\n  \"name\": \"Restaurante Atualizado\",\n  \"address\": \"Nova Rua, 456\",\n  \"kitchenType\": \"Italiana\",\n  \"daysOperation\": [\n    {\n      \"day\": \"MONDAY\",\n      \"openTime\": \"09:00\",\n      \"closeTime\": \"22:00\"\n    },\n    {\n      \"day\": \"TUESDAY\",\n      \"openTime\": \"09:00\",\n      \"closeTime\": \"22:00\"\n    }\n  ],\n  \"ownerId\": \"owner456\",\n  \"isActive\": true,\n  \"rating\": 5.0\n}"
 						},
 						"url": {
-							"raw": "{{baseUrl}}/api/restaurants/{{restaurantId}}/update",
+							"raw": "{{baseUrlRestaurant}}/api/restaurants/{{restaurantId}}/update",
 							"host": [
-								"{{baseUrl}}"
+								"{{baseUrlRestaurant}}"
 							],
 							"path": [
 								"api",
@@ -202,9 +202,9 @@
 						"method": "PATCH",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/api/restaurants/{{restaurantId}}/disable",
+							"raw": "{{baseUrlRestaurant}}/api/restaurants/{{restaurantId}}/disable",
 							"host": [
-								"{{baseUrl}}"
+								"{{baseUrlRestaurant}}"
 							],
 							"path": [
 								"api",
@@ -221,9 +221,9 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/api/restaurants/{{restaurantId}}/delete",
+							"raw": "{{baseUrlRestaurant}}/api/restaurants/{{restaurantId}}/delete",
 							"host": [
-								"{{baseUrl}}"
+								"{{baseUrlRestaurant}}"
 							],
 							"path": [
 								"api",
@@ -254,9 +254,9 @@
 							"raw": "{\n  \"name\": \"Hambúrguer Artesanal\",\n  \"description\": \"Hambúrguer com carne artesanal, queijo, bacon e molho especial\",\n  \"price\": 25.90,\n  \"onlyForLocalConsumption\": false,\n  \"imagePath\": \"/images/hamburguer-artesanal.jpg\",\n  \"restaurantId\": \"{{restaurantId}}\",\n  \"isActive\": true\n}"
 						},
 						"url": {
-							"raw": "{{baseUrl}}/api/menu-items/create",
+							"raw": "{{baseUrlRestaurant}}/api/menu-items/create",
 							"host": [
-								"{{baseUrl}}"
+								"{{baseUrlRestaurant}}"
 							],
 							"path": [
 								"api",
@@ -272,9 +272,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/api/menu-items",
+							"raw": "{{baseUrlRestaurant}}/api/menu-items",
 							"host": [
-								"{{baseUrl}}"
+								"{{baseUrlRestaurant}}"
 							],
 							"path": [
 								"api",
@@ -289,9 +289,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/api/menu-items?restaurantId={{restaurantId}}",
+							"raw": "{{baseUrlRestaurant}}/api/menu-items?restaurantId={{restaurantId}}",
 							"host": [
-								"{{baseUrl}}"
+								"{{baseUrlRestaurant}}"
 							],
 							"path": [
 								"api",
@@ -312,9 +312,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/api/menu-items?activeOnly=true",
+							"raw": "{{baseUrlRestaurant}}/api/menu-items?activeOnly=true",
 							"host": [
-								"{{baseUrl}}"
+								"{{baseUrlRestaurant}}"
 							],
 							"path": [
 								"api",
@@ -335,9 +335,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/api/menu-items?restaurantId={{restaurantId}}&activeOnly=true",
+							"raw": "{{baseUrlRestaurant}}/api/menu-items?restaurantId={{restaurantId}}&activeOnly=true",
 							"host": [
-								"{{baseUrl}}"
+								"{{baseUrlRestaurant}}"
 							],
 							"path": [
 								"api",
@@ -362,9 +362,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/api/menu-items/{{menuItemId}}",
+							"raw": "{{baseUrlRestaurant}}/api/menu-items/{{menuItemId}}",
 							"host": [
-								"{{baseUrl}}"
+								"{{baseUrlRestaurant}}"
 							],
 							"path": [
 								"api",
@@ -389,9 +389,9 @@
 							"raw": "{\n  \"name\": \"Hambúrguer Premium\",\n  \"description\": \"Hambúrguer premium com ingredientes especiais\",\n  \"price\": 35.90,\n  \"onlyForLocalConsumption\": false,\n  \"imagePath\": \"/images/hamburguer-premium.jpg\",\n  \"restaurantId\": \"{{restaurantId}}\",\n  \"isActive\": true\n}"
 						},
 						"url": {
-							"raw": "{{baseUrl}}/api/menu-items/{{menuItemId}}/update",
+							"raw": "{{baseUrlRestaurant}}/api/menu-items/{{menuItemId}}/update",
 							"host": [
-								"{{baseUrl}}"
+								"{{baseUrlRestaurant}}"
 							],
 							"path": [
 								"api",
@@ -408,9 +408,9 @@
 						"method": "PATCH",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/api/menu-items/{{menuItemId}}/toggle-status",
+							"raw": "{{baseUrlRestaurant}}/api/menu-items/{{menuItemId}}/toggle-status",
 							"host": [
-								"{{baseUrl}}"
+								"{{baseUrlRestaurant}}"
 							],
 							"path": [
 								"api",
@@ -427,9 +427,9 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/api/menu-items/{{menuItemId}}/delete",
+							"raw": "{{baseUrlRestaurant}}/api/menu-items/{{menuItemId}}/delete",
 							"host": [
-								"{{baseUrl}}"
+								"{{baseUrlRestaurant}}"
 							],
 							"path": [
 								"api",
@@ -445,7 +445,7 @@
 	],
 	"variable": [
 		{
-			"key": "baseUrl",
+			"key": "baseUrlRestaurant",
 			"value": "http://localhost:8081",
 			"type": "string"
 		},
