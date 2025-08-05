@@ -14,7 +14,4 @@ public class MongoConfigSimple extends AbstractMongoClientConfiguration {
     protected String getDatabaseName() {
         return "tech_challenge_restaurants";
     }
-
-    // Não definimos conversores customizados para evitar problemas de conversão
-    // O Spring Data MongoDB usará os conversores padrão
 }
