@@ -144,6 +144,7 @@ class RestaurantUseCaseTest {
     void shouldCreateRestaurantSuccessfully() {
         // Given
         when(kitchenTypeUseCase.getKitchenTypeById(kitchenTypeId)).thenReturn(kitchenTypeResponse);
+        when(kitchenTypeUseCase.getKitchenTypeByIdOrName("Japonesa")).thenReturn(kitchenTypeResponse);
         when(restaurantRepository.save(any(RestaurantEntity.class))).thenReturn(restaurantEntity);
 
         // When
@@ -232,6 +233,7 @@ class RestaurantUseCaseTest {
         // Given
         when(restaurantRepository.findById(restaurantId)).thenReturn(Optional.of(restaurantEntity));
         when(kitchenTypeUseCase.getKitchenTypeById(kitchenTypeId)).thenReturn(kitchenTypeResponse);
+        when(kitchenTypeUseCase.getKitchenTypeByIdOrName("Japonesa")).thenReturn(kitchenTypeResponse);
         when(restaurantRepository.save(any(RestaurantEntity.class))).thenReturn(restaurantEntity);
 
         // When
@@ -300,6 +302,7 @@ class RestaurantUseCaseTest {
             .build();
 
         when(kitchenTypeUseCase.getKitchenTypeById(kitchenTypeId)).thenReturn(kitchenTypeResponse);
+        when(kitchenTypeUseCase.getKitchenTypeByIdOrName("Italiana")).thenReturn(kitchenTypeResponse);
         when(restaurantRepository.save(any(RestaurantEntity.class))).thenReturn(entityWithoutMenu);
 
         // When
@@ -318,7 +321,7 @@ class RestaurantUseCaseTest {
     @Test
     void shouldGetAllActiveRestaurants() {
         // Given
-        when(restaurantRepository.findByIsActiveTrue()).thenReturn(List.of(restaurantEntity));
+        when(restaurantRepository.findAll()).thenReturn(List.of(restaurantEntity));
 
         // When
         List<RestaurantBasicResponse> response = restaurantUseCase.getAllActiveRestaurants();
@@ -329,7 +332,7 @@ class RestaurantUseCaseTest {
         assertEquals("Restaurante do João", response.get(0).name());
         assertTrue(response.get(0).isActive());
 
-        verify(restaurantRepository).findByIsActiveTrue();
+        verify(restaurantRepository).findAll();
     }
 
     @Test
@@ -347,6 +350,7 @@ class RestaurantUseCaseTest {
 
         when(restaurantRepository.findById(restaurantId)).thenReturn(Optional.of(restaurantEntity));
         when(kitchenTypeUseCase.getKitchenTypeById(kitchenTypeId)).thenReturn(kitchenTypeResponse);
+        when(kitchenTypeUseCase.getKitchenTypeByIdOrName("Brasileira")).thenReturn(kitchenTypeResponse);
         when(restaurantRepository.save(any(RestaurantEntity.class))).thenReturn(restaurantEntity);
 
         // When

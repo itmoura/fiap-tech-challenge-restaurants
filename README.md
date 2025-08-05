@@ -454,24 +454,24 @@ src/test/java/
 4. **Consultar Restaurante Completo** → `GET /api/restaurants/{id}`
 5. **Buscar Item Específico** → `GET /api/restaurants/menu/item/{itemId}`
 
-## 📝 Próximos Passos
 
-- [ ] Implementar autenticação e autorização
-- [ ] Adicionar sistema de avaliações
-- [ ] Implementar cache Redis
-- [ ] Adicionar métricas com Micrometer
-- [ ] Implementar versionamento da API
-- [ ] Adicionar testes de carga
-- [ ] Implementar busca por texto nos itens
-- [ ] Adicionar filtros avançados
+## 🤖 Desenvolvimento com IA
 
-## 🤝 Contribuição
+Este projeto também foi desenvolvido como uma oportunidade de aprendizado e aperfeiçoamento no uso de ferramentas de Inteligência Artificial para desenvolvimento de software. Durante todo o processo, foram utilizadas tecnologias de IA generativa para acelerar o desenvolvimento e melhorar a qualidade do código.
 
-1. Fork o projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
+### 🛠️ Ferramentas de IA Utilizadas
+
+- **Cursor**: IDE com Inteligência Artificial que sugere códigos de forma inteligente e oferece assistência contextual em tempo real, facilitando e acelerando o desenvolvimento.
+- **GitHub Copilot**: Ferramenta de IA que auxilia na programação, fornecendo sugestões automáticas de código e agentes inteligentes para resolver tarefas de desenvolvimento de maneira mais eficiente.
+- **AWS Q CLI**: Ferramenta de IA da AWS que oferece assistência contextual para desenvolvimento, debugging e otimização de código, integrando-se com o ecossistema AWS.
+
+### 🎯 Benefícios Alcançados
+
+- **Aceleração do Desenvolvimento**: Redução significativa no tempo de codificação
+- **Melhoria da Qualidade**: Sugestões inteligentes para boas práticas
+- **Documentação Automática**: Geração automática de documentação e comentários
+- **Debugging Inteligente**: Identificação rápida e sugestões de correção de bugs
+- **Refatoração Assistida**: Sugestões para melhorar a estrutura e legibilidade do código
 
 ## 📄 Licença
 
