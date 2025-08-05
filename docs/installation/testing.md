@@ -363,16 +363,16 @@ jobs:
           MONGO_INITDB_ROOT_PASSWORD: admin123
     
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     
     - name: Set up JDK 21
-      uses: actions/setup-java@v3
+      uses: actions/setup-java@v4
       with:
         java-version: '21'
         distribution: 'temurin'
     
     - name: Cache Gradle packages
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: |
           ~/.gradle/caches
@@ -387,7 +387,7 @@ jobs:
         MONGO_URI: mongodb://admin:admin123@localhost:27017/tech_challenge_test?authSource=admin
     
     - name: Upload coverage reports
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v4
       with:
         file: build/reports/jacoco/test/jacocoTestReport.xml
 ```
