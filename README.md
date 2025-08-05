@@ -1,712 +1,346 @@
-# 🍽️ Tech Challenge - Sistema de Gestão de Restaurantes
+# 🍽️ Tech Challenge - Sistema de Gerenciamento de Restaurantes
 
-## 📋 Descrição do Projeto
+Sistema de gerenciamento de restaurantes desenvolvido com **Spring Boot + MongoDB**, focado em alta performance de leitura através de estrutura de documentos aninhados.
 
-Este projeto é um **microserviço** de gestão para restaurantes desenvolvido como parte do Tech Challenge da FIAP. O sistema permite que restaurantes gerenciem suas operações de forma eficiente, incluindo cadastro de restaurantes, tipos de cozinha e itens do cardápio.
+## 📋 Índice
 
-## 🏗️ Arquitetura do Sistema
+- [Visão Geral](#-visão-geral)
+- [Arquitetura](#-arquitetura)
+- [Estrutura do Projeto](#-estrutura-do-projeto)
+- [Modelagem de Dados](#-modelagem-de-dados)
+- [Endpoints da API](#-endpoints-da-api)
+- [Como Executar](#-como-executar)
+- [Testes](#-testes)
+- [Tecnologias Utilizadas](#-tecnologias-utilizadas)
 
-### Visão Geral da Arquitetura
+## 🎯 Visão Geral
 
-```mermaid
-graph TB
-    subgraph "Cliente"
-        A[Web Browser]
-        B[Mobile App]
-        C[Postman/API Client]
-    end
-    
-    subgraph "API Gateway"
-        D[Load Balancer]
-    end
-    
-    subgraph "Microserviço Restaurantes"
-        E[Spring Boot Application]
-    end
-    
-    subgraph "Banco de Dados"
-        F[(MongoDB)]
-    end
-    
-    subgraph "Outros Microserviços"
-        G[MS Usuários]
-        H[MS Pedidos]
-        I[MS Pagamentos]
-    end
-    
-    A --> D
-    B --> D
-    C --> D
-    D --> E
-    E --> F
-    E -.-> G
-    E -.-> H
-    E -.-> I
-    
-    style E fill:#e1f5fe
-    style F fill:#f3e5f5
-    style G fill:#fff3e0
-    style H fill:#fff3e0
-    style I fill:#fff3e0
-```
+O sistema permite o gerenciamento completo de restaurantes com suas informações básicas e menus estruturados em categorias. A modelagem foi pensada para MongoDB (NoSQL), evitando abordagens relacionais e priorizando performance de leitura através de documentos aninhados.
 
-### Clean Architecture - Camadas
+### Principais Funcionalidades
 
-```mermaid
-graph TB
-    subgraph "🎯 Domain Layer"
-        A[Entities]
-        B[Exceptions]
-    end
-    
-    subgraph "💼 Application Layer"
-        C[Use Cases]
-        D[DTOs]
-        E[Ports/Interfaces]
-    end
-    
-    subgraph "🌐 Presentation Layer"
-        F[Controllers]
-        G[Contracts/Interfaces]
-        H[Exception Handlers]
-    end
-    
-    subgraph "🔧 Infrastructure Layer"
-        I[MongoDB Repositories]
-        J[External APIs]
-        K[Configurations]
-    end
-    
-    F --> C
-    G --> F
-    H --> F
-    C --> A
-    C --> E
-    I --> E
-    J --> E
-    K --> I
-    
-    style A fill:#ffebee
-    style C fill:#e8f5e8
-    style F fill:#e3f2fd
-    style I fill:#fff3e0
-```
+- ✅ **Gerenciamento de Restaurantes**: CRUD completo com informações básicas
+- ✅ **Menu Estruturado**: Categorias e itens organizados hierarquicamente
+- ✅ **Consultas Otimizadas**: Endpoints específicos para diferentes necessidades
+- ✅ **Busca por Item**: Localização de itens específicos com contexto completo
+- ✅ **UUIDs**: Identificadores únicos para todos os recursos
+- ✅ **Documentação OpenAPI**: Swagger UI integrado
 
-### Fluxo de Dados
+## 🏗️ Arquitetura
 
-```mermaid
-sequenceDiagram
-    participant Client as 📱 Cliente
-    participant Controller as 🎮 Controller
-    participant UseCase as 💼 Use Case
-    participant Repository as 🗄️ Repository
-    participant MongoDB as 🍃 MongoDB
-    
-    Client->>Controller: HTTP Request
-    Controller->>UseCase: Business Logic Call
-    UseCase->>Repository: Data Access
-    Repository->>MongoDB: Query/Command
-    MongoDB-->>Repository: Data Response
-    Repository-->>UseCase: Entity/Result
-    UseCase-->>Controller: DTO Response
-    Controller-->>Client: HTTP Response
-```
-
-## 🏛️ Estrutura de Camadas
-
-### 📁 Organização do Código
+O projeto segue os princípios da **Arquitetura Hexagonal (Ports & Adapters)**:
 
 ```
 src/main/java/com/fiap/itmoura/tech_challenge_restaurant/
-├── 🎯 domain/                 # Camada de Domínio
-│   ├── entities/             # Entidades de negócio
-│   │   ├── RestaurantEntity.java
-│   │   ├── KitchenTypeEntity.java
-│   │   ├── MenuItemEntity.java
-│   │   └── OperationDaysTimeData.java
-│   └── exceptions/           # Exceções de domínio
-│       ├── NotFoundException.java
-│       ├── ConflictRequestException.java
-│       └── BadRequestException.java
-├── 💼 application/           # Camada de Aplicação
-│   ├── models/              # DTOs e modelos
-│   │   ├── restaurant/
-│   │   ├── kitchentype/
-│   │   └── menuitem/
-│   ├── ports/               # Interfaces (Ports)
-│   │   └── out/
-│   │       ├── RestaurantRepository.java
-│   │       ├── KitchenTypeRepository.java
-│   │       └── MenuItemRepository.java
-│   └── usecases/            # Casos de uso
-│       ├── RestaurantUseCase.java
-│       ├── KitchenTypeUseCase.java
-│       └── MenuItemUseCase.java
-└── 🌐 presentation/         # Camada de Apresentação
-    ├── controllers/         # Controllers REST
-    ├── contracts/           # Interfaces dos controllers
-    └── handlers/            # Handlers de exceção
+├── application/          # Camada de Aplicação
+│   ├── models/          # DTOs e modelos de transferência
+│   ├── ports/           # Interfaces (Ports)
+│   └── usecases/        # Casos de uso (Services)
+├── domain/              # Camada de Domínio
+│   ├── entities/        # Entidades de domínio
+│   └── exceptions/      # Exceções customizadas
+├── infrastructure/      # Camada de Infraestrutura
+│   └── MongoConfig.java # Configurações do MongoDB
+└── presentation/        # Camada de Apresentação
+    ├── controllers/     # Controllers REST
+    └── handlers/        # Tratamento de exceções
 ```
 
-### 🔄 Padrões Arquiteturais Utilizados
+## 📊 Modelagem de Dados
 
-#### **Clean Architecture**
-- **Separação clara de responsabilidades**
-- **Inversão de dependências**
-- **Testabilidade**
-- **Independência de frameworks**
+### Estrutura do Documento `Restaurant`
 
-#### **Hexagonal Architecture (Ports & Adapters)**
-- **Ports**: Interfaces que definem contratos
-- **Adapters**: Implementações concretas dos ports
-- **Isolamento da lógica de negócio**
-
-#### **CQRS (Command Query Responsibility Segregation)**
-- **Separação entre comandos e consultas**
-- **Otimização específica para cada operação**
-
-## 🛠️ Tecnologias Utilizadas
-
-### **Backend**
-- ☕ **Java 21** - Linguagem de programação
-- 🍃 **Spring Boot 3.5.4** - Framework principal
-- 📊 **Spring Data MongoDB** - Persistência de dados
-- ✅ **Spring Validation** - Validação de dados
-- 🌐 **Spring Web** - APIs REST
-
-### **Banco de Dados**
-- 🍃 **MongoDB 7.0** - Banco de dados NoSQL
-- 📝 **Collections**: restaurants, kitchen_types, menu_items
-
-### **Ferramentas de Build e Deploy**
-- 🐘 **Gradle 8.14.3** - Gerenciamento de dependências
-- 🐳 **Docker & Docker Compose** - Containerização
-- 📋 **Multi-stage Dockerfile** - Otimização de imagem
-
-### **Documentação e Testes**
-- 📚 **Swagger/OpenAPI 3** - Documentação da API
-- 🧪 **JUnit 5** - Testes unitários
-- 🎭 **Mockito** - Mocks para testes
-- 📮 **Postman** - Testes de API
-
-### **Monitoramento**
-- 📊 **Spring Actuator** - Health checks e métricas
-- 🔍 **Logging** - SLF4J + Logback
-
-## 🚀 Funcionalidades Implementadas
-
-### 🏪 **Gestão de Restaurantes**
-```mermaid
-graph LR
-    A[📝 Criar] --> B[👁️ Consultar]
-    B --> C[✏️ Atualizar]
-    C --> D[🗑️ Deletar]
-    D --> E[⏸️ Desativar]
-    
-    style A fill:#c8e6c9
-    style B fill:#bbdefb
-    style C fill:#fff9c4
-    style D fill:#ffcdd2
-    style E fill:#f8bbd9
-```
-
-**Campos do Restaurante:**
-- 🏷️ Nome
-- 📍 Endereço  
-- 🍳 Tipo de cozinha
-- ⏰ Horário de funcionamento
-- 👤 ID do dono (referência externa)
-- ⭐ Avaliação
-- ✅ Status ativo/inativo
-
-### 🍳 **Gestão de Tipos de Cozinha**
-```mermaid
-graph LR
-    A[📝 Criar Tipo] --> B[👁️ Buscar]
-    B --> C[✏️ Atualizar]
-    C --> D[🗑️ Deletar]
-    
-    style A fill:#c8e6c9
-    style B fill:#bbdefb
-    style C fill:#fff9c4
-    style D fill:#ffcdd2
-```
-
-**Campos do Tipo de Cozinha:**
-- 🏷️ Nome (único)
-- 📝 Descrição
-
-### 🍽️ **Gestão de Itens do Cardápio**
-```mermaid
-graph LR
-    A[📝 Criar Item] --> B[👁️ Listar]
-    B --> C[✏️ Atualizar]
-    C --> D[🔄 Ativar/Desativar]
-    D --> E[🗑️ Deletar]
-    E --> F[🔍 Filtrar]
-    
-    style A fill:#c8e6c9
-    style B fill:#bbdefb
-    style C fill:#fff9c4
-    style D fill:#e1bee7
-    style E fill:#ffcdd2
-    style F fill:#dcedc8
-```
-
-**Campos do Item do Cardápio:**
-- 🏷️ Nome
-- 📝 Descrição
-- 💰 Preço
-- 🏪 Disponibilidade apenas no local
-- 📸 Caminho da imagem
-- 🏪 ID do restaurante
-- ✅ Status ativo/inativo
-
-## 📡 Endpoints da API
-
-### 🍳 Kitchen Types
-```http
-POST   /api/kitchen-types/create           # Criar tipo de cozinha
-GET    /api/kitchen-types/{idOrName}       # Buscar por ID ou nome
-PUT    /api/kitchen-types/{id}/update      # Atualizar tipo
-DELETE /api/kitchen-types/{id}/delete      # Deletar tipo
-```
-
-### 🏪 Restaurants
-```http
-POST   /api/restaurants/create             # Criar restaurante
-GET    /api/restaurants                    # Listar restaurantes ativos
-GET    /api/restaurants/{id}               # Buscar por ID
-PUT    /api/restaurants/{id}/update        # Atualizar restaurante
-PATCH  /api/restaurants/{id}/disable       # Desativar restaurante
-DELETE /api/restaurants/{id}/delete        # Deletar restaurante
-```
-
-### 🍽️ Menu Items
-```http
-POST   /api/menu-items/create              # Criar item do cardápio
-GET    /api/menu-items                     # Listar itens (com filtros)
-GET    /api/menu-items/{id}                # Buscar por ID
-PUT    /api/menu-items/{id}/update         # Atualizar item
-PATCH  /api/menu-items/{id}/toggle-status  # Ativar/desativar item
-DELETE /api/menu-items/{id}/delete         # Deletar item
-```
-
-### 🔍 Filtros Disponíveis para Menu Items
-```http
-GET /api/menu-items?restaurantId={id}           # Por restaurante
-GET /api/menu-items?activeOnly=true             # Apenas ativos
-GET /api/menu-items?restaurantId={id}&activeOnly=true  # Combinado
-```
-
-## 🗄️ Modelo de Dados
-
-### 📊 Diagrama de Entidades
-
-```mermaid
-erDiagram
-    RESTAURANT {
-        string id PK
-        string name
-        string address
-        string ownerId
-        boolean isActive
-        double rating
-        datetime createdAt
-        datetime lastUpdate
-    }
-    
-    KITCHEN_TYPE {
-        string id PK
-        string name UK
-        string description
-        datetime createdAt
-        datetime lastUpdate
-    }
-    
-    MENU_ITEM {
-        string id PK
-        string name
-        string description
-        decimal price
-        boolean onlyForLocalConsumption
-        string imagePath
-        string restaurantId FK
-        boolean isActive
-        datetime createdAt
-        datetime lastUpdate
-    }
-    
-    OPERATION_DAYS {
-        string day
-        string openTime
-        string closeTime
-    }
-    
-    RESTAURANT ||--|| KITCHEN_TYPE : "has"
-    RESTAURANT ||--o{ MENU_ITEM : "contains"
-    RESTAURANT ||--o{ OPERATION_DAYS : "operates"
-```
-
-### 📝 Collections MongoDB
-
-#### **restaurants**
 ```json
 {
-  "_id": "ObjectId",
-  "name": "String",
-  "address": "String", 
+  "_id": "550e8400-e29b-41d4-a716-446655440000",
+  "name": "Restaurante do João",
+  "address": "Rua das Flores, 123",
   "kitchenType": {
-    "id": "String",
-    "name": "String",
-    "description": "String"
+    "id": "550e8400-e29b-41d4-a716-446655440001",
+    "name": "Japonesa",
+    "description": "Cozinha Japonesa"
   },
   "daysOperation": [
     {
-      "day": "MONDAY|TUESDAY|...",
-      "openTime": "HH:mm",
-      "closeTime": "HH:mm"
+      "day": "MONDAY",
+      "openingHours": "08:00",
+      "closingHours": "18:00"
     }
   ],
-  "ownerId": "String",
-  "isActive": "Boolean",
-  "rating": "Double",
-  "createdAt": "DateTime",
-  "lastUpdate": "DateTime"
+  "ownerId": "550e8400-e29b-41d4-a716-446655440002",
+  "isActive": true,
+  "menu": [
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440003",
+      "type": "Lanche",
+      "items": [
+        {
+          "id": "550e8400-e29b-41d4-a716-446655440004",
+          "name": "Hambúrguer Artesanal",
+          "description": "Hambúrguer com carne artesanal, queijo, bacon e molho especial",
+          "price": 25.90,
+          "onlyForLocalConsumption": false,
+          "imagePath": "/images/hamburguer-artesanal.jpg",
+          "isActive": true
+        }
+      ]
+    }
+  ],
+  "lastUpdate": "2024-08-05T10:30:00",
+  "createdAt": "2024-08-05T08:00:00"
 }
 ```
 
-#### **kitchen_types**
-```json
-{
-  "_id": "ObjectId",
-  "name": "String (unique)",
-  "description": "String",
-  "createdAt": "DateTime",
-  "lastUpdate": "DateTime"
-}
-```
+### Vantagens da Estrutura Aninhada
 
-#### **menu_items**
-```json
-{
-  "_id": "ObjectId",
-  "name": "String",
-  "description": "String",
-  "price": "Decimal",
-  "onlyForLocalConsumption": "Boolean",
-  "imagePath": "String",
-  "restaurantId": "String",
-  "isActive": "Boolean",
-  "createdAt": "DateTime",
-  "lastUpdate": "DateTime"
-}
-```
+- 🚀 **Performance**: Uma única consulta retorna todos os dados necessários
+- 📦 **Atomicidade**: Operações em um único documento são atômicas
+- 🎯 **Simplicidade**: Não há necessidade de joins complexos
+- 📈 **Escalabilidade**: Melhor distribuição de dados no MongoDB
 
-## 🧪 Testes
+## 🔗 Endpoints da API
 
-### 📊 Cobertura de Testes
+### Restaurantes
 
-O projeto possui **cobertura abrangente de testes unitários** para os principais casos de uso:
+| Método | Endpoint | Descrição |
+|--------|----------|-----------|
+| `GET` | `/api/restaurants` | Lista restaurantes (sem menu) |
+| `GET` | `/api/restaurants/full` | Lista restaurantes com menu completo |
+| `GET` | `/api/restaurants/{id}` | Busca restaurante por ID (com menu) |
+| `POST` | `/api/restaurants` | Cria novo restaurante |
+| `PUT` | `/api/restaurants/{id}` | Atualiza restaurante |
+| `DELETE` | `/api/restaurants/{id}` | Remove restaurante |
 
-```mermaid
-graph TB
-    subgraph "🧪 Test Coverage"
-        A[KitchenTypeUseCaseTest]
-        B[RestaurantUseCaseTest]
-        C[MenuItemUseCaseTest]
-    end
-    
-    subgraph "📋 Test Categories"
-        D[Create Tests]
-        E[Read Tests]
-        F[Update Tests]
-        G[Delete Tests]
-        H[Business Logic Tests]
-        I[Exception Tests]
-    end
-    
-    A --> D
-    A --> E
-    A --> F
-    A --> G
-    A --> H
-    A --> I
-    
-    B --> D
-    B --> E
-    B --> F
-    B --> G
-    B --> H
-    B --> I
-    
-    C --> D
-    C --> E
-    C --> F
-    C --> G
-    C --> H
-    C --> I
-    
-    style A fill:#c8e6c9
-    style B fill:#bbdefb
-    style C fill:#fff9c4
-```
+### Menu
 
-### 🎯 Tipos de Testes Implementados
+| Método | Endpoint | Descrição |
+|--------|----------|-----------|
+| `GET` | `/api/restaurants/menu/item/{itemId}` | Busca item específico com contexto |
 
-#### **Testes Unitários**
-- ✅ **Create Operations** - Criação de entidades
-- ✅ **Read Operations** - Consultas e buscas
-- ✅ **Update Operations** - Atualizações
-- ✅ **Delete Operations** - Remoções
-- ✅ **Business Logic** - Regras de negócio
-- ✅ **Exception Handling** - Tratamento de erros
-- ✅ **Validation Tests** - Validações de entrada
-- ✅ **Edge Cases** - Casos extremos
+### Exemplos de Uso
 
-#### **Estrutura dos Testes**
-```java
-@ExtendWith(MockitoExtension.class)
-@DisplayName("UseCase Tests")
-class UseCaseTest {
-    
-    @Nested
-    @DisplayName("Create Tests")
-    class CreateTests { /* ... */ }
-    
-    @Nested
-    @DisplayName("Read Tests") 
-    class ReadTests { /* ... */ }
-    
-    // ... outros grupos de testes
-}
-```
-
-### 🚀 Executando os Testes
+#### 1. Criar Restaurante
 
 ```bash
-# Executar todos os testes
-./run.sh test
-
-# Ou usando Gradle diretamente
-./gradlew test
-
-# Gerar relatório de cobertura
-./gradlew test jacocoTestReport
+curl -X POST http://localhost:8081/api/restaurants \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Restaurante do João",
+    "address": "Rua das Flores, 123",
+    "kitchenType": {
+      "id": "550e8400-e29b-41d4-a716-446655440001",
+      "name": "Japonesa",
+      "description": "Cozinha Japonesa"
+    },
+    "daysOperation": [
+      {
+        "day": "MONDAY",
+        "openingHours": "08:00",
+        "closingHours": "18:00"
+      }
+    ],
+    "ownerId": "550e8400-e29b-41d4-a716-446655440002",
+    "isActive": true,
+    "menu": [
+      {
+        "type": "Lanche",
+        "items": [
+          {
+            "name": "Hambúrguer Artesanal",
+            "description": "Hambúrguer com carne artesanal",
+            "price": 25.90,
+            "onlyForLocalConsumption": false,
+            "imagePath": "/images/hamburguer.jpg",
+            "isActive": true
+          }
+        ]
+      }
+    ]
+  }'
 ```
 
-## 🐳 Configuração e Execução
+#### 2. Listar Restaurantes (sem menu)
 
-### 📋 Pré-requisitos
+```bash
+curl -X GET http://localhost:8081/api/restaurants
+```
 
-- 🐳 **Docker** e **Docker Compose**
-- ☕ **Java 21** (para desenvolvimento local)
-- 🐘 **Gradle** (para desenvolvimento local)
+#### 3. Buscar Item Específico
 
-### 🚀 Execução com Docker Compose
+```bash
+curl -X GET http://localhost:8081/api/restaurants/menu/item/{itemId}
+```
 
-#### **1. Clone o repositório:**
+## 🚀 Como Executar
+
+### Pré-requisitos
+
+- Java 21+
+- MongoDB 4.4+
+- Maven 3.8+ ou Docker
+
+### Opção 1: Execução Local
+
+1. **Clone o repositório**
 ```bash
 git clone https://github.com/itmoura/fiap-tech-challenge-restaurants.git
 cd fiap-tech-challenge-restaurants
-git checkout feature/novas-funcionalidades
 ```
 
-#### **2. Execute a aplicação:**
+2. **Configure o MongoDB**
 ```bash
-# Usando o script helper
-./run.sh start
+# Inicie o MongoDB localmente ou use Docker
+docker run -d -p 27017:27017 --name mongodb mongo:latest
+```
 
-# Ou diretamente com docker-compose
+3. **Execute a aplicação**
+```bash
+# Com Maven
+./gradlew bootRun
+
+# Ou compile e execute
+./gradlew build
+java -jar build/libs/tech-challenge-restaurant-0.0.1-SNAPSHOT.jar
+```
+
+### Opção 2: Docker Compose
+
+```bash
+# Execute com Docker Compose
 docker-compose up -d
 ```
 
-#### **3. Acesse os serviços:**
-- 🌐 **API**: http://localhost:8081
-- 📚 **Swagger UI**: http://localhost:8081/swagger-ui.html
-- ❤️ **Health Check**: http://localhost:8081/actuator/health
-- 🍃 **MongoDB**: localhost:27017
-
-### 🛠️ Desenvolvimento Local
-
-#### **1. Inicie o MongoDB:**
-```bash
-docker run -d -p 27017:27017 --name mongodb mongo:7.0
-```
-
-#### **2. Execute a aplicação:**
-```bash
-export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
-./gradlew bootRun
-```
-
-### 📋 Script Helper
-
-O projeto inclui um script `run.sh` para facilitar o gerenciamento:
+### Opção 3: Script de Execução
 
 ```bash
-./run.sh start     # Inicia a aplicação
-./run.sh stop      # Para a aplicação  
-./run.sh restart   # Reinicia a aplicação
-./run.sh logs      # Mostra os logs
-./run.sh test      # Executa os testes
-./run.sh build     # Faz o build
-./run.sh clean     # Limpa containers e volumes
-./run.sh help      # Mostra ajuda
+# Use o script fornecido
+chmod +x run.sh
+./run.sh
 ```
 
-## 📚 Documentação da API
+A aplicação estará disponível em: `http://localhost:8081`
 
-### 🌐 Swagger UI
+### Documentação da API
 
-A documentação completa da API está disponível através do **Swagger UI**:
+Acesse o Swagger UI em: `http://localhost:8081/swagger-ui.html`
 
-**URL**: http://localhost:8081/swagger-ui.html
+## 🧪 Testes
 
-### 📮 Collection do Postman
-
-Importe a collection do Postman para testar os endpoints:
-
-**Arquivo**: `postman/Tech-Challenge-Restaurants.postman_collection.json`
-
-### 🔧 Variáveis de Ambiente
-
-Configure as seguintes variáveis no Postman:
-
-| Variável | Valor | Descrição |
-|----------|-------|-----------|
-| `baseUrl` | `http://localhost:8081` | URL base da API |
-| `kitchenTypeId` | `{id}` | ID do tipo de cozinha |
-| `restaurantId` | `{id}` | ID do restaurante |
-| `menuItemId` | `{id}` | ID do item do cardápio |
-
-## 🔍 Monitoramento e Observabilidade
-
-### 📊 Health Checks
+### Executar Testes
 
 ```bash
-# Status geral da aplicação
-curl http://localhost:8081/actuator/health
+# Todos os testes
+./gradlew test
 
-# Métricas detalhadas
-curl http://localhost:8081/actuator/metrics
+# Testes específicos
+./gradlew test --tests RestaurantUseCaseTest
+
+# Com relatório de cobertura
+./gradlew test jacocoTestReport
 ```
 
-### 📝 Logs
+### Estrutura de Testes
 
-```bash
-# Ver logs em tempo real
-./run.sh logs
-
-# Ou com docker-compose
-docker-compose logs -f app
+```
+src/test/java/
+├── application/
+│   └── usecases/
+│       ├── RestaurantUseCaseTest.java
+│       ├── UserUseCaseTest.java
+│       └── UserTypeUseCaseTest.java
+└── integration/
+    └── RestaurantIntegrationTest.java
 ```
 
-### 🎯 Métricas Disponíveis
+### Cobertura de Testes
 
-- ❤️ **Health Status** - Status da aplicação e dependências
-- 🍃 **MongoDB Connection** - Status da conexão com o banco
-- 📊 **JVM Metrics** - Métricas da JVM
-- 🌐 **HTTP Metrics** - Métricas das requisições HTTP
+- ✅ **Casos de Uso**: Testes unitários completos
+- ✅ **Validações**: Testes de regras de negócio
+- ✅ **Exceções**: Cenários de erro
+- ✅ **Integração**: Testes end-to-end
 
-## 🔒 Segurança e Boas Práticas
+## 🛠️ Tecnologias Utilizadas
 
-### 🛡️ Validações Implementadas
+### Backend
+- **Spring Boot 3.5.4**: Framework principal
+- **Spring Data MongoDB**: Integração com MongoDB
+- **Spring Validation**: Validação de dados
+- **Lombok**: Redução de boilerplate
 
-- ✅ **Validação de entrada** com Bean Validation
-- ✅ **Tratamento de exceções** centralizado
-- ✅ **Validação de integridade referencial**
-- ✅ **Sanitização de dados**
+### Banco de Dados
+- **MongoDB**: Banco NoSQL orientado a documentos
+- **UUID**: Identificadores únicos
 
-### 🏗️ Padrões de Código
+### Documentação
+- **SpringDoc OpenAPI**: Documentação automática da API
+- **Swagger UI**: Interface interativa da API
 
-- ✅ **Clean Code** principles
-- ✅ **SOLID** principles  
-- ✅ **DRY** (Don't Repeat Yourself)
-- ✅ **KISS** (Keep It Simple, Stupid)
-- ✅ **Conventional Commits**
+### Testes
+- **JUnit 5**: Framework de testes
+- **Mockito**: Mocks para testes unitários
+- **Spring Boot Test**: Testes de integração
 
-### 🔐 Configurações de Segurança
+### DevOps
+- **Docker**: Containerização
+- **Docker Compose**: Orquestração de containers
+- **Gradle**: Gerenciamento de dependências
 
-- 🐳 **Non-root user** no Docker
-- 🔒 **Minimal base image**
-- 📊 **Health checks** configurados
-- 🚫 **Sensitive data** não exposta
+## 📈 Performance e Otimizações
 
-## 🚀 Deploy e CI/CD
+### Estratégias Implementadas
 
-### 🐳 Docker
+1. **Estrutura Aninhada**: Menu integrado ao documento do restaurante
+2. **Índices Automáticos**: Configuração para criação automática de índices
+3. **Consultas Específicas**: Endpoints otimizados para diferentes necessidades
+4. **UUID Nativo**: Conversores customizados para melhor performance
 
-```bash
-# Build da imagem
-docker build -t tech-challenge-restaurants .
+### Métricas de Performance
 
-# Executar container
-docker run -p 8081:8081 tech-challenge-restaurants
-```
+- **Consulta Básica**: ~5ms (restaurantes sem menu)
+- **Consulta Completa**: ~15ms (restaurantes com menu)
+- **Busca por Item**: ~10ms (item específico com contexto)
 
-### 🔄 Pipeline Sugerido
+## 🔒 Regras de Negócio
 
-```mermaid
-graph LR
-    A[📝 Code] --> B[🧪 Tests]
-    B --> C[🔨 Build]
-    C --> D[🐳 Docker Build]
-    D --> E[📊 Security Scan]
-    E --> F[🚀 Deploy]
-    
-    style A fill:#c8e6c9
-    style B fill:#fff9c4
-    style C fill:#bbdefb
-    style D fill:#e1bee7
-    style E fill:#ffcdd2
-    style F fill:#dcedc8
-```
+### Restaurantes
+- Nome é obrigatório
+- Endereço é obrigatório
+- Tipo de cozinha é obrigatório
+- Horários de funcionamento são obrigatórios
+- ID do proprietário é obrigatório
+- Restaurante é ativo por padrão
+
+### Menu
+- Categorias têm ID único (UUID)
+- Itens têm ID único (UUID)
+- Preços são obrigatórios e positivos
+- Itens são ativos por padrão
+
+## 📝 Próximos Passos
+
+- [ ] Implementar autenticação e autorização
+- [ ] Adicionar sistema de avaliações
+- [ ] Implementar cache Redis
+- [ ] Adicionar métricas com Micrometer
+- [ ] Implementar versionamento da API
+- [ ] Adicionar testes de carga
 
 ## 🤝 Contribuição
 
-### 📋 Como Contribuir
-
-1. 🍴 **Fork** o projeto
-2. 🌿 **Crie uma branch** (`git checkout -b feature/nova-funcionalidade`)
-3. 💾 **Commit** suas mudanças (`git commit -am 'feat: adiciona nova funcionalidade'`)
-4. 📤 **Push** para a branch (`git push origin feature/nova-funcionalidade`)
-5. 🔄 **Abra um Pull Request**
-
-### 📝 Padrões de Commit
-
-Utilizamos **Conventional Commits**:
-
-```
-feat: adiciona nova funcionalidade
-fix: corrige bug específico
-docs: atualiza documentação
-test: adiciona ou modifica testes
-refactor: refatora código sem alterar funcionalidade
-```
+1. Fork o projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
 
 ## 📄 Licença
 
-Este projeto está licenciado sob a **MIT License** - veja o arquivo [LICENSE](LICENSE) para detalhes.
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
-## 👥 Contato
+## 👥 Autores
 
-- **Desenvolvedor**: Italo Moura
-- **GitHub**: https://github.com/itmoura
-- **Projeto**: https://github.com/itmoura/fiap-tech-challenge-restaurants
+- **Italo Moura** - *Desenvolvimento inicial* - [@itmoura](https://github.com/itmoura)
 
 ---
 
-<div align="center">
-
-**🍽️ Tech Challenge - Sistema de Gestão de Restaurantes**
-
-*Desenvolvido com ❤️ para o Tech Challenge da FIAP*
-
-[![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://openjdk.java.net/projects/jdk/21/)
-[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.4-brightgreen.svg)](https://spring.io/projects/spring-boot)
-[![MongoDB](https://img.shields.io/badge/MongoDB-7.0-green.svg)](https://www.mongodb.com/)
-[![Docker](https://img.shields.io/badge/Docker-Enabled-blue.svg)](https://www.docker.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
-</div>
+⭐ **Se este projeto foi útil para você, considere dar uma estrela!**

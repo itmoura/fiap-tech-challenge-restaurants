@@ -2,6 +2,7 @@ package com.fiap.itmoura.tech_challenge_restaurant.domain.entities;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
@@ -21,25 +22,25 @@ import lombok.NoArgsConstructor;
 public class RestaurantEntity {
 
     @Id
-    private String id;
+    private UUID id;
  
     private String name;
 
-    private KitchenTypeEntity kitchenType;
-
     private String address;
+
+    private KitchenTypeEntity kitchenType;
 
     private List<OperationDaysTimeData> daysOperation;
 
-    private String ownerId;
+    private UUID ownerId;
 
     private Boolean isActive;
 
-    private Double rating;
+    private List<MenuCategoryEntity> menu;
 
     @LastModifiedDate
-    LocalDateTime lastUpdate;
+    private LocalDateTime lastUpdate;
     
     @CreatedDate
-    LocalDateTime createdAt;
+    private LocalDateTime createdAt;
 }

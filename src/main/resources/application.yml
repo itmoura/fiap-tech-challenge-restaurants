@@ -2,14 +2,17 @@ spring:
   profiles:
     active: ${SPRING_PROFILES_ACTIVE:develop}
   application:
-    name: tech-challenge-api
+    name: tech-challenge-restaurants-api
   data:
     mongodb:
-      uri: ${MONGO_URI:mongodb://localhost:27017/tech_challenge}
+      uri: ${MONGO_URI:mongodb://localhost:27017/tech_challenge_restaurants}
+      auto-index-creation: true
   main:
     allow-bean-definition-overriding: true
+
 server:
   port: ${APP_PORT:8081}
+
 management:
   endpoint:
     health:
@@ -39,11 +42,12 @@ spring:
       on-profile: develop
   data:
     mongodb:
-      uri: ${MONGO_URI:mongodb://localhost:27017/tech_challenge}
+      uri: ${MONGO_URI:mongodb://localhost:27017/tech_challenge_restaurants}
+      auto-index-creation: true
 
 logging:
   level:
-    com.fiap.itmoura.tech_challenge: DEBUG
+    com.fiap.itmoura.tech_challenge_restaurant: DEBUG
     org.springframework.data.mongodb.core.MongoTemplate: DEBUG
     org.springframework.data.mongodb.repository.query: DEBUG
 
@@ -54,11 +58,12 @@ spring:
       on-profile: prod
   data:
     mongodb:
-      uri: ${MONGO_URI:mongodb://admin:admin123@mongodb:27017/tech_challenge?authSource=admin}
+      uri: ${MONGO_URI:mongodb://admin:admin123@mongodb:27017/tech_challenge_restaurants?authSource=admin}
+      auto-index-creation: false
 
 logging:
   level:
-    com.fiap.itmoura.tech_challenge: DEBUG
-    org.springframework.data.mongodb.core.MongoTemplate: DEBUG
-    org.springframework.data.mongodb.repository.query: DEBUG
+    com.fiap.itmoura.tech_challenge_restaurant: INFO
+    org.springframework.data.mongodb.core.MongoTemplate: WARN
+    org.springframework.data.mongodb.repository.query: WARN
 

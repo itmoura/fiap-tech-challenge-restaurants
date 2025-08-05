@@ -1,5 +1,7 @@
 package com.fiap.itmoura.tech_challenge_restaurant.application.models.kitchentype;
 
+import java.util.UUID;
+
 import com.fiap.itmoura.tech_challenge_restaurant.application.models.group.OnCreateGroup;
 import com.fiap.itmoura.tech_challenge_restaurant.domain.entities.KitchenTypeEntity;
 
@@ -8,18 +10,19 @@ import jakarta.validation.constraints.NotNull;
 
 public record KitchenTypeDTO(
 
-    @Schema(title = "ID", description = "ID do tipo de cozinha", example = "123e4567-e89b-12d3-a456-426614174000")
-    String id,
+    @Schema(description = "ID do tipo de cozinha", example = "550e8400-e29b-41d4-a716-446655440000")
+    UUID id,
 
-    @Schema(title = "Nome", description = "Nome do tipo de cozinha", example = "Brasileira")
+    @Schema(description = "Nome do tipo de cozinha", example = "Brasileira")
     @NotNull(message = "Nome é obrigatório", groups = OnCreateGroup.class)
     String name,
 
-    @Schema(title = "Descrição", description = "Descrição do tipo de cozinha", example = "Cozinha brasileira")
+    @Schema(description = "Descrição do tipo de cozinha", example = "Cozinha brasileira")
     String description
 ) {
     public KitchenTypeEntity toEntity() {
         return KitchenTypeEntity.builder()
+            .id(id != null ? id : UUID.randomUUID())
             .name(name)
             .description(description)
             .build();
