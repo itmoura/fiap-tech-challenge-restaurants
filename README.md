@@ -13,11 +13,14 @@ Sistema de gerenciamento de restaurantes desenvolvido com **Spring Boot + MongoD
 
 ### 🌐 [**Acesse a Documentação Online**](https://itmoura.github.io/fiap-tech-challenge-restaurants/)
 
-A documentação completa está disponível online e inclui:
+A documentação completa está disponível online em **HTML estático** com design AWS dark mode:
 
-- 🔧 **[Guia de Instalação](https://itmoura.github.io/fiap-tech-challenge-restaurants/installation/prerequisites/)** - Pré-requisitos e configuração
-- 📚 **[API Reference](https://itmoura.github.io/fiap-tech-challenge-restaurants/api/overview/)** - Documentação detalhada de todos os endpoints
-- 🏗️ **[Arquitetura](https://itmoura.github.io/fiap-tech-challenge-restaurants/architecture/overview/)** - Clean Architecture e modelagem de dados
+- 🔧 **[Guia de Instalação](https://itmoura.github.io/fiap-tech-challenge-restaurants/pages/prerequisites.html)** - Pré-requisitos e configuração
+- 📚 **[API Reference](https://itmoura.github.io/fiap-tech-challenge-restaurants/pages/api-overview.html)** - Documentação detalhada de todos os endpoints  
+- 🏗️ **[Arquitetura](https://itmoura.github.io/fiap-tech-challenge-restaurants/pages/architecture-overview.html)** - Clean Architecture e modelagem de dados
+- 🐳 **[Docker Setup](https://itmoura.github.io/fiap-tech-challenge-restaurants/pages/docker.html)** - Guia completo de containerização
+
+> 💡 **Nota**: Utilizamos documentação HTML estática para máxima performance e confiabilidade. Deploy automático via GitHub Actions.
 - 👤 **[Sobre o Autor](https://itmoura.github.io/fiap-tech-challenge-restaurants/about/author/)** - Informações do desenvolvedor
 
 ### 📄 Download PDF

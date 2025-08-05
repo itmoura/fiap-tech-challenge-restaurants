@@ -1,4 +1,4 @@
-name: 🌐 Deploy Static HTML Documentation
+name: 📚 Deploy Documentation
 
 on:
   push:
@@ -18,8 +18,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  deploy-static-docs:
-    name: 🚀 Deploy Static Documentation
+  deploy-documentation:
+    name: 🚀 Deploy HTML Documentation
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -75,7 +75,7 @@ jobs:
           echo "📁 Total size: $(du -sh web-docs | cut -f1)"
           echo "=========================="
 
-      - name: 🔧 Optimize Files (Optional)
+      - name: 🔧 Optimize Files
         run: |
           echo "🔧 Optimizing documentation files..."
           
@@ -119,7 +119,7 @@ jobs:
 
       - name: 📢 Deployment Success
         run: |
-          echo "🎉 Static HTML documentation deployed successfully!"
+          echo "🎉 HTML documentation deployed successfully!"
           echo ""
           echo "📊 Deployment Summary:"
           echo "======================"
@@ -143,23 +143,22 @@ jobs:
           echo "• 📋 Copy-to-clipboard code blocks"
           echo "• ⚡ Fast loading static HTML"
           echo ""
-          echo "🔧 Next Steps:"
-          echo "• Test the documentation at the URL above"
-          echo "• Verify all pages load correctly"
-          echo "• Check mobile responsiveness"
-          echo "• Validate all links work properly"
+          echo "🔧 This is now the ONLY documentation workflow"
+          echo "• MkDocs workflows have been removed"
+          echo "• Only HTML static documentation is deployed"
+          echo "• Faster, more reliable, and easier to maintain"
 
   # Notification job for failures
   notify-failure:
     name: 📢 Notify Failure
     runs-on: ubuntu-latest
-    needs: deploy-static-docs
+    needs: deploy-documentation
     if: failure()
     
     steps:
       - name: ❌ Deployment Failed
         run: |
-          echo "❌ Static documentation deployment failed!"
+          echo "❌ Documentation deployment failed!"
           echo ""
           echo "🔍 Possible causes:"
           echo "• Missing required files (index.html, CSS, JS)"
