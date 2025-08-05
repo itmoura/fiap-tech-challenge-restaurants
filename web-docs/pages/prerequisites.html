@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pré-requisitos - Tech Challenge Restaurant API</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍽️</text></svg>">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <a href="../" class="logo">
+                    <span class="logo-icon">🍽️</span>
+                    <div>
+                        <div class="logo-text">Tech Challenge</div>
+                        <div class="logo-subtitle">Restaurant API</div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="nav-menu">
+                <div class="nav-section">
+                    <div class="nav-section-title">Início</div>
+                    <a href="../" class="nav-item">
+                        <span class="nav-item-icon">🏠</span>
+                        Visão Geral
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Instalação</div>
+                    <a href="prerequisites.html" class="nav-item active">
+                        <span class="nav-item-icon">📋</span>
+                        Pré-requisitos
+                    </a>
+                    <a href="local-setup.html" class="nav-item">
+                        <span class="nav-item-icon">⚙️</span>
+                        Configuração Local
+                    </a>
+                    <a href="docker.html" class="nav-item">
+                        <span class="nav-item-icon">🐳</span>
+                        Docker
+                    </a>
+                    <a href="testing.html" class="nav-item">
+                        <span class="nav-item-icon">🧪</span>
+                        Testes
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">API Reference</div>
+                    <a href="api-overview.html" class="nav-item">
+                        <span class="nav-item-icon">📚</span>
+                        Visão Geral
+                    </a>
+                    <a href="kitchen-types.html" class="nav-item">
+                        <span class="nav-item-icon">👨‍🍳</span>
+                        Kitchen Types
+                    </a>
+                    <a href="restaurants.html" class="nav-item">
+                        <span class="nav-item-icon">🏪</span>
+                        Restaurants
+                    </a>
+                    <a href="menu-categories.html" class="nav-item">
+                        <span class="nav-item-icon">📂</span>
+                        Menu Categories
+                    </a>
+                    <a href="menu-items.html" class="nav-item">
+                        <span class="nav-item-icon">🍕</span>
+                        Menu Items
+                    </a>
+                    <a href="status-codes.html" class="nav-item">
+                        <span class="nav-item-icon">📊</span>
+                        Status Codes
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Arquitetura</div>
+                    <a href="architecture-overview.html" class="nav-item">
+                        <span class="nav-item-icon">🏗️</span>
+                        Visão Geral
+                    </a>
+                    <a href="clean-architecture.html" class="nav-item">
+                        <span class="nav-item-icon">🎯</span>
+                        Clean Architecture
+                    </a>
+                    <a href="data-modeling.html" class="nav-item">
+                        <span class="nav-item-icon">🗄️</span>
+                        Modelagem de Dados
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Sobre</div>
+                    <a href="author.html" class="nav-item">
+                        <span class="nav-item-icon">👤</span>
+                        Autor
+                    </a>
+                    <a href="license.html" class="nav-item">
+                        <span class="nav-item-icon">📄</span>
+                        Licença
+                    </a>
+                    <a href="changelog.html" class="nav-item">
+                        <span class="nav-item-icon">📝</span>
+                        Changelog
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <nav class="breadcrumb">
+                    <a href="../">Home</a>
+                    <span>/</span>
+                    <a href="#">Instalação</a>
+                    <span>/</span>
+                    <span>Pré-requisitos</span>
+                </nav>
+                <h1 class="page-title">📋 Pré-requisitos do Sistema</h1>
+                <p class="page-description">Requisitos necessários para executar o Tech Challenge Restaurant API</p>
+            </header>
+
+            <div class="content-body">
+                <!-- System Requirements -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">💻</span>
+                        <h2 class="card-title">Requisitos do Sistema</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>Antes de começar, certifique-se de que seu sistema atende aos seguintes requisitos:</p>
+                        
+                        <div class="feature-cards">
+                            <div class="feature-card">
+                                <div class="feature-card-icon">☕</div>
+                                <h3 class="feature-card-title">Java 21+</h3>
+                                <p class="feature-card-description">
+                                    JDK 21 ou superior é obrigatório. Recomendamos usar OpenJDK ou Oracle JDK.
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🍃</div>
+                                <h3 class="feature-card-title">MongoDB 6.0+</h3>
+                                <p class="feature-card-description">
+                                    Banco de dados NoSQL. Pode ser instalado localmente ou via Docker.
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🔧</div>
+                                <h3 class="feature-card-title">Gradle 8.0+</h3>
+                                <p class="feature-card-description">
+                                    Sistema de build. O projeto inclui Gradle Wrapper para facilitar.
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🐳</div>
+                                <h3 class="feature-card-title">Docker (Opcional)</h3>
+                                <p class="feature-card-description">
+                                    Para containerização e execução simplificada do MongoDB.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Java Installation -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">☕</span>
+                        <h2 class="card-title">Instalação do Java 21</h2>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="mb-1">🪟 Windows</h3>
+                        <div class="code-block">
+                            <pre># Usando Chocolatey
+choco install openjdk21
+
+# Ou baixe diretamente do site
+# https://adoptium.net/temurin/releases/</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">🐧 Linux (Ubuntu/Debian)</h3>
+                        <div class="code-block">
+                            <pre># Atualizar repositórios
+sudo apt update
+
+# Instalar OpenJDK 21
+sudo apt install openjdk-21-jdk
+
+# Verificar instalação
+java -version</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">🍎 macOS</h3>
+                        <div class="code-block">
+                            <pre># Usando Homebrew
+brew install openjdk@21
+
+# Configurar JAVA_HOME
+echo 'export JAVA_HOME=/opt/homebrew/opt/openjdk@21' >> ~/.zshrc
+source ~/.zshrc</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">✅ Verificação</h3>
+                        <div class="code-block">
+                            <pre># Verificar versão do Java
+java -version
+
+# Verificar JAVA_HOME
+echo $JAVA_HOME
+
+# Saída esperada:
+# openjdk version "21.0.x" 2024-xx-xx
+# OpenJDK Runtime Environment (build 21.0.x+xx)
+# OpenJDK 64-Bit Server VM (build 21.0.x+xx, mixed mode)</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MongoDB Installation -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🍃</span>
+                        <h2 class="card-title">Instalação do MongoDB</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>Você pode instalar o MongoDB de duas formas:</p>
+
+                        <h3 class="mb-1 mt-2">🐳 Opção 1: Docker (Recomendado)</h3>
+                        <div class="code-block">
+                            <pre># Baixar e executar MongoDB
+docker run -d \
+  --name mongodb \
+  -p 27017:27017 \
+  -e MONGO_INITDB_ROOT_USERNAME=admin \
+  -e MONGO_INITDB_ROOT_PASSWORD=password \
+  mongo:7.0
+
+# Verificar se está rodando
+docker ps</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">💻 Opção 2: Instalação Local</h3>
+                        
+                        <h4 class="mb-1">🪟 Windows</h4>
+                        <div class="code-block">
+                            <pre># Baixar do site oficial
+# https://www.mongodb.com/try/download/community
+
+# Ou usar Chocolatey
+choco install mongodb</pre>
+                        </div>
+
+                        <h4 class="mb-1 mt-2">🐧 Linux (Ubuntu)</h4>
+                        <div class="code-block">
+                            <pre># Importar chave pública
+wget -qO - https://www.mongodb.org/static/pgp/server-7.0.asc | sudo apt-key add -
+
+# Adicionar repositório
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-7.0.list
+
+# Instalar MongoDB
+sudo apt-get update
+sudo apt-get install -y mongodb-org
+
+# Iniciar serviço
+sudo systemctl start mongod
+sudo systemctl enable mongod</pre>
+                        </div>
+
+                        <h4 class="mb-1 mt-2">🍎 macOS</h4>
+                        <div class="code-block">
+                            <pre># Usando Homebrew
+brew tap mongodb/brew
+brew install mongodb-community@7.0
+
+# Iniciar MongoDB
+brew services start mongodb/brew/mongodb-community</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">✅ Verificação</h3>
+                        <div class="code-block">
+                            <pre># Conectar ao MongoDB
+mongosh
+
+# Ou testar conexão
+mongosh "mongodb://localhost:27017"
+
+# Dentro do MongoDB shell
+show dbs
+exit</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Docker Installation -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🐳</span>
+                        <h2 class="card-title">Instalação do Docker (Opcional)</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>Docker facilita muito o desenvolvimento. Recomendamos sua instalação:</p>
+
+                        <h3 class="mb-1">🪟 Windows</h3>
+                        <div class="code-block">
+                            <pre># Baixar Docker Desktop
+# https://www.docker.com/products/docker-desktop/
+
+# Ou usar Chocolatey
+choco install docker-desktop</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">🐧 Linux</h3>
+                        <div class="code-block">
+                            <pre># Ubuntu/Debian
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+
+# Adicionar usuário ao grupo docker
+sudo usermod -aG docker $USER
+
+# Instalar Docker Compose
+sudo apt install docker-compose-plugin</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">🍎 macOS</h3>
+                        <div class="code-block">
+                            <pre># Baixar Docker Desktop
+# https://www.docker.com/products/docker-desktop/
+
+# Ou usar Homebrew
+brew install --cask docker</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">✅ Verificação</h3>
+                        <div class="code-block">
+                            <pre># Verificar Docker
+docker --version
+docker-compose --version
+
+# Testar instalação
+docker run hello-world</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Development Tools -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🛠️</span>
+                        <h2 class="card-title">Ferramentas de Desenvolvimento</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>Ferramentas recomendadas para melhor experiência de desenvolvimento:</p>
+
+                        <div class="feature-cards">
+                            <div class="feature-card">
+                                <div class="feature-card-icon">💡</div>
+                                <h3 class="feature-card-title">IntelliJ IDEA</h3>
+                                <p class="feature-card-description">
+                                    IDE recomendada para desenvolvimento Java/Spring Boot.
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">📝</div>
+                                <h3 class="feature-card-title">VS Code</h3>
+                                <p class="feature-card-description">
+                                    Editor leve com extensões para Java e Spring Boot.
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">📡</div>
+                                <h3 class="feature-card-title">Postman</h3>
+                                <p class="feature-card-description">
+                                    Para testar e documentar APIs REST.
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🗄️</div>
+                                <h3 class="feature-card-title">MongoDB Compass</h3>
+                                <p class="feature-card-description">
+                                    Interface gráfica para gerenciar MongoDB.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- System Check -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">✅</span>
+                        <h2 class="card-title">Verificação Final</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>Execute os comandos abaixo para verificar se tudo está instalado corretamente:</p>
+
+                        <div class="code-block">
+                            <pre># Verificar Java
+java -version
+javac -version
+
+# Verificar Gradle (se instalado globalmente)
+gradle -version
+
+# Verificar MongoDB
+mongosh --version
+
+# Verificar Docker (se instalado)
+docker --version
+docker-compose --version
+
+# Verificar Git
+git --version</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">📋 Checklist</h3>
+                        <ul>
+                            <li>✅ Java 21+ instalado e configurado</li>
+                            <li>✅ MongoDB 6.0+ rodando (local ou Docker)</li>
+                            <li>✅ Git instalado para clonar o repositório</li>
+                            <li>✅ Docker instalado (opcional, mas recomendado)</li>
+                            <li>✅ IDE ou editor de código configurado</li>
+                            <li>✅ Postman ou similar para testar APIs</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Next Steps -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🚀</span>
+                        <h2 class="card-title">Próximos Passos</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>Agora que você tem todos os pré-requisitos instalados:</p>
+
+                        <div class="feature-cards">
+                            <div class="feature-card" data-link="local-setup.html">
+                                <div class="feature-card-icon">⚙️</div>
+                                <h3 class="feature-card-title">Configuração Local</h3>
+                                <p class="feature-card-description">
+                                    Configure o ambiente de desenvolvimento local
+                                </p>
+                            </div>
+
+                            <div class="feature-card" data-link="docker.html">
+                                <div class="feature-card-icon">🐳</div>
+                                <h3 class="feature-card-title">Docker Setup</h3>
+                                <p class="feature-card-description">
+                                    Execute o projeto usando Docker Compose
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

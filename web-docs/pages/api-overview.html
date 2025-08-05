@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Overview - Tech Challenge Restaurant API</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍽️</text></svg>">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <a href="../" class="logo">
+                    <span class="logo-icon">🍽️</span>
+                    <div>
+                        <div class="logo-text">Tech Challenge</div>
+                        <div class="logo-subtitle">Restaurant API</div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="nav-menu">
+                <div class="nav-section">
+                    <div class="nav-section-title">Início</div>
+                    <a href="../" class="nav-item">
+                        <span class="nav-item-icon">🏠</span>
+                        Visão Geral
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Instalação</div>
+                    <a href="prerequisites.html" class="nav-item">
+                        <span class="nav-item-icon">📋</span>
+                        Pré-requisitos
+                    </a>
+                    <a href="local-setup.html" class="nav-item">
+                        <span class="nav-item-icon">⚙️</span>
+                        Configuração Local
+                    </a>
+                    <a href="docker.html" class="nav-item">
+                        <span class="nav-item-icon">🐳</span>
+                        Docker
+                    </a>
+                    <a href="testing.html" class="nav-item">
+                        <span class="nav-item-icon">🧪</span>
+                        Testes
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">API Reference</div>
+                    <a href="api-overview.html" class="nav-item active">
+                        <span class="nav-item-icon">📚</span>
+                        Visão Geral
+                    </a>
+                    <a href="kitchen-types.html" class="nav-item">
+                        <span class="nav-item-icon">👨‍🍳</span>
+                        Kitchen Types
+                    </a>
+                    <a href="restaurants.html" class="nav-item">
+                        <span class="nav-item-icon">🏪</span>
+                        Restaurants
+                    </a>
+                    <a href="menu-categories.html" class="nav-item">
+                        <span class="nav-item-icon">📂</span>
+                        Menu Categories
+                    </a>
+                    <a href="menu-items.html" class="nav-item">
+                        <span class="nav-item-icon">🍕</span>
+                        Menu Items
+                    </a>
+                    <a href="status-codes.html" class="nav-item">
+                        <span class="nav-item-icon">📊</span>
+                        Status Codes
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Arquitetura</div>
+                    <a href="architecture-overview.html" class="nav-item">
+                        <span class="nav-item-icon">🏗️</span>
+                        Visão Geral
+                    </a>
+                    <a href="clean-architecture.html" class="nav-item">
+                        <span class="nav-item-icon">🎯</span>
+                        Clean Architecture
+                    </a>
+                    <a href="data-modeling.html" class="nav-item">
+                        <span class="nav-item-icon">🗄️</span>
+                        Modelagem de Dados
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Sobre</div>
+                    <a href="author.html" class="nav-item">
+                        <span class="nav-item-icon">👤</span>
+                        Autor
+                    </a>
+                    <a href="license.html" class="nav-item">
+                        <span class="nav-item-icon">📄</span>
+                        Licença
+                    </a>
+                    <a href="changelog.html" class="nav-item">
+                        <span class="nav-item-icon">📝</span>
+                        Changelog
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <nav class="breadcrumb">
+                    <a href="../">Home</a>
+                    <span>/</span>
+                    <a href="#">API Reference</a>
+                    <span>/</span>
+                    <span>Visão Geral</span>
+                </nav>
+                <h1 class="page-title">📚 API Reference - Visão Geral</h1>
+                <p class="page-description">Documentação completa da REST API do Restaurant Management System</p>
+            </header>
+
+            <div class="content-body">
+                <!-- API Info -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🌐</span>
+                        <h2 class="card-title">Informações da API</h2>
+                    </div>
+                    <div class="card-content">
+                        <table>
+                            <tr>
+                                <td><strong>Base URL</strong></td>
+                                <td><code>http://localhost:8080/api</code></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Versão</strong></td>
+                                <td>v1.0.0</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Formato</strong></td>
+                                <td>JSON</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Charset</strong></td>
+                                <td>UTF-8</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Content-Type</strong></td>
+                                <td><code>application/json</code></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Quick Start -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">⚡</span>
+                        <h2 class="card-title">Quick Start</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>Teste rapidamente a API com estes exemplos:</p>
+
+                        <h3 class="mb-1">🏪 Listar Restaurantes</h3>
+                        <div class="code-block">
+                            <pre>curl -X GET http://localhost:8080/api/restaurants \
+  -H "Content-Type: application/json"</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">👨‍🍳 Listar Tipos de Cozinha</h3>
+                        <div class="code-block">
+                            <pre>curl -X GET http://localhost:8080/api/kitchen-types \
+  -H "Content-Type: application/json"</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">🍽️ Criar Novo Restaurante</h3>
+                        <div class="code-block">
+                            <pre>curl -X POST http://localhost:8080/api/restaurants \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Restaurante Exemplo",
+    "description": "Descrição do restaurante",
+    "kitchenType": "ITALIAN",
+    "address": {
+      "street": "Rua Exemplo, 123",
+      "city": "São Paulo",
+      "state": "SP",
+      "zipCode": "01234-567"
+    }
+  }'</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- API Resources -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🗂️</span>
+                        <h2 class="card-title">Recursos da API</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="feature-cards">
+                            <div class="feature-card" data-link="kitchen-types.html">
+                                <div class="feature-card-icon">👨‍🍳</div>
+                                <h3 class="feature-card-title">Kitchen Types</h3>
+                                <p class="feature-card-description">
+                                    Gerenciamento de tipos de cozinha (Italiana, Brasileira, etc.)
+                                </p>
+                            </div>
+
+                            <div class="feature-card" data-link="restaurants.html">
+                                <div class="feature-card-icon">🏪</div>
+                                <h3 class="feature-card-title">Restaurants</h3>
+                                <p class="feature-card-description">
+                                    CRUD completo de restaurantes com informações básicas
+                                </p>
+                            </div>
+
+                            <div class="feature-card" data-link="menu-categories.html">
+                                <div class="feature-card-icon">📂</div>
+                                <h3 class="feature-card-title">Menu Categories</h3>
+                                <p class="feature-card-description">
+                                    Categorias do menu (Entradas, Pratos Principais, etc.)
+                                </p>
+                            </div>
+
+                            <div class="feature-card" data-link="menu-items.html">
+                                <div class="feature-card-icon">🍕</div>
+                                <h3 class="feature-card-title">Menu Items</h3>
+                                <p class="feature-card-description">
+                                    Itens específicos do menu com preços e descrições
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- All Endpoints -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🔗</span>
+                        <h2 class="card-title">Todos os Endpoints</h2>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="mb-1">👨‍🍳 Kitchen Types</h3>
+                        <div class="endpoint">
+                            <span class="method method-get">GET</span>
+                            <span class="endpoint-path">/api/kitchen-types</span>
+                            <span class="endpoint-description">Listar todos os tipos de cozinha</span>
+                        </div>
+                        <div class="endpoint">
+                            <span class="method method-get">GET</span>
+                            <span class="endpoint-path">/api/kitchen-types/{id}</span>
+                            <span class="endpoint-description">Buscar tipo de cozinha por ID</span>
+                        </div>
+                        <div class="endpoint">
+                            <span class="method method-post">POST</span>
+                            <span class="endpoint-path">/api/kitchen-types</span>
+                            <span class="endpoint-description">Criar novo tipo de cozinha</span>
+                        </div>
+                        <div class="endpoint">
+                            <span class="method method-put">PUT</span>
+                            <span class="endpoint-path">/api/kitchen-types/{id}</span>
+                            <span class="endpoint-description">Atualizar tipo de cozinha</span>
+                        </div>
+                        <div class="endpoint">
+                            <span class="method method-delete">DELETE</span>
+                            <span class="endpoint-path">/api/kitchen-types/{id}</span>
+                            <span class="endpoint-description">Remover tipo de cozinha</span>
+                        </div>
+
+                        <h3 class="mb-1 mt-3">🏪 Restaurants</h3>
+                        <div class="endpoint">
+                            <span class="method method-get">GET</span>
+                            <span class="endpoint-path">/api/restaurants</span>
+                            <span class="endpoint-description">Listar todos os restaurantes</span>
+                        </div>
+                        <div class="endpoint">
+                            <span class="method method-get">GET</span>
+                            <span class="endpoint-path">/api/restaurants/{id}</span>
+                            <span class="endpoint-description">Buscar restaurante por ID</span>
+                        </div>
+                        <div class="endpoint">
+                            <span class="method method-get">GET</span>
+                            <span class="endpoint-path">/api/restaurants/search</span>
+                            <span class="endpoint-description">Buscar restaurantes por critérios</span>
+                        </div>
+                        <div class="endpoint">
+                            <span class="method method-post">POST</span>
+                            <span class="endpoint-path">/api/restaurants</span>
+                            <span class="endpoint-description">Criar novo restaurante</span>
+                        </div>
+                        <div class="endpoint">
+                            <span class="method method-put">PUT</span>
+                            <span class="endpoint-path">/api/restaurants/{id}</span>
+                            <span class="endpoint-description">Atualizar restaurante</span>
+                        </div>
+                        <div class="endpoint">
+                            <span class="method method-delete">DELETE</span>
+                            <span class="endpoint-path">/api/restaurants/{id}</span>
+                            <span class="endpoint-description">Remover restaurante</span>
+                        </div>
+
+                        <h3 class="mb-1 mt-3">📂 Menu Categories</h3>
+                        <div class="endpoint">
+                            <span class="method method-get">GET</span>
+                            <span class="endpoint-path">/api/restaurants/{id}/menu/categories</span>
+                            <span class="endpoint-description">Listar categorias do menu</span>
+                        </div>
+                        <div class="endpoint">
+                            <span class="method method-get">GET</span>
+                            <span class="endpoint-path">/api/restaurants/{id}/menu/categories/{categoryId}</span>
+                            <span class="endpoint-description">Buscar categoria específica</span>
+                        </div>
+                        <div class="endpoint">
+                            <span class="method method-post">POST</span>
+                            <span class="endpoint-path">/api/restaurants/{id}/menu/categories</span>
+                            <span class="endpoint-description">Adicionar categoria ao menu</span>
+                        </div>
+                        <div class="endpoint">
+                            <span class="method method-put">PUT</span>
+                            <span class="endpoint-path">/api/restaurants/{id}/menu/categories/{categoryId}</span>
+                            <span class="endpoint-description">Atualizar categoria</span>
+                        </div>
+                        <div class="endpoint">
+                            <span class="method method-delete">DELETE</span>
+                            <span class="endpoint-path">/api/restaurants/{id}/menu/categories/{categoryId}</span>
+                            <span class="endpoint-description">Remover categoria</span>
+                        </div>
+
+                        <h3 class="mb-1 mt-3">🍕 Menu Items</h3>
+                        <div class="endpoint">
+                            <span class="method method-get">GET</span>
+                            <span class="endpoint-path">/api/restaurants/{id}/menu/categories/{categoryId}/items</span>
+                            <span class="endpoint-description">Listar itens da categoria</span>
+                        </div>
+                        <div class="endpoint">
+                            <span class="method method-get">GET</span>
+                            <span class="endpoint-path">/api/restaurants/{id}/menu/categories/{categoryId}/items/{itemId}</span>
+                            <span class="endpoint-description">Buscar item específico</span>
+                        </div>
+                        <div class="endpoint">
+                            <span class="method method-post">POST</span>
+                            <span class="endpoint-path">/api/restaurants/{id}/menu/categories/{categoryId}/items</span>
+                            <span class="endpoint-description">Adicionar item à categoria</span>
+                        </div>
+                        <div class="endpoint">
+                            <span class="method method-put">PUT</span>
+                            <span class="endpoint-path">/api/restaurants/{id}/menu/categories/{categoryId}/items/{itemId}</span>
+                            <span class="endpoint-description">Atualizar item</span>
+                        </div>
+                        <div class="endpoint">
+                            <span class="method method-delete">DELETE</span>
+                            <span class="endpoint-path">/api/restaurants/{id}/menu/categories/{categoryId}/items/{itemId}</span>
+                            <span class="endpoint-description">Remover item</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Response Format -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">📄</span>
+                        <h2 class="card-title">Formato de Resposta</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>Todas as respostas da API seguem um formato padrão:</p>
+
+                        <h3 class="mb-1">✅ Resposta de Sucesso</h3>
+                        <div class="code-block">
+                            <pre>{
+  "success": true,
+  "data": {
+    // Dados solicitados
+  },
+  "message": "Operação realizada com sucesso",
+  "timestamp": "2024-08-05T19:30:00Z"
+}</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">❌ Resposta de Erro</h3>
+                        <div class="code-block">
+                            <pre>{
+  "success": false,
+  "error": {
+    "code": "RESOURCE_NOT_FOUND",
+    "message": "Restaurante não encontrado",
+    "details": "Nenhum restaurante encontrado com o ID fornecido"
+  },
+  "timestamp": "2024-08-05T19:30:00Z"
+}</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">📋 Resposta de Lista Paginada</h3>
+                        <div class="code-block">
+                            <pre>{
+  "success": true,
+  "data": {
+    "content": [
+      // Array de itens
+    ],
+    "pagination": {
+      "page": 0,
+      "size": 20,
+      "totalElements": 150,
+      "totalPages": 8,
+      "first": true,
+      "last": false
+    }
+  },
+  "timestamp": "2024-08-05T19:30:00Z"
+}</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HTTP Status Codes -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">📊</span>
+                        <h2 class="card-title">Códigos de Status HTTP</h2>
+                    </div>
+                    <div class="card-content">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Status</th>
+                                    <th>Descrição</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="badge badge-success">200</span></td>
+                                    <td>OK</td>
+                                    <td>Requisição bem-sucedida</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge badge-success">201</span></td>
+                                    <td>Created</td>
+                                    <td>Recurso criado com sucesso</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge badge-primary">204</span></td>
+                                    <td>No Content</td>
+                                    <td>Operação bem-sucedida sem conteúdo</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge badge-secondary">400</span></td>
+                                    <td>Bad Request</td>
+                                    <td>Dados inválidos na requisição</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge badge-secondary">404</span></td>
+                                    <td>Not Found</td>
+                                    <td>Recurso não encontrado</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge badge-secondary">409</span></td>
+                                    <td>Conflict</td>
+                                    <td>Conflito com estado atual</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge badge-secondary">500</span></td>
+                                    <td>Internal Server Error</td>
+                                    <td>Erro interno do servidor</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p class="mt-2">
+                            <a href="status-codes.html">📊 Ver documentação completa dos códigos de status →</a>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Testing Tools -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🧪</span>
+                        <h2 class="card-title">Ferramentas de Teste</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="feature-cards">
+                            <div class="feature-card">
+                                <div class="feature-card-icon">📡</div>
+                                <h3 class="feature-card-title">Postman</h3>
+                                <p class="feature-card-description">
+                                    Collection completa disponível para importação
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🌐</div>
+                                <h3 class="feature-card-title">Swagger UI</h3>
+                                <p class="feature-card-description">
+                                    Interface web em /swagger-ui/index.html
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">💻</div>
+                                <h3 class="feature-card-title">cURL</h3>
+                                <p class="feature-card-description">
+                                    Exemplos de comandos para linha de comando
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🔧</div>
+                                <h3 class="feature-card-title">HTTPie</h3>
+                                <p class="feature-card-description">
+                                    Ferramenta moderna para testes de API
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Next Steps -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🚀</span>
+                        <h2 class="card-title">Explore a API</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>Agora que você conhece a estrutura geral, explore cada recurso em detalhes:</p>
+
+                        <div class="feature-cards">
+                            <div class="feature-card" data-link="kitchen-types.html">
+                                <div class="feature-card-icon">👨‍🍳</div>
+                                <h3 class="feature-card-title">Kitchen Types</h3>
+                                <p class="feature-card-description">
+                                    Comece pelos tipos de cozinha
+                                </p>
+                            </div>
+
+                            <div class="feature-card" data-link="restaurants.html">
+                                <div class="feature-card-icon">🏪</div>
+                                <h3 class="feature-card-title">Restaurants</h3>
+                                <p class="feature-card-description">
+                                    Gerenciamento de restaurantes
+                                </p>
+                            </div>
+
+                            <div class="feature-card" data-link="menu-categories.html">
+                                <div class="feature-card-icon">📂</div>
+                                <h3 class="feature-card-title">Menu Structure</h3>
+                                <p class="feature-card-description">
+                                    Estrutura hierárquica do menu
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

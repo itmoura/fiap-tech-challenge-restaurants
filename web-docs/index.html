@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Challenge - Restaurant Management API</title>
+    <meta name="description" content="Sistema de gerenciamento de restaurantes desenvolvido com Spring Boot + MongoDB">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍽️</text></svg>">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <a href="./" class="logo">
+                    <span class="logo-icon">🍽️</span>
+                    <div>
+                        <div class="logo-text">Tech Challenge</div>
+                        <div class="logo-subtitle">Restaurant API</div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="nav-menu">
+                <div class="nav-section">
+                    <div class="nav-section-title">Início</div>
+                    <a href="./" class="nav-item active">
+                        <span class="nav-item-icon">🏠</span>
+                        Visão Geral
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Instalação</div>
+                    <a href="pages/prerequisites.html" class="nav-item">
+                        <span class="nav-item-icon">📋</span>
+                        Pré-requisitos
+                    </a>
+                    <a href="pages/local-setup.html" class="nav-item">
+                        <span class="nav-item-icon">⚙️</span>
+                        Configuração Local
+                    </a>
+                    <a href="pages/docker.html" class="nav-item">
+                        <span class="nav-item-icon">🐳</span>
+                        Docker
+                    </a>
+                    <a href="pages/testing.html" class="nav-item">
+                        <span class="nav-item-icon">🧪</span>
+                        Testes
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">API Reference</div>
+                    <a href="pages/api-overview.html" class="nav-item">
+                        <span class="nav-item-icon">📚</span>
+                        Visão Geral
+                    </a>
+                    <a href="pages/kitchen-types.html" class="nav-item">
+                        <span class="nav-item-icon">👨‍🍳</span>
+                        Kitchen Types
+                    </a>
+                    <a href="pages/restaurants.html" class="nav-item">
+                        <span class="nav-item-icon">🏪</span>
+                        Restaurants
+                    </a>
+                    <a href="pages/menu-categories.html" class="nav-item">
+                        <span class="nav-item-icon">📂</span>
+                        Menu Categories
+                    </a>
+                    <a href="pages/menu-items.html" class="nav-item">
+                        <span class="nav-item-icon">🍕</span>
+                        Menu Items
+                    </a>
+                    <a href="pages/status-codes.html" class="nav-item">
+                        <span class="nav-item-icon">📊</span>
+                        Status Codes
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Arquitetura</div>
+                    <a href="pages/architecture-overview.html" class="nav-item">
+                        <span class="nav-item-icon">🏗️</span>
+                        Visão Geral
+                    </a>
+                    <a href="pages/clean-architecture.html" class="nav-item">
+                        <span class="nav-item-icon">🎯</span>
+                        Clean Architecture
+                    </a>
+                    <a href="pages/data-modeling.html" class="nav-item">
+                        <span class="nav-item-icon">🗄️</span>
+                        Modelagem de Dados
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Sobre</div>
+                    <a href="pages/author.html" class="nav-item">
+                        <span class="nav-item-icon">👤</span>
+                        Autor
+                    </a>
+                    <a href="pages/license.html" class="nav-item">
+                        <span class="nav-item-icon">📄</span>
+                        Licença
+                    </a>
+                    <a href="pages/changelog.html" class="nav-item">
+                        <span class="nav-item-icon">📝</span>
+                        Changelog
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <nav class="breadcrumb">
+                    <a href="./">Home</a>
+                    <span>/</span>
+                    <span>Visão Geral</span>
+                </nav>
+                <h1 class="page-title">🍽️ Restaurant Management API</h1>
+                <p class="page-description">Sistema completo de gerenciamento de restaurantes com Spring Boot + MongoDB</p>
+            </header>
+
+            <div class="content-body">
+                <!-- Status Badges -->
+                <div class="mb-3">
+                    <span class="badge badge-success">Active</span>
+                    <span class="badge badge-primary">Java 21</span>
+                    <span class="badge badge-secondary">Spring Boot 3.5.4</span>
+                    <span class="badge badge-success">MongoDB 7.0</span>
+                    <span class="badge badge-primary">Docker Ready</span>
+                </div>
+
+                <!-- Feature Cards -->
+                <div class="feature-cards">
+                    <div class="feature-card" data-link="pages/api-overview.html">
+                        <div class="feature-card-icon">🚀</div>
+                        <h3 class="feature-card-title">API Completa</h3>
+                        <p class="feature-card-description">
+                            Endpoints RESTful para gerenciamento completo de restaurantes, menus e itens com documentação detalhada.
+                        </p>
+                    </div>
+
+                    <div class="feature-card" data-link="pages/clean-architecture.html">
+                        <div class="feature-card-icon">🎯</div>
+                        <h3 class="feature-card-title">Clean Architecture</h3>
+                        <p class="feature-card-description">
+                            Arquitetura limpa com separação clara de responsabilidades, facilitando manutenção e testes.
+                        </p>
+                    </div>
+
+                    <div class="feature-card" data-link="pages/data-modeling.html">
+                        <div class="feature-card-icon">⚡</div>
+                        <h3 class="feature-card-title">Performance NoSQL</h3>
+                        <p class="feature-card-description">
+                            Modelagem otimizada para MongoDB com documentos aninhados para máxima performance de leitura.
+                        </p>
+                    </div>
+
+                    <div class="feature-card" data-link="pages/docker.html">
+                        <div class="feature-card-icon">🐳</div>
+                        <h3 class="feature-card-title">Docker Ready</h3>
+                        <p class="feature-card-description">
+                            Containerização completa com Docker Compose para desenvolvimento e produção simplificados.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Overview Section -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">📖</span>
+                        <h2 class="card-title">Sobre o Projeto</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>
+                            O <strong>Tech Challenge - Restaurant Management API</strong> é um sistema completo de gerenciamento 
+                            de restaurantes desenvolvido com as melhores práticas de desenvolvimento moderno. Utilizando 
+                            <strong>Spring Boot</strong> e <strong>MongoDB</strong>, o sistema oferece alta performance 
+                            e escalabilidade.
+                        </p>
+                        
+                        <h3 class="mt-2 mb-1">🎯 Objetivos Principais</h3>
+                        <ul>
+                            <li><strong>Performance</strong>: Otimização para leitura com documentos aninhados</li>
+                            <li><strong>Escalabilidade</strong>: Arquitetura preparada para crescimento</li>
+                            <li><strong>Manutenibilidade</strong>: Código limpo e bem estruturado</li>
+                            <li><strong>Testabilidade</strong>: Cobertura completa de testes</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Quick Start -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">⚡</span>
+                        <h2 class="card-title">Quick Start</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>Execute o projeto em poucos passos:</p>
+                        
+                        <div class="code-block">
+                            <pre># 1. Clone o repositório
+git clone https://github.com/itmoura/fiap-tech-challenge-restaurants.git
+cd fiap-tech-challenge-restaurants
+
+# 2. Inicie o MongoDB
+docker-compose up -d mongodb
+
+# 3. Execute a aplicação
+./gradlew bootRun
+
+# 4. Teste a API
+curl http://localhost:8080/api/restaurants</pre>
+                        </div>
+                        
+                        <p class="mt-2">
+                            🎉 <strong>Pronto!</strong> A API estará disponível em 
+                            <code>http://localhost:8080</code>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Architecture Overview -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🏗️</span>
+                        <h2 class="card-title">Arquitetura</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>O sistema segue os princípios da <strong>Clean Architecture</strong>:</p>
+                        
+                        <div class="feature-cards">
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🌐</div>
+                                <h4 class="feature-card-title">Controllers</h4>
+                                <p class="feature-card-description">Camada de apresentação REST API</p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <div class="feature-card-icon">⚙️</div>
+                                <h4 class="feature-card-title">Use Cases</h4>
+                                <p class="feature-card-description">Regras de negócio da aplicação</p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🎯</div>
+                                <h4 class="feature-card-title">Entities</h4>
+                                <p class="feature-card-description">Regras de negócio empresariais</p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🗄️</div>
+                                <h4 class="feature-card-title">Repositories</h4>
+                                <p class="feature-card-description">Acesso e persistência de dados</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- API Endpoints Preview -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🔗</span>
+                        <h2 class="card-title">Principais Endpoints</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="endpoint">
+                            <span class="method method-get">GET</span>
+                            <span class="endpoint-path">/api/restaurants</span>
+                            <span class="endpoint-description">Listar todos os restaurantes</span>
+                        </div>
+                        
+                        <div class="endpoint">
+                            <span class="method method-post">POST</span>
+                            <span class="endpoint-path">/api/restaurants</span>
+                            <span class="endpoint-description">Criar novo restaurante</span>
+                        </div>
+                        
+                        <div class="endpoint">
+                            <span class="method method-get">GET</span>
+                            <span class="endpoint-path">/api/restaurants/{id}/menu</span>
+                            <span class="endpoint-description">Obter menu completo do restaurante</span>
+                        </div>
+                        
+                        <div class="endpoint">
+                            <span class="method method-post">POST</span>
+                            <span class="endpoint-path">/api/restaurants/{id}/menu/categories</span>
+                            <span class="endpoint-description">Adicionar categoria ao menu</span>
+                        </div>
+                        
+                        <p class="mt-2">
+                            <a href="pages/api-overview.html">📚 Ver documentação completa da API →</a>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Technologies -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🛠️</span>
+                        <h2 class="card-title">Tecnologias Utilizadas</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="feature-cards">
+                            <div class="feature-card">
+                                <div class="feature-card-icon">☕</div>
+                                <h4 class="feature-card-title">Java 21</h4>
+                                <p class="feature-card-description">Linguagem principal com recursos modernos</p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🍃</div>
+                                <h4 class="feature-card-title">Spring Boot 3.5.4</h4>
+                                <p class="feature-card-description">Framework para desenvolvimento rápido</p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🍃</div>
+                                <h4 class="feature-card-title">MongoDB 7.0</h4>
+                                <p class="feature-card-description">Banco NoSQL para alta performance</p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🐳</div>
+                                <h4 class="feature-card-title">Docker</h4>
+                                <p class="feature-card-description">Containerização e orquestração</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Next Steps -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🚀</span>
+                        <h2 class="card-title">Próximos Passos</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="feature-cards">
+                            <div class="feature-card" data-link="pages/prerequisites.html">
+                                <div class="feature-card-icon">1️⃣</div>
+                                <h4 class="feature-card-title">Pré-requisitos</h4>
+                                <p class="feature-card-description">Verifique os requisitos do sistema</p>
+                            </div>
+                            
+                            <div class="feature-card" data-link="pages/local-setup.html">
+                                <div class="feature-card-icon">2️⃣</div>
+                                <h4 class="feature-card-title">Configuração</h4>
+                                <p class="feature-card-description">Configure o ambiente de desenvolvimento</p>
+                            </div>
+                            
+                            <div class="feature-card" data-link="pages/api-overview.html">
+                                <div class="feature-card-icon">3️⃣</div>
+                                <h4 class="feature-card-title">Explore a API</h4>
+                                <p class="feature-card-description">Conheça todos os endpoints disponíveis</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
