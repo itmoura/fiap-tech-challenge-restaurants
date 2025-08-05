@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
-import java.util.UUID;
 
 @Tag(name = "Restaurants", description = "API para gerenciamento de restaurantes")
 public interface RestaurantControllerInterface {
@@ -103,7 +102,7 @@ public interface RestaurantControllerInterface {
     })
     ResponseEntity<RestaurantFullResponse> getRestaurantById(
         @Parameter(description = "ID do restaurante", required = true, example = "550e8400-e29b-41d4-a716-446655440000")
-        @PathVariable UUID id
+        @PathVariable String id
     );
 
     @Operation(
@@ -132,7 +131,7 @@ public interface RestaurantControllerInterface {
     })
     ResponseEntity<RestaurantFullResponse> updateRestaurant(
         @Parameter(description = "ID do restaurante", required = true, example = "550e8400-e29b-41d4-a716-446655440000")
-        @PathVariable UUID id,
+        @PathVariable String id,
         @Parameter(description = "Dados atualizados do restaurante", required = true)
         @Valid @RequestBody RestaurantRequest restaurantRequest
     );
@@ -154,6 +153,6 @@ public interface RestaurantControllerInterface {
     })
     ResponseEntity<Void> deleteRestaurant(
         @Parameter(description = "ID do restaurante", required = true, example = "550e8400-e29b-41d4-a716-446655440000")
-        @PathVariable UUID id
+        @PathVariable String id
     );
 }

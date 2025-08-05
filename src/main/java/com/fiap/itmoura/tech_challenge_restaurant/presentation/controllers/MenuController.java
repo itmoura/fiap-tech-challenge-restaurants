@@ -32,7 +32,7 @@ public class MenuController implements MenuControllerInterface {
     @Override
     @PostMapping
     public ResponseEntity<MenuCategoryResponse> createMenuCategory(
-            @PathVariable UUID restaurantId,
+            @PathVariable String restaurantId,
             @Validated(OnCreateGroup.class) @RequestBody MenuCategoryRequest request) {
         
         MenuCategoryResponse response = menuUseCase.createMenuCategory(restaurantId, request);
@@ -42,8 +42,8 @@ public class MenuController implements MenuControllerInterface {
     @Override
     @PutMapping("/{menuId}")
     public ResponseEntity<MenuCategoryResponse> updateMenuCategory(
-            @PathVariable UUID restaurantId,
-            @PathVariable UUID menuId,
+            @PathVariable String restaurantId,
+            @PathVariable String menuId,
             @Validated(OnCreateGroup.class) @RequestBody MenuCategoryRequest request) {
         
         MenuCategoryResponse response = menuUseCase.updateMenuCategory(restaurantId, menuId, request);
@@ -53,8 +53,8 @@ public class MenuController implements MenuControllerInterface {
     @Override
     @DeleteMapping("/{menuId}")
     public ResponseEntity<Void> deleteMenuCategory(
-            @PathVariable UUID restaurantId,
-            @PathVariable UUID menuId) {
+            @PathVariable String restaurantId,
+            @PathVariable String menuId) {
         
         menuUseCase.deleteMenuCategory(restaurantId, menuId);
         return ResponseEntity.noContent().build();
@@ -63,8 +63,8 @@ public class MenuController implements MenuControllerInterface {
     @Override
     @GetMapping("/{menuId}")
     public ResponseEntity<MenuCategoryResponse> getMenuCategory(
-            @PathVariable UUID restaurantId,
-            @PathVariable UUID menuId) {
+            @PathVariable String restaurantId,
+            @PathVariable String menuId) {
         
         MenuCategoryResponse response = menuUseCase.getMenuCategory(restaurantId, menuId);
         return ResponseEntity.ok(response);

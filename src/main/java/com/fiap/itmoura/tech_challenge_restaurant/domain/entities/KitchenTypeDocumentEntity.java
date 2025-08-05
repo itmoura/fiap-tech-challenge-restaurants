@@ -24,7 +24,7 @@ public class KitchenTypeDocumentEntity {
 
     @Id
     @Field("_id")
-    private UUID id;
+    private String id;
 
     @Indexed(unique = true)
     @Field("name")

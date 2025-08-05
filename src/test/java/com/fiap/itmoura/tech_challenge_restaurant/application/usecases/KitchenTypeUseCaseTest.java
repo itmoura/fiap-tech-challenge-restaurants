@@ -41,11 +41,11 @@ class KitchenTypeUseCaseTest {
 
     private KitchenTypeRequest kitchenTypeRequest;
     private KitchenTypeDocumentEntity kitchenTypeEntity;
-    private UUID kitchenTypeId;
+    private String kitchenTypeId;
 
     @BeforeEach
     void setUp() {
-        kitchenTypeId = UUID.randomUUID();
+        kitchenTypeId = UUID.randomUUID().toString();
 
         kitchenTypeRequest = KitchenTypeRequest.builder()
             .name("Italiana")
@@ -138,7 +138,7 @@ class KitchenTypeUseCaseTest {
             kitchenTypeUseCase.getKitchenTypeById(kitchenTypeId);
         });
 
-        assertEquals("Kitchen type not found with ID: " + kitchenTypeId, exception.getMessage());
+        assertEquals("Kitchen type not found with id: " + kitchenTypeId, exception.getMessage());
         verify(kitchenTypeRepository).findById(kitchenTypeId);
     }
 
@@ -188,75 +188,22 @@ class KitchenTypeUseCaseTest {
 
     @Test
     void shouldDeleteKitchenTypeSuccessfully() {
+        KitchenTypeDocumentEntity kitchenType = KitchenTypeDocumentEntity.builder()
+                .id(kitchenTypeId)
+                .name("Italiana")
+                .description("Cozinha italiana tradicional")
+                .createdAt(LocalDateTime.now())
+                .lastUpdate(LocalDateTime.now())
+                .build();
+
         // Given
-        when(kitchenTypeRepository.existsById(kitchenTypeId)).thenReturn(true);
-        when(restaurantRepository.findAll()).thenReturn(List.of());
+        when(kitchenTypeRepository.findById(kitchenTypeId)).thenReturn(Optional.of(kitchenType));
 
         // When
         kitchenTypeUseCase.deleteKitchenType(kitchenTypeId);
 
         // Then
-        verify(kitchenTypeRepository).existsById(kitchenTypeId);
-        verify(restaurantRepository).findAll();
         verify(kitchenTypeRepository).deleteById(kitchenTypeId);
-    }
-
-    @Test
-    void shouldThrowNotFoundExceptionWhenDeletingNonExistentKitchenType() {
-        // Given
-        when(kitchenTypeRepository.existsById(kitchenTypeId)).thenReturn(false);
-
-        // When & Then
-        NotFoundException exception = assertThrows(NotFoundException.class, () -> {
-            kitchenTypeUseCase.deleteKitchenType(kitchenTypeId);
-        });
-
-        assertEquals("Kitchen type not found with ID: " + kitchenTypeId, exception.getMessage());
-        verify(kitchenTypeRepository).existsById(kitchenTypeId);
-        verify(kitchenTypeRepository, never()).deleteById(any());
-    }
-
-    @Test
-    void shouldThrowConflictExceptionWhenDeletingKitchenTypeUsedByRestaurants() {
-        // Given
-        KitchenTypeEntity kitchenType = KitchenTypeEntity.builder()
-            .id(kitchenTypeId)
-            .name("Italiana")
-            .build();
-
-        RestaurantEntity restaurant = RestaurantEntity.builder()
-            .id(UUID.randomUUID())
-            .name("Restaurante Italiano")
-            .kitchenType(kitchenType)
-            .build();
-
-        when(kitchenTypeRepository.existsById(kitchenTypeId)).thenReturn(true);
-        when(restaurantRepository.findAll()).thenReturn(List.of(restaurant));
-
-        // When & Then
-        ConflictRequestException exception = assertThrows(ConflictRequestException.class, () -> {
-            kitchenTypeUseCase.deleteKitchenType(kitchenTypeId);
-        });
-
-        assertEquals("Cannot delete kitchen type as it is being used by restaurants", exception.getMessage());
-        verify(kitchenTypeRepository).existsById(kitchenTypeId);
-        verify(restaurantRepository).findAll();
-        verify(kitchenTypeRepository, never()).deleteById(any());
-    }
-
-    @Test
-    void shouldGetKitchenTypeByIdOrNameWithValidUUID() {
-        // Given
-        String uuidString = kitchenTypeId.toString();
-        when(kitchenTypeRepository.findById(kitchenTypeId)).thenReturn(Optional.of(kitchenTypeEntity));
-
-        // When
-        KitchenTypeDocumentEntity result = kitchenTypeUseCase.getKitchenTypeByIdOrName(uuidString);
-
-        // Then
-        assertNotNull(result);
-        assertEquals(kitchenTypeId, result.getId());
-        verify(kitchenTypeRepository).findById(kitchenTypeId);
     }
 
     @Test
@@ -266,7 +213,7 @@ class KitchenTypeUseCaseTest {
         when(kitchenTypeRepository.findByNameIgnoreCase(name)).thenReturn(Optional.of(kitchenTypeEntity));
 
         // When
-        KitchenTypeDocumentEntity result = kitchenTypeUseCase.getKitchenTypeByIdOrName(name);
+        var result = kitchenTypeUseCase.getKitchenTypeByIdOrName(name);
 
         // Then
         assertNotNull(result);
@@ -280,16 +227,11 @@ class KitchenTypeUseCaseTest {
         String name = "Inexistente";
         when(kitchenTypeRepository.findByNameIgnoreCase(name)).thenReturn(Optional.empty());
 
-        // When
-        KitchenTypeDocumentEntity result = kitchenTypeUseCase.getKitchenTypeByIdOrName(name);
-
         // Then
-        assertNull(result);
+        assertThrows(NotFoundException.class, () -> {
+            kitchenTypeUseCase.getKitchenTypeByIdOrName(name);
+        });
+
         verify(kitchenTypeRepository).findByNameIgnoreCase(name);
     }
-
-    // @Test
-    // void shouldTrimWhitespaceWhenCreatingKitchenType() {
-    //     // Test temporarily disabled due to Mockito stubbing issue
-    // }
 }

@@ -1,11 +1,7 @@
 package com.fiap.itmoura.tech_challenge_restaurant.presentation.controllers;
 
-import com.fiap.itmoura.tech_challenge_restaurant.application.models.group.OnCreateGroup;
-import com.fiap.itmoura.tech_challenge_restaurant.application.models.kitchentype.KitchenTypeRequest;
-import com.fiap.itmoura.tech_challenge_restaurant.application.models.kitchentype.KitchenTypeResponse;
-import com.fiap.itmoura.tech_challenge_restaurant.application.usecases.KitchenTypeUseCase;
-import com.fiap.itmoura.tech_challenge_restaurant.presentation.contracts.KitchenTypeControllerInterface;
-import lombok.RequiredArgsConstructor;
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -18,8 +14,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-import java.util.UUID;
+import com.fiap.itmoura.tech_challenge_restaurant.application.models.group.OnCreateGroup;
+import com.fiap.itmoura.tech_challenge_restaurant.application.models.kitchentype.KitchenTypeRequest;
+import com.fiap.itmoura.tech_challenge_restaurant.application.models.kitchentype.KitchenTypeResponse;
+import com.fiap.itmoura.tech_challenge_restaurant.application.usecases.KitchenTypeUseCase;
+import com.fiap.itmoura.tech_challenge_restaurant.presentation.contracts.KitchenTypeControllerInterface;
+
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/kitchen-types")
@@ -45,7 +46,7 @@ public class KitchenTypeController implements KitchenTypeControllerInterface {
 
     @Override
     @GetMapping("/{id}")
-    public ResponseEntity<KitchenTypeResponse> getKitchenTypeById(@PathVariable UUID id) {
+    public ResponseEntity<KitchenTypeResponse> getKitchenTypeById(@PathVariable String id) {
         KitchenTypeResponse kitchenType = kitchenTypeUseCase.getKitchenTypeById(id);
         return ResponseEntity.ok(kitchenType);
     }
@@ -53,7 +54,7 @@ public class KitchenTypeController implements KitchenTypeControllerInterface {
     @Override
     @PutMapping("/{id}")
     public ResponseEntity<KitchenTypeResponse> updateKitchenType(
-            @PathVariable UUID id,
+            @PathVariable String id,
             @Validated(OnCreateGroup.class) @RequestBody KitchenTypeRequest request) {
         KitchenTypeResponse response = kitchenTypeUseCase.updateKitchenType(id, request);
         return ResponseEntity.ok(response);
@@ -61,7 +62,7 @@ public class KitchenTypeController implements KitchenTypeControllerInterface {
 
     @Override
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteKitchenType(@PathVariable UUID id) {
+    public ResponseEntity<Void> deleteKitchenType(@PathVariable String id) {
         kitchenTypeUseCase.deleteKitchenType(id);
         return ResponseEntity.noContent().build();
     }

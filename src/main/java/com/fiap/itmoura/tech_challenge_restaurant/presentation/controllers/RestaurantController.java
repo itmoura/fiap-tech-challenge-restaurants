@@ -1,8 +1,5 @@
 package com.fiap.itmoura.tech_challenge_restaurant.presentation.controllers;
 
-import java.util.List;
-import java.util.UUID;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,6 +19,8 @@ import com.fiap.itmoura.tech_challenge_restaurant.presentation.contracts.Restaur
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/restaurants")
@@ -54,7 +53,7 @@ public class RestaurantController implements RestaurantControllerInterface {
 
     @Override
     @GetMapping("/{id}")
-    public ResponseEntity<RestaurantFullResponse> getRestaurantById(@PathVariable UUID id) {
+    public ResponseEntity<RestaurantFullResponse> getRestaurantById(@PathVariable String id) {
         RestaurantFullResponse restaurant = restaurantService.getRestaurantById(id);
         return ResponseEntity.ok(restaurant);
     }
@@ -62,7 +61,7 @@ public class RestaurantController implements RestaurantControllerInterface {
     @Override
     @PutMapping("/{id}")
     public ResponseEntity<RestaurantFullResponse> updateRestaurant(
-            @PathVariable UUID id,
+            @PathVariable String id,
             @Valid @RequestBody RestaurantRequest restaurantRequest) {
         RestaurantFullResponse response = restaurantService.updateRestaurant(id, restaurantRequest);
         return ResponseEntity.ok(response);
@@ -70,7 +69,7 @@ public class RestaurantController implements RestaurantControllerInterface {
 
     @Override
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteRestaurant(@PathVariable UUID id) {
+    public ResponseEntity<Void> deleteRestaurant(@PathVariable String id) {
         restaurantService.deleteRestaurant(id);
         return ResponseEntity.noContent().build();
     }

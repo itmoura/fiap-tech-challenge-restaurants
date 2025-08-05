@@ -26,7 +26,7 @@ public class MenuItemUseCase {
     private final RestaurantRepository restaurantRepository;
 
     @Transactional
-    public MenuItemResponse createMenuItem(UUID restaurantId, UUID menuId, MenuItemRequest request) {
+    public MenuItemResponse createMenuItem(String restaurantId, String menuId, MenuItemRequest request) {
         log.info("Creating menu item for restaurant ID: {} and menu ID: {}", restaurantId, menuId);
 
         RestaurantEntity restaurant = restaurantRepository.findById(restaurantId)
@@ -35,7 +35,7 @@ public class MenuItemUseCase {
         MenuCategoryEntity category = findMenuCategory(restaurant, menuId);
 
         MenuItemEntity newItem = MenuItemEntity.builder()
-            .id(UUID.randomUUID())
+            .id(UUID.randomUUID().toString())
             .name(request.getName())
             .description(request.getDescription())
             .price(request.getPrice())
@@ -60,7 +60,7 @@ public class MenuItemUseCase {
     }
 
     @Transactional
-    public MenuItemResponse updateMenuItem(UUID restaurantId, UUID menuId, UUID itemId, MenuItemRequest request) {
+    public MenuItemResponse updateMenuItem(String restaurantId, String menuId, String itemId, MenuItemRequest request) {
         log.info("Updating menu item ID: {} for restaurant ID: {} and menu ID: {}", itemId, restaurantId, menuId);
 
         RestaurantEntity restaurant = restaurantRepository.findById(restaurantId)
@@ -83,7 +83,7 @@ public class MenuItemUseCase {
     }
 
     @Transactional
-    public void deleteMenuItem(UUID restaurantId, UUID menuId, UUID itemId) {
+    public void deleteMenuItem(String restaurantId, String menuId, String itemId) {
         log.info("Deleting menu item ID: {} for restaurant ID: {} and menu ID: {}", itemId, restaurantId, menuId);
 
         RestaurantEntity restaurant = restaurantRepository.findById(restaurantId)
@@ -113,7 +113,7 @@ public class MenuItemUseCase {
         log.info("Menu item deleted successfully with ID: {}", itemId);
     }
 
-    public MenuItemWithContextDTO getMenuItemById(UUID itemId) {
+    public MenuItemWithContextDTO getMenuItemById(String itemId) {
         log.info("Fetching menu item by ID: {}", itemId);
 
         RestaurantEntity restaurant = restaurantRepository.findByMenuItemId(itemId)
@@ -148,7 +148,7 @@ public class MenuItemUseCase {
         throw new NotFoundException("Menu item not found with ID: " + itemId);
     }
 
-    private MenuCategoryEntity findMenuCategory(RestaurantEntity restaurant, UUID menuId) {
+    private MenuCategoryEntity findMenuCategory(RestaurantEntity restaurant, String menuId) {
         List<MenuCategoryEntity> menu = restaurant.getMenu();
         if (menu == null || menu.isEmpty()) {
             throw new NotFoundException("Menu not found for restaurant ID: " + restaurant.getId());
@@ -160,7 +160,7 @@ public class MenuItemUseCase {
             .orElseThrow(() -> new NotFoundException("Menu category not found with ID: " + menuId));
     }
 
-    private MenuItemEntity findMenuItem(MenuCategoryEntity category, UUID itemId) {
+    private MenuItemEntity findMenuItem(MenuCategoryEntity category, String itemId) {
         List<MenuItemEntity> items = category.getItems();
         if (items == null || items.isEmpty()) {
             throw new NotFoundException("No items found in menu category ID: " + category.getId());

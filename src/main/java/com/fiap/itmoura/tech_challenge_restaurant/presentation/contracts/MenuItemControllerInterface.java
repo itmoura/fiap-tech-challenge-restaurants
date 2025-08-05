@@ -1,7 +1,5 @@
 package com.fiap.itmoura.tech_challenge_restaurant.presentation.contracts;
 
-import java.util.UUID;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -49,9 +47,9 @@ public interface MenuItemControllerInterface {
     })
     ResponseEntity<MenuItemResponse> createMenuItem(
         @Parameter(description = "ID do restaurante", required = true, example = "550e8400-e29b-41d4-a716-446655440000")
-        @PathVariable UUID restaurantId,
+        @PathVariable String restaurantId,
         @Parameter(description = "ID da categoria do menu", required = true, example = "550e8400-e29b-41d4-a716-446655440001")
-        @PathVariable UUID menuId,
+        @PathVariable String menuId,
         @Parameter(description = "Dados do item a ser criado", required = true)
         @Validated(OnCreateGroup.class) @RequestBody MenuItemRequest request
     );
@@ -82,11 +80,11 @@ public interface MenuItemControllerInterface {
     })
     ResponseEntity<MenuItemResponse> updateMenuItem(
         @Parameter(description = "ID do restaurante", required = true, example = "550e8400-e29b-41d4-a716-446655440000")
-        @PathVariable UUID restaurantId,
+        @PathVariable String restaurantId,
         @Parameter(description = "ID da categoria do menu", required = true, example = "550e8400-e29b-41d4-a716-446655440001")
-        @PathVariable UUID menuId,
+        @PathVariable String menuId,
         @Parameter(description = "ID do item", required = true, example = "550e8400-e29b-41d4-a716-446655440002")
-        @PathVariable UUID itemId,
+        @PathVariable String itemId,
         @Parameter(description = "Dados atualizados do item", required = true)
         @Validated(OnCreateGroup.class) @RequestBody MenuItemRequest request
     );
@@ -108,11 +106,11 @@ public interface MenuItemControllerInterface {
     })
     ResponseEntity<Void> deleteMenuItem(
         @Parameter(description = "ID do restaurante", required = true, example = "550e8400-e29b-41d4-a716-446655440000")
-        @PathVariable UUID restaurantId,
+        @PathVariable String restaurantId,
         @Parameter(description = "ID da categoria do menu", required = true, example = "550e8400-e29b-41d4-a716-446655440001")
-        @PathVariable UUID menuId,
+        @PathVariable String menuId,
         @Parameter(description = "ID do item", required = true, example = "550e8400-e29b-41d4-a716-446655440002")
-        @PathVariable UUID itemId
+        @PathVariable String itemId
     );
 
     @Operation(
@@ -136,6 +134,6 @@ public interface MenuItemControllerInterface {
     })
     ResponseEntity<MenuItemWithContextDTO> getMenuItemById(
         @Parameter(description = "ID do item do menu", required = true, example = "550e8400-e29b-41d4-a716-446655440002")
-        @PathVariable UUID itemId
+        @PathVariable String itemId
     );
 }

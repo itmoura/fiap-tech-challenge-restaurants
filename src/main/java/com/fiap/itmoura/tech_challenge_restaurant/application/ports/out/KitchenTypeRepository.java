@@ -9,11 +9,11 @@ import org.springframework.stereotype.Repository;
 import com.fiap.itmoura.tech_challenge_restaurant.domain.entities.KitchenTypeDocumentEntity;
 
 @Repository
-public interface KitchenTypeRepository extends MongoRepository<KitchenTypeDocumentEntity, UUID> {
+public interface KitchenTypeRepository extends MongoRepository<KitchenTypeDocumentEntity, String> {
 
     Optional<KitchenTypeDocumentEntity> findByNameIgnoreCase(String name);
 
     boolean existsByNameIgnoreCase(String name);
 
-    boolean existsByNameIgnoreCaseAndIdNot(String name, UUID id);
+    boolean existsByNameIgnoreCaseAndIdNot(String name, String id);
 }

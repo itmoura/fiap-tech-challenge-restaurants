@@ -31,7 +31,7 @@ public record RestaurantRequest(
     
     @Schema(description = "ID do dono do restaurante", example = "550e8400-e29b-41d4-a716-446655440001")
     @NotNull(message = "ID do dono é obrigatório", groups = OnCreateGroup.class)
-    UUID ownerId,
+    String ownerId,
 
     @Schema(description = "Se o restaurante está ativo", example = "true")
     Boolean isActive,

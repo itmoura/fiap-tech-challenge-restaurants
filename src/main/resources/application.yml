@@ -7,6 +7,8 @@ spring:
     mongodb:
       uri: ${MONGO_URI:mongodb://localhost:27017/tech_challenge_restaurants}
       auto-index-creation: true
+      write-concern: MAJORITY
+      read-concern: MAJORITY
   main:
     allow-bean-definition-overriding: true
 
@@ -44,6 +46,8 @@ spring:
     mongodb:
       uri: ${MONGO_URI:mongodb://localhost:27017/tech_challenge_restaurants}
       auto-index-creation: true
+      write-concern: MAJORITY
+      read-concern: MAJORITY
 
 logging:
   level:
@@ -61,6 +65,8 @@ spring:
     mongodb:
       uri: ${MONGO_URI:mongodb://admin:admin123@mongodb:27017/tech_challenge_restaurants?authSource=admin}
       auto-index-creation: false
+      write-concern: MAJORITY
+      read-concern: MAJORITY
 
 logging:
   level:
@@ -68,17 +74,3 @@ logging:
     org.springframework.data.mongodb.core.MongoTemplate: WARN
     org.springframework.data.mongodb.repository.query: WARN
 
----
-spring:
-  config:
-    activate:
-      on-profile: cleanup
-  data:
-    mongodb:
-      uri: ${MONGO_URI:mongodb://localhost:27017/tech_challenge_restaurants}
-      auto-index-creation: true
-
-logging:
-  level:
-    com.fiap.itmoura.tech_challenge_restaurant.infrastructure.MongoCleanupUtility: DEBUG
-    org.springframework.data.mongodb: DEBUG

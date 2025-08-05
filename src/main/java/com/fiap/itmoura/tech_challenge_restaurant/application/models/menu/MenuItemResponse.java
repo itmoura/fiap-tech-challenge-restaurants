@@ -1,15 +1,13 @@
 package com.fiap.itmoura.tech_challenge_restaurant.application.models.menu;
 
-import java.math.BigDecimal;
-import java.util.UUID;
-
 import com.fiap.itmoura.tech_challenge_restaurant.domain.entities.MenuItemEntity;
-
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.math.BigDecimal;
 
 @Data
 @Builder
@@ -19,7 +17,7 @@ import lombok.NoArgsConstructor;
 public class MenuItemResponse {
     
     @Schema(description = "ID único do item", example = "550e8400-e29b-41d4-a716-446655440001")
-    private UUID id;
+    private String id;
     
     @Schema(description = "Nome do item", example = "Hambúrguer Artesanal")
     private String name;
@@ -40,12 +38,12 @@ public class MenuItemResponse {
     private Boolean isActive;
     
     @Schema(description = "ID do restaurante", example = "550e8400-e29b-41d4-a716-446655440002")
-    private UUID restaurantId;
+    private String restaurantId;
     
     @Schema(description = "ID da categoria", example = "550e8400-e29b-41d4-a716-446655440003")
-    private UUID categoryId;
+    private String categoryId;
 
-    public static MenuItemResponse fromEntity(MenuItemEntity entity, UUID restaurantId, UUID categoryId) {
+    public static MenuItemResponse fromEntity(MenuItemEntity entity, String restaurantId, String categoryId) {
         return MenuItemResponse.builder()
             .id(entity.getId())
             .name(entity.getName())

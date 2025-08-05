@@ -15,7 +15,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public record RestaurantFullResponse(
     
     @Schema(description = "ID do restaurante", example = "550e8400-e29b-41d4-a716-446655440000")
-    UUID id,
+    String id,
 
     @Schema(description = "Nome do restaurante", example = "Restaurante do João")
     String name,
@@ -30,7 +30,7 @@ public record RestaurantFullResponse(
     List<OperationDaysTimeData> daysOperation,
 
     @Schema(description = "ID do dono do restaurante", example = "550e8400-e29b-41d4-a716-446655440001")
-    UUID ownerId,
+    String ownerId,
 
     @Schema(description = "Se o restaurante está ativo", example = "true")
     Boolean isActive,

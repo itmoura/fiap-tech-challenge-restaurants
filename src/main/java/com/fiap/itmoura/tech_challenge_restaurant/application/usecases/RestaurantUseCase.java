@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
+import com.fiap.itmoura.tech_challenge_restaurant.application.models.kitchentype.KitchenTypeResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,7 +12,6 @@ import com.fiap.itmoura.tech_challenge_restaurant.application.models.restaurant.
 import com.fiap.itmoura.tech_challenge_restaurant.application.models.restaurant.RestaurantFullResponse;
 import com.fiap.itmoura.tech_challenge_restaurant.application.models.restaurant.RestaurantRequest;
 import com.fiap.itmoura.tech_challenge_restaurant.application.ports.out.RestaurantRepository;
-import com.fiap.itmoura.tech_challenge_restaurant.domain.entities.KitchenTypeDocumentEntity;
 import com.fiap.itmoura.tech_challenge_restaurant.domain.entities.KitchenTypeEntity;
 import com.fiap.itmoura.tech_challenge_restaurant.domain.entities.MenuCategoryEntity;
 import com.fiap.itmoura.tech_challenge_restaurant.domain.entities.MenuItemEntity;
@@ -43,7 +43,7 @@ public class RestaurantUseCase {
             : List.of();
 
         RestaurantEntity restaurantEntity = RestaurantEntity.builder()
-            .id(UUID.randomUUID())
+            .id(UUID.randomUUID().toString())
             .name(restaurantRequest.name())
             .address(restaurantRequest.address())
             .kitchenType(kitchenType)
@@ -62,7 +62,7 @@ public class RestaurantUseCase {
     }
 
     @Transactional
-    public RestaurantFullResponse updateRestaurant(UUID id, RestaurantRequest restaurantRequest) {
+    public RestaurantFullResponse updateRestaurant(String id, RestaurantRequest restaurantRequest) {
         log.info("Updating restaurant with ID: {}", id);
 
         RestaurantEntity existingRestaurant = restaurantRepository.findById(id)
@@ -96,6 +96,32 @@ public class RestaurantUseCase {
         return RestaurantFullResponse.fromEntity(restaurantSaved);
     }
 
+    @Transactional
+    public RestaurantFullResponse disableRestaurant(String id) {
+        log.info("Disabling restaurant with ID: {}", id);
+
+        RestaurantEntity existingRestaurant = restaurantRepository.findById(id)
+            .orElseThrow(() -> new NotFoundException("Restaurant not found with ID: " + id));
+
+        RestaurantEntity disabledRestaurant = RestaurantEntity.builder()
+            .id(existingRestaurant.getId())
+            .name(existingRestaurant.getName())
+            .address(existingRestaurant.getAddress())
+            .kitchenType(existingRestaurant.getKitchenType())
+            .daysOperation(existingRestaurant.getDaysOperation())
+            .ownerId(existingRestaurant.getOwnerId())
+            .isActive(false)
+            .menu(existingRestaurant.getMenu())
+            .lastUpdate(LocalDateTime.now())
+            .createdAt(existingRestaurant.getCreatedAt())
+            .build();
+
+        var restaurantSaved = restaurantRepository.save(disabledRestaurant);
+        log.info("Restaurant disabled successfully with ID: {}", restaurantSaved.getId());
+
+        return RestaurantFullResponse.fromEntity(restaurantSaved);
+    }
+
     public List<RestaurantBasicResponse> getAllRestaurants() {
         log.info("Fetching all restaurants without menu");
         
@@ -109,15 +135,16 @@ public class RestaurantUseCase {
     public List<RestaurantBasicResponse> getAllActiveRestaurants() {
         log.info("Fetching all active restaurants without menu");
         
-        List<RestaurantEntity> restaurants = restaurantRepository.findByIsActiveTrue();
+        List<RestaurantEntity> restaurants = restaurantRepository.findAll();
         
         return restaurants.stream()
+            .filter(RestaurantEntity::getIsActive)
             .map(RestaurantBasicResponse::fromEntity)
             .toList();
     }
 
     public List<RestaurantFullResponse> getAllRestaurantsWithMenu() {
-        log.info("Fetching all restaurants with full menu");
+        log.info("Fetching all restaurants with menu");
         
         List<RestaurantEntity> restaurants = restaurantRepository.findAll();
         
@@ -126,7 +153,7 @@ public class RestaurantUseCase {
             .toList();
     }
 
-    public RestaurantFullResponse getRestaurantById(UUID id) {
+    public RestaurantFullResponse getRestaurantById(String id) {
         log.info("Fetching restaurant by ID: {}", id);
         
         RestaurantEntity restaurant = restaurantRepository.findById(id)
@@ -136,7 +163,7 @@ public class RestaurantUseCase {
     }
 
     @Transactional
-    public void deleteRestaurant(UUID id) {
+    public void deleteRestaurant(String id) {
         log.info("Deleting restaurant with ID: {}", id);
         
         if (!restaurantRepository.existsById(id)) {
@@ -148,9 +175,23 @@ public class RestaurantUseCase {
     }
 
     private KitchenTypeEntity getKitchenTypeFromRequest(RestaurantRequest restaurantRequest) {
+        if (restaurantRequest.kitchenType() == null) {
+            throw new IllegalArgumentException("Kitchen type is required");
+        }
+
+        KitchenTypeResponse kitchenTypeResponse = new KitchenTypeResponse();
+
+        // Se o kitchenType tem um ID, buscar por ID
         if (restaurantRequest.kitchenType().id() != null) {
-            // Se o ID foi fornecido, buscar por ID
-            var kitchenTypeResponse = kitchenTypeUseCase.getKitchenTypeById(restaurantRequest.kitchenType().id());
+            kitchenTypeResponse = kitchenTypeUseCase.getKitchenTypeById(restaurantRequest.kitchenType().id());
+        }
+
+        // Se não tem ID, buscar por nome
+        if (restaurantRequest.kitchenType().name() != null) {
+            kitchenTypeResponse = kitchenTypeUseCase.getKitchenTypeByIdOrName(restaurantRequest.kitchenType().name());
+        }
+
+        if (kitchenTypeResponse != null) {
             return KitchenTypeEntity.builder()
                 .id(kitchenTypeResponse.getId())
                 .name(kitchenTypeResponse.getName())
@@ -158,35 +199,34 @@ public class RestaurantUseCase {
                 .createdAt(kitchenTypeResponse.getCreatedAt())
                 .lastUpdate(kitchenTypeResponse.getLastUpdate())
                 .build();
-        } else {
-            // Se apenas o nome foi fornecido, buscar por nome
-            KitchenTypeDocumentEntity kitchenTypeDoc = kitchenTypeUseCase.getKitchenTypeByIdOrName(restaurantRequest.kitchenType().name());
-            if (kitchenTypeDoc == null) {
-                throw new NotFoundException("Kitchen type not found: " + restaurantRequest.kitchenType().name());
-            }
-            return KitchenTypeEntity.fromDocument(kitchenTypeDoc);
         }
+
+        throw new IllegalArgumentException("Kitchen type must have either id or name");
     }
 
     private MenuCategoryEntity convertToMenuCategoryEntity(com.fiap.itmoura.tech_challenge_restaurant.application.models.menu.MenuCategoryDTO categoryDTO) {
-        List<MenuItemEntity> items = categoryDTO.getItems() != null 
+        List<MenuItemEntity> menuItems = categoryDTO.getItems() != null 
             ? categoryDTO.getItems().stream()
-                .map(itemDTO -> MenuItemEntity.builder()
-                    .id(itemDTO.getId() != null ? itemDTO.getId() : UUID.randomUUID())
-                    .name(itemDTO.getName())
-                    .description(itemDTO.getDescription())
-                    .price(itemDTO.getPrice())
-                    .onlyForLocalConsumption(itemDTO.getOnlyForLocalConsumption())
-                    .imagePath(itemDTO.getImagePath())
-                    .isActive(itemDTO.getIsActive() != null ? itemDTO.getIsActive() : true)
-                    .build())
+                .map(this::convertToMenuItemEntity)
                 .toList()
             : List.of();
 
         return MenuCategoryEntity.builder()
-            .id(categoryDTO.getId() != null ? categoryDTO.getId() : UUID.randomUUID())
+            .id(categoryDTO.getId() != null ? categoryDTO.getId().toString() : UUID.randomUUID().toString())
             .type(categoryDTO.getType())
-            .items(items)
+            .items(menuItems)
+            .build();
+    }
+
+    private MenuItemEntity convertToMenuItemEntity(com.fiap.itmoura.tech_challenge_restaurant.application.models.menu.MenuItemNestedDTO itemDTO) {
+        return MenuItemEntity.builder()
+            .id(itemDTO.getId() != null ? itemDTO.getId().toString() : UUID.randomUUID().toString())
+            .name(itemDTO.getName())
+            .description(itemDTO.getDescription())
+            .price(itemDTO.getPrice())
+            .onlyForLocalConsumption(Boolean.TRUE.equals(itemDTO.getOnlyForLocalConsumption()))
+            .imagePath(itemDTO.getImagePath())
+            .isActive(Boolean.TRUE.equals(itemDTO.getIsActive()))
             .build();
     }
 }

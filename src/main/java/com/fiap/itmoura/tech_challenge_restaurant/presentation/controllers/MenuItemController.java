@@ -1,7 +1,12 @@
 package com.fiap.itmoura.tech_challenge_restaurant.presentation.controllers;
 
-import java.util.UUID;
-
+import com.fiap.itmoura.tech_challenge_restaurant.application.models.group.OnCreateGroup;
+import com.fiap.itmoura.tech_challenge_restaurant.application.models.menu.MenuItemRequest;
+import com.fiap.itmoura.tech_challenge_restaurant.application.models.menu.MenuItemResponse;
+import com.fiap.itmoura.tech_challenge_restaurant.application.models.menu.MenuItemWithContextDTO;
+import com.fiap.itmoura.tech_challenge_restaurant.application.usecases.MenuItemUseCase;
+import com.fiap.itmoura.tech_challenge_restaurant.presentation.contracts.MenuItemControllerInterface;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -13,15 +18,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fiap.itmoura.tech_challenge_restaurant.application.models.group.OnCreateGroup;
-import com.fiap.itmoura.tech_challenge_restaurant.application.models.menu.MenuItemRequest;
-import com.fiap.itmoura.tech_challenge_restaurant.application.models.menu.MenuItemResponse;
-import com.fiap.itmoura.tech_challenge_restaurant.application.models.menu.MenuItemWithContextDTO;
-import com.fiap.itmoura.tech_challenge_restaurant.application.usecases.MenuItemUseCase;
-import com.fiap.itmoura.tech_challenge_restaurant.presentation.contracts.MenuItemControllerInterface;
-
-import lombok.RequiredArgsConstructor;
-
 @RestController
 @RequiredArgsConstructor
 public class MenuItemController implements MenuItemControllerInterface {
@@ -31,8 +27,8 @@ public class MenuItemController implements MenuItemControllerInterface {
     @Override
     @PostMapping("/api/restaurants/{restaurantId}/menu/{menuId}/item")
     public ResponseEntity<MenuItemResponse> createMenuItem(
-            @PathVariable UUID restaurantId,
-            @PathVariable UUID menuId,
+            @PathVariable String restaurantId,
+            @PathVariable String menuId,
             @Validated(OnCreateGroup.class) @RequestBody MenuItemRequest request) {
         
         MenuItemResponse response = menuItemUseCase.createMenuItem(restaurantId, menuId, request);
@@ -42,9 +38,9 @@ public class MenuItemController implements MenuItemControllerInterface {
     @Override
     @PutMapping("/api/restaurants/{restaurantId}/menu/{menuId}/item/{itemId}")
     public ResponseEntity<MenuItemResponse> updateMenuItem(
-            @PathVariable UUID restaurantId,
-            @PathVariable UUID menuId,
-            @PathVariable UUID itemId,
+            @PathVariable String restaurantId,
+            @PathVariable String menuId,
+            @PathVariable String itemId,
             @Validated(OnCreateGroup.class) @RequestBody MenuItemRequest request) {
         
         MenuItemResponse response = menuItemUseCase.updateMenuItem(restaurantId, menuId, itemId, request);
@@ -54,9 +50,9 @@ public class MenuItemController implements MenuItemControllerInterface {
     @Override
     @DeleteMapping("/api/restaurants/{restaurantId}/menu/{menuId}/item/{itemId}")
     public ResponseEntity<Void> deleteMenuItem(
-            @PathVariable UUID restaurantId,
-            @PathVariable UUID menuId,
-            @PathVariable UUID itemId) {
+            @PathVariable String restaurantId,
+            @PathVariable String menuId,
+            @PathVariable String itemId) {
         
         menuItemUseCase.deleteMenuItem(restaurantId, menuId, itemId);
         return ResponseEntity.noContent().build();
@@ -64,7 +60,7 @@ public class MenuItemController implements MenuItemControllerInterface {
 
     @Override
     @GetMapping("/api/restaurants/menu/item/{itemId}")
-    public ResponseEntity<MenuItemWithContextDTO> getMenuItemById(@PathVariable UUID itemId) {
+    public ResponseEntity<MenuItemWithContextDTO> getMenuItemById(@PathVariable String itemId) {
         MenuItemWithContextDTO response = menuItemUseCase.getMenuItemById(itemId);
         return ResponseEntity.ok(response);
     }

@@ -24,14 +24,14 @@ public class MenuUseCase {
     private final RestaurantRepository restaurantRepository;
 
     @Transactional
-    public MenuCategoryResponse createMenuCategory(UUID restaurantId, MenuCategoryRequest request) {
+    public MenuCategoryResponse createMenuCategory(String restaurantId, MenuCategoryRequest request) {
         log.info("Creating menu category for restaurant ID: {}", restaurantId);
 
         RestaurantEntity restaurant = restaurantRepository.findById(restaurantId)
             .orElseThrow(() -> new NotFoundException("Restaurant not found with ID: " + restaurantId));
 
         MenuCategoryEntity newCategory = MenuCategoryEntity.builder()
-            .id(UUID.randomUUID())
+            .id(UUID.randomUUID().toString())
             .type(request.getType())
             .items(List.of())
             .build();
@@ -51,7 +51,7 @@ public class MenuUseCase {
     }
 
     @Transactional
-    public MenuCategoryResponse updateMenuCategory(UUID restaurantId, UUID menuId, MenuCategoryRequest request) {
+    public MenuCategoryResponse updateMenuCategory(String restaurantId, String menuId, MenuCategoryRequest request) {
         log.info("Updating menu category ID: {} for restaurant ID: {}", menuId, restaurantId);
 
         RestaurantEntity restaurant = restaurantRepository.findById(restaurantId)
@@ -76,7 +76,7 @@ public class MenuUseCase {
     }
 
     @Transactional
-    public void deleteMenuCategory(UUID restaurantId, UUID menuId) {
+    public void deleteMenuCategory(String restaurantId, String menuId) {
         log.info("Deleting menu category ID: {} for restaurant ID: {}", menuId, restaurantId);
 
         RestaurantEntity restaurant = restaurantRepository.findById(restaurantId)
@@ -104,7 +104,7 @@ public class MenuUseCase {
         log.info("Menu category deleted successfully with ID: {}", menuId);
     }
 
-    public MenuCategoryResponse getMenuCategory(UUID restaurantId, UUID menuId) {
+    public MenuCategoryResponse getMenuCategory(String restaurantId, String menuId) {
         log.info("Fetching menu category ID: {} for restaurant ID: {}", menuId, restaurantId);
 
         RestaurantEntity restaurant = restaurantRepository.findById(restaurantId)

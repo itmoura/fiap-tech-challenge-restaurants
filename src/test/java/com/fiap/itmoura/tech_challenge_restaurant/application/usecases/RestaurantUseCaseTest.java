@@ -47,20 +47,20 @@ class RestaurantUseCaseTest {
 
     private RestaurantRequest restaurantRequest;
     private RestaurantEntity restaurantEntity;
-    private UUID restaurantId;
-    private UUID ownerId;
-    private UUID kitchenTypeId;
-    private UUID categoryId;
-    private UUID itemId;
+    private String restaurantId;
+    private String ownerId;
+    private String kitchenTypeId;
+    private String categoryId;
+    private String itemId;
     private KitchenTypeResponse kitchenTypeResponse;
 
     @BeforeEach
     void setUp() {
-        restaurantId = UUID.randomUUID();
-        ownerId = UUID.randomUUID();
-        kitchenTypeId = UUID.randomUUID();
-        categoryId = UUID.randomUUID();
-        itemId = UUID.randomUUID();
+        restaurantId = UUID.randomUUID().toString();
+        ownerId = UUID.randomUUID().toString();
+        kitchenTypeId = UUID.randomUUID().toString();
+        categoryId = UUID.randomUUID().toString();
+        itemId = UUID.randomUUID().toString();
 
         kitchenTypeResponse = KitchenTypeResponse.builder()
             .id(kitchenTypeId)

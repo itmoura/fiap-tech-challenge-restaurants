@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 public class MenuItemWithContextDTO {
     
     @Schema(description = "ID único do item", example = "550e8400-e29b-41d4-a716-446655440001")
-    private UUID id;
+    private String id;
     
     @Schema(description = "Nome do item", example = "Hambúrguer Artesanal")
     private String name;
@@ -50,7 +50,7 @@ public class MenuItemWithContextDTO {
     @Schema(description = "Contexto da categoria")
     public static class MenuCategoryContextDTO {
         @Schema(description = "ID da categoria")
-        private UUID id;
+        private String id;
         
         @Schema(description = "Tipo da categoria", example = "Lanche")
         private String type;
@@ -63,7 +63,7 @@ public class MenuItemWithContextDTO {
     @Schema(description = "Contexto do restaurante")
     public static class RestaurantContextDTO {
         @Schema(description = "ID do restaurante")
-        private UUID id;
+        private String id;
         
         @Schema(description = "Nome do restaurante", example = "Restaurante do João")
         private String name;

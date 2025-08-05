@@ -40,19 +40,19 @@ class MenuItemUseCaseTest {
 
     private RestaurantEntity restaurantEntity;
     private MenuItemRequest menuItemRequest;
-    private UUID restaurantId;
-    private UUID menuId;
-    private UUID itemId;
-    private UUID kitchenTypeId;
-    private UUID ownerId;
+    private String restaurantId;
+    private String menuId;
+    private String itemId;
+    private String kitchenTypeId;
+    private String ownerId;
 
     @BeforeEach
     void setUp() {
-        restaurantId = UUID.randomUUID();
-        menuId = UUID.randomUUID();
-        itemId = UUID.randomUUID();
-        kitchenTypeId = UUID.randomUUID();
-        ownerId = UUID.randomUUID();
+        restaurantId = UUID.randomUUID().toString();
+        menuId = UUID.randomUUID().toString();
+        itemId = UUID.randomUUID().toString();
+        kitchenTypeId = UUID.randomUUID().toString();
+        ownerId = UUID.randomUUID().toString();
 
         menuItemRequest = MenuItemRequest.builder()
             .name("Hambúrguer Artesanal")
@@ -141,7 +141,7 @@ class MenuItemUseCaseTest {
     @Test
     void shouldThrowNotFoundExceptionWhenMenuCategoryNotExistsForCreateItem() {
         // Given
-        UUID nonExistentMenuId = UUID.randomUUID();
+        String nonExistentMenuId = UUID.randomUUID().toString();
         when(restaurantRepository.findById(restaurantId)).thenReturn(Optional.of(restaurantEntity));
 
         // When & Then
@@ -187,7 +187,7 @@ class MenuItemUseCaseTest {
     @Test
     void shouldThrowNotFoundExceptionWhenMenuItemNotExistsForUpdate() {
         // Given
-        UUID nonExistentItemId = UUID.randomUUID();
+        String nonExistentItemId = UUID.randomUUID().toString();
         when(restaurantRepository.findById(restaurantId)).thenReturn(Optional.of(restaurantEntity));
 
         // When & Then
@@ -216,7 +216,7 @@ class MenuItemUseCaseTest {
     @Test
     void shouldThrowNotFoundExceptionWhenMenuItemNotExistsForDelete() {
         // Given
-        UUID nonExistentItemId = UUID.randomUUID();
+        String nonExistentItemId = UUID.randomUUID().toString();
         when(restaurantRepository.findById(restaurantId)).thenReturn(Optional.of(restaurantEntity));
 
         // When & Then
@@ -258,7 +258,7 @@ class MenuItemUseCaseTest {
     @Test
     void shouldThrowNotFoundExceptionWhenMenuItemNotExistsForGet() {
         // Given
-        UUID nonExistentItemId = UUID.randomUUID();
+        String nonExistentItemId = UUID.randomUUID().toString();
         when(restaurantRepository.findByMenuItemId(nonExistentItemId)).thenReturn(Optional.empty());
 
         // When & Then

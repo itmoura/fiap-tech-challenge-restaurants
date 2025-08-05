@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
-import java.util.UUID;
 
 @Tag(name = "Kitchen Types", description = "API para gerenciamento de tipos de cozinha")
 public interface KitchenTypeControllerInterface {
@@ -87,7 +86,7 @@ public interface KitchenTypeControllerInterface {
     })
     ResponseEntity<KitchenTypeResponse> getKitchenTypeById(
         @Parameter(description = "ID do tipo de cozinha", required = true, example = "550e8400-e29b-41d4-a716-446655440000")
-        @PathVariable UUID id
+        @PathVariable String id
     );
 
     @Operation(
@@ -121,7 +120,7 @@ public interface KitchenTypeControllerInterface {
     })
     ResponseEntity<KitchenTypeResponse> updateKitchenType(
         @Parameter(description = "ID do tipo de cozinha", required = true, example = "550e8400-e29b-41d4-a716-446655440000")
-        @PathVariable UUID id,
+        @PathVariable String id,
         @Parameter(description = "Dados atualizados do tipo de cozinha", required = true)
         @Validated(OnCreateGroup.class) @RequestBody KitchenTypeRequest request
     );
@@ -148,6 +147,6 @@ public interface KitchenTypeControllerInterface {
     })
     ResponseEntity<Void> deleteKitchenType(
         @Parameter(description = "ID do tipo de cozinha", required = true, example = "550e8400-e29b-41d4-a716-446655440000")
-        @PathVariable UUID id
+        @PathVariable String id
     );
 }

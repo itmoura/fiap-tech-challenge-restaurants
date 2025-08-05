@@ -1,15 +1,13 @@
 package com.fiap.itmoura.tech_challenge_restaurant.application.models.menu;
 
-import java.math.BigDecimal;
-import java.util.UUID;
-
 import com.fiap.itmoura.tech_challenge_restaurant.domain.entities.MenuItemEntity;
-
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.math.BigDecimal;
 
 @Data
 @Builder
@@ -19,7 +17,7 @@ import lombok.NoArgsConstructor;
 public class MenuItemNestedDTO {
     
     @Schema(description = "ID único do item", example = "550e8400-e29b-41d4-a716-446655440001")
-    private UUID id;
+    private String id;
     
     @Schema(description = "Nome do item", example = "Hambúrguer Artesanal")
     private String name;

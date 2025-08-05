@@ -25,4 +25,21 @@ public class KitchenTypeRequest {
     @Schema(description = "Descrição do tipo de cozinha", example = "Cozinha italiana tradicional com massas e pizzas")
     @Size(max = 200, message = "Descrição deve ter no máximo 200 caracteres", groups = OnCreateGroup.class)
     private String description;
+
+    // Getters e Setters manuais caso o Lombok não funcione
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

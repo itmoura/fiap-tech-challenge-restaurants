@@ -1,15 +1,13 @@
 package com.fiap.itmoura.tech_challenge_restaurant.application.models.menu;
 
-import java.util.List;
-import java.util.UUID;
-
 import com.fiap.itmoura.tech_challenge_restaurant.domain.entities.MenuCategoryEntity;
-
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @Builder
@@ -19,7 +17,7 @@ import lombok.NoArgsConstructor;
 public class MenuCategoryDTO {
     
     @Schema(description = "ID único da categoria", example = "550e8400-e29b-41d4-a716-446655440000")
-    private UUID id;
+    private String id;
     
     @Schema(description = "Tipo da categoria", example = "Lanche")
     private String type;

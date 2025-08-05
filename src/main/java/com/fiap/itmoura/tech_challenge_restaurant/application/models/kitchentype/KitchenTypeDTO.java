@@ -11,7 +11,7 @@ import jakarta.validation.constraints.NotNull;
 public record KitchenTypeDTO(
 
     @Schema(description = "ID do tipo de cozinha", example = "550e8400-e29b-41d4-a716-446655440000")
-    UUID id,
+    String id,
 
     @Schema(description = "Nome do tipo de cozinha", example = "Brasileira")
     @NotNull(message = "Nome é obrigatório", groups = OnCreateGroup.class)
@@ -22,7 +22,7 @@ public record KitchenTypeDTO(
 ) {
     public KitchenTypeEntity toEntity() {
         return KitchenTypeEntity.builder()
-            .id(id != null ? id : UUID.randomUUID())
+            .id(id != null ? id : UUID.randomUUID().toString())
             .name(name)
             .description(description)
             .build();

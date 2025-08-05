@@ -38,9 +38,6 @@ public class KitchenTypeUseCase {
         }
 
         String trimmedName = request.getName().trim();
-        String trimmedDescription = request.getDescription() != null ? request.getDescription().trim() : null;
-
-        log.info("After trimming: name='{}', description='{}'", trimmedName, trimmedDescription);
 
         // Verificar se já existe um tipo de cozinha com o mesmo nome
         if (kitchenTypeRepository.existsByNameIgnoreCase(trimmedName)) {
@@ -49,35 +46,19 @@ public class KitchenTypeUseCase {
         }
 
         // Criar entidade
-        UUID id = UUID.randomUUID();
+        String id = UUID.randomUUID().toString();
         LocalDateTime now = LocalDateTime.now();
         
         KitchenTypeDocumentEntity entity = KitchenTypeDocumentEntity.builder()
             .id(id)
             .name(trimmedName)
-            .description(trimmedDescription)
+            .description(request.getDescription() != null ? request.getDescription().trim() : null)
             .createdAt(now)
             .lastUpdate(now)
             .build();
 
-        log.info("Entity created: {}", entity);
-        log.info("Entity details - ID: {}, Name: '{}', Description: '{}', CreatedAt: {}, LastUpdate: {}", 
-                entity.getId(), entity.getName(), entity.getDescription(), entity.getCreatedAt(), entity.getLastUpdate());
-
         // Salvar no banco
         KitchenTypeDocumentEntity savedEntity = kitchenTypeRepository.save(entity);
-        log.info("Entity saved: {}", savedEntity);
-        log.info("Saved entity details - ID: {}, Name: '{}', Description: '{}', CreatedAt: {}, LastUpdate: {}", 
-                savedEntity.getId(), savedEntity.getName(), savedEntity.getDescription(), 
-                savedEntity.getCreatedAt(), savedEntity.getLastUpdate());
-
-        // Verificar se foi salvo corretamente
-        var foundEntity = kitchenTypeRepository.findById(savedEntity.getId());
-        if (foundEntity.isPresent()) {
-            log.info("Verification: Entity found in database: {}", foundEntity.get());
-        } else {
-            log.error("Verification: Entity NOT found in database after save!");
-        }
 
         // Converter para response
         KitchenTypeResponse response = KitchenTypeResponse.fromEntity(savedEntity);
@@ -104,7 +85,7 @@ public class KitchenTypeUseCase {
         return responses;
     }
 
-    public KitchenTypeResponse getKitchenTypeById(UUID id) {
+    public KitchenTypeResponse getKitchenTypeById(String id) {
         log.info("=== Getting kitchen type by ID: {} ===", id);
         
         KitchenTypeDocumentEntity entity = kitchenTypeRepository.findById(id)
@@ -122,11 +103,11 @@ public class KitchenTypeUseCase {
     }
 
     @Transactional
-    public KitchenTypeResponse updateKitchenType(UUID id, KitchenTypeRequest request) {
+    public KitchenTypeResponse updateKitchenType(String id, KitchenTypeRequest request) {
         log.info("=== Updating kitchen type with ID: {} ===", id);
         log.info("Update request: name='{}', description='{}'", request.getName(), request.getDescription());
 
-        KitchenTypeDocumentEntity existingEntity = kitchenTypeRepository.findById(id)
+        KitchenTypeDocumentEntity existingEntity = kitchenTypeRepository.findById(id.toString())
             .orElseThrow(() -> new NotFoundException("Kitchen type not found with id: " + id));
 
         log.info("Existing entity: {}", existingEntity);
@@ -153,10 +134,10 @@ public class KitchenTypeUseCase {
     }
 
     @Transactional
-    public void deleteKitchenType(UUID id) {
+    public void deleteKitchenType(String id) {
         log.info("=== Deleting kitchen type with ID: {} ===", id);
 
-        KitchenTypeDocumentEntity entity = kitchenTypeRepository.findById(id)
+        KitchenTypeDocumentEntity entity = kitchenTypeRepository.findById(id.toString())
             .orElseThrow(() -> new NotFoundException("Kitchen type not found with id: " + id));
 
         log.info("Entity to delete: {}", entity);
@@ -168,7 +149,21 @@ public class KitchenTypeUseCase {
             throw new ConflictRequestException("Cannot delete kitchen type. It is being used by restaurants");
         }
 
-        kitchenTypeRepository.deleteById(id);
+        kitchenTypeRepository.deleteById(id.toString());
         log.info("Kitchen type deleted successfully");
+    }
+
+    public KitchenTypeResponse getKitchenTypeByIdOrName(String name) {
+        log.info("=== Getting kitchen type by ID or name: {} ===", name);
+
+        KitchenTypeDocumentEntity entity = kitchenTypeRepository.findByNameIgnoreCase(name)
+            .orElseThrow(() -> new NotFoundException("Kitchen type not found with name: " + name));
+
+        log.info("Found entity: {}", entity);
+
+        KitchenTypeResponse response = KitchenTypeResponse.fromEntity(entity);
+        log.info("Returning response: {}", response);
+
+        return response;
     }
 }

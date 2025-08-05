@@ -37,17 +37,17 @@ class MenuUseCaseTest {
 
     private RestaurantEntity restaurantEntity;
     private MenuCategoryRequest menuCategoryRequest;
-    private UUID restaurantId;
-    private UUID menuId;
-    private UUID kitchenTypeId;
-    private UUID ownerId;
+    private String restaurantId;
+    private String menuId;
+    private String kitchenTypeId;
+    private String ownerId;
 
     @BeforeEach
     void setUp() {
-        restaurantId = UUID.randomUUID();
-        menuId = UUID.randomUUID();
-        kitchenTypeId = UUID.randomUUID();
-        ownerId = UUID.randomUUID();
+        restaurantId = UUID.randomUUID().toString();
+        menuId = UUID.randomUUID().toString();
+        kitchenTypeId = UUID.randomUUID().toString();
+        ownerId = UUID.randomUUID().toString();
 
         menuCategoryRequest = MenuCategoryRequest.builder()
             .type("Lanche")
@@ -139,7 +139,7 @@ class MenuUseCaseTest {
     @Test
     void shouldThrowNotFoundExceptionWhenMenuCategoryNotExistsForUpdate() {
         // Given
-        UUID nonExistentMenuId = UUID.randomUUID();
+        String nonExistentMenuId = UUID.randomUUID().toString();
         when(restaurantRepository.findById(restaurantId)).thenReturn(Optional.of(restaurantEntity));
 
         // When & Then
@@ -168,7 +168,7 @@ class MenuUseCaseTest {
     @Test
     void shouldThrowNotFoundExceptionWhenMenuCategoryNotExistsForDelete() {
         // Given
-        UUID nonExistentMenuId = UUID.randomUUID();
+        String nonExistentMenuId = UUID.randomUUID().toString();
         when(restaurantRepository.findById(restaurantId)).thenReturn(Optional.of(restaurantEntity));
 
         // When & Then
@@ -213,7 +213,7 @@ class MenuUseCaseTest {
     @Test
     void shouldThrowNotFoundExceptionWhenMenuCategoryNotExistsForGet() {
         // Given
-        UUID nonExistentMenuId = UUID.randomUUID();
+        String nonExistentMenuId = UUID.randomUUID().toString();
         when(restaurantRepository.findById(restaurantId)).thenReturn(Optional.of(restaurantEntity));
 
         // When & Then

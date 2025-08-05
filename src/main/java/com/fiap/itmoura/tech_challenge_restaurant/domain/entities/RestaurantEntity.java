@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 public class RestaurantEntity {
 
     @Id
-    private UUID id;
+    private String id;
  
     private String name;
 
@@ -32,7 +32,7 @@ public class RestaurantEntity {
 
     private List<OperationDaysTimeData> daysOperation;
 
-    private UUID ownerId;
+    private String ownerId;
 
     private Boolean isActive;
 

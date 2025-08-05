@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MenuItemEntity {
 
-    private UUID id;
+    private String id;
 
     private String name;
 
