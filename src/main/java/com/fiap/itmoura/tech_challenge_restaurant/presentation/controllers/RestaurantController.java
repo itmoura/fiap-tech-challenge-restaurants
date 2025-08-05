@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fiap.itmoura.tech_challenge_restaurant.application.models.menu.MenuItemWithContextDTO;
 import com.fiap.itmoura.tech_challenge_restaurant.application.models.restaurant.RestaurantBasicResponse;
 import com.fiap.itmoura.tech_challenge_restaurant.application.models.restaurant.RestaurantFullResponse;
 import com.fiap.itmoura.tech_challenge_restaurant.application.models.restaurant.RestaurantRequest;
@@ -74,18 +73,6 @@ public class RestaurantController {
             @Parameter(description = "ID do restaurante") @PathVariable UUID id) {
         RestaurantFullResponse restaurant = restaurantService.getRestaurantById(id);
         return ResponseEntity.ok(restaurant);
-    }
-
-    @GetMapping("/menu/item/{itemId}")
-    @Operation(summary = "Buscar item do menu por ID", description = "Retorna um item específico do menu com contexto do restaurante e categoria")
-    @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Item encontrado"),
-        @ApiResponse(responseCode = "404", description = "Item não encontrado")
-    })
-    public ResponseEntity<MenuItemWithContextDTO> getMenuItemById(
-            @Parameter(description = "ID do item do menu") @PathVariable UUID itemId) {
-        MenuItemWithContextDTO menuItem = restaurantService.getMenuItemById(itemId);
-        return ResponseEntity.ok(menuItem);
     }
 
     @PutMapping("/{id}")

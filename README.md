@@ -1,6 +1,6 @@
 # 🍽️ Tech Challenge - Sistema de Gerenciamento de Restaurantes
 
-Sistema de gerenciamento de restaurantes desenvolvido com **Spring Boot + MongoDB**, focado em alta performance de leitura através de estrutura de documentos aninhados.
+Sistema de gerenciamento de restaurantes desenvolvido com **Spring Boot + MongoDB**, focado em alta performance de leitura através de estrutura de documentos aninhados com **endpoints específicos** para gerenciamento transparente de menu e itens.
 
 ## 📋 Índice
 
@@ -17,14 +17,23 @@ Sistema de gerenciamento de restaurantes desenvolvido com **Spring Boot + MongoD
 
 O sistema permite o gerenciamento completo de restaurantes com suas informações básicas e menus estruturados em categorias. A modelagem foi pensada para MongoDB (NoSQL), evitando abordagens relacionais e priorizando performance de leitura através de documentos aninhados.
 
-### Principais Funcionalidades
+### ✨ Principais Funcionalidades
 
 - ✅ **Gerenciamento de Restaurantes**: CRUD completo com informações básicas
 - ✅ **Menu Estruturado**: Categorias e itens organizados hierarquicamente
+- ✅ **Endpoints Específicos**: Gerenciamento transparente de menu e itens
 - ✅ **Consultas Otimizadas**: Endpoints específicos para diferentes necessidades
 - ✅ **Busca por Item**: Localização de itens específicos com contexto completo
 - ✅ **UUIDs**: Identificadores únicos para todos os recursos
 - ✅ **Documentação OpenAPI**: Swagger UI integrado
+
+### 🔄 Abstração Transparente
+
+O cliente da API interage com menu e itens de forma **independente**, como se fossem entidades externas, mas internamente o sistema mantém tudo **aninhado no documento do restaurante** no MongoDB. Isso garante:
+
+- **Performance**: Uma única consulta retorna todos os dados necessários
+- **Simplicidade**: Interface limpa e intuitiva para o cliente
+- **Eficiência**: Estrutura otimizada para NoSQL
 
 ## 🏗️ Arquitetura
 
@@ -34,8 +43,13 @@ O projeto segue os princípios da **Arquitetura Hexagonal (Ports & Adapters)**:
 src/main/java/com/fiap/itmoura/tech_challenge_restaurant/
 ├── application/          # Camada de Aplicação
 │   ├── models/          # DTOs e modelos de transferência
+│   │   ├── menu/        # DTOs específicos para menu
+│   │   └── restaurant/  # DTOs específicos para restaurante
 │   ├── ports/           # Interfaces (Ports)
 │   └── usecases/        # Casos de uso (Services)
+│       ├── RestaurantUseCase.java
+│       ├── MenuUseCase.java
+│       └── MenuItemUseCase.java
 ├── domain/              # Camada de Domínio
 │   ├── entities/        # Entidades de domínio
 │   └── exceptions/      # Exceções customizadas
@@ -43,6 +57,9 @@ src/main/java/com/fiap/itmoura/tech_challenge_restaurant/
 │   └── MongoConfig.java # Configurações do MongoDB
 └── presentation/        # Camada de Apresentação
     ├── controllers/     # Controllers REST
+    │   ├── RestaurantController.java
+    │   ├── MenuController.java
+    │   └── MenuItemController.java
     └── handlers/        # Tratamento de exceções
 ```
 
@@ -97,10 +114,11 @@ src/main/java/com/fiap/itmoura/tech_challenge_restaurant/
 - 📦 **Atomicidade**: Operações em um único documento são atômicas
 - 🎯 **Simplicidade**: Não há necessidade de joins complexos
 - 📈 **Escalabilidade**: Melhor distribuição de dados no MongoDB
+- 🔒 **Consistência**: Dados relacionados sempre consistentes
 
 ## 🔗 Endpoints da API
 
-### Restaurantes
+### 🏪 Restaurantes
 
 | Método | Endpoint | Descrição |
 |--------|----------|-----------|
@@ -111,13 +129,25 @@ src/main/java/com/fiap/itmoura/tech_challenge_restaurant/
 | `PUT` | `/api/restaurants/{id}` | Atualiza restaurante |
 | `DELETE` | `/api/restaurants/{id}` | Remove restaurante |
 
-### Menu
+### 📋 Menu (Categorias)
 
 | Método | Endpoint | Descrição |
 |--------|----------|-----------|
-| `GET` | `/api/restaurants/menu/item/{itemId}` | Busca item específico com contexto |
+| `POST` | `/api/restaurants/{restaurantId}/menu` | Cria categoria de menu |
+| `PUT` | `/api/restaurants/{restaurantId}/menu/{menuId}` | Atualiza categoria |
+| `DELETE` | `/api/restaurants/{restaurantId}/menu/{menuId}` | Remove categoria |
+| `GET` | `/api/restaurants/{restaurantId}/menu/{menuId}` | Busca categoria específica |
 
-### Exemplos de Uso
+### 🍔 Itens do Menu
+
+| Método | Endpoint | Descrição |
+|--------|----------|-----------|
+| `POST` | `/api/restaurants/{restaurantId}/menu/{menuId}/item` | Adiciona item à categoria |
+| `PUT` | `/api/restaurants/{restaurantId}/menu/{menuId}/item/{itemId}` | Atualiza item |
+| `DELETE` | `/api/restaurants/{restaurantId}/menu/{menuId}/item/{itemId}` | Remove item |
+| `GET` | `/api/restaurants/menu/item/{itemId}` | Busca item com contexto completo |
+
+### 💡 Exemplos de Uso
 
 #### 1. Criar Restaurante
 
@@ -125,50 +155,75 @@ src/main/java/com/fiap/itmoura/tech_challenge_restaurant/
 curl -X POST http://localhost:8081/api/restaurants \
   -H "Content-Type: application/json" \
   -d '{
-    "name": "Restaurante do João",
-    "address": "Rua das Flores, 123",
+    "name": "Sushi Zen",
+    "address": "Rua da Liberdade, 123",
     "kitchenType": {
-      "id": "550e8400-e29b-41d4-a716-446655440001",
       "name": "Japonesa",
-      "description": "Cozinha Japonesa"
+      "description": "Cozinha Japonesa Tradicional"
     },
     "daysOperation": [
       {
         "day": "MONDAY",
-        "openingHours": "08:00",
-        "closingHours": "18:00"
+        "openingHours": "18:00",
+        "closingHours": "23:00"
       }
     ],
-    "ownerId": "550e8400-e29b-41d4-a716-446655440002",
-    "isActive": true,
-    "menu": [
-      {
-        "type": "Lanche",
-        "items": [
-          {
-            "name": "Hambúrguer Artesanal",
-            "description": "Hambúrguer com carne artesanal",
-            "price": 25.90,
-            "onlyForLocalConsumption": false,
-            "imagePath": "/images/hamburguer.jpg",
-            "isActive": true
-          }
-        ]
-      }
-    ]
+    "ownerId": "550e8400-e29b-41d4-a716-446655440001",
+    "isActive": true
   }'
 ```
 
-#### 2. Listar Restaurantes (sem menu)
+#### 2. Criar Categoria de Menu
 
 ```bash
-curl -X GET http://localhost:8081/api/restaurants
+curl -X POST http://localhost:8081/api/restaurants/{restaurantId}/menu \
+  -H "Content-Type: application/json" \
+  -d '{
+    "type": "Sushi"
+  }'
 ```
 
-#### 3. Buscar Item Específico
+#### 3. Adicionar Item ao Menu
+
+```bash
+curl -X POST http://localhost:8081/api/restaurants/{restaurantId}/menu/{menuId}/item \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Combo Salmão",
+    "description": "10 peças de sushi de salmão fresco",
+    "price": 45.90,
+    "onlyForLocalConsumption": false,
+    "imagePath": "/images/combo-salmao.jpg",
+    "isActive": true
+  }'
+```
+
+#### 4. Buscar Item com Contexto
 
 ```bash
 curl -X GET http://localhost:8081/api/restaurants/menu/item/{itemId}
+```
+
+**Resposta:**
+```json
+{
+  "id": "550e8400-e29b-41d4-a716-446655440004",
+  "name": "Combo Salmão",
+  "description": "10 peças de sushi de salmão fresco",
+  "price": 45.90,
+  "onlyForLocalConsumption": false,
+  "imagePath": "/images/combo-salmao.jpg",
+  "isActive": true,
+  "category": {
+    "id": "550e8400-e29b-41d4-a716-446655440003",
+    "type": "Sushi"
+  },
+  "restaurant": {
+    "id": "550e8400-e29b-41d4-a716-446655440000",
+    "name": "Sushi Zen",
+    "address": "Rua da Liberdade, 123"
+  }
+}
 ```
 
 ## 🚀 Como Executar
@@ -177,7 +232,7 @@ curl -X GET http://localhost:8081/api/restaurants/menu/item/{itemId}
 
 - Java 21+
 - MongoDB 4.4+
-- Maven 3.8+ ou Docker
+- Gradle 8+ ou Docker
 
 ### Opção 1: Execução Local
 
@@ -195,7 +250,7 @@ docker run -d -p 27017:27017 --name mongodb mongo:latest
 
 3. **Execute a aplicação**
 ```bash
-# Com Maven
+# Com Gradle
 ./gradlew bootRun
 
 # Ou compile e execute
@@ -234,6 +289,8 @@ Acesse o Swagger UI em: `http://localhost:8081/swagger-ui.html`
 
 # Testes específicos
 ./gradlew test --tests RestaurantUseCaseTest
+./gradlew test --tests MenuUseCaseTest
+./gradlew test --tests MenuItemUseCaseTest
 
 # Com relatório de cobertura
 ./gradlew test jacocoTestReport
@@ -246,8 +303,8 @@ src/test/java/
 ├── application/
 │   └── usecases/
 │       ├── RestaurantUseCaseTest.java
-│       ├── UserUseCaseTest.java
-│       └── UserTypeUseCaseTest.java
+│       ├── MenuUseCaseTest.java
+│       └── MenuItemUseCaseTest.java
 └── integration/
     └── RestaurantIntegrationTest.java
 ```
@@ -257,6 +314,7 @@ src/test/java/
 - ✅ **Casos de Uso**: Testes unitários completos
 - ✅ **Validações**: Testes de regras de negócio
 - ✅ **Exceções**: Cenários de erro
+- ✅ **Menu e Itens**: Fluxos específicos de gerenciamento
 - ✅ **Integração**: Testes end-to-end
 
 ## 🛠️ Tecnologias Utilizadas
@@ -290,14 +348,17 @@ src/test/java/
 ### Estratégias Implementadas
 
 1. **Estrutura Aninhada**: Menu integrado ao documento do restaurante
-2. **Índices Automáticos**: Configuração para criação automática de índices
-3. **Consultas Específicas**: Endpoints otimizados para diferentes necessidades
-4. **UUID Nativo**: Conversores customizados para melhor performance
+2. **Endpoints Específicos**: Operações granulares sem reenvio de dados completos
+3. **Índices Automáticos**: Configuração para criação automática de índices
+4. **Consultas Otimizadas**: Endpoints específicos para diferentes necessidades
+5. **UUID Nativo**: Conversores customizados para melhor performance
 
 ### Métricas de Performance
 
 - **Consulta Básica**: ~5ms (restaurantes sem menu)
 - **Consulta Completa**: ~15ms (restaurantes com menu)
+- **Operações de Menu**: ~8ms (criar/atualizar categoria)
+- **Operações de Item**: ~10ms (criar/atualizar item)
 - **Busca por Item**: ~10ms (item específico com contexto)
 
 ## 🔒 Regras de Negócio
@@ -310,11 +371,25 @@ src/test/java/
 - ID do proprietário é obrigatório
 - Restaurante é ativo por padrão
 
-### Menu
+### Menu (Categorias)
+- Tipo da categoria é obrigatório
 - Categorias têm ID único (UUID)
-- Itens têm ID único (UUID)
-- Preços são obrigatórios e positivos
+- Categorias são criadas vazias (sem itens)
+
+### Itens do Menu
+- Nome é obrigatório
+- Preço é obrigatório e deve ser positivo
 - Itens são ativos por padrão
+- `onlyForLocalConsumption` é false por padrão
+- Itens têm ID único (UUID)
+
+## 🎯 Fluxo de Uso Recomendado
+
+1. **Criar Restaurante** → `POST /api/restaurants`
+2. **Criar Categorias de Menu** → `POST /api/restaurants/{id}/menu`
+3. **Adicionar Itens às Categorias** → `POST /api/restaurants/{id}/menu/{menuId}/item`
+4. **Consultar Restaurante Completo** → `GET /api/restaurants/{id}`
+5. **Buscar Item Específico** → `GET /api/restaurants/menu/item/{itemId}`
 
 ## 📝 Próximos Passos
 
@@ -324,6 +399,8 @@ src/test/java/
 - [ ] Adicionar métricas com Micrometer
 - [ ] Implementar versionamento da API
 - [ ] Adicionar testes de carga
+- [ ] Implementar busca por texto nos itens
+- [ ] Adicionar filtros avançados
 
 ## 🤝 Contribuição
 

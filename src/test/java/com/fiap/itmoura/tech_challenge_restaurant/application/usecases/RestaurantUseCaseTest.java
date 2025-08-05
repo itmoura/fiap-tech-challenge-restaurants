@@ -2,7 +2,6 @@ package com.fiap.itmoura.tech_challenge_restaurant.application.usecases;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
 import java.math.BigDecimal;
@@ -21,7 +20,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.fiap.itmoura.tech_challenge_restaurant.application.models.kitchentype.KitchenTypeDTO;
 import com.fiap.itmoura.tech_challenge_restaurant.application.models.menu.MenuCategoryDTO;
 import com.fiap.itmoura.tech_challenge_restaurant.application.models.menu.MenuItemNestedDTO;
-import com.fiap.itmoura.tech_challenge_restaurant.application.models.menu.MenuItemWithContextDTO;
 import com.fiap.itmoura.tech_challenge_restaurant.application.models.restaurant.RestaurantBasicResponse;
 import com.fiap.itmoura.tech_challenge_restaurant.application.models.restaurant.RestaurantFullResponse;
 import com.fiap.itmoura.tech_challenge_restaurant.application.models.restaurant.RestaurantRequest;
@@ -213,40 +211,6 @@ class RestaurantUseCaseTest {
     }
 
     @Test
-    void shouldGetMenuItemByIdSuccessfully() {
-        // Given
-        when(restaurantRepository.findByMenuItemId(itemId)).thenReturn(Optional.of(restaurantEntity));
-
-        // When
-        MenuItemWithContextDTO response = restaurantUseCase.getMenuItemById(itemId);
-
-        // Then
-        assertNotNull(response);
-        assertEquals(itemId, response.getId());
-        assertEquals("Hambúrguer Artesanal", response.getName());
-        assertEquals(new BigDecimal("25.90"), response.getPrice());
-        assertNotNull(response.getCategory());
-        assertEquals("Lanche", response.getCategory().getType());
-        assertNotNull(response.getRestaurant());
-        assertEquals("Restaurante do João", response.getRestaurant().getName());
-
-        verify(restaurantRepository).findByMenuItemId(itemId);
-    }
-
-    @Test
-    void shouldThrowNotFoundExceptionWhenMenuItemNotExists() {
-        // Given
-        when(restaurantRepository.findByMenuItemId(itemId)).thenReturn(Optional.empty());
-
-        // When & Then
-        assertThrows(NotFoundException.class, () -> {
-            restaurantUseCase.getMenuItemById(itemId);
-        });
-
-        verify(restaurantRepository).findByMenuItemId(itemId);
-    }
-
-    @Test
     void shouldUpdateRestaurantSuccessfully() {
         // Given
         when(restaurantRepository.findById(restaurantId)).thenReturn(Optional.of(restaurantEntity));
@@ -288,5 +252,89 @@ class RestaurantUseCaseTest {
 
         verify(restaurantRepository).existsById(restaurantId);
         verify(restaurantRepository, never()).deleteById(any());
+    }
+
+    @Test
+    void shouldCreateRestaurantWithoutMenu() {
+        // Given
+        RestaurantRequest requestWithoutMenu = new RestaurantRequest(
+            "Restaurante Simples",
+            "Rua Simples, 456",
+            new KitchenTypeDTO(kitchenTypeId, "Italiana", "Cozinha Italiana"),
+            List.of(new OperationDaysTimeData(DayEnum.TUESDAY, "09:00", "22:00")),
+            ownerId,
+            true,
+            null // Sem menu
+        );
+
+        RestaurantEntity entityWithoutMenu = RestaurantEntity.builder()
+            .id(restaurantId)
+            .name("Restaurante Simples")
+            .address("Rua Simples, 456")
+            .kitchenType(KitchenTypeEntity.builder().id(kitchenTypeId).name("Italiana").build())
+            .daysOperation(List.of(new OperationDaysTimeData(DayEnum.TUESDAY, "09:00", "22:00")))
+            .ownerId(ownerId)
+            .isActive(true)
+            .menu(List.of())
+            .lastUpdate(LocalDateTime.now())
+            .createdAt(LocalDateTime.now())
+            .build();
+
+        when(restaurantRepository.save(any(RestaurantEntity.class))).thenReturn(entityWithoutMenu);
+
+        // When
+        RestaurantFullResponse response = restaurantUseCase.createRestaurant(requestWithoutMenu);
+
+        // Then
+        assertNotNull(response);
+        assertEquals("Restaurante Simples", response.name());
+        assertNotNull(response.menu());
+        assertTrue(response.menu().isEmpty());
+
+        verify(restaurantRepository).save(any(RestaurantEntity.class));
+    }
+
+    @Test
+    void shouldGetAllActiveRestaurants() {
+        // Given
+        when(restaurantRepository.findByIsActiveTrue()).thenReturn(List.of(restaurantEntity));
+
+        // When
+        List<RestaurantBasicResponse> response = restaurantUseCase.getAllActiveRestaurants();
+
+        // Then
+        assertNotNull(response);
+        assertEquals(1, response.size());
+        assertEquals("Restaurante do João", response.get(0).name());
+        assertTrue(response.get(0).isActive());
+
+        verify(restaurantRepository).findByIsActiveTrue();
+    }
+
+    @Test
+    void shouldUpdateRestaurantWithNullIsActiveKeepingExistingValue() {
+        // Given
+        RestaurantRequest requestWithNullIsActive = new RestaurantRequest(
+            "Restaurante Atualizado",
+            "Rua Atualizada, 789",
+            new KitchenTypeDTO(kitchenTypeId, "Brasileira", "Cozinha Brasileira"),
+            List.of(new OperationDaysTimeData(DayEnum.WEDNESDAY, "10:00", "21:00")),
+            ownerId,
+            null, // isActive null - deve manter o valor existente
+            null
+        );
+
+        when(restaurantRepository.findById(restaurantId)).thenReturn(Optional.of(restaurantEntity));
+        when(restaurantRepository.save(any(RestaurantEntity.class))).thenReturn(restaurantEntity);
+
+        // When
+        RestaurantFullResponse response = restaurantUseCase.updateRestaurant(restaurantId, requestWithNullIsActive);
+
+        // Then
+        assertNotNull(response);
+        assertTrue(response.isActive()); // Deve manter o valor original (true)
+
+        verify(restaurantRepository).findById(restaurantId);
+        verify(restaurantRepository).save(any(RestaurantEntity.class));
     }
 }

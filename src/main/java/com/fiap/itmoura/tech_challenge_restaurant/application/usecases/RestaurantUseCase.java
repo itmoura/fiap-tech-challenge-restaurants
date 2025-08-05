@@ -7,7 +7,6 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.fiap.itmoura.tech_challenge_restaurant.application.models.menu.MenuItemWithContextDTO;
 import com.fiap.itmoura.tech_challenge_restaurant.application.models.restaurant.RestaurantBasicResponse;
 import com.fiap.itmoura.tech_challenge_restaurant.application.models.restaurant.RestaurantFullResponse;
 import com.fiap.itmoura.tech_challenge_restaurant.application.models.restaurant.RestaurantRequest;
@@ -125,41 +124,6 @@ public class RestaurantUseCase {
             .orElseThrow(() -> new NotFoundException("Restaurant not found with ID: " + id));
         
         return RestaurantFullResponse.fromEntity(restaurant);
-    }
-
-    public MenuItemWithContextDTO getMenuItemById(UUID itemId) {
-        log.info("Fetching menu item by ID: {}", itemId);
-        
-        RestaurantEntity restaurant = restaurantRepository.findByMenuItemId(itemId)
-            .orElseThrow(() -> new NotFoundException("Menu item not found with ID: " + itemId));
-
-        // Encontrar o item e sua categoria
-        for (MenuCategoryEntity category : restaurant.getMenu()) {
-            for (MenuItemEntity item : category.getItems()) {
-                if (item.getId().equals(itemId)) {
-                    return MenuItemWithContextDTO.builder()
-                        .id(item.getId())
-                        .name(item.getName())
-                        .description(item.getDescription())
-                        .price(item.getPrice())
-                        .onlyForLocalConsumption(item.getOnlyForLocalConsumption())
-                        .imagePath(item.getImagePath())
-                        .isActive(item.getIsActive())
-                        .category(MenuItemWithContextDTO.MenuCategoryContextDTO.builder()
-                            .id(category.getId())
-                            .type(category.getType())
-                            .build())
-                        .restaurant(MenuItemWithContextDTO.RestaurantContextDTO.builder()
-                            .id(restaurant.getId())
-                            .name(restaurant.getName())
-                            .address(restaurant.getAddress())
-                            .build())
-                        .build();
-                }
-            }
-        }
-
-        throw new NotFoundException("Menu item not found with ID: " + itemId);
     }
 
     @Transactional
