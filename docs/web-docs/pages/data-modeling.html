@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Modeling - MongoDB - Tech Challenge Restaurant</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>📚 Documentação</h2>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-section-title">Início</div>
+                <a href="../index.html" class="nav-item">
+                    <span class="nav-item-icon">🏠</span>
+                    Home
+                </a>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-section-title">Configuração</div>
+                <a href="prerequisites.html" class="nav-item">
+                    <span class="nav-item-icon">📋</span>
+                    Pré-requisitos
+                </a>
+                <a href="local-setup.html" class="nav-item">
+                    <span class="nav-item-icon">⚙️</span>
+                    Configuração Local
+                </a>
+                <a href="docker.html" class="nav-item">
+                    <span class="nav-item-icon">🐳</span>
+                    Docker
+                </a>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-section-title">Microserviços</div>
+                <a href="restaurants.html" class="nav-item">
+                    <span class="nav-item-icon">🍽️</span>
+                    Restaurants API
+                </a>
+                <a href="user-microservice.html" class="nav-item">
+                    <span class="nav-item-icon">👤</span>
+                    Users Microservice
+                </a>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-section-title">Ferramentas</div>
+                <a href="postman.html" class="nav-item">
+                    <span class="nav-item-icon">📡</span>
+                    Postman Collections
+                </a>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-section-title">Arquitetura</div>
+                <a href="architecture-overview.html" class="nav-item">
+                    <span class="nav-item-icon">🏗️</span>
+                    Visão Geral
+                </a>
+                <a href="api-overview.html" class="nav-item">
+                    <span class="nav-item-icon">🔗</span>
+                    API Overview
+                </a>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-section-title">Recursos</div>
+                <a href="menu-items.html" class="nav-item">
+                    <span class="nav-item-icon">🍕</span>
+                    Menu Items
+                </a>
+                <a href="menu-categories.html" class="nav-item">
+                    <span class="nav-item-icon">📂</span>
+                    Menu Categories
+                </a>
+                <a href="kitchen-types.html" class="nav-item">
+                    <span class="nav-item-icon">👨‍🍳</span>
+                    Kitchen Types
+                </a>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-section-title">Desenvolvimento</div>
+                <a href="testing.html" class="nav-item">
+                    <span class="nav-item-icon">🧪</span>
+                    Testes
+                </a>
+                <a href="status-codes.html" class="nav-item">
+                    <span class="nav-item-icon">📊</span>
+                    Status Codes
+                </a>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-section-title">Sobre</div>
+                <a href="author.html" class="nav-item">
+                    <span class="nav-item-icon">👨‍💻</span>
+                    Autor
+                </a>
+                <a href="license.html" class="nav-item">
+                    <span class="nav-item-icon">📄</span>
+                    Licença
+                </a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <h1>🗄️ Data Modeling - MongoDB</h1>
+                <p>Compreenda como os dados são estruturados e persistidos no MongoDB</p>
+            </header>
+
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a>
+                <span class="breadcrumb-separator">/</span>
+                <span>Data Modeling</span>
+            </nav>
+
+            <div class="content-body">
+                <!-- Overview Section -->
+                <div class="card">
+                    <h2>📋 Visão Geral do Data Modeling</h2>
+                    <p>
+                        O Tech Challenge Restaurant utiliza MongoDB como banco de dados NoSQL, 
+                        implementando uma arquitetura de domínio com entidades bem definidas. 
+                        Esta página demonstra como os dados são estruturados e persistidos no MongoDB.
+                    </p>
+                    
+                    <div class="feature-cards">
+                        <div class="feature-card">
+                            <div class="feature-card-icon">🏗️</div>
+                            <h3 class="feature-card-title">Arquitetura de Domínio</h3>
+                            <p class="feature-card-description">
+                                Entidades de domínio separadas das entidades de persistência, 
+                                seguindo princípios de Clean Architecture.
+                            </p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-card-icon">📊</div>
+                            <h3 class="feature-card-title">MongoDB Collections</h3>
+                            <p class="feature-card-description">
+                                Dados organizados em collections específicas com índices 
+                                otimizados para performance.
+                            </p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-card-icon">🔍</div>
+                            <h3 class="feature-card-title">Mapeamento Explícito</h3>
+                            <p class="feature-card-description">
+                                Uso de anotações @Field para mapeamento explícito entre 
+                                campos Java e documentos MongoDB.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Database Configuration -->
+                <div class="card">
+                    <h2>⚙️ Configuração do MongoDB</h2>
+                    <p>
+                        O projeto utiliza Spring Data MongoDB com configurações específicas 
+                        para diferentes ambientes (desenvolvimento e produção).
+                    </p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>application.yml - Configuração MongoDB</span>
+                        </div>
+                        <pre><code>spring:
+  data:
+    mongodb:
+      uri: ${MONGO_URI:mongodb://localhost:27017/tech_challenge_restaurants}
+      auto-index-creation: true
+      write-concern: MAJORITY
+      read-concern: MAJORITY
+
+# Configuração para desenvolvimento
+logging:
+  level:
+    com.fiap.itmoura.tech_challenge_restaurant: DEBUG
+    org.springframework.data.mongodb.core.MongoTemplate: DEBUG
+    org.springframework.data.mongodb.repository.query: DEBUG
+    org.springframework.data.mongodb.core.convert: DEBUG</code></pre>
+                    </div>
+                </div>
+
+                <!-- Entity Structure -->
+                <div class="card">
+                    <h2>🏛️ Estrutura das Entidades</h2>
+                    <p>
+                        As entidades são organizadas em duas camadas: entidades de domínio 
+                        e entidades de documento MongoDB.
+                    </p>
+                    
+                    <h3>📁 Collections do MongoDB</h3>
+                    <ul>
+                        <li><strong>restaurants</strong> - Dados dos restaurantes</li>
+                        <li><strong>kitchen_types</strong> - Tipos de cozinha</li>
+                    </ul>
+                </div>
+
+                <!-- Restaurant Entity -->
+                <div class="card">
+                    <h2>🍽️ RestaurantEntity - Estrutura Completa</h2>
+                    <p>
+                        A entidade principal que representa um restaurante no sistema, 
+                        com todos os seus dados relacionados.
+                    </p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>RestaurantEntity.java - Entidade de Domínio</span>
+                        </div>
+                        <pre><code>@Document(collection = "restaurants")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class RestaurantEntity {
+
+    @Id
+    private String id;
+ 
+    private String name;
+    private String address;
+    private KitchenTypeEntity kitchenType;
+    private List&lt;OperationDaysTimeData&gt; daysOperation;
+    private String ownerId;
+    private Boolean isActive;
+    private List&lt;MenuCategoryEntity&gt; menu;
+
+    @LastModifiedDate
+    private LocalDateTime lastUpdate;
+    
+    @CreatedDate
+    private LocalDateTime createdAt;
+}</code></pre>
+                    </div>
+                    
+                    <h3>📊 Documento MongoDB - Restaurant</h3>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>Exemplo de Documento MongoDB</span>
+                        </div>
+                        <pre><code>{
+  "_id": "507f1f77bcf86cd799439011",
+  "name": "Restaurante Italiano",
+  "address": "Rua das Flores, 123 - São Paulo, SP",
+  "kitchenType": {
+    "id": "507f1f77bcf86cd799439012",
+    "name": "Italiana",
+    "description": "Culinária italiana tradicional",
+    "createdAt": "2024-01-15T10:30:00Z",
+    "lastUpdate": "2024-01-15T10:30:00Z"
+  },
+  "daysOperation": [
+    {
+      "day": "MONDAY",
+      "openingHours": "11:00",
+      "closingHours": "22:00"
+    },
+    {
+      "day": "TUESDAY",
+      "openingHours": "11:00",
+      "closingHours": "22:00"
+    }
+  ],
+  "ownerId": "user123",
+  "isActive": true,
+  "menu": [
+    {
+      "id": "507f1f77bcf86cd799439013",
+      "type": "Pratos Principais",
+      "items": [
+        {
+          "id": "507f1f77bcf86cd799439014",
+          "name": "Espaguete à Bolonhesa",
+          "description": "Massa italiana com molho de carne",
+          "price": 45.90,
+          "onlyForLocalConsumption": false,
+          "imagePath": "/images/espaguete.jpg",
+          "isActive": true
+        }
+      ]
+    }
+  ],
+  "lastUpdate": "2024-01-15T10:30:00Z",
+  "createdAt": "2024-01-15T10:30:00Z"
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Kitchen Type Entity -->
+                <div class="card">
+                    <h2>👨‍🍳 KitchenTypeEntity - Tipos de Cozinha</h2>
+                    <p>
+                        Representa os diferentes tipos de cozinha disponíveis no sistema, 
+                        com mapeamento explícito para MongoDB.
+                    </p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>KitchenTypeDocumentEntity.java - Entidade MongoDB</span>
+                        </div>
+                        <pre><code>@Document(collection = "kitchen_types")
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class KitchenTypeDocumentEntity {
+
+    @Id
+    @Field("_id")
+    private String id;
+
+    @Indexed(unique = true)
+    @Field("name")
+    private String name;
+
+    @Field("description")
+    private String description;
+
+    @CreatedDate
+    @Field("createdAt")
+    private LocalDateTime createdAt;
+
+    @LastModifiedDate
+    @Field("lastUpdate")
+    private LocalDateTime lastUpdate;
+}</code></pre>
+                    </div>
+                    
+                    <h3>📊 Documento MongoDB - Kitchen Type</h3>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>Exemplo de Documento MongoDB</span>
+                        </div>
+                        <pre><code>{
+  "_id": "507f1f77bcf86cd799439012",
+  "name": "Italiana",
+  "description": "Culinária italiana tradicional com massas, pizzas e risotos",
+  "createdAt": "2024-01-15T10:30:00Z",
+  "lastUpdate": "2024-01-15T10:30:00Z"
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Menu Structure -->
+                <div class="card">
+                    <h2>🍕 Estrutura do Menu</h2>
+                    <p>
+                        O menu é organizado em categorias, cada uma contendo itens específicos 
+                        com preços e informações detalhadas.
+                    </p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>MenuCategoryEntity.java</span>
+                        </div>
+                        <pre><code>@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class MenuCategoryEntity {
+    
+    private String id;
+    private String type;
+    private List&lt;MenuItemEntity&gt; items;
+}</code></pre>
+                    </div>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>MenuItemEntity.java</span>
+                        </div>
+                        <pre><code>@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class MenuItemEntity {
+
+    private String id;
+    private String name;
+    private String description;
+    private BigDecimal price;
+    private Boolean onlyForLocalConsumption;
+    private String imagePath;
+    private Boolean isActive;
+}</code></pre>
+                    </div>
+                    
+                    <h3>📊 Estrutura do Menu no MongoDB</h3>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>Exemplo de Menu no Documento Restaurant</span>
+                        </div>
+                        <pre><code>"menu": [
+  {
+    "id": "507f1f77bcf86cd799439013",
+    "type": "Entradas",
+    "items": [
+      {
+        "id": "507f1f77bcf86cd799439015",
+        "name": "Bruschetta",
+        "description": "Pão torrado com tomate e manjericão",
+        "price": 18.90,
+        "onlyForLocalConsumption": false,
+        "imagePath": "/images/bruschetta.jpg",
+        "isActive": true
+      }
+    ]
+  },
+  {
+    "id": "507f1f77bcf86cd799439016",
+    "type": "Pratos Principais",
+    "items": [
+      {
+        "id": "507f1f77bcf86cd799439014",
+        "name": "Espaguete à Bolonhesa",
+        "description": "Massa italiana com molho de carne",
+        "price": 45.90,
+        "onlyForLocalConsumption": false,
+        "imagePath": "/images/espaguete.jpg",
+        "isActive": true
+      }
+    ]
+  }
+]</code></pre>
+                    </div>
+                </div>
+
+                <!-- Operation Days -->
+                <div class="card">
+                    <h2>🕒 Horários de Funcionamento</h2>
+                    <p>
+                        Cada restaurante possui horários de funcionamento específicos 
+                        para cada dia da semana.
+                    </p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>OperationDaysTimeData.java</span>
+                        </div>
+                        <pre><code>@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class OperationDaysTimeData {
+
+    @Schema(title = "Dia", description = "Dia da semana", example = "Segunda-feira")
+    private DayEnum day;
+
+    @Schema(title = "Horário de abertura", description = "Horário de abertura do restaurante", example = "08:00")
+    private String openingHours;
+
+    @Schema(title = "Horário de fechamento", description = "Horário de fechamento do restaurante", example = "18:00")
+    private String closingHours;
+}</code></pre>
+                    </div>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>DayEnum.java</span>
+                        </div>
+                        <pre><code>public enum DayEnum {
+    MONDAY,
+    TUESDAY,
+    WEDNESDAY,
+    THURSDAY,
+    FRIDAY,
+    SATURDAY,
+    SUNDAY;
+}</code></pre>
+                    </div>
+                    
+                    <h3>📊 Horários no MongoDB</h3>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>Exemplo de Horários no Documento Restaurant</span>
+                        </div>
+                        <pre><code>"daysOperation": [
+  {
+    "day": "MONDAY",
+    "openingHours": "11:00",
+    "closingHours": "22:00"
+  },
+  {
+    "day": "TUESDAY",
+    "openingHours": "11:00",
+    "closingHours": "22:00"
+  },
+  {
+    "day": "WEDNESDAY",
+    "openingHours": "11:00",
+    "closingHours": "22:00"
+  },
+  {
+    "day": "THURSDAY",
+    "openingHours": "11:00",
+    "closingHours": "23:00"
+  },
+  {
+    "day": "FRIDAY",
+    "openingHours": "11:00",
+    "closingHours": "23:00"
+  },
+  {
+    "day": "SATURDAY",
+    "openingHours": "12:00",
+    "closingHours": "23:00"
+  },
+  {
+    "day": "SUNDAY",
+    "openingHours": "12:00",
+    "closingHours": "21:00"
+  }
+]</code></pre>
+                    </div>
+                </div>
+
+                <!-- MongoDB Features -->
+                <div class="card">
+                    <h2>🚀 Recursos do MongoDB Utilizados</h2>
+                    
+                    <div class="feature-cards">
+                        <div class="feature-card">
+                            <div class="feature-card-icon">🆔</div>
+                            <h3 class="feature-card-title">IDs Únicos</h3>
+                            <p class="feature-card-description">
+                                Uso de @Id para identificadores únicos automáticos 
+                                do MongoDB (_id).
+                            </p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-card-icon">📅</div>
+                            <h3 class="feature-card-title">Auditoria Automática</h3>
+                            <p class="feature-card-description">
+                                @CreatedDate e @LastModifiedDate para rastreamento 
+                                automático de datas.
+                            </p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-card-icon">🔍</div>
+                            <h3 class="feature-card-title">Índices Otimizados</h3>
+                            <p class="feature-card-description">
+                                @Indexed(unique = true) para campos únicos 
+                                como nome do tipo de cozinha.
+                            </p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-card-icon">🗺️</div>
+                            <h3 class="feature-card-title">Mapeamento Explícito</h3>
+                            <p class="feature-card-description">
+                                @Field para mapeamento explícito entre campos 
+                                Java e documentos MongoDB.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Best Practices -->
+                <div class="card">
+                    <h2>✅ Melhores Práticas Implementadas</h2>
+                    
+                    <div class="feature-cards">
+                        <div class="feature-card">
+                            <div class="feature-card-icon">🏗️</div>
+                            <h3 class="feature-card-title">Separação de Responsabilidades</h3>
+                            <p class="feature-card-description">
+                                Entidades de domínio separadas das entidades 
+                                de persistência MongoDB.
+                            </p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-card-icon">🔒</div>
+                            <h3 class="feature-card-title">Validação de Dados</h3>
+                            <p class="feature-card-description">
+                                Uso de anotações de validação e campos obrigatórios 
+                                bem definidos.
+                            </p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-card-icon">📊</div>
+                            <h3 class="feature-card-title">Estrutura Normalizada</h3>
+                            <p class="feature-card-description">
+                                Dados organizados de forma lógica e eficiente 
+                                para consultas e performance.
+                            </p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-card-icon">🔄</div>
+                            <h3 class="feature-card-title">Versionamento</h3>
+                            <p class="feature-card-description">
+                                Campos de auditoria para rastreamento de mudanças 
+                                e histórico de dados.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Query Examples -->
+                <div class="card">
+                    <h2>🔍 Exemplos de Consultas MongoDB</h2>
+                    <p>
+                        Exemplos práticos de como consultar os dados no MongoDB.
+                    </p>
+                    
+                    <h3>📋 Consultas Comuns</h3>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>Buscar Restaurantes Ativos</span>
+                        </div>
+                        <pre><code>db.restaurants.find({ "isActive": true })</code></pre>
+                    </div>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>Buscar por Tipo de Cozinha</span>
+                        </div>
+                        <pre><code>db.restaurants.find({ 
+  "kitchenType.name": "Italiana" 
+})</code></pre>
+                    </div>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>Buscar Itens de Menu por Preço</span>
+                        </div>
+                        <pre><code>db.restaurants.find({
+  "menu.items": {
+    $elemMatch: {
+      "price": { $gte: 30.00, $lte: 50.00 },
+      "isActive": true
+    }
+  }
+})</code></pre>
+                    </div>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>Buscar Restaurantes por Horário de Funcionamento</span>
+                        </div>
+                        <pre><code>db.restaurants.find({
+  "daysOperation": {
+    $elemMatch: {
+      "day": "MONDAY",
+      "openingHours": { $lte: "12:00" }
+    }
+  }
+})</code></pre>
+                    </div>
+                </div>
+
+                <!-- Performance Tips -->
+                <div class="card">
+                    <h2>⚡ Dicas de Performance</h2>
+                    
+                    <div class="feature-cards">
+                        <div class="feature-card">
+                            <div class="feature-card-icon">📈</div>
+                            <h3 class="feature-card-title">Índices Estratégicos</h3>
+                            <p class="feature-card-description">
+                                Índices criados automaticamente para campos 
+                                frequentemente consultados.
+                            </p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-card-icon">🔍</div>
+                            <h3 class="feature-card-title">Projeções Otimizadas</h3>
+                            <p class="feature-card-description">
+                                Uso de projeções para retornar apenas campos 
+                                necessários nas consultas.
+                            </p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-card-icon">📊</div>
+                            <h3 class="feature-card-title">Agregações Eficientes</h3>
+                            <p class="feature-card-description">
+                                Pipeline de agregação para consultas complexas 
+                                e relatórios.
+                            </p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-card-icon">💾</div>
+                            <h3 class="feature-card-title">Write Concerns</h3>
+                            <p class="feature-card-description">
+                                Configuração MAJORITY para garantir consistência 
+                                dos dados.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html> 

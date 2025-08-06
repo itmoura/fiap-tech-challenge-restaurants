@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clean Architecture - Tech Challenge Restaurant</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>📚 Documentação</h2>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-section-title">Início</div>
+                <a href="../index.html" class="nav-item">
+                    <span class="nav-item-icon">🏠</span>
+                    Home
+                </a>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-section-title">Configuração</div>
+                <a href="prerequisites.html" class="nav-item">
+                    <span class="nav-item-icon">📋</span>
+                    Pré-requisitos
+                </a>
+                <a href="local-setup.html" class="nav-item">
+                    <span class="nav-item-icon">⚙️</span>
+                    Configuração Local
+                </a>
+                <a href="docker.html" class="nav-item">
+                    <span class="nav-item-icon">🐳</span>
+                    Docker
+                </a>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-section-title">Microserviços</div>
+                <a href="restaurants.html" class="nav-item">
+                    <span class="nav-item-icon">🍽️</span>
+                    Restaurants API
+                </a>
+                <a href="user-microservice.html" class="nav-item">
+                    <span class="nav-item-icon">👤</span>
+                    Users Microservice
+                </a>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-section-title">Ferramentas</div>
+                <a href="postman.html" class="nav-item">
+                    <span class="nav-item-icon">📡</span>
+                    Postman Collections
+                </a>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-section-title">Arquitetura</div>
+                <a href="architecture-overview.html" class="nav-item">
+                    <span class="nav-item-icon">🏗️</span>
+                    Visão Geral
+                </a>
+                <a href="api-overview.html" class="nav-item">
+                    <span class="nav-item-icon">🔗</span>
+                    API Overview
+                </a>
+                <a href="data-modeling.html" class="nav-item">
+                    <span class="nav-item-icon">🗄️</span>
+                    Modelagem de Dados
+                </a>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-section-title">Recursos</div>
+                <a href="menu-items.html" class="nav-item">
+                    <span class="nav-item-icon">🍕</span>
+                    Menu Items
+                </a>
+                <a href="menu-categories.html" class="nav-item">
+                    <span class="nav-item-icon">📂</span>
+                    Menu Categories
+                </a>
+                <a href="kitchen-types.html" class="nav-item">
+                    <span class="nav-item-icon">👨‍🍳</span>
+                    Kitchen Types
+                </a>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-section-title">Desenvolvimento</div>
+                <a href="testing.html" class="nav-item">
+                    <span class="nav-item-icon">🧪</span>
+                    Testes
+                </a>
+                <a href="status-codes.html" class="nav-item">
+                    <span class="nav-item-icon">📊</span>
+                    Status Codes
+                </a>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-section-title">Sobre</div>
+                <a href="author.html" class="nav-item">
+                    <span class="nav-item-icon">👨‍💻</span>
+                    Autor
+                </a>
+                <a href="license.html" class="nav-item">
+                    <span class="nav-item-icon">📄</span>
+                    Licença
+                </a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <h1>🎯 Clean Architecture</h1>
+                <p>Arquitetura limpa e organizada seguindo os princípios de Robert C. Martin</p>
+            </header>
+
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a>
+                <span class="breadcrumb-separator">/</span>
+                <span>Clean Architecture</span>
+            </nav>
+
+            <div class="content-body">
+                <!-- Overview Section -->
+                <div class="card">
+                    <h2>📋 Visão Geral da Clean Architecture</h2>
+                    <p>
+                        O Tech Challenge Restaurant implementa os princípios da Clean Architecture 
+                        propostos por Robert C. Martin (Uncle Bob), organizando o código em camadas 
+                        bem definidas com responsabilidades claras e dependências direcionadas.
+                    </p>
+                    
+                    <div class="feature-cards">
+                        <div class="feature-card">
+                            <div class="feature-card-icon">🏗️</div>
+                            <h3 class="feature-card-title">Separação de Responsabilidades</h3>
+                            <p class="feature-card-description">
+                                Cada camada tem uma responsabilidade específica e bem definida, 
+                                facilitando manutenção e testes.
+                            </p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-card-icon">🔄</div>
+                            <h3 class="feature-card-title">Inversão de Dependências</h3>
+                            <p class="feature-card-description">
+                                Dependências apontam para dentro, com regras de negócio independentes 
+                                de frameworks externos.
+                            </p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-card-icon">🧪</div>
+                            <h3 class="feature-card-title">Testabilidade</h3>
+                            <p class="feature-card-description">
+                                Arquitetura que facilita a criação de testes unitários e de integração 
+                                isolados.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Architecture Layers -->
+                <div class="card">
+                    <h2>🏛️ Camadas da Arquitetura</h2>
+                    <p>
+                        A aplicação está organizada em quatro camadas principais, cada uma com 
+                        responsabilidades específicas e regras de dependência bem definidas.
+                    </p>
+                    
+                    <div class="feature-cards">
+                        <div class="feature-card">
+                            <div class="feature-card-icon">🎯</div>
+                            <h3 class="feature-card-title">Domain Layer</h3>
+                            <p class="feature-card-description">
+                                Regras de negócio centrais, entidades e casos de uso. 
+                                Não depende de nenhuma outra camada.
+                            </p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-card-icon">🔧</div>
+                            <h3 class="feature-card-title">Application Layer</h3>
+                            <p class="feature-card-description">
+                                Orquestração de casos de uso, coordenação entre entidades 
+                                e regras de aplicação.
+                            </p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-card-icon">🌐</div>
+                            <h3 class="feature-card-title">Infrastructure Layer</h3>
+                            <p class="feature-card-description">
+                                Implementações concretas: controllers, repositórios, 
+                                configurações e adaptadores externos.
+                            </p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-card-icon">🎨</div>
+                            <h3 class="feature-card-title">Presentation Layer</h3>
+                            <p class="feature-card-description">
+                                Interface com usuários e sistemas externos, 
+                                controllers REST e DTOs.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Domain Layer -->
+                <div class="card">
+                    <h2>🎯 Domain Layer - Núcleo da Aplicação</h2>
+                    <p>
+                        A camada de domínio contém as regras de negócio centrais e não depende 
+                        de nenhuma outra camada. É o coração da aplicação.
+                    </p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>Estrutura do Domain Layer</span>
+                        </div>
+                        <pre><code>src/main/java/com/fiap/itmoura/tech_challenge_restaurant/domain/
+├── entities/                    # Entidades de domínio
+│   ├── RestaurantEntity.java
+│   ├── KitchenTypeEntity.java
+│   ├── MenuCategoryEntity.java
+│   ├── MenuItemEntity.java
+│   └── OperationDaysTimeData.java
+├── exceptions/                  # Exceções de domínio
+│   ├── RestaurantNotFoundException.java
+│   ├── KitchenTypeNotFoundException.java
+│   └── InvalidOperationException.java
+└── valueobjects/               # Objetos de valor
+    ├── Address.java
+    ├── Price.java
+    └── TimeRange.java</code></pre>
+                    </div>
+                    
+                    <h3>📋 Características do Domain Layer</h3>
+                    <ul>
+                        <li><strong>Independência Total:</strong> Não depende de frameworks, bibliotecas ou outras camadas</li>
+                        <li><strong>Regras de Negócio:</strong> Contém toda a lógica de negócio da aplicação</li>
+                        <li><strong>Entidades Ricas:</strong> Entidades com comportamento e validações</li>
+                        <li><strong>Imutabilidade:</strong> Objetos de valor imutáveis para garantir consistência</li>
+                    </ul>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>Exemplo: RestaurantEntity - Entidade de Domínio</span>
+                        </div>
+                        <pre><code>@Document(collection = "restaurants")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class RestaurantEntity {
+
+    @Id
+    private String id;
+    private String name;
+    private String address;
+    private KitchenTypeEntity kitchenType;
+    private List&lt;OperationDaysTimeData&gt; daysOperation;
+    private String ownerId;
+    private Boolean isActive;
+    private List&lt;MenuCategoryEntity&gt; menu;
+
+    @LastModifiedDate
+    private LocalDateTime lastUpdate;
+    
+    @CreatedDate
+    private LocalDateTime createdAt;
+
+    // Métodos de negócio
+    public boolean isOpenOnDay(DayEnum day) {
+        return daysOperation.stream()
+            .anyMatch(operation -&gt; operation.getDay() == day);
+    }
+
+    public boolean hasActiveMenu() {
+        return menu != null && !menu.isEmpty() && 
+               menu.stream().anyMatch(category -&gt; 
+                   category.getItems().stream()
+                       .anyMatch(MenuItemEntity::getIsActive));
+    }
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Application Layer -->
+                <div class="card">
+                    <h2>🔧 Application Layer - Casos de Uso</h2>
+                    <p>
+                        A camada de aplicação orquestra os casos de uso, coordenando as entidades 
+                        de domínio e definindo as regras de aplicação.
+                    </p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>Estrutura do Application Layer</span>
+                        </div>
+                        <pre><code>src/main/java/com/fiap/itmoura/tech_challenge_restaurant/application/
+├── usecases/                   # Casos de uso da aplicação
+│   ├── RestaurantUseCase.java
+│   ├── KitchenTypeUseCase.java
+│   └── MenuUseCase.java
+├── ports/                      # Interfaces (Ports)
+│   ├── in/                     # Ports de entrada
+│   │   ├── RestaurantUseCase.java
+│   │   └── KitchenTypeUseCase.java
+│   └── out/                    # Ports de saída
+│       ├── RestaurantRepository.java
+│       └── KitchenTypeRepository.java
+└── dtos/                       # Objetos de transferência
+    ├── RestaurantRequest.java
+    ├── RestaurantResponse.java
+    └── KitchenTypeRequest.java</code></pre>
+                    </div>
+                    
+                    <h3>📋 Características do Application Layer</h3>
+                    <ul>
+                        <li><strong>Casos de Uso:</strong> Implementa as operações específicas da aplicação</li>
+                        <li><strong>Orquestração:</strong> Coordena entidades e regras de negócio</li>
+                        <li><strong>Ports e Adapters:</strong> Define interfaces para comunicação com outras camadas</li>
+                        <li><strong>DTOs:</strong> Objetos de transferência para comunicação entre camadas</li>
+                    </ul>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>Exemplo: RestaurantUseCase - Caso de Uso</span>
+                        </div>
+                        <pre><code>@Service
+@Slf4j
+public class RestaurantUseCase {
+
+    private final RestaurantRepository restaurantRepository;
+    private final KitchenTypeRepository kitchenTypeRepository;
+
+    public RestaurantUseCase(RestaurantRepository restaurantRepository,
+                           KitchenTypeRepository kitchenTypeRepository) {
+        this.restaurantRepository = restaurantRepository;
+        this.kitchenTypeRepository = kitchenTypeRepository;
+    }
+
+    public RestaurantFullResponse createRestaurant(RestaurantRequest request) {
+        log.info("Criando restaurante: {}", request.getName());
+        
+        // Validação de negócio
+        KitchenTypeEntity kitchenType = kitchenTypeRepository.findById(request.getKitchenTypeId())
+            .orElseThrow(() -&gt; new KitchenTypeNotFoundException("Kitchen type not found"));
+        
+        // Criação da entidade
+        RestaurantEntity restaurant = RestaurantEntity.builder()
+            .name(request.getName())
+            .address(request.getAddress())
+            .kitchenType(kitchenType)
+            .daysOperation(request.getDaysOperation())
+            .ownerId(request.getOwnerId())
+            .isActive(true)
+            .menu(new ArrayList&lt;&gt;())
+            .build();
+        
+        // Persistência
+        RestaurantEntity savedRestaurant = restaurantRepository.save(restaurant);
+        
+        log.info("Restaurante criado com sucesso: {}", savedRestaurant.getId());
+        return RestaurantFullResponse.fromEntity(savedRestaurant);
+    }
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Infrastructure Layer -->
+                <div class="card">
+                    <h2>🌐 Infrastructure Layer - Implementações</h2>
+                    <p>
+                        A camada de infraestrutura contém as implementações concretas dos adaptadores, 
+                        repositórios e configurações externas.
+                    </p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>Estrutura do Infrastructure Layer</span>
+                        </div>
+                        <pre><code>src/main/java/com/fiap/itmoura/tech_challenge_restaurant/infrastructure/
+├── controllers/                # Controllers REST
+│   ├── RestaurantController.java
+│   ├── KitchenTypeController.java
+│   └── MenuController.java
+├── persistence/                # Implementações de repositórios
+│   ├── RestaurantRepositoryImpl.java
+│   ├── KitchenTypeRepositoryImpl.java
+│   └── MongoConfig.java
+├── config/                     # Configurações
+│   ├── MongoConfig.java
+│   ├── SwaggerConfig.java
+│   └── SecurityConfig.java
+└── adapters/                   # Adaptadores externos
+    ├── EmailAdapter.java
+    ├── PaymentAdapter.java
+    └── NotificationAdapter.java</code></pre>
+                    </div>
+                    
+                    <h3>📋 Características do Infrastructure Layer</h3>
+                    <ul>
+                        <li><strong>Implementações Concretas:</strong> Contém todas as implementações reais</li>
+                        <li><strong>Frameworks Externos:</strong> Spring Boot, MongoDB, etc.</li>
+                        <li><strong>Adaptadores:</strong> Comunicação com sistemas externos</li>
+                        <li><strong>Configurações:</strong> Setup de beans e configurações</li>
+                    </ul>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>Exemplo: RestaurantController - Controller REST</span>
+                        </div>
+                        <pre><code>@RestController
+@RequestMapping("/api/restaurants")
+@Tag(name = "Restaurants", description = "API para gerenciamento de restaurantes")
+@Slf4j
+public class RestaurantController {
+
+    private final RestaurantUseCase restaurantUseCase;
+
+    public RestaurantController(RestaurantUseCase restaurantUseCase) {
+        this.restaurantUseCase = restaurantUseCase;
+    }
+
+    @PostMapping
+    @Operation(summary = "Criar restaurante", description = "Cria um novo restaurante")
+    public ResponseEntity&lt;RestaurantFullResponse&gt; createRestaurant(
+            @Valid @RequestBody RestaurantRequest request) {
+        
+        log.info("Recebida requisição para criar restaurante: {}", request.getName());
+        
+        RestaurantFullResponse response = restaurantUseCase.createRestaurant(request);
+        
+        return ResponseEntity.status(HttpStatus.CREATED)
+            .body(response);
+    }
+
+    @GetMapping("/{id}")
+    @Operation(summary = "Buscar restaurante por ID")
+    public ResponseEntity&lt;RestaurantFullResponse&gt; getRestaurantById(
+            @PathVariable String id) {
+        
+        RestaurantFullResponse response = restaurantUseCase.getRestaurantById(id);
+        return ResponseEntity.ok(response);
+    }
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Dependency Flow -->
+                <div class="card">
+                    <h2>🔄 Fluxo de Dependências</h2>
+                    <p>
+                        A Clean Architecture define um fluxo de dependências bem específico, 
+                        onde as dependências apontam sempre para dentro, em direção ao domínio.
+                    </p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>Regra de Dependências</span>
+                        </div>
+                        <pre><code>Presentation Layer → Application Layer → Domain Layer
+Infrastructure Layer → Application Layer → Domain Layer
+
+# Nenhuma camada externa pode depender de camadas internas
+# Domain Layer não depende de nenhuma outra camada
+# Application Layer só depende do Domain Layer
+# Infrastructure Layer implementa interfaces do Application Layer</code></pre>
+                    </div>
+                    
+                    <h3>📊 Diagrama de Dependências</h3>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>Estrutura de Dependências</span>
+                        </div>
+                        <pre><code>┌─────────────────────────────────────────────────────────┐
+│                    Presentation Layer                    │
+│  ┌─────────────────┐  ┌─────────────────┐              │
+│  │   Controllers   │  │      DTOs       │              │
+│  └─────────────────┘  └─────────────────┘              │
+└─────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────┐
+│                   Application Layer                     │
+│  ┌─────────────────┐  ┌─────────────────┐              │
+│  │   Use Cases     │  │     Ports       │              │
+│  └─────────────────┘  └─────────────────┘              │
+└─────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────┐
+│                     Domain Layer                        │
+│  ┌─────────────────┐  ┌─────────────────┐              │
+│  │    Entities     │  │  Value Objects  │              │
+│  └─────────────────┘  └─────────────────┘              │
+└─────────────────────────────────────────────────────────┘
+                              ▲
+                              │
+┌─────────────────────────────────────────────────────────┐
+│                 Infrastructure Layer                    │
+│  ┌─────────────────┐  ┌─────────────────┐              │
+│  │  Repositories   │  │   Adapters      │              │
+│  └─────────────────┘  └─────────────────┘              │
+└─────────────────────────────────────────────────────────┘</code></pre>
+                    </div>
+                </div>
+
+                <!-- Benefits -->
+                <div class="card">
+                    <h2>✅ Benefícios da Clean Architecture</h2>
+                    
+                    <div class="feature-cards">
+                        <div class="feature-card">
+                            <div class="feature-card-icon">🧪</div>
+                            <h3 class="feature-card-title">Testabilidade</h3>
+                            <p class="feature-card-description">
+                                Facilita a criação de testes unitários isolados, 
+                                com mocks e stubs bem definidos.
+                            </p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-card-icon">🔧</div>
+                            <h3 class="feature-card-title">Manutenibilidade</h3>
+                            <p class="feature-card-description">
+                                Código organizado e responsabilidades claras 
+                                facilitam manutenção e evolução.
+                            </p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-card-icon">🔄</div>
+                            <h3 class="feature-card-title">Flexibilidade</h3>
+                            <p class="feature-card-description">
+                                Mudanças em uma camada não afetam outras, 
+                                permitindo evolução independente.
+                            </p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-card-icon">📚</div>
+                            <h3 class="feature-card-title">Legibilidade</h3>
+                            <p class="feature-card-description">
+                                Código auto-documentado com estrutura clara 
+                                e fácil de entender.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Implementation Examples -->
+                <div class="card">
+                    <h2>💻 Exemplos de Implementação</h2>
+                    <p>
+                        Exemplos práticos de como a Clean Architecture é implementada 
+                        no projeto Tech Challenge Restaurant.
+                    </p>
+                    
+                    <h3>🎯 Ports (Interfaces)</h3>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>RestaurantRepository - Port de Saída</span>
+                        </div>
+                        <pre><code>public interface RestaurantRepository {
+    RestaurantEntity save(RestaurantEntity restaurant);
+    Optional&lt;RestaurantEntity&gt; findById(String id);
+    List&lt;RestaurantEntity&gt; findAll();
+    void deleteById(String id);
+    boolean existsByKitchenTypeId(String kitchenTypeId);
+}</code></pre>
+                    </div>
+                    
+                    <h3>🔧 Adapters (Implementações)</h3>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>RestaurantRepositoryImpl - Adapter de Persistência</span>
+                        </div>
+                        <pre><code>@Repository
+public class RestaurantRepositoryImpl implements RestaurantRepository {
+    
+    private final MongoTemplate mongoTemplate;
+    
+    public RestaurantRepositoryImpl(MongoTemplate mongoTemplate) {
+        this.mongoTemplate = mongoTemplate;
+    }
+    
+    @Override
+    public RestaurantEntity save(RestaurantEntity restaurant) {
+        return mongoTemplate.save(restaurant);
+    }
+    
+    @Override
+    public Optional&lt;RestaurantEntity&gt; findById(String id) {
+        RestaurantEntity restaurant = mongoTemplate.findById(id, RestaurantEntity.class);
+        return Optional.ofNullable(restaurant);
+    }
+}</code></pre>
+                    </div>
+                    
+                    <h3>🎨 DTOs (Data Transfer Objects)</h3>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>RestaurantRequest - DTO de Entrada</span>
+                        </div>
+                        <pre><code>@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class RestaurantRequest {
+    
+    @NotBlank(message = "Nome é obrigatório")
+    private String name;
+    
+    @NotBlank(message = "Endereço é obrigatório")
+    private String address;
+    
+    @NotBlank(message = "ID do tipo de cozinha é obrigatório")
+    private String kitchenTypeId;
+    
+    @Valid
+    @NotEmpty(message = "Horários de funcionamento são obrigatórios")
+    private List&lt;OperationDaysTimeData&gt; daysOperation;
+    
+    @NotBlank(message = "ID do proprietário é obrigatório")
+    private String ownerId;
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Best Practices -->
+                <div class="card">
+                    <h2>⭐ Melhores Práticas</h2>
+                    
+                    <div class="feature-cards">
+                        <div class="feature-card">
+                            <div class="feature-card-icon">🎯</div>
+                            <h3 class="feature-card-title">Single Responsibility</h3>
+                            <p class="feature-card-description">
+                                Cada classe tem uma única responsabilidade 
+                                bem definida e focada.
+                            </p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-card-icon">🔒</div>
+                            <h3 class="feature-card-title">Dependency Inversion</h3>
+                            <p class="feature-card-description">
+                                Dependa de abstrações, não de implementações 
+                                concretas.
+                            </p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-card-icon">🚫</div>
+                            <h3 class="feature-card-title">No Framework Dependencies</h3>
+                            <p class="feature-card-description">
+                                Domain e Application layers não devem 
+                                depender de frameworks.
+                            </p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-card-icon">📝</div>
+                            <h3 class="feature-card-title">Clear Interfaces</h3>
+                            <p class="feature-card-description">
+                                Interfaces bem definidas entre camadas 
+                                facilitam testes e manutenção.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testing Strategy -->
+                <div class="card">
+                    <h2>🧪 Estratégia de Testes</h2>
+                    <p>
+                        A Clean Architecture facilita a criação de testes em diferentes níveis, 
+                        desde testes unitários até testes de integração.
+                    </p>
+                    
+                    <h3>📋 Tipos de Testes</h3>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>Teste Unitário - Use Case</span>
+                        </div>
+                        <pre><code>@ExtendWith(MockitoExtension.class)
+class RestaurantUseCaseTest {
+
+    @Mock
+    private RestaurantRepository restaurantRepository;
+    
+    @Mock
+    private KitchenTypeRepository kitchenTypeRepository;
+    
+    @InjectMocks
+    private RestaurantUseCase restaurantUseCase;
+    
+    @Test
+    void shouldCreateRestaurantSuccessfully() {
+        // Given
+        RestaurantRequest request = createValidRequest();
+        KitchenTypeEntity kitchenType = createKitchenType();
+        
+        when(kitchenTypeRepository.findById(any()))
+            .thenReturn(Optional.of(kitchenType));
+        when(restaurantRepository.save(any()))
+            .thenAnswer(invocation -&gt; invocation.getArgument(0));
+        
+        // When
+        RestaurantFullResponse response = restaurantUseCase.createRestaurant(request);
+        
+        // Then
+        assertThat(response).isNotNull();
+        assertThat(response.getName()).isEqualTo(request.getName());
+        verify(restaurantRepository).save(any(RestaurantEntity.class));
+    }
+}</code></pre>
+                    </div>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>Teste de Integração - Controller</span>
+                        </div>
+                        <pre><code>@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Testcontainers
+class RestaurantControllerIntegrationTest {
+
+    @Autowired
+    private TestRestTemplate restTemplate;
+    
+    @Test
+    void shouldCreateRestaurantViaApi() {
+        // Given
+        RestaurantRequest request = RestaurantRequest.builder()
+            .name("Restaurante Teste")
+            .address("Rua Teste, 123")
+            .kitchenTypeId("kitchen-type-id")
+            .daysOperation(createDaysOperation())
+            .ownerId("owner-id")
+            .build();
+        
+        // When
+        ResponseEntity&lt;RestaurantFullResponse&gt; response = restTemplate
+            .postForEntity("/api/restaurants", request, RestaurantFullResponse.class);
+        
+        // Then
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+        assertThat(response.getBody()).isNotNull();
+        assertThat(response.getBody().getName()).isEqualTo("Restaurante Teste");
+    }
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Migration Guide -->
+                <div class="card">
+                    <h2>🔄 Guia de Migração</h2>
+                    <p>
+                        Como migrar código existente para seguir os princípios 
+                        da Clean Architecture.
+                    </p>
+                    
+                    <h3>📋 Passos para Migração</h3>
+                    <ol>
+                        <li><strong>Identificar Regras de Negócio:</strong> Extrair lógica de negócio para o Domain Layer</li>
+                        <li><strong>Criar Interfaces:</strong> Definir ports para comunicação entre camadas</li>
+                        <li><strong>Separar Responsabilidades:</strong> Mover código para camadas apropriadas</li>
+                        <li><strong>Implementar Adapters:</strong> Criar implementações concretas na Infrastructure Layer</li>
+                        <li><strong>Refatorar Dependências:</strong> Garantir que dependências apontem para dentro</li>
+                        <li><strong>Adicionar Testes:</strong> Criar testes unitários para cada camada</li>
+                    </ol>
+                    
+                    <h3>⚠️ Pontos de Atenção</h3>
+                    <ul>
+                        <li><strong>Refatoração Gradual:</strong> Migre uma funcionalidade por vez</li>
+                        <li><strong>Testes Existentes:</strong> Mantenha testes funcionando durante a migração</li>
+                        <li><strong>Documentação:</strong> Atualize documentação conforme a arquitetura evolui</li>
+                        <li><strong>Code Review:</strong> Revise mudanças para garantir aderência aos princípios</li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html> 

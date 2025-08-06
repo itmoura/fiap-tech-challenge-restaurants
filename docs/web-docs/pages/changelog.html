@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Changelog - Tech Challenge Restaurant</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>📚 Documentação</h2>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-section-title">Início</div>
+                <a href="../index.html" class="nav-item">
+                    <span class="nav-item-icon">🏠</span>
+                    Home
+                </a>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-section-title">Configuração</div>
+                <a href="prerequisites.html" class="nav-item">
+                    <span class="nav-item-icon">📋</span>
+                    Pré-requisitos
+                </a>
+                <a href="local-setup.html" class="nav-item">
+                    <span class="nav-item-icon">⚙️</span>
+                    Configuração Local
+                </a>
+                <a href="docker.html" class="nav-item">
+                    <span class="nav-item-icon">🐳</span>
+                    Docker
+                </a>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-section-title">Microserviços</div>
+                <a href="restaurants.html" class="nav-item">
+                    <span class="nav-item-icon">🍽️</span>
+                    Restaurants API
+                </a>
+                <a href="user-microservice.html" class="nav-item">
+                    <span class="nav-item-icon">👤</span>
+                    Users Microservice
+                </a>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-section-title">Ferramentas</div>
+                <a href="postman.html" class="nav-item">
+                    <span class="nav-item-icon">📡</span>
+                    Postman Collections
+                </a>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-section-title">Arquitetura</div>
+                <a href="architecture-overview.html" class="nav-item">
+                    <span class="nav-item-icon">🏗️</span>
+                    Visão Geral
+                </a>
+                <a href="api-overview.html" class="nav-item">
+                    <span class="nav-item-icon">🔗</span>
+                    API Overview
+                </a>
+                <a href="data-modeling.html" class="nav-item">
+                    <span class="nav-item-icon">🗄️</span>
+                    Modelagem de Dados
+                </a>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-section-title">Recursos</div>
+                <a href="menu-items.html" class="nav-item">
+                    <span class="nav-item-icon">🍕</span>
+                    Menu Items
+                </a>
+                <a href="menu-categories.html" class="nav-item">
+                    <span class="nav-item-icon">📂</span>
+                    Menu Categories
+                </a>
+                <a href="kitchen-types.html" class="nav-item">
+                    <span class="nav-item-icon">👨‍🍳</span>
+                    Kitchen Types
+                </a>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-section-title">Desenvolvimento</div>
+                <a href="testing.html" class="nav-item">
+                    <span class="nav-item-icon">🧪</span>
+                    Testes
+                </a>
+                <a href="status-codes.html" class="nav-item">
+                    <span class="nav-item-icon">📊</span>
+                    Status Codes
+                </a>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-section-title">Sobre</div>
+                <a href="author.html" class="nav-item">
+                    <span class="nav-item-icon">👨‍💻</span>
+                    Autor
+                </a>
+                <a href="license.html" class="nav-item">
+                    <span class="nav-item-icon">📄</span>
+                    Licença
+                </a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <h1>📝 Changelog</h1>
+                <p>Histórico de mudanças e evolução do projeto</p>
+            </header>
+
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a>
+                <span class="breadcrumb-separator">/</span>
+                <span>Changelog</span>
+            </nav>
+
+            <div class="content-body">
+                <!-- Overview Section -->
+                <div class="card">
+                    <h2>📋 Visão Geral</h2>
+                    <p>
+                        Este documento registra todas as mudanças significativas no projeto 
+                        Tech Challenge Restaurant, incluindo novas funcionalidades, correções 
+                        de bugs e melhorias de performance.
+                    </p>
+                </div>
+
+                <!-- Version History -->
+                <div class="card">
+                    <h2>🔄 Histórico de Versões</h2>
+                    
+                    <div class="version-entry">
+                        <h3>🚀 v1.0.0 - Lançamento Inicial</h3>
+                        <p class="version-date">05 de Agosto de 2025</p>
+                        
+                        <h4>✨ Novas Funcionalidades</h4>
+                        <ul>
+                            <li>Implementação inicial da API de Restaurantes</li>
+                            <li>Sistema de gerenciamento de tipos de cozinha</li>
+                            <li>Funcionalidades de menu e categorias</li>
+                            <li>Integração com MongoDB</li>
+                            <li>Documentação completa da API</li>
+                            <li>Coleções Postman para testes</li>
+                        </ul>
+                        
+                        <h4>🔧 Melhorias Técnicas</h4>
+                        <ul>
+                            <li>Arquitetura Clean Architecture implementada</li>
+                            <li>Configuração Docker para desenvolvimento</li>
+                            <li>Sistema de testes automatizados</li>
+                            <li>Documentação web interativa</li>
+                        </ul>
+                        
+                        <h4>🐛 Correções</h4>
+                        <ul>
+                            <li>Correção de mapeamento de campos MongoDB</li>
+                            <li>Ajustes na validação de dados</li>
+                            <li>Melhorias no tratamento de erros</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Future Plans -->
+                <div class="card">
+                    <h2>🔮 Próximas Versões</h2>
+                    
+                    <div class="feature-cards">
+                        <div class="feature-card">
+                            <div class="feature-card-icon">🔐</div>
+                            <h3 class="feature-card-title">v1.1.0 - Autenticação</h3>
+                            <p class="feature-card-description">
+                                Implementação de sistema de autenticação JWT 
+                                e autorização baseada em roles.
+                            </p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-card-icon">📱</div>
+                            <h3 class="feature-card-title">v1.2.0 - Mobile API</h3>
+                            <p class="feature-card-description">
+                                Endpoints otimizados para aplicações móveis 
+                                com cache e paginação.
+                            </p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-card-icon">📊</div>
+                            <h3 class="feature-card-title">v1.3.0 - Analytics</h3>
+                            <p class="feature-card-description">
+                                Sistema de métricas e relatórios para 
+                                análise de performance.
+                            </p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-card-icon">🔔</div>
+                            <h3 class="feature-card-title">v1.4.0 - Notificações</h3>
+                            <p class="feature-card-description">
+                                Sistema de notificações em tempo real 
+                                para atualizações de pedidos.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Breaking Changes -->
+                <div class="card">
+                    <h2>⚠️ Mudanças Quebradoras</h2>
+                    <p>
+                        Esta seção documenta mudanças que podem quebrar compatibilidade 
+                        com versões anteriores.
+                    </p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>Exemplo de Mudança Quebradora</span>
+                        </div>
+                        <pre><code>// v1.0.0 - Campo antigo
+{
+  "restaurant": {
+    "kitchenType": "italian"
+  }
+}
+
+// v1.1.0 - Nova estrutura
+{
+  "restaurant": {
+    "kitchenType": {
+      "id": "kitchen-type-id",
+      "name": "Italian"
+    }
+  }
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Contribution Guidelines -->
+                <div class="card">
+                    <h2>🤝 Diretrizes de Contribuição</h2>
+                    <p>
+                        Para contribuir com o projeto, siga estas diretrizes para 
+                        manter a qualidade e consistência do código.
+                    </p>
+                    
+                    <h3>📋 Processo de Desenvolvimento</h3>
+                    <ol>
+                        <li><strong>Fork do Repositório:</strong> Crie um fork do projeto</li>
+                        <li><strong>Branch de Feature:</strong> Crie uma branch para sua feature</li>
+                        <li><strong>Desenvolvimento:</strong> Implemente as mudanças seguindo os padrões</li>
+                        <li><strong>Testes:</strong> Execute todos os testes e adicione novos se necessário</li>
+                        <li><strong>Documentação:</strong> Atualize a documentação conforme necessário</li>
+                        <li><strong>Pull Request:</strong> Crie um PR com descrição detalhada</li>
+                    </ol>
+                    
+                    <h3>📝 Padrões de Commit</h3>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>Convenção de Commits</span>
+                        </div>
+                        <pre><code>feat: adiciona nova funcionalidade de busca
+fix: corrige problema de validação de dados
+docs: atualiza documentação da API
+style: formatação de código
+refactor: refatoração sem mudança de funcionalidade
+test: adiciona ou corrige testes
+chore: mudanças em build ou ferramentas</code></pre>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html> 
