@@ -1,6 +1,15 @@
 version: '3.8'
 
 services:
+  postgres:
+    image: postgres:latest
+    container_name: fiap-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: tech_challenge
+    ports:
+      - "5432:5432"
   mongodb:
     image: mongo:7.0
     container_name: fiap-mongodb
@@ -15,6 +24,19 @@ services:
       - mongodb_data:/data/db
     networks:
       - fiap-network
+
+  tech-challenge:
+    image: itmoura/fiap-tech-challenge:latest
+    container_name: fiap-tech-challenge
+    privileged: true
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - BD_USER=postgres
+      - BD_PASS=root
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
 
   app:
     build:
