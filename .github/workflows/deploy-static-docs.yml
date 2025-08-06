@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main ]
     paths:
-      - 'web-docs/**'
+      - 'docs/web-docs/**'
       - '.github/workflows/deploy-static-docs.yml'
   workflow_dispatch:
 
@@ -31,35 +31,35 @@ jobs:
 
       - name: 🔍 Verify Documentation Structure
         run: |
-          echo "🔍 Checking web-docs structure..."
-          ls -la web-docs/
+          echo "🔍 Checking docs/web-docs structure..."
+          ls -la docs/web-docs/
           
           echo "📄 Checking required files..."
-          if [ -f "web-docs/index.html" ]; then
+          if [ -f "docs/web-docs/index.html" ]; then
             echo "✅ index.html found"
           else
             echo "❌ index.html not found"
             exit 1
           fi
           
-          if [ -d "web-docs/css" ]; then
+          if [ -d "docs/web-docs/css" ]; then
             echo "✅ CSS directory found"
           else
             echo "❌ CSS directory not found"
             exit 1
           fi
           
-          if [ -d "web-docs/js" ]; then
+          if [ -d "docs/web-docs/js" ]; then
             echo "✅ JS directory found"
           else
             echo "❌ JS directory not found"
             exit 1
           fi
           
-          if [ -d "web-docs/pages" ]; then
+          if [ -d "docs/web-docs/pages" ]; then
             echo "✅ Pages directory found"
             echo "📋 Available pages:"
-            ls -1 web-docs/pages/ | head -10
+            ls -1 docs/web-docs/pages/ | head -10
           else
             echo "❌ Pages directory not found"
             exit 1
@@ -69,10 +69,10 @@ jobs:
         run: |
           echo "📊 Documentation Statistics"
           echo "=========================="
-          echo "📄 Total HTML files: $(find web-docs -name "*.html" | wc -l)"
-          echo "🎨 CSS files: $(find web-docs -name "*.css" | wc -l)"
-          echo "⚡ JS files: $(find web-docs -name "*.js" | wc -l)"
-          echo "📁 Total size: $(du -sh web-docs | cut -f1)"
+          echo "📄 Total HTML files: $(find docs/web-docs -name "*.html" | wc -l)"
+          echo "🎨 CSS files: $(find docs/web-docs -name "*.css" | wc -l)"
+          echo "⚡ JS files: $(find docs/web-docs -name "*.js" | wc -l)"
+          echo "📁 Total size: $(du -sh docs/web-docs | cut -f1)"
           echo "=========================="
 
       - name: 🔧 Optimize Files
@@ -80,14 +80,14 @@ jobs:
           echo "🔧 Optimizing documentation files..."
           
           # Remove any .DS_Store files (macOS)
-          find web-docs -name ".DS_Store" -delete || true
+          find docs/web-docs -name ".DS_Store" -delete || true
           
           # Remove any backup files
-          find web-docs -name "*.bak" -delete || true
-          find web-docs -name "*~" -delete || true
+          find docs/web-docs -name "*.bak" -delete || true
+          find docs/web-docs -name "*~" -delete || true
           
           # Ensure .nojekyll file exists for static HTML serving
-          touch web-docs/.nojekyll
+          touch docs/web-docs/.nojekyll
           echo "✅ .nojekyll file created for static HTML serving"
           
           echo "✅ Optimization completed"
@@ -98,7 +98,7 @@ jobs:
       - name: 📤 Upload Documentation Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./web-docs
+          path: ./docs/web-docs
 
       - name: 🌐 Deploy to GitHub Pages
         id: deployment
