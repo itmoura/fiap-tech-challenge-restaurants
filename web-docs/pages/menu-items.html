@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Items API - Tech Challenge Restaurant API</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍕</text></svg>">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <a href="../" class="logo">
+                    <span class="logo-icon">🍽️</span>
+                    <div>
+                        <div class="logo-text">Tech Challenge</div>
+                        <div class="logo-subtitle">Restaurant API</div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="nav-menu">
+                <div class="nav-section">
+                    <div class="nav-section-title">Início</div>
+                    <a href="../" class="nav-item">
+                        <span class="nav-item-icon">🏠</span>
+                        Visão Geral
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Instalação</div>
+                    <a href="prerequisites.html" class="nav-item">
+                        <span class="nav-item-icon">📋</span>
+                        Pré-requisitos
+                    </a>
+                    <a href="local-setup.html" class="nav-item">
+                        <span class="nav-item-icon">⚙️</span>
+                        Configuração Local
+                    </a>
+                    <a href="docker.html" class="nav-item">
+                        <span class="nav-item-icon">🐳</span>
+                        Docker
+                    </a>
+                    <a href="testing.html" class="nav-item">
+                        <span class="nav-item-icon">🧪</span>
+                        Testes
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">API Reference</div>
+                    <a href="api-overview.html" class="nav-item">
+                        <span class="nav-item-icon">📚</span>
+                        Visão Geral
+                    </a>
+                    <a href="kitchen-types.html" class="nav-item">
+                        <span class="nav-item-icon">👨‍🍳</span>
+                        Kitchen Types
+                    </a>
+                    <a href="restaurants.html" class="nav-item">
+                        <span class="nav-item-icon">🏪</span>
+                        Restaurants
+                    </a>
+                    <a href="menu-categories.html" class="nav-item">
+                        <span class="nav-item-icon">📂</span>
+                        Menu Categories
+                    </a>
+                    <a href="menu-items.html" class="nav-item active">
+                        <span class="nav-item-icon">🍕</span>
+                        Menu Items
+                    </a>
+                    <a href="status-codes.html" class="nav-item">
+                        <span class="nav-item-icon">📊</span>
+                        Status Codes
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Microserviços</div>
+                    <a href="user-microservice.html" class="nav-item">
+                        <span class="nav-item-icon">👥</span>
+                        Usuários (MS)
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Arquitetura</div>
+                    <a href="architecture-overview.html" class="nav-item">
+                        <span class="nav-item-icon">🏗️</span>
+                        Visão Geral
+                    </a>
+                    <a href="clean-architecture.html" class="nav-item">
+                        <span class="nav-item-icon">🎯</span>
+                        Clean Architecture
+                    </a>
+                    <a href="data-modeling.html" class="nav-item">
+                        <span class="nav-item-icon">🗄️</span>
+                        Modelagem de Dados
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Sobre</div>
+                    <a href="author.html" class="nav-item">
+                        <span class="nav-item-icon">👤</span>
+                        Autor
+                    </a>
+                    <a href="license.html" class="nav-item">
+                        <span class="nav-item-icon">📄</span>
+                        Licença
+                    </a>
+                    <a href="changelog.html" class="nav-item">
+                        <span class="nav-item-icon">📝</span>
+                        Changelog
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <nav class="breadcrumb">
+                    <a href="../">Home</a>
+                    <span>/</span>
+                    <a href="#">API Reference</a>
+                    <span>/</span>
+                    <span>Menu Items</span>
+                </nav>
+                <h1 class="page-title">🍕 Menu Items API</h1>
+                <p class="page-description">Gerenciamento de itens específicos do menu com preços e descrições</p>
+            </header>
+
+            <div class="content-body">
+                <!-- Overview -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">📋</span>
+                        <h2 class="card-title">Sobre Menu Items</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>Os Menu Items são os pratos específicos oferecidos pelo restaurante, organizados dentro de categorias. Cada item possui nome, descrição, preço e pertence a uma categoria específica.</p>
+
+                        <div class="feature-cards">
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🍽️</div>
+                                <h3 class="feature-card-title">Pratos Específicos</h3>
+                                <p class="feature-card-description">
+                                    Cada item representa um prato do menu
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">💰</div>
+                                <h3 class="feature-card-title">Preços</h3>
+                                <p class="feature-card-description">
+                                    Cada item tem seu preço específico
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">📝</div>
+                                <h3 class="feature-card-title">Descrições</h3>
+                                <p class="feature-card-description">
+                                    Descrições detalhadas dos ingredientes
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">📂</div>
+                                <h3 class="feature-card-title">Categorizado</h3>
+                                <p class="feature-card-description">
+                                    Pertence a uma categoria específica
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- API Endpoints -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🔗</span>
+                        <h2 class="card-title">Endpoints</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="endpoint">
+                            <span class="method method-get">GET</span>
+                            <span class="endpoint-path">/api/restaurants/{id}/menu/categories/{categoryId}/items</span>
+                            <span class="endpoint-description">Listar itens da categoria</span>
+                        </div>
+                        
+                        <div class="endpoint">
+                            <span class="method method-get">GET</span>
+                            <span class="endpoint-path">/api/restaurants/{id}/menu/categories/{categoryId}/items/{itemId}</span>
+                            <span class="endpoint-description">Buscar item específico</span>
+                        </div>
+
+                        <div class="endpoint">
+                            <span class="method method-post">POST</span>
+                            <span class="endpoint-path">/api/restaurants/{id}/menu/categories/{categoryId}/items</span>
+                            <span class="endpoint-description">Adicionar item à categoria</span>
+                        </div>
+
+                        <div class="endpoint">
+                            <span class="method method-put">PUT</span>
+                            <span class="endpoint-path">/api/restaurants/{id}/menu/categories/{categoryId}/items/{itemId}</span>
+                            <span class="endpoint-description">Atualizar item</span>
+                        </div>
+
+                        <div class="endpoint">
+                            <span class="method method-delete">DELETE</span>
+                            <span class="endpoint-path">/api/restaurants/{id}/menu/categories/{categoryId}/items/{itemId}</span>
+                            <span class="endpoint-description">Remover item</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Model -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">📊</span>
+                        <h2 class="card-title">Modelo de Dados</h2>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="mb-1">🏗️ Estrutura MenuItem</h3>
+                        <div class="code-block">
+                            <pre>{
+  "id": "string",           // ID único do item
+  "name": "string",         // Nome do prato
+  "description": "string",  // Descrição detalhada
+  "price": "number"         // Preço em reais (formato decimal)
+}</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">✅ Validações</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Campo</th>
+                                    <th>Regras</th>
+                                    <th>Exemplo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>name</code></td>
+                                    <td>Obrigatório, 2-100 caracteres</td>
+                                    <td>Spaghetti Carbonara</td>
+                                </tr>
+                                <tr>
+                                    <td><code>description</code></td>
+                                    <td>Opcional, máximo 300 caracteres</td>
+                                    <td>Massa com bacon, ovos e queijo parmesão</td>
+                                </tr>
+                                <tr>
+                                    <td><code>price</code></td>
+                                    <td>Obrigatório, > 0, máximo 2 decimais</td>
+                                    <td>32.90</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3 class="mb-1 mt-2">💰 Formato de Preço</h3>
+                        <ul>
+                            <li><strong>Moeda</strong>: Real brasileiro (BRL)</li>
+                            <li><strong>Formato</strong>: Decimal com até 2 casas</li>
+                            <li><strong>Mínimo</strong>: 0.01 (1 centavo)</li>
+                            <li><strong>Máximo</strong>: 9999.99</li>
+                            <li><strong>Exemplos válidos</strong>: 15.50, 32.90, 125.00</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Examples -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">💻</span>
+                        <h2 class="card-title">Exemplos de Uso</h2>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="mb-1">📋 Listar Itens da Categoria</h3>
+                        <div class="code-block">
+                            <pre>curl -X GET http://localhost:8081/api/restaurants/64f1a2b3c4d5e6f7g8h9i0j1/menu/categories/cat1/items \
+  -H "Content-Type: application/json"</pre>
+                        </div>
+
+                        <p><strong>Resposta:</strong></p>
+                        <div class="code-block">
+                            <pre>{
+  "success": true,
+  "data": [
+    {
+      "id": "item1",
+      "name": "Bruschetta Clássica",
+      "description": "Pão italiano com tomate, manjericão e azeite",
+      "price": 18.90
+    },
+    {
+      "id": "item2",
+      "name": "Carpaccio de Salmão",
+      "description": "Fatias finas de salmão com alcaparras e limão",
+      "price": 28.50
+    }
+  ],
+  "timestamp": "2024-08-05T19:30:00Z"
+}</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">🔍 Buscar Item Específico</h3>
+                        <div class="code-block">
+                            <pre>curl -X GET http://localhost:8081/api/restaurants/64f1a2b3c4d5e6f7g8h9i0j1/menu/categories/cat1/items/item1 \
+  -H "Content-Type: application/json"</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">➕ Adicionar Item</h3>
+                        <div class="code-block">
+                            <pre>curl -X POST http://localhost:8081/api/restaurants/64f1a2b3c4d5e6f7g8h9i0j1/menu/categories/cat1/items \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Salada Caesar",
+    "description": "Alface romana, croutons, parmesão e molho caesar",
+    "price": 22.90
+  }'</pre>
+                        </div>
+
+                        <p><strong>Resposta:</strong></p>
+                        <div class="code-block">
+                            <pre>{
+  "success": true,
+  "data": {
+    "id": "item3",
+    "name": "Salada Caesar",
+    "description": "Alface romana, croutons, parmesão e molho caesar",
+    "price": 22.90
+  },
+  "message": "Item adicionado com sucesso",
+  "timestamp": "2024-08-05T19:30:00Z"
+}</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">✏️ Atualizar Item</h3>
+                        <div class="code-block">
+                            <pre>curl -X PUT http://localhost:8081/api/restaurants/64f1a2b3c4d5e6f7g8h9i0j1/menu/categories/cat1/items/item3 \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Salada Caesar Premium",
+    "description": "Alface romana, croutons artesanais, parmesão 24 meses e molho caesar da casa",
+    "price": 26.90
+  }'</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">🗑️ Remover Item</h3>
+                        <div class="code-block">
+                            <pre>curl -X DELETE http://localhost:8081/api/restaurants/64f1a2b3c4d5e6f7g8h9i0j1/menu/categories/cat1/items/item3 \
+  -H "Content-Type: application/json"</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Menu Examples -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🍽️</span>
+                        <h2 class="card-title">Exemplos de Itens por Categoria</h2>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="mb-1">🥗 Entradas</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Descrição</th>
+                                    <th>Preço</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Bruschetta Clássica</td>
+                                    <td>Pão italiano com tomate, manjericão e azeite</td>
+                                    <td>R$ 18,90</td>
+                                </tr>
+                                <tr>
+                                    <td>Carpaccio de Carne</td>
+                                    <td>Fatias finas de carne com rúcula e parmesão</td>
+                                    <td>R$ 32,50</td>
+                                </tr>
+                                <tr>
+                                    <td>Antipasto Misto</td>
+                                    <td>Seleção de queijos, embutidos e azeitonas</td>
+                                    <td>R$ 45,90</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3 class="mb-1 mt-2">🍝 Pratos Principais</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Descrição</th>
+                                    <th>Preço</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Spaghetti Carbonara</td>
+                                    <td>Massa com bacon, ovos e queijo parmesão</td>
+                                    <td>R$ 32,90</td>
+                                </tr>
+                                <tr>
+                                    <td>Risotto de Cogumelos</td>
+                                    <td>Arroz arbóreo com mix de cogumelos frescos</td>
+                                    <td>R$ 38,50</td>
+                                </tr>
+                                <tr>
+                                    <td>Osso Buco alla Milanese</td>
+                                    <td>Osso buco braseado com risotto açafrão</td>
+                                    <td>R$ 65,90</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3 class="mb-1 mt-2">🍰 Sobremesas</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Descrição</th>
+                                    <th>Preço</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Tiramisu</td>
+                                    <td>Sobremesa italiana com café e mascarpone</td>
+                                    <td>R$ 16,90</td>
+                                </tr>
+                                <tr>
+                                    <td>Panna Cotta</td>
+                                    <td>Creme italiano com calda de frutas vermelhas</td>
+                                    <td>R$ 14,50</td>
+                                </tr>
+                                <tr>
+                                    <td>Gelato Artesanal</td>
+                                    <td>Sorvete italiano - sabores variados</td>
+                                    <td>R$ 12,90</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Business Rules -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">⚖️</span>
+                        <h2 class="card-title">Regras de Negócio</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="feature-cards">
+                            <div class="feature-card">
+                                <div class="feature-card-icon">📂</div>
+                                <h3 class="feature-card-title">Categoria Existente</h3>
+                                <p class="feature-card-description">
+                                    Item só pode ser criado em categoria existente
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🏷️</div>
+                                <h3 class="feature-card-title">Nome Único</h3>
+                                <p class="feature-card-description">
+                                    Não pode haver itens com mesmo nome na categoria
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">💰</div>
+                                <h3 class="feature-card-title">Preço Válido</h3>
+                                <p class="feature-card-description">
+                                    Preço deve ser positivo com máximo 2 decimais
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🔄</div>
+                                <h3 class="feature-card-title">Operação Atômica</h3>
+                                <p class="feature-card-description">
+                                    Todas as operações são atômicas no documento
+                                </p>
+                            </div>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">⚠️ Validações Especiais</h3>
+                        <ul>
+                            <li><strong>Restaurante não encontrado</strong>: Retorna 404</li>
+                            <li><strong>Categoria não encontrada</strong>: Retorna 404</li>
+                            <li><strong>Item duplicado na categoria</strong>: Retorna 409 Conflict</li>
+                            <li><strong>Item não encontrado</strong>: Retorna 404</li>
+                            <li><strong>Preço inválido</strong>: Retorna 400 Bad Request</li>
+                            <li><strong>Nome muito longo</strong>: Retorna 400 Bad Request</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Error Handling -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">⚠️</span>
+                        <h2 class="card-title">Tratamento de Erros</h2>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="mb-1">❌ Erros Específicos</h3>
+                        
+                        <h4 class="mb-1 mt-2">404 - Menu Item Not Found</h4>
+                        <div class="code-block">
+                            <pre>{
+  "success": false,
+  "error": {
+    "code": "MENU_ITEM_NOT_FOUND",
+    "message": "Item do menu não encontrado",
+    "details": "Nenhum item encontrado com o ID fornecido na categoria",
+    "resourceId": "item999"
+  },
+  "timestamp": "2024-08-05T19:30:00Z"
+}</pre>
+                        </div>
+
+                        <h4 class="mb-1 mt-2">409 - Item Already Exists</h4>
+                        <div class="code-block">
+                            <pre>{
+  "success": false,
+  "error": {
+    "code": "MENU_ITEM_ALREADY_EXISTS",
+    "message": "Item já existe",
+    "details": "Já existe um item com este nome na categoria",
+    "conflictField": "name"
+  },
+  "timestamp": "2024-08-05T19:30:00Z"
+}</pre>
+                        </div>
+
+                        <h4 class="mb-1 mt-2">400 - Invalid Price</h4>
+                        <div class="code-block">
+                            <pre>{
+  "success": false,
+  "error": {
+    "code": "INVALID_PRICE",
+    "message": "Preço inválido",
+    "details": "Preço deve ser positivo com máximo 2 casas decimais",
+    "field": "price",
+    "value": -10.50
+  },
+  "timestamp": "2024-08-05T19:30:00Z"
+}</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Next Steps -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🚀</span>
+                        <h2 class="card-title">Próximos Passos</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="feature-cards">
+                            <div class="feature-card" data-link="menu-categories.html">
+                                <div class="feature-card-icon">📂</div>
+                                <h3 class="feature-card-title">Menu Categories</h3>
+                                <p class="feature-card-description">
+                                    Entenda como categorias organizam os itens
+                                </p>
+                            </div>
+
+                            <div class="feature-card" data-link="restaurants.html">
+                                <div class="feature-card-icon">🏪</div>
+                                <h3 class="feature-card-title">Restaurants</h3>
+                                <p class="feature-card-description">
+                                    Veja como restaurantes, categorias e itens se relacionam
+                                </p>
+                            </div>
+
+                            <div class="feature-card" data-link="data-modeling.html">
+                                <div class="feature-card-icon">🗄️</div>
+                                <h3 class="feature-card-title">Modelagem de Dados</h3>
+                                <p class="feature-card-description">
+                                    Compreenda a estrutura aninhada no MongoDB
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

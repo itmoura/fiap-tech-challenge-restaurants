@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autor - Tech Challenge Restaurant API</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👤</text></svg>">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <a href="../" class="logo">
+                    <span class="logo-icon">🍽️</span>
+                    <div>
+                        <div class="logo-text">Tech Challenge</div>
+                        <div class="logo-subtitle">Restaurant API</div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="nav-menu">
+                <div class="nav-section">
+                    <div class="nav-section-title">Início</div>
+                    <a href="../" class="nav-item">
+                        <span class="nav-item-icon">🏠</span>
+                        Visão Geral
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Instalação</div>
+                    <a href="prerequisites.html" class="nav-item">
+                        <span class="nav-item-icon">📋</span>
+                        Pré-requisitos
+                    </a>
+                    <a href="local-setup.html" class="nav-item">
+                        <span class="nav-item-icon">⚙️</span>
+                        Configuração Local
+                    </a>
+                    <a href="docker.html" class="nav-item">
+                        <span class="nav-item-icon">🐳</span>
+                        Docker
+                    </a>
+                    <a href="testing.html" class="nav-item">
+                        <span class="nav-item-icon">🧪</span>
+                        Testes
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">API Reference</div>
+                    <a href="api-overview.html" class="nav-item">
+                        <span class="nav-item-icon">📚</span>
+                        Visão Geral
+                    </a>
+                    <a href="kitchen-types.html" class="nav-item">
+                        <span class="nav-item-icon">👨‍🍳</span>
+                        Kitchen Types
+                    </a>
+                    <a href="restaurants.html" class="nav-item">
+                        <span class="nav-item-icon">🏪</span>
+                        Restaurants
+                    </a>
+                    <a href="menu-categories.html" class="nav-item">
+                        <span class="nav-item-icon">📂</span>
+                        Menu Categories
+                    </a>
+                    <a href="menu-items.html" class="nav-item">
+                        <span class="nav-item-icon">🍕</span>
+                        Menu Items
+                    </a>
+                    <a href="status-codes.html" class="nav-item">
+                        <span class="nav-item-icon">📊</span>
+                        Status Codes
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Microserviços</div>
+                    <a href="user-microservice.html" class="nav-item">
+                        <span class="nav-item-icon">👥</span>
+                        Usuários (MS)
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Arquitetura</div>
+                    <a href="architecture-overview.html" class="nav-item">
+                        <span class="nav-item-icon">🏗️</span>
+                        Visão Geral
+                    </a>
+                    <a href="clean-architecture.html" class="nav-item">
+                        <span class="nav-item-icon">🎯</span>
+                        Clean Architecture
+                    </a>
+                    <a href="data-modeling.html" class="nav-item">
+                        <span class="nav-item-icon">🗄️</span>
+                        Modelagem de Dados
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Sobre</div>
+                    <a href="author.html" class="nav-item active">
+                        <span class="nav-item-icon">👤</span>
+                        Autor
+                    </a>
+                    <a href="license.html" class="nav-item">
+                        <span class="nav-item-icon">📄</span>
+                        Licença
+                    </a>
+                    <a href="changelog.html" class="nav-item">
+                        <span class="nav-item-icon">📝</span>
+                        Changelog
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <nav class="breadcrumb">
+                    <a href="../">Home</a>
+                    <span>/</span>
+                    <a href="#">Sobre</a>
+                    <span>/</span>
+                    <span>Autor</span>
+                </nav>
+                <h1 class="page-title">👤 Sobre o Autor</h1>
+                <p class="page-description">Informações sobre o desenvolvedor do Tech Challenge</p>
+            </header>
+
+            <div class="content-body">
+                <!-- Author Profile -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">👨‍💻</span>
+                        <h2 class="card-title">Ítalo Moura</h2>
+                    </div>
+                    <div class="card-content">
+                        <div style="display: flex; align-items: center; gap: 2rem; margin-bottom: 2rem;">
+                            <div style="width: 120px; height: 120px; border-radius: 50%; background: var(--accent-primary); display: flex; align-items: center; justify-content: center; font-size: 3rem; color: var(--bg-primary);">
+                                👨‍💻
+                            </div>
+                            <div>
+                                <h3 style="margin-bottom: 0.5rem; color: var(--text-primary);">Desenvolvedor Full Stack</h3>
+                                <p style="color: var(--text-secondary); margin-bottom: 1rem;">Especialista em Java, Spring Boot e arquiteturas modernas</p>
+                                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                                    <a href="https://github.com/itmoura" target="_blank" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: var(--bg-tertiary); border-radius: 6px; text-decoration: none; color: var(--text-primary);">
+                                        <span>🐙</span> GitHub
+                                    </a>
+                                    <a href="https://linkedin.com/in/itmoura" target="_blank" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: var(--bg-tertiary); border-radius: 6px; text-decoration: none; color: var(--text-primary);">
+                                        <span>💼</span> LinkedIn
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p>Desenvolvedor apaixonado por tecnologia com foco em criar soluções robustas e escaláveis. Especialista em desenvolvimento backend com Java e Spring Boot, sempre buscando aplicar as melhores práticas de arquitetura de software.</p>
+                    </div>
+                </div>
+
+                <!-- Experience -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">💼</span>
+                        <h2 class="card-title">Experiência Profissional</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="feature-cards">
+                            <div class="feature-card">
+                                <div class="feature-card-icon">☕</div>
+                                <h3 class="feature-card-title">Java & Spring</h3>
+                                <p class="feature-card-description">
+                                    Desenvolvimento de APIs REST com Spring Boot, Spring Security e Spring Data
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🏗️</div>
+                                <h3 class="feature-card-title">Arquitetura</h3>
+                                <p class="feature-card-description">
+                                    Clean Architecture, Microserviços, Domain-Driven Design (DDD)
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🗄️</div>
+                                <h3 class="feature-card-title">Banco de Dados</h3>
+                                <p class="feature-card-description">
+                                    MongoDB, PostgreSQL, MySQL, Redis para cache
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🐳</div>
+                                <h3 class="feature-card-title">DevOps</h3>
+                                <p class="feature-card-description">
+                                    Docker, Kubernetes, CI/CD com GitHub Actions
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">☁️</div>
+                                <h3 class="feature-card-title">Cloud</h3>
+                                <p class="feature-card-description">
+                                    AWS (EC2, RDS, S3, Lambda), Azure, Google Cloud Platform
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🧪</div>
+                                <h3 class="feature-card-title">Testes</h3>
+                                <p class="feature-card-description">
+                                    TDD, JUnit, Mockito, TestContainers, testes de integração
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Education -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🎓</span>
+                        <h2 class="card-title">Formação Acadêmica</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="feature-cards">
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🏛️</div>
+                                <h3 class="feature-card-title">FIAP</h3>
+                                <p class="feature-card-description">
+                                    Pós-graduação em Arquitetura de Software<br>
+                                    <small style="color: var(--text-muted);">Especialização em Clean Architecture e Microserviços</small>
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">💻</div>
+                                <h3 class="feature-card-title">Ciência da Computação</h3>
+                                <p class="feature-card-description">
+                                    Bacharelado em Ciência da Computação<br>
+                                    <small style="color: var(--text-muted);">Fundamentos sólidos em algoritmos e estruturas de dados</small>
+                                </p>
+                            </div>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">📚 Certificações</h3>
+                        <ul>
+                            <li><strong>AWS Certified Solutions Architect</strong> - Amazon Web Services</li>
+                            <li><strong>Oracle Certified Professional Java SE</strong> - Oracle</li>
+                            <li><strong>Spring Professional Certification</strong> - VMware</li>
+                            <li><strong>MongoDB Certified Developer</strong> - MongoDB Inc.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Tech Challenge Project -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🍽️</span>
+                        <h2 class="card-title">Sobre o Tech Challenge</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>O <strong>Tech Challenge - Restaurant Management API</strong> foi desenvolvido como projeto final da pós-graduação em Arquitetura de Software da FIAP, demonstrando a aplicação prática de conceitos avançados de desenvolvimento.</p>
+
+                        <h3 class="mb-1 mt-2">🎯 Objetivos do Projeto</h3>
+                        <ul>
+                            <li><strong>Aplicar Clean Architecture</strong>: Demonstrar separação clara de responsabilidades</li>
+                            <li><strong>Implementar DDD</strong>: Modelagem focada no domínio do negócio</li>
+                            <li><strong>Usar NoSQL eficientemente</strong>: Aproveitar as vantagens do MongoDB</li>
+                            <li><strong>Criar API RESTful</strong>: Seguir padrões e boas práticas</li>
+                            <li><strong>Documentar completamente</strong>: Facilitar uso e manutenção</li>
+                            <li><strong>Implementar testes</strong>: Garantir qualidade e confiabilidade</li>
+                        </ul>
+
+                        <h3 class="mb-1 mt-2">🏆 Resultados Alcançados</h3>
+                        <div class="feature-cards">
+                            <div class="feature-card">
+                                <div class="feature-card-icon">📊</div>
+                                <h3 class="feature-card-title">85%+ Cobertura</h3>
+                                <p class="feature-card-description">
+                                    Alta cobertura de testes automatizados
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">⚡</div>
+                                <h3 class="feature-card-title">Performance</h3>
+                                <p class="feature-card-description">
+                                    Otimizado para leitura com documentos aninhados
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">📚</div>
+                                <h3 class="feature-card-title">Documentação</h3>
+                                <p class="feature-card-description">
+                                    Documentação completa e interativa
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🔄</div>
+                                <h3 class="feature-card-title">CI/CD</h3>
+                                <p class="feature-card-description">
+                                    Pipeline automatizada com GitHub Actions
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technologies Used -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🛠️</span>
+                        <h2 class="card-title">Tecnologias Utilizadas</h2>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="mb-1">🏗️ Backend</h3>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem;">
+                            <span class="badge badge-primary">Java 21</span>
+                            <span class="badge badge-success">Spring Boot 3.5.4</span>
+                            <span class="badge badge-secondary">Spring Data MongoDB</span>
+                            <span class="badge badge-primary">Spring Security</span>
+                            <span class="badge badge-success">Lombok</span>
+                            <span class="badge badge-secondary">Jackson</span>
+                        </div>
+
+                        <h3 class="mb-1">🗄️ Banco de Dados</h3>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem;">
+                            <span class="badge badge-success">MongoDB 7.0</span>
+                            <span class="badge badge-primary">MongoDB Compass</span>
+                        </div>
+
+                        <h3 class="mb-1">🧪 Testes</h3>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem;">
+                            <span class="badge badge-primary">JUnit 5</span>
+                            <span class="badge badge-secondary">Mockito</span>
+                            <span class="badge badge-success">TestContainers</span>
+                            <span class="badge badge-primary">Spring Boot Test</span>
+                        </div>
+
+                        <h3 class="mb-1">📚 Documentação</h3>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem;">
+                            <span class="badge badge-secondary">SpringDoc OpenAPI</span>
+                            <span class="badge badge-primary">Swagger UI</span>
+                            <span class="badge badge-success">HTML/CSS/JS</span>
+                        </div>
+
+                        <h3 class="mb-1">🐳 DevOps</h3>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <span class="badge badge-primary">Docker</span>
+                            <span class="badge badge-secondary">Docker Compose</span>
+                            <span class="badge badge-success">GitHub Actions</span>
+                            <span class="badge badge-primary">Gradle</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Philosophy -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">💭</span>
+                        <h2 class="card-title">Filosofia de Desenvolvimento</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="feature-cards">
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🎯</div>
+                                <h3 class="feature-card-title">Qualidade</h3>
+                                <p class="feature-card-description">
+                                    "Código limpo não é escrito seguindo regras. É escrito por programadores que se importam."
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🔄</div>
+                                <h3 class="feature-card-title">Melhoria Contínua</h3>
+                                <p class="feature-card-description">
+                                    Sempre buscando aprender novas tecnologias e aprimorar práticas existentes.
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🤝</div>
+                                <h3 class="feature-card-title">Colaboração</h3>
+                                <p class="feature-card-description">
+                                    Acredito que o melhor software é construído em equipe, com comunicação clara.
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">📚</div>
+                                <h3 class="feature-card-title">Documentação</h3>
+                                <p class="feature-card-description">
+                                    Código bem documentado é um presente para o futuro desenvolvedor (incluindo você mesmo).
+                                </p>
+                            </div>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">💡 Princípios que Sigo</h3>
+                        <ul>
+                            <li><strong>SOLID</strong>: Princípios fundamentais para código limpo</li>
+                            <li><strong>DRY</strong>: Don't Repeat Yourself - evitar duplicação</li>
+                            <li><strong>KISS</strong>: Keep It Simple, Stupid - simplicidade é elegância</li>
+                            <li><strong>YAGNI</strong>: You Aren't Gonna Need It - não over-engineer</li>
+                            <li><strong>TDD</strong>: Test-Driven Development quando apropriado</li>
+                            <li><strong>Clean Code</strong>: Código que conta uma história</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Contact -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">📞</span>
+                        <h2 class="card-title">Contato</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>Interessado em discutir tecnologia, arquitetura de software ou oportunidades de colaboração? Entre em contato!</p>
+
+                        <div class="feature-cards">
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🐙</div>
+                                <h3 class="feature-card-title">GitHub</h3>
+                                <p class="feature-card-description">
+                                    <a href="https://github.com/itmoura" target="_blank">github.com/itmoura</a><br>
+                                    <small style="color: var(--text-muted);">Projetos open source e contribuições</small>
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">💼</div>
+                                <h3 class="feature-card-title">LinkedIn</h3>
+                                <p class="feature-card-description">
+                                    <a href="https://linkedin.com/in/itmoura" target="_blank">linkedin.com/in/itmoura</a><br>
+                                    <small style="color: var(--text-muted);">Rede profissional e experiências</small>
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">📧</div>
+                                <h3 class="feature-card-title">Email</h3>
+                                <p class="feature-card-description">
+                                    <a href="mailto:italo.moura.dev@gmail.com">italo.moura.dev@gmail.com</a><br>
+                                    <small style="color: var(--text-muted);">Para discussões técnicas e oportunidades</small>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div style="background: var(--bg-tertiary); padding: 1.5rem; border-radius: 8px; margin-top: 2rem; text-align: center;">
+                            <p style="margin-bottom: 1rem; color: var(--text-primary);">
+                                <strong>"A melhor forma de prever o futuro é criá-lo."</strong>
+                            </p>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem;">
+                                Obrigado por visitar a documentação do Tech Challenge!<br>
+                                Espero que este projeto demonstre minha paixão por desenvolvimento de software de qualidade.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

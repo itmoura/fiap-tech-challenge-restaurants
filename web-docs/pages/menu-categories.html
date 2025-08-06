@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Categories API - Tech Challenge Restaurant API</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📂</text></svg>">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <a href="../" class="logo">
+                    <span class="logo-icon">🍽️</span>
+                    <div>
+                        <div class="logo-text">Tech Challenge</div>
+                        <div class="logo-subtitle">Restaurant API</div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="nav-menu">
+                <div class="nav-section">
+                    <div class="nav-section-title">Início</div>
+                    <a href="../" class="nav-item">
+                        <span class="nav-item-icon">🏠</span>
+                        Visão Geral
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Instalação</div>
+                    <a href="prerequisites.html" class="nav-item">
+                        <span class="nav-item-icon">📋</span>
+                        Pré-requisitos
+                    </a>
+                    <a href="local-setup.html" class="nav-item">
+                        <span class="nav-item-icon">⚙️</span>
+                        Configuração Local
+                    </a>
+                    <a href="docker.html" class="nav-item">
+                        <span class="nav-item-icon">🐳</span>
+                        Docker
+                    </a>
+                    <a href="testing.html" class="nav-item">
+                        <span class="nav-item-icon">🧪</span>
+                        Testes
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">API Reference</div>
+                    <a href="api-overview.html" class="nav-item">
+                        <span class="nav-item-icon">📚</span>
+                        Visão Geral
+                    </a>
+                    <a href="kitchen-types.html" class="nav-item">
+                        <span class="nav-item-icon">👨‍🍳</span>
+                        Kitchen Types
+                    </a>
+                    <a href="restaurants.html" class="nav-item">
+                        <span class="nav-item-icon">🏪</span>
+                        Restaurants
+                    </a>
+                    <a href="menu-categories.html" class="nav-item active">
+                        <span class="nav-item-icon">📂</span>
+                        Menu Categories
+                    </a>
+                    <a href="menu-items.html" class="nav-item">
+                        <span class="nav-item-icon">🍕</span>
+                        Menu Items
+                    </a>
+                    <a href="status-codes.html" class="nav-item">
+                        <span class="nav-item-icon">📊</span>
+                        Status Codes
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Microserviços</div>
+                    <a href="user-microservice.html" class="nav-item">
+                        <span class="nav-item-icon">👥</span>
+                        Usuários (MS)
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Arquitetura</div>
+                    <a href="architecture-overview.html" class="nav-item">
+                        <span class="nav-item-icon">🏗️</span>
+                        Visão Geral
+                    </a>
+                    <a href="clean-architecture.html" class="nav-item">
+                        <span class="nav-item-icon">🎯</span>
+                        Clean Architecture
+                    </a>
+                    <a href="data-modeling.html" class="nav-item">
+                        <span class="nav-item-icon">🗄️</span>
+                        Modelagem de Dados
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Sobre</div>
+                    <a href="author.html" class="nav-item">
+                        <span class="nav-item-icon">👤</span>
+                        Autor
+                    </a>
+                    <a href="license.html" class="nav-item">
+                        <span class="nav-item-icon">📄</span>
+                        Licença
+                    </a>
+                    <a href="changelog.html" class="nav-item">
+                        <span class="nav-item-icon">📝</span>
+                        Changelog
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <nav class="breadcrumb">
+                    <a href="../">Home</a>
+                    <span>/</span>
+                    <a href="#">API Reference</a>
+                    <span>/</span>
+                    <span>Menu Categories</span>
+                </nav>
+                <h1 class="page-title">📂 Menu Categories API</h1>
+                <p class="page-description">Gerenciamento de categorias do menu (Entradas, Pratos Principais, etc.)</p>
+            </header>
+
+            <div class="content-body">
+                <!-- Overview -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">📋</span>
+                        <h2 class="card-title">Sobre Menu Categories</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>As Menu Categories organizam os itens do menu em grupos lógicos como Entradas, Pratos Principais, Sobremesas, etc. Cada categoria pertence a um restaurante específico e pode conter múltiplos itens.</p>
+
+                        <div class="feature-cards">
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🏷️</div>
+                                <h3 class="feature-card-title">Organização</h3>
+                                <p class="feature-card-description">
+                                    Agrupa itens por tipo ou característica
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🔗</div>
+                                <h3 class="feature-card-title">Hierarquia</h3>
+                                <p class="feature-card-description">
+                                    Pertence a um restaurante, contém itens
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">📊</div>
+                                <h3 class="feature-card-title">Estrutura Aninhada</h3>
+                                <p class="feature-card-description">
+                                    Armazenada dentro do documento do restaurante
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🎯</div>
+                                <h3 class="feature-card-title">Performance</h3>
+                                <p class="feature-card-description">
+                                    Uma consulta retorna menu completo
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Common Categories -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">📂</span>
+                        <h2 class="card-title">Categorias Comuns</h2>
+                    </div>
+                    <div class="card-content">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Categoria</th>
+                                    <th>Descrição</th>
+                                    <th>Exemplos de Itens</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Entradas</strong></td>
+                                    <td>Pratos servidos antes do prato principal</td>
+                                    <td>Bruschetta, Carpaccio, Saladas</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Pratos Principais</strong></td>
+                                    <td>Pratos centrais da refeição</td>
+                                    <td>Massas, Carnes, Peixes</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Sobremesas</strong></td>
+                                    <td>Doces servidos ao final da refeição</td>
+                                    <td>Tiramisu, Gelato, Tortas</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Bebidas</strong></td>
+                                    <td>Líquidos para acompanhar a refeição</td>
+                                    <td>Vinhos, Sucos, Refrigerantes</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Petiscos</strong></td>
+                                    <td>Pequenos pratos para compartilhar</td>
+                                    <td>Azeitonas, Queijos, Embutidos</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- API Endpoints -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🔗</span>
+                        <h2 class="card-title">Endpoints</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="endpoint">
+                            <span class="method method-get">GET</span>
+                            <span class="endpoint-path">/api/restaurants/{id}/menu/categories</span>
+                            <span class="endpoint-description">Listar categorias do menu</span>
+                        </div>
+                        
+                        <div class="endpoint">
+                            <span class="method method-get">GET</span>
+                            <span class="endpoint-path">/api/restaurants/{id}/menu/categories/{categoryId}</span>
+                            <span class="endpoint-description">Buscar categoria específica</span>
+                        </div>
+
+                        <div class="endpoint">
+                            <span class="method method-post">POST</span>
+                            <span class="endpoint-path">/api/restaurants/{id}/menu/categories</span>
+                            <span class="endpoint-description">Adicionar categoria ao menu</span>
+                        </div>
+
+                        <div class="endpoint">
+                            <span class="method method-put">PUT</span>
+                            <span class="endpoint-path">/api/restaurants/{id}/menu/categories/{categoryId}</span>
+                            <span class="endpoint-description">Atualizar categoria</span>
+                        </div>
+
+                        <div class="endpoint">
+                            <span class="method method-delete">DELETE</span>
+                            <span class="endpoint-path">/api/restaurants/{id}/menu/categories/{categoryId}</span>
+                            <span class="endpoint-description">Remover categoria</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Model -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">📊</span>
+                        <h2 class="card-title">Modelo de Dados</h2>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="mb-1">🏗️ Estrutura MenuCategory</h3>
+                        <div class="code-block">
+                            <pre>{
+  "id": "string",           // ID único da categoria
+  "name": "string",         // Nome da categoria
+  "description": "string",  // Descrição da categoria
+  "items": [               // Array de itens da categoria
+    {
+      "id": "string",
+      "name": "string",
+      "description": "string",
+      "price": "number"
+    }
+  ]
+}</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">✅ Validações</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Campo</th>
+                                    <th>Regras</th>
+                                    <th>Exemplo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>name</code></td>
+                                    <td>Obrigatório, 2-50 caracteres</td>
+                                    <td>Pratos Principais</td>
+                                </tr>
+                                <tr>
+                                    <td><code>description</code></td>
+                                    <td>Opcional, máximo 200 caracteres</td>
+                                    <td>Pratos centrais da refeição</td>
+                                </tr>
+                                <tr>
+                                    <td><code>items</code></td>
+                                    <td>Array opcional, inicializado vazio</td>
+                                    <td>[]</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Examples -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">💻</span>
+                        <h2 class="card-title">Exemplos de Uso</h2>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="mb-1">📋 Listar Categorias</h3>
+                        <div class="code-block">
+                            <pre>curl -X GET http://localhost:8081/api/restaurants/64f1a2b3c4d5e6f7g8h9i0j1/menu/categories \
+  -H "Content-Type: application/json"</pre>
+                        </div>
+
+                        <p><strong>Resposta:</strong></p>
+                        <div class="code-block">
+                            <pre>{
+  "success": true,
+  "data": [
+    {
+      "id": "cat1",
+      "name": "Entradas",
+      "description": "Pratos para começar a refeição",
+      "items": []
+    },
+    {
+      "id": "cat2", 
+      "name": "Pratos Principais",
+      "description": "Pratos centrais da refeição",
+      "items": [
+        {
+          "id": "item1",
+          "name": "Spaghetti Carbonara",
+          "description": "Massa com bacon e ovos",
+          "price": 32.90
+        }
+      ]
+    }
+  ],
+  "timestamp": "2024-08-05T19:30:00Z"
+}</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">🔍 Buscar Categoria Específica</h3>
+                        <div class="code-block">
+                            <pre>curl -X GET http://localhost:8081/api/restaurants/64f1a2b3c4d5e6f7g8h9i0j1/menu/categories/cat1 \
+  -H "Content-Type: application/json"</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">➕ Adicionar Categoria</h3>
+                        <div class="code-block">
+                            <pre>curl -X POST http://localhost:8081/api/restaurants/64f1a2b3c4d5e6f7g8h9i0j1/menu/categories \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Sobremesas",
+    "description": "Doces para finalizar a refeição"
+  }'</pre>
+                        </div>
+
+                        <p><strong>Resposta:</strong></p>
+                        <div class="code-block">
+                            <pre>{
+  "success": true,
+  "data": {
+    "id": "cat3",
+    "name": "Sobremesas",
+    "description": "Doces para finalizar a refeição",
+    "items": []
+  },
+  "message": "Categoria adicionada com sucesso",
+  "timestamp": "2024-08-05T19:30:00Z"
+}</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">✏️ Atualizar Categoria</h3>
+                        <div class="code-block">
+                            <pre>curl -X PUT http://localhost:8081/api/restaurants/64f1a2b3c4d5e6f7g8h9i0j1/menu/categories/cat3 \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Sobremesas Especiais",
+    "description": "Sobremesas artesanais da casa"
+  }'</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">🗑️ Remover Categoria</h3>
+                        <div class="code-block">
+                            <pre>curl -X DELETE http://localhost:8081/api/restaurants/64f1a2b3c4d5e6f7g8h9i0j1/menu/categories/cat3 \
+  -H "Content-Type: application/json"</pre>
+                        </div>
+
+                        <p><strong>Resposta:</strong></p>
+                        <div class="code-block">
+                            <pre>{
+  "success": true,
+  "message": "Categoria removida com sucesso",
+  "timestamp": "2024-08-05T19:30:00Z"
+}</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Business Rules -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">⚖️</span>
+                        <h2 class="card-title">Regras de Negócio</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="feature-cards">
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🏪</div>
+                                <h3 class="feature-card-title">Restaurante Existente</h3>
+                                <p class="feature-card-description">
+                                    Só é possível criar categorias em restaurantes existentes
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🏷️</div>
+                                <h3 class="feature-card-title">Nome Único</h3>
+                                <p class="feature-card-description">
+                                    Não pode haver categorias com mesmo nome no restaurante
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🗑️</div>
+                                <h3 class="feature-card-title">Remoção com Itens</h3>
+                                <p class="feature-card-description">
+                                    Categorias com itens só podem ser removidas se estiverem vazias
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🔄</div>
+                                <h3 class="feature-card-title">Atualização Atômica</h3>
+                                <p class="feature-card-description">
+                                    Operações são atômicas no documento do restaurante
+                                </p>
+                            </div>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">⚠️ Validações Especiais</h3>
+                        <ul>
+                            <li><strong>Restaurante não encontrado</strong>: Retorna 404</li>
+                            <li><strong>Categoria duplicada</strong>: Retorna 409 Conflict</li>
+                            <li><strong>Categoria com itens</strong>: Não pode ser removida (409)</li>
+                            <li><strong>Categoria não encontrada</strong>: Retorna 404</li>
+                            <li><strong>Nome inválido</strong>: Retorna 400 Bad Request</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Error Handling -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">⚠️</span>
+                        <h2 class="card-title">Tratamento de Erros</h2>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="mb-1">❌ Erros Específicos</h3>
+                        
+                        <h4 class="mb-1 mt-2">404 - Restaurant Not Found</h4>
+                        <div class="code-block">
+                            <pre>{
+  "success": false,
+  "error": {
+    "code": "RESTAURANT_NOT_FOUND",
+    "message": "Restaurante não encontrado",
+    "details": "Nenhum restaurante encontrado com o ID fornecido",
+    "resourceId": "64f1a2b3c4d5e6f7g8h9i0j1"
+  },
+  "timestamp": "2024-08-05T19:30:00Z"
+}</pre>
+                        </div>
+
+                        <h4 class="mb-1 mt-2">404 - Category Not Found</h4>
+                        <div class="code-block">
+                            <pre>{
+  "success": false,
+  "error": {
+    "code": "MENU_CATEGORY_NOT_FOUND",
+    "message": "Categoria do menu não encontrada",
+    "details": "Nenhuma categoria encontrada com o ID fornecido",
+    "resourceId": "cat999"
+  },
+  "timestamp": "2024-08-05T19:30:00Z"
+}</pre>
+                        </div>
+
+                        <h4 class="mb-1 mt-2">409 - Category Already Exists</h4>
+                        <div class="code-block">
+                            <pre>{
+  "success": false,
+  "error": {
+    "code": "MENU_CATEGORY_ALREADY_EXISTS",
+    "message": "Categoria já existe",
+    "details": "Já existe uma categoria com este nome no restaurante",
+    "conflictField": "name"
+  },
+  "timestamp": "2024-08-05T19:30:00Z"
+}</pre>
+                        </div>
+
+                        <h4 class="mb-1 mt-2">409 - Category Has Items</h4>
+                        <div class="code-block">
+                            <pre>{
+  "success": false,
+  "error": {
+    "code": "CATEGORY_HAS_ITEMS",
+    "message": "Categoria possui itens",
+    "details": "Não é possível remover categoria que possui itens. Remova os itens primeiro.",
+    "itemCount": 3
+  },
+  "timestamp": "2024-08-05T19:30:00Z"
+}</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Next Steps -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🚀</span>
+                        <h2 class="card-title">Próximos Passos</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="feature-cards">
+                            <div class="feature-card" data-link="menu-items.html">
+                                <div class="feature-card-icon">🍕</div>
+                                <h3 class="feature-card-title">Menu Items</h3>
+                                <p class="feature-card-description">
+                                    Aprenda a gerenciar itens dentro das categorias
+                                </p>
+                            </div>
+
+                            <div class="feature-card" data-link="restaurants.html">
+                                <div class="feature-card-icon">🏪</div>
+                                <h3 class="feature-card-title">Restaurants</h3>
+                                <p class="feature-card-description">
+                                    Entenda como restaurantes e menus se relacionam
+                                </p>
+                            </div>
+
+                            <div class="feature-card" data-link="data-modeling.html">
+                                <div class="feature-card-icon">🗄️</div>
+                                <h3 class="feature-card-title">Modelagem de Dados</h3>
+                                <p class="feature-card-description">
+                                    Veja como os dados são estruturados no MongoDB
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

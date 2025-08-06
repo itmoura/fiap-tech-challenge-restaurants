@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurants API - Tech Challenge Restaurant API</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏪</text></svg>">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <a href="../" class="logo">
+                    <span class="logo-icon">🍽️</span>
+                    <div>
+                        <div class="logo-text">Tech Challenge</div>
+                        <div class="logo-subtitle">Restaurant API</div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="nav-menu">
+                <div class="nav-section">
+                    <div class="nav-section-title">Início</div>
+                    <a href="../" class="nav-item">
+                        <span class="nav-item-icon">🏠</span>
+                        Visão Geral
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Instalação</div>
+                    <a href="prerequisites.html" class="nav-item">
+                        <span class="nav-item-icon">📋</span>
+                        Pré-requisitos
+                    </a>
+                    <a href="local-setup.html" class="nav-item">
+                        <span class="nav-item-icon">⚙️</span>
+                        Configuração Local
+                    </a>
+                    <a href="docker.html" class="nav-item">
+                        <span class="nav-item-icon">🐳</span>
+                        Docker
+                    </a>
+                    <a href="testing.html" class="nav-item">
+                        <span class="nav-item-icon">🧪</span>
+                        Testes
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">API Reference</div>
+                    <a href="api-overview.html" class="nav-item">
+                        <span class="nav-item-icon">📚</span>
+                        Visão Geral
+                    </a>
+                    <a href="kitchen-types.html" class="nav-item">
+                        <span class="nav-item-icon">👨‍🍳</span>
+                        Kitchen Types
+                    </a>
+                    <a href="restaurants.html" class="nav-item active">
+                        <span class="nav-item-icon">🏪</span>
+                        Restaurants
+                    </a>
+                    <a href="menu-categories.html" class="nav-item">
+                        <span class="nav-item-icon">📂</span>
+                        Menu Categories
+                    </a>
+                    <a href="menu-items.html" class="nav-item">
+                        <span class="nav-item-icon">🍕</span>
+                        Menu Items
+                    </a>
+                    <a href="status-codes.html" class="nav-item">
+                        <span class="nav-item-icon">📊</span>
+                        Status Codes
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Microserviços</div>
+                    <a href="user-microservice.html" class="nav-item">
+                        <span class="nav-item-icon">👥</span>
+                        Usuários (MS)
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Arquitetura</div>
+                    <a href="architecture-overview.html" class="nav-item">
+                        <span class="nav-item-icon">🏗️</span>
+                        Visão Geral
+                    </a>
+                    <a href="clean-architecture.html" class="nav-item">
+                        <span class="nav-item-icon">🎯</span>
+                        Clean Architecture
+                    </a>
+                    <a href="data-modeling.html" class="nav-item">
+                        <span class="nav-item-icon">🗄️</span>
+                        Modelagem de Dados
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Sobre</div>
+                    <a href="author.html" class="nav-item">
+                        <span class="nav-item-icon">👤</span>
+                        Autor
+                    </a>
+                    <a href="license.html" class="nav-item">
+                        <span class="nav-item-icon">📄</span>
+                        Licença
+                    </a>
+                    <a href="changelog.html" class="nav-item">
+                        <span class="nav-item-icon">📝</span>
+                        Changelog
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <nav class="breadcrumb">
+                    <a href="../">Home</a>
+                    <span>/</span>
+                    <a href="#">API Reference</a>
+                    <span>/</span>
+                    <span>Restaurants</span>
+                </nav>
+                <h1 class="page-title">🏪 Restaurants API</h1>
+                <p class="page-description">CRUD completo para gerenciamento de restaurantes</p>
+            </header>
+
+            <div class="content-body">
+                <!-- Overview -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">📋</span>
+                        <h2 class="card-title">Sobre Restaurants</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>A API de Restaurants é o núcleo do sistema, permitindo o gerenciamento completo de restaurantes com suas informações básicas, endereços e menus estruturados.</p>
+
+                        <div class="feature-cards">
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🏷️</div>
+                                <h3 class="feature-card-title">Informações Básicas</h3>
+                                <p class="feature-card-description">
+                                    Nome, descrição e tipo de cozinha
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">📍</div>
+                                <h3 class="feature-card-title">Endereço Completo</h3>
+                                <p class="feature-card-description">
+                                    Endereço estruturado com validação
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🍽️</div>
+                                <h3 class="feature-card-title">Menu Integrado</h3>
+                                <p class="feature-card-description">
+                                    Menu com categorias e itens aninhados
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🔍</div>
+                                <h3 class="feature-card-title">Busca Avançada</h3>
+                                <p class="feature-card-description">
+                                    Filtros por tipo, localização e nome
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- API Endpoints -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🔗</span>
+                        <h2 class="card-title">Endpoints</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="endpoint">
+                            <span class="method method-get">GET</span>
+                            <span class="endpoint-path">/api/restaurants</span>
+                            <span class="endpoint-description">Listar todos os restaurantes</span>
+                        </div>
+                        
+                        <div class="endpoint">
+                            <span class="method method-get">GET</span>
+                            <span class="endpoint-path">/api/restaurants/{id}</span>
+                            <span class="endpoint-description">Buscar restaurante por ID</span>
+                        </div>
+
+                        <div class="endpoint">
+                            <span class="method method-get">GET</span>
+                            <span class="endpoint-path">/api/restaurants/search</span>
+                            <span class="endpoint-description">Buscar restaurantes com filtros</span>
+                        </div>
+
+                        <div class="endpoint">
+                            <span class="method method-post">POST</span>
+                            <span class="endpoint-path">/api/restaurants</span>
+                            <span class="endpoint-description">Criar novo restaurante</span>
+                        </div>
+
+                        <div class="endpoint">
+                            <span class="method method-put">PUT</span>
+                            <span class="endpoint-path">/api/restaurants/{id}</span>
+                            <span class="endpoint-description">Atualizar restaurante</span>
+                        </div>
+
+                        <div class="endpoint">
+                            <span class="method method-delete">DELETE</span>
+                            <span class="endpoint-path">/api/restaurants/{id}</span>
+                            <span class="endpoint-description">Remover restaurante</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Model -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">📊</span>
+                        <h2 class="card-title">Modelo de Dados</h2>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="mb-1">🏗️ Estrutura Restaurant</h3>
+                        <div class="code-block">
+                            <pre>{
+  "id": "string",                    // ID único gerado automaticamente
+  "name": "string",                  // Nome do restaurante
+  "description": "string",           // Descrição detalhada
+  "kitchenType": "string",          // Tipo de cozinha (enum)
+  "address": {                      // Endereço estruturado
+    "street": "string",             // Rua e número
+    "city": "string",               // Cidade
+    "state": "string",              // Estado (UF)
+    "zipCode": "string"             // CEP
+  },
+  "menu": {                         // Menu do restaurante
+    "categories": [                 // Array de categorias
+      {
+        "id": "string",
+        "name": "string",
+        "description": "string",
+        "items": [                  // Array de itens
+          {
+            "id": "string",
+            "name": "string",
+            "description": "string",
+            "price": "number"
+          }
+        ]
+      }
+    ]
+  }
+}</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">✅ Validações</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Campo</th>
+                                    <th>Regras</th>
+                                    <th>Exemplo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>name</code></td>
+                                    <td>Obrigatório, 2-100 caracteres</td>
+                                    <td>Restaurante Italiano</td>
+                                </tr>
+                                <tr>
+                                    <td><code>description</code></td>
+                                    <td>Opcional, máximo 500 caracteres</td>
+                                    <td>Autêntica culinária italiana</td>
+                                </tr>
+                                <tr>
+                                    <td><code>kitchenType</code></td>
+                                    <td>Obrigatório, enum válido</td>
+                                    <td>ITALIAN</td>
+                                </tr>
+                                <tr>
+                                    <td><code>address.street</code></td>
+                                    <td>Obrigatório, 5-200 caracteres</td>
+                                    <td>Rua Augusta, 123</td>
+                                </tr>
+                                <tr>
+                                    <td><code>address.zipCode</code></td>
+                                    <td>Obrigatório, formato 00000-000</td>
+                                    <td>01234-567</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Examples -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">💻</span>
+                        <h2 class="card-title">Exemplos de Uso</h2>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="mb-1">📋 Listar Restaurantes</h3>
+                        <div class="code-block">
+                            <pre>curl -X GET http://localhost:8081/api/restaurants \
+  -H "Content-Type: application/json"</pre>
+                        </div>
+
+                        <p><strong>Resposta:</strong></p>
+                        <div class="code-block">
+                            <pre>{
+  "success": true,
+  "data": [
+    {
+      "id": "64f1a2b3c4d5e6f7g8h9i0j1",
+      "name": "Bella Italia",
+      "description": "Autêntica culinária italiana",
+      "kitchenType": "ITALIAN",
+      "address": {
+        "street": "Rua Augusta, 123",
+        "city": "São Paulo",
+        "state": "SP",
+        "zipCode": "01234-567"
+      }
+    }
+  ],
+  "timestamp": "2024-08-05T19:30:00Z"
+}</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">🔍 Buscar por ID</h3>
+                        <div class="code-block">
+                            <pre>curl -X GET http://localhost:8081/api/restaurants/64f1a2b3c4d5e6f7g8h9i0j1 \
+  -H "Content-Type: application/json"</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">🔍 Busca com Filtros</h3>
+                        <div class="code-block">
+                            <pre>curl -X GET "http://localhost:8081/api/restaurants/search?kitchenType=ITALIAN&city=São Paulo" \
+  -H "Content-Type: application/json"</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">➕ Criar Restaurante</h3>
+                        <div class="code-block">
+                            <pre>curl -X POST http://localhost:8081/api/restaurants \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Novo Restaurante",
+    "description": "Descrição do restaurante",
+    "kitchenType": "BRAZILIAN",
+    "address": {
+      "street": "Rua Nova, 456",
+      "city": "São Paulo",
+      "state": "SP",
+      "zipCode": "01234-567"
+    }
+  }'</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">✏️ Atualizar Restaurante</h3>
+                        <div class="code-block">
+                            <pre>curl -X PUT http://localhost:8081/api/restaurants/64f1a2b3c4d5e6f7g8h9i0j1 \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Bella Italia Renovado",
+    "description": "Renovado com novo chef",
+    "kitchenType": "ITALIAN",
+    "address": {
+      "street": "Rua Augusta, 123",
+      "city": "São Paulo", 
+      "state": "SP",
+      "zipCode": "01234-567"
+    }
+  }'</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">🗑️ Remover Restaurante</h3>
+                        <div class="code-block">
+                            <pre>curl -X DELETE http://localhost:8081/api/restaurants/64f1a2b3c4d5e6f7g8h9i0j1 \
+  -H "Content-Type: application/json"</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Search Parameters -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🔍</span>
+                        <h2 class="card-title">Parâmetros de Busca</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>O endpoint <code>/api/restaurants/search</code> suporta os seguintes parâmetros:</p>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Parâmetro</th>
+                                    <th>Tipo</th>
+                                    <th>Descrição</th>
+                                    <th>Exemplo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>name</code></td>
+                                    <td>string</td>
+                                    <td>Busca por nome (parcial)</td>
+                                    <td>?name=Bella</td>
+                                </tr>
+                                <tr>
+                                    <td><code>kitchenType</code></td>
+                                    <td>enum</td>
+                                    <td>Filtro por tipo de cozinha</td>
+                                    <td>?kitchenType=ITALIAN</td>
+                                </tr>
+                                <tr>
+                                    <td><code>city</code></td>
+                                    <td>string</td>
+                                    <td>Filtro por cidade</td>
+                                    <td>?city=São Paulo</td>
+                                </tr>
+                                <tr>
+                                    <td><code>state</code></td>
+                                    <td>string</td>
+                                    <td>Filtro por estado</td>
+                                    <td>?state=SP</td>
+                                </tr>
+                                <tr>
+                                    <td><code>page</code></td>
+                                    <td>integer</td>
+                                    <td>Número da página (0-based)</td>
+                                    <td>?page=0</td>
+                                </tr>
+                                <tr>
+                                    <td><code>size</code></td>
+                                    <td>integer</td>
+                                    <td>Tamanho da página (max 100)</td>
+                                    <td>?size=20</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3 class="mb-1 mt-2">🔗 Exemplos de Busca Combinada</h3>
+                        <div class="code-block">
+                            <pre># Restaurantes italianos em São Paulo
+GET /api/restaurants/search?kitchenType=ITALIAN&city=São Paulo
+
+# Busca por nome com paginação
+GET /api/restaurants/search?name=Bella&page=0&size=10
+
+# Múltiplos filtros
+GET /api/restaurants/search?kitchenType=BRAZILIAN&state=SP&page=0&size=20</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Next Steps -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🚀</span>
+                        <h2 class="card-title">Próximos Passos</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="feature-cards">
+                            <div class="feature-card" data-link="menu-categories.html">
+                                <div class="feature-card-icon">📂</div>
+                                <h3 class="feature-card-title">Menu Categories</h3>
+                                <p class="feature-card-description">
+                                    Aprenda a gerenciar categorias do menu
+                                </p>
+                            </div>
+
+                            <div class="feature-card" data-link="kitchen-types.html">
+                                <div class="feature-card-icon">👨‍🍳</span>
+                                <h3 class="feature-card-title">Kitchen Types</h3>
+                                <p class="feature-card-description">
+                                    Conheça os tipos de cozinha disponíveis
+                                </p>
+                            </div>
+
+                            <div class="feature-card" data-link="data-modeling.html">
+                                <div class="feature-card-icon">🗄️</div>
+                                <h3 class="feature-card-title">Modelagem de Dados</h3>
+                                <p class="feature-card-description">
+                                    Entenda a estrutura do MongoDB
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>
