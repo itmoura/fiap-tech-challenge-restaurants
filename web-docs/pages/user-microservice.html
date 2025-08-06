@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microserviço de Usuários - Tech Challenge</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👥</text></svg>">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <a href="../" class="logo">
+                    <span class="logo-icon">🍽️</span>
+                    <div>
+                        <div class="logo-text">Tech Challenge</div>
+                        <div class="logo-subtitle">Restaurant API</div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="nav-menu">
+                <div class="nav-section">
+                    <div class="nav-section-title">Início</div>
+                    <a href="../" class="nav-item">
+                        <span class="nav-item-icon">🏠</span>
+                        Visão Geral
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Instalação</div>
+                    <a href="prerequisites.html" class="nav-item">
+                        <span class="nav-item-icon">📋</span>
+                        Pré-requisitos
+                    </a>
+                    <a href="local-setup.html" class="nav-item">
+                        <span class="nav-item-icon">⚙️</span>
+                        Configuração Local
+                    </a>
+                    <a href="docker.html" class="nav-item">
+                        <span class="nav-item-icon">🐳</span>
+                        Docker
+                    </a>
+                    <a href="testing.html" class="nav-item">
+                        <span class="nav-item-icon">🧪</span>
+                        Testes
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">API Reference</div>
+                    <a href="api-overview.html" class="nav-item">
+                        <span class="nav-item-icon">📚</span>
+                        Visão Geral
+                    </a>
+                    <a href="kitchen-types.html" class="nav-item">
+                        <span class="nav-item-icon">👨‍🍳</span>
+                        Kitchen Types
+                    </a>
+                    <a href="restaurants.html" class="nav-item">
+                        <span class="nav-item-icon">🏪</span>
+                        Restaurants
+                    </a>
+                    <a href="menu-categories.html" class="nav-item">
+                        <span class="nav-item-icon">📂</span>
+                        Menu Categories
+                    </a>
+                    <a href="menu-items.html" class="nav-item">
+                        <span class="nav-item-icon">🍕</span>
+                        Menu Items
+                    </a>
+                    <a href="status-codes.html" class="nav-item">
+                        <span class="nav-item-icon">📊</span>
+                        Status Codes
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Microserviços</div>
+                    <a href="user-microservice.html" class="nav-item active">
+                        <span class="nav-item-icon">👥</span>
+                        Usuários (MS)
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Arquitetura</div>
+                    <a href="architecture-overview.html" class="nav-item">
+                        <span class="nav-item-icon">🏗️</span>
+                        Visão Geral
+                    </a>
+                    <a href="clean-architecture.html" class="nav-item">
+                        <span class="nav-item-icon">🎯</span>
+                        Clean Architecture
+                    </a>
+                    <a href="data-modeling.html" class="nav-item">
+                        <span class="nav-item-icon">🗄️</span>
+                        Modelagem de Dados
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Sobre</div>
+                    <a href="author.html" class="nav-item">
+                        <span class="nav-item-icon">👤</span>
+                        Autor
+                    </a>
+                    <a href="license.html" class="nav-item">
+                        <span class="nav-item-icon">📄</span>
+                        Licença
+                    </a>
+                    <a href="changelog.html" class="nav-item">
+                        <span class="nav-item-icon">📝</span>
+                        Changelog
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <nav class="breadcrumb">
+                    <a href="../">Home</a>
+                    <span>/</span>
+                    <a href="#">Microserviços</a>
+                    <span>/</span>
+                    <span>Usuários</span>
+                </nav>
+                <h1 class="page-title">👥 Microserviço de Usuários</h1>
+                <p class="page-description">Gestão de usuários e tipos de usuário - Porta 8080 (Futuro BFF)</p>
+            </header>
+
+            <div class="content-body">
+                <!-- Important Notice -->
+                <div class="card" style="border-left: 4px solid var(--accent-warning);">
+                    <div class="card-header">
+                        <span class="card-icon">⚠️</span>
+                        <h2 class="card-title">Microserviço Separado</h2>
+                    </div>
+                    <div class="card-content">
+                        <p><strong>Este é um microserviço independente</strong> que roda em <strong>porta 8080</strong> e será futuramente o BFF (Backend for Frontend) do sistema.</p>
+                        
+                        <div class="feature-cards">
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🔗</div>
+                                <h3 class="feature-card-title">Repositório</h3>
+                                <p class="feature-card-description">
+                                    <a href="https://github.com/itmoura/fiap-tech-challenge" target="_blank">github.com/itmoura/fiap-tech-challenge</a>
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🌐</div>
+                                <h3 class="feature-card-title">Porta</h3>
+                                <p class="feature-card-description">
+                                    Roda na porta <strong>8080</strong> (diferente do Restaurant API)
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🔮</div>
+                                <h3 class="feature-card-title">Futuro BFF</h3>
+                                <p class="feature-card-description">
+                                    Será o Backend for Frontend do sistema distribuído
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Overview -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">📋</span>
+                        <h2 class="card-title">Sobre o Microserviço</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>Microserviço responsável pela gestão de usuários e tipos de usuário, desenvolvido como parte do Tech Challenge da FIAP. Este microserviço é parte de um sistema distribuído para gestão de restaurantes.</p>
+
+                        <h3 class="mb-1 mt-2">✨ Funcionalidades Implementadas</h3>
+                        <ul>
+                            <li>✅ <strong>Gestão de Tipos de Usuário</strong>: CRUD completo para tipos de usuário (Administrador, Cliente, Moderador)</li>
+                            <li>✅ <strong>Gestão de Usuários</strong>: CRUD completo para usuários com validações robustas</li>
+                            <li>✅ <strong>Associação de Usuários com Tipos</strong>: Relacionamento entre usuários e tipos de usuário</li>
+                            <li>✅ <strong>Soft Delete</strong>: Desativação lógica de usuários e tipos</li>
+                            <li>✅ <strong>Paginação</strong>: Suporte a consultas paginadas</li>
+                            <li>✅ <strong>Busca Avançada</strong>: Busca por email, tipo de usuário, etc.</li>
+                            <li>✅ <strong>Alteração de Senha</strong>: Funcionalidade segura para alteração de senhas</li>
+                            <li>✅ <strong>Contadores</strong>: Estatísticas de usuários ativos por tipo</li>
+                            <li>✅ <strong>Migrações Automáticas</strong>: Sistema Flyway para criação automática do banco</li>
+                            <li>✅ <strong>Documentação da API</strong>: Swagger/OpenAPI integrado</li>
+                            <li>✅ <strong>Testes Automatizados</strong>: Testes unitários e de integração com alta cobertura</li>
+                            <li>✅ <strong>Docker Compose</strong>: Configuração para execução com PostgreSQL</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Architecture -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🏗️</span>
+                        <h2 class="card-title">Arquitetura</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>O projeto segue uma arquitetura em camadas com as seguintes tecnologias:</p>
+
+                        <div class="feature-cards">
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🍃</div>
+                                <h3 class="feature-card-title">Spring Boot 3.4.5</h3>
+                                <p class="feature-card-description">
+                                    Framework principal com Java 21
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🐘</div>
+                                <h3 class="feature-card-title">PostgreSQL</h3>
+                                <p class="feature-card-description">
+                                    Banco relacional para produção / H2 para testes
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🔄</div>
+                                <h3 class="feature-card-title">Flyway</h3>
+                                <p class="feature-card-description">
+                                    Migrações automáticas e versionamento do banco
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🔒</div>
+                                <h3 class="feature-card-title">Spring Security</h3>
+                                <p class="feature-card-description">
+                                    Segurança com JWT tokens
+                                </p>
+                            </div>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">📁 Estrutura do Projeto</h3>
+                        <div class="code-block">
+                            <pre>src/
+├── main/
+│   ├── java/com/fiap/itmoura/tech_challenge/
+│   │   ├── controller/          # Controllers REST
+│   │   ├── service/             # Lógica de negócio
+│   │   ├── repository/          # Acesso a dados
+│   │   ├── model/
+│   │   │   ├── entity/          # Entidades JPA
+│   │   │   ├── dto/             # DTOs
+│   │   │   └── enums/           # Enumerações
+│   │   ├── config/              # Configurações (incluindo Flyway)
+│   │   └── exception/           # Exceções customizadas
+│   └── resources/
+│       ├── db/migration/        # Scripts de migração Flyway
+│       └── application.yml      # Configurações
+└── test/                        # Testes unitários e integração</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Start -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🚀</span>
+                        <h2 class="card-title">Como Executar</h2>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="mb-1">🐳 Executando com Docker Compose (Recomendado)</h3>
+                        <div class="code-block">
+                            <pre># 1. Clone o repositório
+git clone https://github.com/itmoura/fiap-tech-challenge.git
+cd fiap-tech-challenge
+git checkout feature/novas-funcionalidades
+
+# 2. Execute o Docker Compose
+docker-compose up -d
+
+# 3. A aplicação estará disponível em:
+# - API: http://localhost:8080
+# - Swagger UI: http://localhost:8080/swagger-ui.html
+# - PostgreSQL: localhost:5432</pre>
+                        </div>
+
+                        <p class="mt-2">
+                            🎯 <strong>Migrações Automáticas</strong>: O banco de dados será criado automaticamente na primeira execução!
+                        </p>
+
+                        <h3 class="mb-1 mt-2">💻 Executando Localmente</h3>
+                        <div class="code-block">
+                            <pre># 1. Inicie o PostgreSQL
+docker run -d --name postgres \
+  -e POSTGRES_USER=postgres \
+  -e POSTGRES_PASSWORD=root \
+  -e POSTGRES_DB=tech_challenge \
+  -p 5432:5432 postgres:latest
+
+# 2. Execute a aplicação
+./gradlew bootRun</pre>
+                        </div>
+
+                        <p class="mt-2">
+                            📝 <strong>Nota</strong>: As migrações serão executadas automaticamente na inicialização!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Database Migrations -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🗄️</span>
+                        <h2 class="card-title">Sistema de Migrações Automáticas</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>O projeto utiliza <strong>Flyway</strong> para gerenciar migrações automáticas do banco de dados:</p>
+
+                        <div class="feature-cards">
+                            <div class="feature-card">
+                                <div class="feature-card-icon">⚡</div>
+                                <h3 class="feature-card-title">Execução Automática</h3>
+                                <p class="feature-card-description">
+                                    Migrações executam na inicialização da aplicação
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🔢</div>
+                                <h3 class="feature-card-title">Versionamento</h3>
+                                <p class="feature-card-description">
+                                    Scripts numerados garantem ordem de execução
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🔒</div>
+                                <h3 class="feature-card-title">Idempotência</h3>
+                                <p class="feature-card-description">
+                                    Migrações só executam se necessário
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">📋</div>
+                                <h3 class="feature-card-title">Histórico</h3>
+                                <p class="feature-card-description">
+                                    Histórico completo de migrações aplicadas
+                                </p>
+                            </div>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">📊 Migrações Disponíveis</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Versão</th>
+                                    <th>Arquivo</th>
+                                    <th>Descrição</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>V1</td>
+                                    <td><code>V1__Create_type_users_table.sql</code></td>
+                                    <td>Cria tabela <code>type_users</code> com tipos padrão</td>
+                                </tr>
+                                <tr>
+                                    <td>V2</td>
+                                    <td><code>V2__Create_address_table.sql</code></td>
+                                    <td>Cria tabela <code>address</code> para endereços</td>
+                                </tr>
+                                <tr>
+                                    <td>V3</td>
+                                    <td><code>V3__Create_users_table.sql</code></td>
+                                    <td>Cria tabela <code>users</code> com relacionamentos</td>
+                                </tr>
+                                <tr>
+                                    <td>V4</td>
+                                    <td><code>V4__Initial_data_and_improvements.sql</code></td>
+                                    <td>Dados iniciais e melhorias</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- API Endpoints -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">📚</span>
+                        <h2 class="card-title">Endpoints da API</h2>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="mb-1">👥 Tipos de Usuário</h3>
+                        <div class="endpoint">
+                            <span class="method method-get">GET</span>
+                            <span class="endpoint-path">/api/type-users</span>
+                            <span class="endpoint-description">Listar todos os tipos</span>
+                        </div>
+                        <div class="endpoint">
+                            <span class="method method-get">GET</span>
+                            <span class="endpoint-path">/api/type-users/{id}</span>
+                            <span class="endpoint-description">Buscar por ID</span>
+                        </div>
+                        <div class="endpoint">
+                            <span class="method method-post">POST</span>
+                            <span class="endpoint-path">/api/type-users</span>
+                            <span class="endpoint-description">Criar novo tipo</span>
+                        </div>
+                        <div class="endpoint">
+                            <span class="method method-put">PUT</span>
+                            <span class="endpoint-path">/api/type-users/{id}</span>
+                            <span class="endpoint-description">Atualizar tipo</span>
+                        </div>
+                        <div class="endpoint">
+                            <span class="method method-delete">DELETE</span>
+                            <span class="endpoint-path">/api/type-users/{id}</span>
+                            <span class="endpoint-description">Excluir tipo (soft delete)</span>
+                        </div>
+
+                        <h3 class="mb-1 mt-3">👤 Usuários</h3>
+                        <div class="endpoint">
+                            <span class="method method-get">GET</span>
+                            <span class="endpoint-path">/api/users</span>
+                            <span class="endpoint-description">Listar todos os usuários</span>
+                        </div>
+                        <div class="endpoint">
+                            <span class="method method-get">GET</span>
+                            <span class="endpoint-path">/api/users/paginated</span>
+                            <span class="endpoint-description">Listar usuários paginados</span>
+                        </div>
+                        <div class="endpoint">
+                            <span class="method method-get">GET</span>
+                            <span class="endpoint-path">/api/users/{id}</span>
+                            <span class="endpoint-description">Buscar por ID</span>
+                        </div>
+                        <div class="endpoint">
+                            <span class="method method-get">GET</span>
+                            <span class="endpoint-path">/api/users/email/{email}</span>
+                            <span class="endpoint-description">Buscar por email</span>
+                        </div>
+                        <div class="endpoint">
+                            <span class="method method-post">POST</span>
+                            <span class="endpoint-path">/api/users</span>
+                            <span class="endpoint-description">Criar novo usuário</span>
+                        </div>
+                        <div class="endpoint">
+                            <span class="method method-put">PUT</span>
+                            <span class="endpoint-path">/api/users/{id}</span>
+                            <span class="endpoint-description">Atualizar usuário</span>
+                        </div>
+                        <div class="endpoint">
+                            <span class="method method-delete">DELETE</span>
+                            <span class="endpoint-path">/api/users/{id}</span>
+                            <span class="endpoint-description">Desativar usuário (soft delete)</span>
+                        </div>
+                        <div class="endpoint">
+                            <span class="method method-post">PATCH</span>
+                            <span class="endpoint-path">/api/users/{id}/change-password</span>
+                            <span class="endpoint-description">Alterar senha</span>
+                        </div>
+
+                        <p class="mt-2">
+                            📚 <strong>Documentação Completa</strong>: Acesse <a href="http://localhost:8080/swagger-ui.html" target="_blank">http://localhost:8080/swagger-ui.html</a>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Testing -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🧪</span>
+                        <h2 class="card-title">Testes</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>O projeto possui uma suíte completa de testes com alta cobertura:</p>
+
+                        <div class="feature-cards">
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🧪</div>
+                                <h3 class="feature-card-title">Testes Unitários</h3>
+                                <p class="feature-card-description">
+                                    TypeUsersServiceTest e UserServiceTest (95+ cenários)
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🔗</div>
+                                <h3 class="feature-card-title">Testes de Integração</h3>
+                                <p class="feature-card-description">
+                                    Controllers com fluxos completos
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">📊</div>
+                                <h3 class="feature-card-title">Cobertura 85%+</h3>
+                                <p class="feature-card-description">
+                                    Meta de 80%, atual 85%+ de cobertura
+                                </p>
+                            </div>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">🚀 Executando Testes</h3>
+                        <div class="code-block">
+                            <pre># Executar todos os testes
+./gradlew test
+
+# Gerar relatório de cobertura
+./gradlew jacocoTestReport
+
+# Verificar cobertura mínima (80%)
+./gradlew jacocoTestCoverageVerification</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Integration Notice -->
+                <div class="card" style="border-left: 4px solid var(--accent-secondary);">
+                    <div class="card-header">
+                        <span class="card-icon">🔗</span>
+                        <h2 class="card-title">Integração com Restaurant API</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>Este microserviço de usuários complementa o Restaurant API:</p>
+
+                        <div class="feature-cards">
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🍽️</div>
+                                <h3 class="feature-card-title">Restaurant API</h3>
+                                <p class="feature-card-description">
+                                    <strong>Porta 8081</strong> - Gestão de restaurantes e menus
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">👥</div>
+                                <h3 class="feature-card-title">User API</h3>
+                                <p class="feature-card-description">
+                                    <strong>Porta 8080</strong> - Gestão de usuários (futuro BFF)
+                                </p>
+                            </div>
+                        </div>
+
+                        <p class="mt-2">
+                            🔮 <strong>Futuro</strong>: Este microserviço será o BFF (Backend for Frontend) que orquestrará as chamadas para outros microserviços do sistema.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Links -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🔗</span>
+                        <h2 class="card-title">Links Importantes</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="feature-cards">
+                            <div class="feature-card">
+                                <div class="feature-card-icon">📂</div>
+                                <h3 class="feature-card-title">Repositório</h3>
+                                <p class="feature-card-description">
+                                    <a href="https://github.com/itmoura/fiap-tech-challenge" target="_blank">GitHub Repository</a>
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">📚</div>
+                                <h3 class="feature-card-title">Swagger UI</h3>
+                                <p class="feature-card-description">
+                                    <a href="http://localhost:8080/swagger-ui.html" target="_blank">API Documentation</a>
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">📡</div>
+                                <h3 class="feature-card-title">Postman Collection</h3>
+                                <p class="feature-card-description">
+                                    Collection disponível no repositório
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

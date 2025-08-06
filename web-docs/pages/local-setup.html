@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuração Local - Tech Challenge Restaurant API</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍽️</text></svg>">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <a href="../" class="logo">
+                    <span class="logo-icon">🍽️</span>
+                    <div>
+                        <div class="logo-text">Tech Challenge</div>
+                        <div class="logo-subtitle">Restaurant API</div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="nav-menu">
+                <div class="nav-section">
+                    <div class="nav-section-title">Início</div>
+                    <a href="../" class="nav-item">
+                        <span class="nav-item-icon">🏠</span>
+                        Visão Geral
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Instalação</div>
+                    <a href="prerequisites.html" class="nav-item">
+                        <span class="nav-item-icon">📋</span>
+                        Pré-requisitos
+                    </a>
+                    <a href="local-setup.html" class="nav-item active">
+                        <span class="nav-item-icon">⚙️</span>
+                        Configuração Local
+                    </a>
+                    <a href="docker.html" class="nav-item">
+                        <span class="nav-item-icon">🐳</span>
+                        Docker
+                    </a>
+                    <a href="testing.html" class="nav-item">
+                        <span class="nav-item-icon">🧪</span>
+                        Testes
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">API Reference</div>
+                    <a href="api-overview.html" class="nav-item">
+                        <span class="nav-item-icon">📚</span>
+                        Visão Geral
+                    </a>
+                    <a href="kitchen-types.html" class="nav-item">
+                        <span class="nav-item-icon">👨‍🍳</span>
+                        Kitchen Types
+                    </a>
+                    <a href="restaurants.html" class="nav-item">
+                        <span class="nav-item-icon">🏪</span>
+                        Restaurants
+                    </a>
+                    <a href="menu-categories.html" class="nav-item">
+                        <span class="nav-item-icon">📂</span>
+                        Menu Categories
+                    </a>
+                    <a href="menu-items.html" class="nav-item">
+                        <span class="nav-item-icon">🍕</span>
+                        Menu Items
+                    </a>
+                    <a href="status-codes.html" class="nav-item">
+                        <span class="nav-item-icon">📊</span>
+                        Status Codes
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Microserviços</div>
+                    <a href="user-microservice.html" class="nav-item">
+                        <span class="nav-item-icon">👥</span>
+                        Usuários (MS)
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Arquitetura</div>
+                    <a href="architecture-overview.html" class="nav-item">
+                        <span class="nav-item-icon">🏗️</span>
+                        Visão Geral
+                    </a>
+                    <a href="clean-architecture.html" class="nav-item">
+                        <span class="nav-item-icon">🎯</span>
+                        Clean Architecture
+                    </a>
+                    <a href="data-modeling.html" class="nav-item">
+                        <span class="nav-item-icon">🗄️</span>
+                        Modelagem de Dados
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Sobre</div>
+                    <a href="author.html" class="nav-item">
+                        <span class="nav-item-icon">👤</span>
+                        Autor
+                    </a>
+                    <a href="license.html" class="nav-item">
+                        <span class="nav-item-icon">📄</span>
+                        Licença
+                    </a>
+                    <a href="changelog.html" class="nav-item">
+                        <span class="nav-item-icon">📝</span>
+                        Changelog
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <nav class="breadcrumb">
+                    <a href="../">Home</a>
+                    <span>/</span>
+                    <a href="#">Instalação</a>
+                    <span>/</span>
+                    <span>Configuração Local</span>
+                </nav>
+                <h1 class="page-title">⚙️ Configuração Local</h1>
+                <p class="page-description">Configure o ambiente de desenvolvimento local</p>
+            </header>
+
+            <div class="content-body">
+                <!-- Quick Setup -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">⚡</span>
+                        <h2 class="card-title">Setup Rápido</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>Configure o ambiente local em poucos passos:</p>
+
+                        <div class="code-block">
+                            <pre># 1. Clone o repositório
+git clone https://github.com/itmoura/fiap-tech-challenge-restaurants.git
+cd fiap-tech-challenge-restaurants
+
+# 2. Inicie o MongoDB
+docker run -d --name mongodb -p 27017:27017 mongo:7.0
+
+# 3. Configure as variáveis de ambiente
+export MONGO_URI=mongodb://localhost:27017/restaurant_db
+export SPRING_PROFILES_ACTIVE=local
+
+# 4. Execute a aplicação
+./gradlew bootRun
+
+# 5. Teste a API
+curl http://localhost:8081/api/restaurants</pre>
+                        </div>
+
+                        <p class="mt-2">
+                            🎉 <strong>Pronto!</strong> A API estará disponível em 
+                            <code>http://localhost:8081</code>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Environment Configuration -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🔧</span>
+                        <h2 class="card-title">Configuração de Ambiente</h2>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="mb-1">📄 Arquivo application-local.yml</h3>
+                        <p>Crie ou edite o arquivo <code>src/main/resources/application-local.yml</code>:</p>
+
+                        <div class="code-block">
+                            <pre>server:
+  port: 8081
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/restaurant_db
+      database: restaurant_db
+  
+  jackson:
+    default-property-inclusion: non_null
+    serialization:
+      write-dates-as-timestamps: false
+
+logging:
+  level:
+    com.fiap.itmoura.tech_challenge: DEBUG
+    org.springframework.data.mongodb: DEBUG
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">🌍 Variáveis de Ambiente</h3>
+                        <p>Configure as seguintes variáveis de ambiente:</p>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Variável</th>
+                                    <th>Valor</th>
+                                    <th>Descrição</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>SPRING_PROFILES_ACTIVE</code></td>
+                                    <td>local</td>
+                                    <td>Perfil de desenvolvimento local</td>
+                                </tr>
+                                <tr>
+                                    <td><code>MONGO_URI</code></td>
+                                    <td>mongodb://localhost:27017/restaurant_db</td>
+                                    <td>URI de conexão com MongoDB</td>
+                                </tr>
+                                <tr>
+                                    <td><code>SERVER_PORT</code></td>
+                                    <td>8081</td>
+                                    <td>Porta da aplicação</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- MongoDB Setup -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🍃</span>
+                        <h2 class="card-title">Configuração do MongoDB</h2>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="mb-1">🐳 Opção 1: Docker (Recomendado)</h3>
+                        <div class="code-block">
+                            <pre># Executar MongoDB em container
+docker run -d \
+  --name mongodb \
+  -p 27017:27017 \
+  -v mongodb_data:/data/db \
+  mongo:7.0
+
+# Verificar se está rodando
+docker ps | grep mongodb
+
+# Conectar ao MongoDB
+docker exec -it mongodb mongosh</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">💻 Opção 2: Instalação Local</h3>
+                        <div class="code-block">
+                            <pre># Ubuntu/Debian
+sudo apt-get install -y mongodb
+
+# macOS
+brew install mongodb-community@7.0
+
+# Windows
+# Baixar do site oficial: https://www.mongodb.com/try/download/community
+
+# Iniciar serviço
+sudo systemctl start mongod  # Linux
+brew services start mongodb-community@7.0  # macOS</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">✅ Verificação</h3>
+                        <div class="code-block">
+                            <pre># Testar conexão
+mongosh mongodb://localhost:27017
+
+# Dentro do MongoDB shell
+use restaurant_db
+show collections
+db.restaurants.find().limit(5)</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- IDE Configuration -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">💡</span>
+                        <h2 class="card-title">Configuração da IDE</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="feature-cards">
+                            <div class="feature-card">
+                                <div class="feature-card-icon">💡</div>
+                                <h3 class="feature-card-title">IntelliJ IDEA</h3>
+                                <p class="feature-card-description">
+                                    IDE recomendada com suporte completo ao Spring Boot
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">📝</div>
+                                <h3 class="feature-card-title">VS Code</h3>
+                                <p class="feature-card-description">
+                                    Editor leve com extensões Java e Spring Boot
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🌙</div>
+                                <h3 class="feature-card-title">Eclipse</h3>
+                                <p class="feature-card-description">
+                                    IDE tradicional com Spring Tools Suite
+                                </p>
+                            </div>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">🔧 IntelliJ IDEA Setup</h3>
+                        <div class="code-block">
+                            <pre># 1. Importar projeto
+File → Open → Selecionar pasta do projeto
+
+# 2. Configurar JDK
+File → Project Structure → Project → SDK → Java 21
+
+# 3. Configurar perfil de execução
+Run → Edit Configurations → Spring Boot
+- Main class: com.fiap.itmoura.tech_challenge.TechChallengeApplication
+- Environment variables: SPRING_PROFILES_ACTIVE=local
+- VM options: -Dserver.port=8081
+
+# 4. Habilitar hot reload
+Settings → Build → Compiler → Build project automatically
+Settings → Advanced Settings → Allow auto-make to start</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">📝 VS Code Setup</h3>
+                        <div class="code-block">
+                            <pre># Extensões recomendadas
+- Extension Pack for Java
+- Spring Boot Extension Pack
+- MongoDB for VS Code
+- Thunder Client (para testar APIs)
+
+# Configuração launch.json
+{
+  "type": "java",
+  "name": "Spring Boot-TechChallengeApplication",
+  "request": "launch",
+  "cwd": "${workspaceFolder}",
+  "mainClass": "com.fiap.itmoura.tech_challenge.TechChallengeApplication",
+  "projectName": "fiap-tech-challenge-restaurants",
+  "args": "--spring.profiles.active=local --server.port=8081",
+  "envFile": "${workspaceFolder}/.env"
+}</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Development Workflow -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🔄</span>
+                        <h2 class="card-title">Fluxo de Desenvolvimento</h2>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="mb-1">🚀 Desenvolvimento Diário</h3>
+                        <div class="code-block">
+                            <pre># 1. Iniciar MongoDB
+docker start mongodb
+
+# 2. Executar aplicação
+./gradlew bootRun
+
+# 3. Fazer alterações no código
+# (Hot reload automático com Spring DevTools)
+
+# 4. Testar endpoints
+curl -X GET http://localhost:8081/api/restaurants
+
+# 5. Executar testes
+./gradlew test</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">🧪 Ciclo de Testes</h3>
+                        <div class="code-block">
+                            <pre># Executar testes unitários
+./gradlew test
+
+# Executar testes de integração
+./gradlew integrationTest
+
+# Executar todos os testes
+./gradlew check
+
+# Gerar relatório de cobertura
+./gradlew jacocoTestReport
+
+# Ver relatório
+open build/reports/jacoco/test/html/index.html</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">🔧 Debug e Troubleshooting</h3>
+                        <div class="code-block">
+                            <pre># Executar com debug habilitado
+./gradlew bootRun --debug-jvm
+
+# Ou com parâmetros específicos
+java -jar -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005 \
+  build/libs/fiap-tech-challenge-restaurants-*.jar
+
+# Logs detalhados
+./gradlew bootRun -Dlogging.level.com.fiap.itmoura.tech_challenge=DEBUG</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Database Management -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🗄️</span>
+                        <h2 class="card-title">Gerenciamento do Banco</h2>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="mb-1">🔍 MongoDB Compass</h3>
+                        <p>Interface gráfica para gerenciar o MongoDB:</p>
+
+                        <div class="code-block">
+                            <pre># Baixar MongoDB Compass
+# https://www.mongodb.com/products/compass
+
+# Conectar
+Connection String: mongodb://localhost:27017
+Database: restaurant_db</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">💻 Linha de Comando</h3>
+                        <div class="code-block">
+                            <pre># Conectar ao MongoDB
+mongosh mongodb://localhost:27017/restaurant_db
+
+# Comandos úteis
+show dbs                    # Listar databases
+use restaurant_db          # Usar database
+show collections           # Listar collections
+db.restaurants.find()      # Buscar documentos
+db.restaurants.countDocuments()  # Contar documentos
+
+# Limpar dados de teste
+db.restaurants.deleteMany({})
+db.kitchenTypes.deleteMany({})</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">📊 Dados de Exemplo</h3>
+                        <div class="code-block">
+                            <pre># Inserir dados de teste via MongoDB shell
+db.kitchenTypes.insertMany([
+  { name: "ITALIAN", description: "Cozinha Italiana" },
+  { name: "BRAZILIAN", description: "Cozinha Brasileira" },
+  { name: "JAPANESE", description: "Cozinha Japonesa" }
+])
+
+db.restaurants.insertOne({
+  name: "Restaurante Exemplo",
+  description: "Descrição do restaurante",
+  kitchenType: "ITALIAN",
+  address: {
+    street: "Rua Exemplo, 123",
+    city: "São Paulo",
+    state: "SP",
+    zipCode: "01234-567"
+  },
+  menu: {
+    categories: []
+  }
+})</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- API Testing -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">📡</span>
+                        <h2 class="card-title">Teste da API</h2>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="mb-1">🔗 Endpoints Principais</h3>
+                        <div class="endpoint">
+                            <span class="method method-get">GET</span>
+                            <span class="endpoint-path">http://localhost:8081/api/restaurants</span>
+                            <span class="endpoint-description">Listar restaurantes</span>
+                        </div>
+                        
+                        <div class="endpoint">
+                            <span class="method method-get">GET</span>
+                            <span class="endpoint-path">http://localhost:8081/api/kitchen-types</span>
+                            <span class="endpoint-description">Listar tipos de cozinha</span>
+                        </div>
+
+                        <div class="endpoint">
+                            <span class="method method-get">GET</span>
+                            <span class="endpoint-path">http://localhost:8081/actuator/health</span>
+                            <span class="endpoint-description">Health check</span>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">📡 Postman</h3>
+                        <div class="code-block">
+                            <pre># Importar collection
+1. Abrir Postman
+2. Import → File → Selecionar postman/collection.json
+3. Configurar variável: baseUrl = http://localhost:8081</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">💻 cURL Examples</h3>
+                        <div class="code-block">
+                            <pre># Listar restaurantes
+curl -X GET http://localhost:8081/api/restaurants
+
+# Criar restaurante
+curl -X POST http://localhost:8081/api/restaurants \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Novo Restaurante",
+    "description": "Descrição",
+    "kitchenType": "ITALIAN",
+    "address": {
+      "street": "Rua Nova, 456",
+      "city": "São Paulo",
+      "state": "SP",
+      "zipCode": "01234-567"
+    }
+  }'
+
+# Health check
+curl -X GET http://localhost:8081/actuator/health</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Troubleshooting -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🔧</span>
+                        <h2 class="card-title">Troubleshooting</h2>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="mb-1">❌ Problemas Comuns</h3>
+                        
+                        <h4 class="mb-1 mt-2">🔌 Porta 8081 já em uso</h4>
+                        <div class="code-block">
+                            <pre># Verificar o que está usando a porta
+lsof -i :8081
+netstat -tulpn | grep :8081
+
+# Parar processo
+kill -9 &lt;PID&gt;
+
+# Ou usar porta diferente
+./gradlew bootRun -Dserver.port=8082</pre>
+                        </div>
+
+                        <h4 class="mb-1 mt-2">🗄️ Erro de conexão MongoDB</h4>
+                        <div class="code-block">
+                            <pre># Verificar se MongoDB está rodando
+docker ps | grep mongodb
+mongosh --eval "db.adminCommand('ping')"
+
+# Reiniciar MongoDB
+docker restart mongodb
+
+# Verificar logs
+docker logs mongodb</pre>
+                        </div>
+
+                        <h4 class="mb-1 mt-2">☕ Problemas com Java</h4>
+                        <div class="code-block">
+                            <pre># Verificar versão do Java
+java -version
+javac -version
+
+# Verificar JAVA_HOME
+echo $JAVA_HOME
+
+# Limpar cache do Gradle
+./gradlew clean
+rm -rf ~/.gradle/caches</pre>
+                        </div>
+
+                        <h4 class="mb-1 mt-2">🏗️ Problemas de build</h4>
+                        <div class="code-block">
+                            <pre># Limpar e rebuildar
+./gradlew clean build
+
+# Executar com logs detalhados
+./gradlew bootRun --info --debug
+
+# Verificar dependências
+./gradlew dependencies</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Next Steps -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🚀</span>
+                        <h2 class="card-title">Próximos Passos</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>Agora que você tem o ambiente local configurado:</p>
+
+                        <div class="feature-cards">
+                            <div class="feature-card" data-link="testing.html">
+                                <div class="feature-card-icon">🧪</div>
+                                <h3 class="feature-card-title">Executar Testes</h3>
+                                <p class="feature-card-description">
+                                    Aprenda a executar e criar testes
+                                </p>
+                            </div>
+
+                            <div class="feature-card" data-link="api-overview.html">
+                                <div class="feature-card-icon">📚</div>
+                                <h3 class="feature-card-title">Explorar API</h3>
+                                <p class="feature-card-description">
+                                    Conheça todos os endpoints disponíveis
+                                </p>
+                            </div>
+
+                            <div class="feature-card" data-link="docker.html">
+                                <div class="feature-card-icon">🐳</div>
+                                <h3 class="feature-card-title">Docker Setup</h3>
+                                <p class="feature-card-description">
+                                    Alternative com Docker Compose
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

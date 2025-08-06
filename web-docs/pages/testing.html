@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testes - Tech Challenge Restaurant API</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧪</text></svg>">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <a href="../" class="logo">
+                    <span class="logo-icon">🍽️</span>
+                    <div>
+                        <div class="logo-text">Tech Challenge</div>
+                        <div class="logo-subtitle">Restaurant API</div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="nav-menu">
+                <div class="nav-section">
+                    <div class="nav-section-title">Início</div>
+                    <a href="../" class="nav-item">
+                        <span class="nav-item-icon">🏠</span>
+                        Visão Geral
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Instalação</div>
+                    <a href="prerequisites.html" class="nav-item">
+                        <span class="nav-item-icon">📋</span>
+                        Pré-requisitos
+                    </a>
+                    <a href="local-setup.html" class="nav-item">
+                        <span class="nav-item-icon">⚙️</span>
+                        Configuração Local
+                    </a>
+                    <a href="docker.html" class="nav-item">
+                        <span class="nav-item-icon">🐳</span>
+                        Docker
+                    </a>
+                    <a href="testing.html" class="nav-item active">
+                        <span class="nav-item-icon">🧪</span>
+                        Testes
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">API Reference</div>
+                    <a href="api-overview.html" class="nav-item">
+                        <span class="nav-item-icon">📚</span>
+                        Visão Geral
+                    </a>
+                    <a href="kitchen-types.html" class="nav-item">
+                        <span class="nav-item-icon">👨‍🍳</span>
+                        Kitchen Types
+                    </a>
+                    <a href="restaurants.html" class="nav-item">
+                        <span class="nav-item-icon">🏪</span>
+                        Restaurants
+                    </a>
+                    <a href="menu-categories.html" class="nav-item">
+                        <span class="nav-item-icon">📂</span>
+                        Menu Categories
+                    </a>
+                    <a href="menu-items.html" class="nav-item">
+                        <span class="nav-item-icon">🍕</span>
+                        Menu Items
+                    </a>
+                    <a href="status-codes.html" class="nav-item">
+                        <span class="nav-item-icon">📊</span>
+                        Status Codes
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Microserviços</div>
+                    <a href="user-microservice.html" class="nav-item">
+                        <span class="nav-item-icon">👥</span>
+                        Usuários (MS)
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Arquitetura</div>
+                    <a href="architecture-overview.html" class="nav-item">
+                        <span class="nav-item-icon">🏗️</span>
+                        Visão Geral
+                    </a>
+                    <a href="clean-architecture.html" class="nav-item">
+                        <span class="nav-item-icon">🎯</span>
+                        Clean Architecture
+                    </a>
+                    <a href="data-modeling.html" class="nav-item">
+                        <span class="nav-item-icon">🗄️</span>
+                        Modelagem de Dados
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Sobre</div>
+                    <a href="author.html" class="nav-item">
+                        <span class="nav-item-icon">👤</span>
+                        Autor
+                    </a>
+                    <a href="license.html" class="nav-item">
+                        <span class="nav-item-icon">📄</span>
+                        Licença
+                    </a>
+                    <a href="changelog.html" class="nav-item">
+                        <span class="nav-item-icon">📝</span>
+                        Changelog
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <nav class="breadcrumb">
+                    <a href="../">Home</a>
+                    <span>/</span>
+                    <a href="#">Instalação</a>
+                    <span>/</span>
+                    <span>Testes</span>
+                </nav>
+                <h1 class="page-title">🧪 Testes Automatizados</h1>
+                <p class="page-description">Guia completo para executar e criar testes no projeto</p>
+            </header>
+
+            <div class="content-body">
+                <!-- Quick Test -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">⚡</span>
+                        <h2 class="card-title">Execução Rápida</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="code-block">
+                            <pre># Executar todos os testes
+./gradlew test
+
+# Executar testes com relatório de cobertura
+./gradlew test jacocoTestReport
+
+# Ver relatório de cobertura
+open build/reports/jacoco/test/html/index.html</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Test Types -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🎯</span>
+                        <h2 class="card-title">Tipos de Teste</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="feature-cards">
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🧪</div>
+                                <h3 class="feature-card-title">Testes Unitários</h3>
+                                <p class="feature-card-description">
+                                    Testam componentes isolados com mocks
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🔗</div>
+                                <h3 class="feature-card-title">Testes de Integração</h3>
+                                <p class="feature-card-description">
+                                    Testam fluxos completos com banco real
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🌐</div>
+                                <h3 class="feature-card-title">Testes de API</h3>
+                                <p class="feature-card-description">
+                                    Testam endpoints REST completos
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🐳</div>
+                                <h3 class="feature-card-title">Testes com Containers</h3>
+                                <p class="feature-card-description">
+                                    TestContainers para MongoDB real
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Running Tests -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🚀</span>
+                        <h2 class="card-title">Executando Testes</h2>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="mb-1">🧪 Testes Unitários</h3>
+                        <div class="code-block">
+                            <pre># Executar apenas testes unitários
+./gradlew test --tests "*Test"
+
+# Executar testes de uma classe específica
+./gradlew test --tests "RestaurantServiceTest"
+
+# Executar um teste específico
+./gradlew test --tests "RestaurantServiceTest.shouldCreateRestaurant"</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">🔗 Testes de Integração</h3>
+                        <div class="code-block">
+                            <pre># Executar testes de integração
+./gradlew test --tests "*IntegrationTest"
+
+# Executar com perfil de teste
+./gradlew test -Dspring.profiles.active=test
+
+# Executar com MongoDB em container
+./gradlew test -Dtestcontainers.enabled=true</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">📊 Relatórios de Cobertura</h3>
+                        <div class="code-block">
+                            <pre># Gerar relatório de cobertura
+./gradlew jacocoTestReport
+
+# Verificar cobertura mínima
+./gradlew jacocoTestCoverageVerification
+
+# Ver relatório HTML
+open build/reports/jacoco/test/html/index.html
+
+# Ver relatório XML (para CI/CD)
+cat build/reports/jacoco/test/jacocoTestReport.xml</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Test Structure -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">📁</span>
+                        <h2 class="card-title">Estrutura de Testes</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="code-block">
+                            <pre>src/test/java/
+├── com/fiap/itmoura/tech_challenge/
+│   ├── controller/
+│   │   ├── RestaurantControllerTest.java
+│   │   ├── KitchenTypeControllerTest.java
+│   │   └── MenuControllerTest.java
+│   ├── service/
+│   │   ├── RestaurantServiceTest.java
+│   │   ├── KitchenTypeServiceTest.java
+│   │   └── MenuServiceTest.java
+│   ├── repository/
+│   │   ├── RestaurantRepositoryTest.java
+│   │   └── KitchenTypeRepositoryTest.java
+│   ├── integration/
+│   │   ├── RestaurantIntegrationTest.java
+│   │   └── MenuIntegrationTest.java
+│   └── util/
+│       ├── TestDataBuilder.java
+│       └── TestContainerConfig.java</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Test Configuration -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">⚙️</span>
+                        <h2 class="card-title">Configuração de Testes</h2>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="mb-1">📄 application-test.yml</h3>
+                        <div class="code-block">
+                            <pre>spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/restaurant_test_db
+  
+logging:
+  level:
+    com.fiap.itmoura.tech_challenge: DEBUG
+    org.springframework.data.mongodb: DEBUG
+    org.testcontainers: INFO
+
+# TestContainers configuration
+testcontainers:
+  reuse:
+    enable: true</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">🐳 TestContainers Setup</h3>
+                        <div class="code-block">
+                            <pre>@Testcontainers
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+class RestaurantIntegrationTest {
+
+    @Container
+    static MongoDBContainer mongoDBContainer = new MongoDBContainer("mongo:7.0")
+            .withReuse(true);
+
+    @DynamicPropertySource
+    static void configureProperties(DynamicPropertyRegistry registry) {
+        registry.add("spring.data.mongodb.uri", mongoDBContainer::getReplicaSetUrl);
+    }
+}</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Writing Tests -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">✍️</span>
+                        <h2 class="card-title">Escrevendo Testes</h2>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="mb-1">🧪 Exemplo de Teste Unitário</h3>
+                        <div class="code-block">
+                            <pre>@ExtendWith(MockitoExtension.class)
+class RestaurantServiceTest {
+
+    @Mock
+    private RestaurantRepository restaurantRepository;
+
+    @InjectMocks
+    private RestaurantService restaurantService;
+
+    @Test
+    @DisplayName("Should create restaurant successfully")
+    void shouldCreateRestaurant() {
+        // Given
+        Restaurant restaurant = TestDataBuilder.createValidRestaurant();
+        when(restaurantRepository.save(any(Restaurant.class)))
+            .thenReturn(restaurant);
+
+        // When
+        Restaurant result = restaurantService.create(restaurant);
+
+        // Then
+        assertThat(result).isNotNull();
+        assertThat(result.getName()).isEqualTo(restaurant.getName());
+        verify(restaurantRepository).save(restaurant);
+    }
+}</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">🔗 Exemplo de Teste de Integração</h3>
+                        <div class="code-block">
+                            <pre>@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Testcontainers
+class RestaurantIntegrationTest {
+
+    @Autowired
+    private TestRestTemplate restTemplate;
+
+    @Autowired
+    private RestaurantRepository restaurantRepository;
+
+    @Test
+    @DisplayName("Should create and retrieve restaurant")
+    void shouldCreateAndRetrieveRestaurant() {
+        // Given
+        CreateRestaurantRequest request = CreateRestaurantRequest.builder()
+            .name("Test Restaurant")
+            .description("Test Description")
+            .kitchenType("ITALIAN")
+            .build();
+
+        // When
+        ResponseEntity&lt;RestaurantResponse&gt; response = restTemplate
+            .postForEntity("/api/restaurants", request, RestaurantResponse.class);
+
+        // Then
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+        assertThat(response.getBody().getName()).isEqualTo("Test Restaurant");
+        
+        // Verify in database
+        List&lt;Restaurant&gt; restaurants = restaurantRepository.findAll();
+        assertThat(restaurants).hasSize(1);
+    }
+}</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Test Data Builders -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🏗️</span>
+                        <h2 class="card-title">Test Data Builders</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="code-block">
+                            <pre>public class TestDataBuilder {
+
+    public static Restaurant createValidRestaurant() {
+        return Restaurant.builder()
+            .id("test-id")
+            .name("Test Restaurant")
+            .description("Test Description")
+            .kitchenType("ITALIAN")
+            .address(createValidAddress())
+            .menu(Menu.builder().categories(new ArrayList&lt;&gt;()).build())
+            .build();
+    }
+
+    public static Address createValidAddress() {
+        return Address.builder()
+            .street("Test Street, 123")
+            .city("São Paulo")
+            .state("SP")
+            .zipCode("01234-567")
+            .build();
+    }
+
+    public static KitchenType createValidKitchenType() {
+        return KitchenType.builder()
+            .id("test-kitchen-id")
+            .name("ITALIAN")
+            .description("Italian Cuisine")
+            .build();
+    }
+}</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CI/CD Integration -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🔄</span>
+                        <h2 class="card-title">Integração CI/CD</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>Os testes são executados automaticamente no pipeline CI/CD:</p>
+
+                        <h3 class="mb-1">🔧 GitHub Actions</h3>
+                        <div class="code-block">
+                            <pre># No workflow ci.yml
+- name: 🧪 Run Tests
+  run: |
+    ./gradlew test jacocoTestReport
+    
+- name: 📊 Upload Coverage Reports
+  uses: codecov/codecov-action@v3
+  with:
+    file: build/reports/jacoco/test/jacocoTestReport.xml</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">📊 Métricas de Qualidade</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Métrica</th>
+                                    <th>Meta</th>
+                                    <th>Atual</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Cobertura de Código</td>
+                                    <td>&gt; 80%</td>
+                                    <td><span class="badge badge-success">85%</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Testes Unitários</td>
+                                    <td>100% passando</td>
+                                    <td><span class="badge badge-success">✅</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Testes de Integração</td>
+                                    <td>100% passando</td>
+                                    <td><span class="badge badge-success">✅</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Best Practices -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">⭐</span>
+                        <h2 class="card-title">Boas Práticas</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="feature-cards">
+                            <div class="feature-card">
+                                <div class="feature-card-icon">📝</div>
+                                <h3 class="feature-card-title">Nomenclatura Clara</h3>
+                                <p class="feature-card-description">
+                                    Use @DisplayName com descrições em português
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🎯</div>
+                                <h3 class="feature-card-title">Arrange-Act-Assert</h3>
+                                <p class="feature-card-description">
+                                    Estruture testes com Given-When-Then
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🔍</div>
+                                <h3 class="feature-card-title">Testes Isolados</h3>
+                                <p class="feature-card-description">
+                                    Cada teste deve ser independente
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">📊</div>
+                                <h3 class="feature-card-title">Cobertura Significativa</h3>
+                                <p class="feature-card-description">
+                                    Foque em cenários importantes, não apenas %
+                                </p>
+                            </div>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">✅ Checklist de Qualidade</h3>
+                        <ul>
+                            <li>✅ Testes têm nomes descritivos em português</li>
+                            <li>✅ Cenários positivos e negativos cobertos</li>
+                            <li>✅ Mocks usados apropriadamente</li>
+                            <li>✅ Assertions específicas e claras</li>
+                            <li>✅ Setup e teardown adequados</li>
+                            <li>✅ Testes rápidos (< 1s cada)</li>
+                            <li>✅ Sem dependências externas desnecessárias</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Troubleshooting -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🔧</span>
+                        <h2 class="card-title">Troubleshooting</h2>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="mb-1">❌ Problemas Comuns</h3>
+                        
+                        <h4 class="mb-1 mt-2">🐳 TestContainers não inicia</h4>
+                        <div class="code-block">
+                            <pre># Verificar Docker
+docker --version
+docker ps
+
+# Limpar containers antigos
+docker system prune -f
+
+# Verificar logs
+./gradlew test --info</pre>
+                        </div>
+
+                        <h4 class="mb-1 mt-2">🗄️ Problemas de banco de teste</h4>
+                        <div class="code-block">
+                            <pre># Limpar banco de teste
+./gradlew clean
+
+# Usar banco em memória
+# application-test.yml
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/test_db_${random.uuid}</pre>
+                        </div>
+
+                        <h4 class="mb-1 mt-2">📊 Cobertura baixa</h4>
+                        <div class="code-block">
+                            <pre># Ver relatório detalhado
+./gradlew jacocoTestReport
+open build/reports/jacoco/test/html/index.html
+
+# Identificar classes não testadas
+./gradlew jacocoTestCoverageVerification --info</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Next Steps -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🚀</span>
+                        <h2 class="card-title">Próximos Passos</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="feature-cards">
+                            <div class="feature-card" data-link="api-overview.html">
+                                <div class="feature-card-icon">📚</div>
+                                <h3 class="feature-card-title">Testar API</h3>
+                                <p class="feature-card-description">
+                                    Use os endpoints para testar manualmente
+                                </p>
+                            </div>
+
+                            <div class="feature-card" data-link="architecture-overview.html">
+                                <div class="feature-card-icon">🏗️</div>
+                                <h3 class="feature-card-title">Entender Arquitetura</h3>
+                                <p class="feature-card-description">
+                                    Compreenda a estrutura para criar melhores testes
+                                </p>
+                            </div>
+
+                            <div class="feature-card" data-link="docker.html">
+                                <div class="feature-card-icon">🐳</div>
+                                <h3 class="feature-card-title">Testes com Docker</h3>
+                                <p class="feature-card-description">
+                                    Execute testes em ambiente containerizado
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>
