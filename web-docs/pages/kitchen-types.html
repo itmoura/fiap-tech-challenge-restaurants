@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitchen Types API - Tech Challenge Restaurant API</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👨‍🍳</text></svg>">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <a href="../" class="logo">
+                    <span class="logo-icon">🍽️</span>
+                    <div>
+                        <div class="logo-text">Tech Challenge</div>
+                        <div class="logo-subtitle">Restaurant API</div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="nav-menu">
+                <div class="nav-section">
+                    <div class="nav-section-title">Início</div>
+                    <a href="../" class="nav-item">
+                        <span class="nav-item-icon">🏠</span>
+                        Visão Geral
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Instalação</div>
+                    <a href="prerequisites.html" class="nav-item">
+                        <span class="nav-item-icon">📋</span>
+                        Pré-requisitos
+                    </a>
+                    <a href="local-setup.html" class="nav-item">
+                        <span class="nav-item-icon">⚙️</span>
+                        Configuração Local
+                    </a>
+                    <a href="docker.html" class="nav-item">
+                        <span class="nav-item-icon">🐳</span>
+                        Docker
+                    </a>
+                    <a href="testing.html" class="nav-item">
+                        <span class="nav-item-icon">🧪</span>
+                        Testes
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">API Reference</div>
+                    <a href="api-overview.html" class="nav-item">
+                        <span class="nav-item-icon">📚</span>
+                        Visão Geral
+                    </a>
+                    <a href="kitchen-types.html" class="nav-item active">
+                        <span class="nav-item-icon">👨‍🍳</span>
+                        Kitchen Types
+                    </a>
+                    <a href="restaurants.html" class="nav-item">
+                        <span class="nav-item-icon">🏪</span>
+                        Restaurants
+                    </a>
+                    <a href="menu-categories.html" class="nav-item">
+                        <span class="nav-item-icon">📂</span>
+                        Menu Categories
+                    </a>
+                    <a href="menu-items.html" class="nav-item">
+                        <span class="nav-item-icon">🍕</span>
+                        Menu Items
+                    </a>
+                    <a href="status-codes.html" class="nav-item">
+                        <span class="nav-item-icon">📊</span>
+                        Status Codes
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Microserviços</div>
+                    <a href="user-microservice.html" class="nav-item">
+                        <span class="nav-item-icon">👥</span>
+                        Usuários (MS)
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Arquitetura</div>
+                    <a href="architecture-overview.html" class="nav-item">
+                        <span class="nav-item-icon">🏗️</span>
+                        Visão Geral
+                    </a>
+                    <a href="clean-architecture.html" class="nav-item">
+                        <span class="nav-item-icon">🎯</span>
+                        Clean Architecture
+                    </a>
+                    <a href="data-modeling.html" class="nav-item">
+                        <span class="nav-item-icon">🗄️</span>
+                        Modelagem de Dados
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Sobre</div>
+                    <a href="author.html" class="nav-item">
+                        <span class="nav-item-icon">👤</span>
+                        Autor
+                    </a>
+                    <a href="license.html" class="nav-item">
+                        <span class="nav-item-icon">📄</span>
+                        Licença
+                    </a>
+                    <a href="changelog.html" class="nav-item">
+                        <span class="nav-item-icon">📝</span>
+                        Changelog
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <nav class="breadcrumb">
+                    <a href="../">Home</a>
+                    <span>/</span>
+                    <a href="#">API Reference</a>
+                    <span>/</span>
+                    <span>Kitchen Types</span>
+                </nav>
+                <h1 class="page-title">👨‍🍳 Kitchen Types API</h1>
+                <p class="page-description">Gerenciamento de tipos de cozinha (Italiana, Brasileira, etc.)</p>
+            </header>
+
+            <div class="content-body">
+                <!-- Overview -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">📋</span>
+                        <h2 class="card-title">Sobre Kitchen Types</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>Os Kitchen Types representam os diferentes tipos de cozinha disponíveis no sistema (Italiana, Brasileira, Japonesa, etc.). Cada restaurante deve ter um tipo de cozinha associado.</p>
+
+                        <div class="feature-cards">
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🏷️</div>
+                                <h3 class="feature-card-title">Identificação</h3>
+                                <p class="feature-card-description">
+                                    Cada tipo tem um nome único e descrição
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🔗</div>
+                                <h3 class="feature-card-title">Relacionamento</h3>
+                                <p class="feature-card-description">
+                                    Associado a restaurantes via campo kitchenType
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">📊</div>
+                                <h3 class="feature-card-title">Enum Values</h3>
+                                <p class="feature-card-description">
+                                    Valores pré-definidos para consistência
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Available Types -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🍽️</span>
+                        <h2 class="card-title">Tipos Disponíveis</h2>
+                    </div>
+                    <div class="card-content">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Nome</th>
+                                    <th>Descrição</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>ITALIAN</code></td>
+                                    <td>Italiana</td>
+                                    <td>Cozinha tradicional italiana com massas, pizzas e risotos</td>
+                                </tr>
+                                <tr>
+                                    <td><code>BRAZILIAN</code></td>
+                                    <td>Brasileira</td>
+                                    <td>Culinária brasileira com pratos regionais e tradicionais</td>
+                                </tr>
+                                <tr>
+                                    <td><code>JAPANESE</code></td>
+                                    <td>Japonesa</td>
+                                    <td>Cozinha japonesa com sushi, sashimi e pratos orientais</td>
+                                </tr>
+                                <tr>
+                                    <td><code>MEXICAN</code></td>
+                                    <td>Mexicana</td>
+                                    <td>Culinária mexicana com tacos, burritos e especiarias</td>
+                                </tr>
+                                <tr>
+                                    <td><code>CHINESE</code></td>
+                                    <td>Chinesa</td>
+                                    <td>Cozinha chinesa tradicional com wok e dim sum</td>
+                                </tr>
+                                <tr>
+                                    <td><code>FRENCH</code></td>
+                                    <td>Francesa</td>
+                                    <td>Alta gastronomia francesa com técnicas refinadas</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- API Endpoints -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🔗</span>
+                        <h2 class="card-title">Endpoints</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="endpoint">
+                            <span class="method method-get">GET</span>
+                            <span class="endpoint-path">/api/kitchen-types</span>
+                            <span class="endpoint-description">Listar todos os tipos de cozinha</span>
+                        </div>
+                        
+                        <div class="endpoint">
+                            <span class="method method-get">GET</span>
+                            <span class="endpoint-path">/api/kitchen-types/{id}</span>
+                            <span class="endpoint-description">Buscar tipo de cozinha por ID</span>
+                        </div>
+
+                        <div class="endpoint">
+                            <span class="method method-post">POST</span>
+                            <span class="endpoint-path">/api/kitchen-types</span>
+                            <span class="endpoint-description">Criar novo tipo de cozinha</span>
+                        </div>
+
+                        <div class="endpoint">
+                            <span class="method method-put">PUT</span>
+                            <span class="endpoint-path">/api/kitchen-types/{id}</span>
+                            <span class="endpoint-description">Atualizar tipo de cozinha</span>
+                        </div>
+
+                        <div class="endpoint">
+                            <span class="method method-delete">DELETE</span>
+                            <span class="endpoint-path">/api/kitchen-types/{id}</span>
+                            <span class="endpoint-description">Remover tipo de cozinha</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Examples -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">💻</span>
+                        <h2 class="card-title">Exemplos de Uso</h2>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="mb-1">📋 Listar Tipos de Cozinha</h3>
+                        <div class="code-block">
+                            <pre>curl -X GET http://localhost:8081/api/kitchen-types \
+  -H "Content-Type: application/json"</pre>
+                        </div>
+
+                        <p><strong>Resposta:</strong></p>
+                        <div class="code-block">
+                            <pre>{
+  "success": true,
+  "data": [
+    {
+      "id": "64f1a2b3c4d5e6f7g8h9i0j1",
+      "name": "ITALIAN",
+      "description": "Cozinha tradicional italiana"
+    },
+    {
+      "id": "64f1a2b3c4d5e6f7g8h9i0j2",
+      "name": "BRAZILIAN", 
+      "description": "Culinária brasileira"
+    }
+  ],
+  "timestamp": "2024-08-05T19:30:00Z"
+}</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">🔍 Buscar por ID</h3>
+                        <div class="code-block">
+                            <pre>curl -X GET http://localhost:8081/api/kitchen-types/64f1a2b3c4d5e6f7g8h9i0j1 \
+  -H "Content-Type: application/json"</pre>
+                        </div>
+
+                        <p><strong>Resposta:</strong></p>
+                        <div class="code-block">
+                            <pre>{
+  "success": true,
+  "data": {
+    "id": "64f1a2b3c4d5e6f7g8h9i0j1",
+    "name": "ITALIAN",
+    "description": "Cozinha tradicional italiana com massas, pizzas e risotos"
+  },
+  "timestamp": "2024-08-05T19:30:00Z"
+}</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">➕ Criar Tipo de Cozinha</h3>
+                        <div class="code-block">
+                            <pre>curl -X POST http://localhost:8081/api/kitchen-types \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "THAI",
+    "description": "Cozinha tailandesa com especiarias e sabores únicos"
+  }'</pre>
+                        </div>
+
+                        <p><strong>Resposta:</strong></p>
+                        <div class="code-block">
+                            <pre>{
+  "success": true,
+  "data": {
+    "id": "64f1a2b3c4d5e6f7g8h9i0j3",
+    "name": "THAI",
+    "description": "Cozinha tailandesa com especiarias e sabores únicos"
+  },
+  "message": "Tipo de cozinha criado com sucesso",
+  "timestamp": "2024-08-05T19:30:00Z"
+}</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">✏️ Atualizar Tipo de Cozinha</h3>
+                        <div class="code-block">
+                            <pre>curl -X PUT http://localhost:8081/api/kitchen-types/64f1a2b3c4d5e6f7g8h9i0j3 \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "THAI",
+    "description": "Autêntica cozinha tailandesa com curry e pad thai"
+  }'</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">🗑️ Remover Tipo de Cozinha</h3>
+                        <div class="code-block">
+                            <pre>curl -X DELETE http://localhost:8081/api/kitchen-types/64f1a2b3c4d5e6f7g8h9i0j3 \
+  -H "Content-Type: application/json"</pre>
+                        </div>
+
+                        <p><strong>Resposta:</strong></p>
+                        <div class="code-block">
+                            <pre>{
+  "success": true,
+  "message": "Tipo de cozinha removido com sucesso",
+  "timestamp": "2024-08-05T19:30:00Z"
+}</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Model -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">📊</span>
+                        <h2 class="card-title">Modelo de Dados</h2>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="mb-1">🏗️ Estrutura KitchenType</h3>
+                        <div class="code-block">
+                            <pre>{
+  "id": "string",           // ID único gerado automaticamente
+  "name": "string",         // Nome do tipo (enum: ITALIAN, BRAZILIAN, etc.)
+  "description": "string"   // Descrição detalhada do tipo de cozinha
+}</pre>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">✅ Validações</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Campo</th>
+                                    <th>Regras</th>
+                                    <th>Exemplo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>name</code></td>
+                                    <td>Obrigatório, único, enum válido</td>
+                                    <td>ITALIAN</td>
+                                </tr>
+                                <tr>
+                                    <td><code>description</code></td>
+                                    <td>Obrigatório, 10-200 caracteres</td>
+                                    <td>Cozinha tradicional italiana</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3 class="mb-1 mt-2">🔗 Relacionamentos</h3>
+                        <ul>
+                            <li><strong>Restaurants</strong>: Um tipo de cozinha pode ter vários restaurantes</li>
+                            <li><strong>Constraint</strong>: Não pode ser removido se houver restaurantes associados</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Error Handling -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">⚠️</span>
+                        <h2 class="card-title">Tratamento de Erros</h2>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="mb-1">❌ Erros Comuns</h3>
+                        
+                        <h4 class="mb-1 mt-2">400 - Bad Request</h4>
+                        <div class="code-block">
+                            <pre>{
+  "success": false,
+  "error": {
+    "code": "VALIDATION_ERROR",
+    "message": "Dados inválidos",
+    "details": "Nome é obrigatório"
+  },
+  "timestamp": "2024-08-05T19:30:00Z"
+}</pre>
+                        </div>
+
+                        <h4 class="mb-1 mt-2">404 - Not Found</h4>
+                        <div class="code-block">
+                            <pre>{
+  "success": false,
+  "error": {
+    "code": "KITCHEN_TYPE_NOT_FOUND",
+    "message": "Tipo de cozinha não encontrado",
+    "details": "Nenhum tipo de cozinha encontrado com o ID fornecido"
+  },
+  "timestamp": "2024-08-05T19:30:00Z"
+}</pre>
+                        </div>
+
+                        <h4 class="mb-1 mt-2">409 - Conflict</h4>
+                        <div class="code-block">
+                            <pre>{
+  "success": false,
+  "error": {
+    "code": "KITCHEN_TYPE_ALREADY_EXISTS",
+    "message": "Tipo de cozinha já existe",
+    "details": "Já existe um tipo de cozinha com este nome"
+  },
+  "timestamp": "2024-08-05T19:30:00Z"
+}</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testing -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🧪</span>
+                        <h2 class="card-title">Testando a API</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="feature-cards">
+                            <div class="feature-card">
+                                <div class="feature-card-icon">📡</div>
+                                <h3 class="feature-card-title">Postman</h3>
+                                <p class="feature-card-description">
+                                    Collection disponível no repositório
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🌐</div>
+                                <h3 class="feature-card-title">Swagger UI</h3>
+                                <p class="feature-card-description">
+                                    Interface interativa em /swagger-ui/index.html
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card-icon">💻</div>
+                                <h3 class="feature-card-title">cURL</h3>
+                                <p class="feature-card-description">
+                                    Exemplos de comandos acima
+                                </p>
+                            </div>
+                        </div>
+
+                        <h3 class="mb-1 mt-2">🔄 Fluxo de Teste Sugerido</h3>
+                        <ol>
+                            <li>Listar tipos existentes</li>
+                            <li>Criar um novo tipo</li>
+                            <li>Buscar o tipo criado por ID</li>
+                            <li>Atualizar a descrição</li>
+                            <li>Tentar criar tipo duplicado (deve falhar)</li>
+                            <li>Remover o tipo criado</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Next Steps -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🚀</span>
+                        <h2 class="card-title">Próximos Passos</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="feature-cards">
+                            <div class="feature-card" data-link="restaurants.html">
+                                <div class="feature-card-icon">🏪</div>
+                                <h3 class="feature-card-title">Restaurants API</h3>
+                                <p class="feature-card-description">
+                                    Aprenda a criar restaurantes com tipos de cozinha
+                                </p>
+                            </div>
+
+                            <div class="feature-card" data-link="api-overview.html">
+                                <div class="feature-card-icon">📚</div>
+                                <h3 class="feature-card-title">API Overview</h3>
+                                <p class="feature-card-description">
+                                    Visão geral de todos os endpoints
+                                </p>
+                            </div>
+
+                            <div class="feature-card" data-link="data-modeling.html">
+                                <div class="feature-card-icon">🗄️</div>
+                                <h3 class="feature-card-title">Modelagem de Dados</h3>
+                                <p class="feature-card-description">
+                                    Entenda a estrutura do banco de dados
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>
