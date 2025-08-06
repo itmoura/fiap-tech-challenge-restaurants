@@ -86,6 +86,10 @@ jobs:
           find web-docs -name "*.bak" -delete || true
           find web-docs -name "*~" -delete || true
           
+          # Ensure .nojekyll file exists for static HTML serving
+          touch web-docs/.nojekyll
+          echo "✅ .nojekyll file created for static HTML serving"
+          
           echo "✅ Optimization completed"
 
       - name: 🚀 Setup GitHub Pages
