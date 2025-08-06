@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postman Collections - Tech Challenge Restaurant API</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍽️</text></svg>">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <a href="../" class="logo">
+                    <span class="logo-icon">🍽️</span>
+                    <div>
+                        <div class="logo-text">Tech Challenge</div>
+                        <div class="logo-subtitle">Restaurant API</div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="nav-menu">
+                <div class="nav-section">
+                    <div class="nav-section-title">Início</div>
+                    <a href="../" class="nav-item">
+                        <span class="nav-item-icon">🏠</span>
+                        Visão Geral
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Instalação</div>
+                    <a href="prerequisites.html" class="nav-item">
+                        <span class="nav-item-icon">📋</span>
+                        Pré-requisitos
+                    </a>
+                    <a href="local-setup.html" class="nav-item">
+                        <span class="nav-item-icon">⚙️</span>
+                        Configuração Local
+                    </a>
+                    <a href="docker.html" class="nav-item">
+                        <span class="nav-item-icon">🐳</span>
+                        Docker
+                    </a>
+                    <a href="testing.html" class="nav-item">
+                        <span class="nav-item-icon">🧪</span>
+                        Testes
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">API Reference</div>
+                    <a href="api-overview.html" class="nav-item">
+                        <span class="nav-item-icon">📚</span>
+                        Visão Geral
+                    </a>
+                    <a href="kitchen-types.html" class="nav-item">
+                        <span class="nav-item-icon">👨‍🍳</span>
+                        Kitchen Types
+                    </a>
+                    <a href="restaurants.html" class="nav-item">
+                        <span class="nav-item-icon">🏪</span>
+                        Restaurants
+                    </a>
+                    <a href="menu-categories.html" class="nav-item">
+                        <span class="nav-item-icon">📂</span>
+                        Menu Categories
+                    </a>
+                    <a href="menu-items.html" class="nav-item">
+                        <span class="nav-item-icon">🍕</span>
+                        Menu Items
+                    </a>
+                    <a href="status-codes.html" class="nav-item">
+                        <span class="nav-item-icon">📊</span>
+                        Status Codes
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Microserviços</div>
+                    <a href="user-microservice.html" class="nav-item">
+                        <span class="nav-item-icon">👥</span>
+                        Usuários (MS)
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Ferramentas</div>
+                    <a href="postman.html" class="nav-item active">
+                        <span class="nav-item-icon">📡</span>
+                        Postman Collections
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Arquitetura</div>
+                    <a href="architecture-overview.html" class="nav-item">
+                        <span class="nav-item-icon">🏗️</span>
+                        Visão Geral
+                    </a>
+                    <a href="clean-architecture.html" class="nav-item">
+                        <span class="nav-item-icon">🎯</span>
+                        Clean Architecture
+                    </a>
+                    <a href="data-modeling.html" class="nav-item">
+                        <span class="nav-item-icon">🗄️</span>
+                        Modelagem de Dados
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Sobre</div>
+                    <a href="author.html" class="nav-item">
+                        <span class="nav-item-icon">👤</span>
+                        Autor
+                    </a>
+                    <a href="license.html" class="nav-item">
+                        <span class="nav-item-icon">📄</span>
+                        Licença
+                    </a>
+                    <a href="changelog.html" class="nav-item">
+                        <span class="nav-item-icon">📝</span>
+                        Changelog
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <nav class="breadcrumb">
+                    <a href="../">Home</a>
+                    <span>/</span>
+                    <a href="#">Ferramentas</a>
+                    <span>/</span>
+                    <span>Postman Collections</span>
+                </nav>
+                <h1 class="page-title">📡 Postman Collections</h1>
+                <p class="page-description">Coleções do Postman para testar as APIs do Tech Challenge</p>
+            </header>
+
+            <div class="content-body">
+                <!-- Collections Overview -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">📚</span>
+                        <h2 class="card-title">Coleções Disponíveis</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>Disponibilizamos duas coleções do Postman para facilitar o teste das APIs:</p>
+                        
+                        <div class="feature-cards">
+                            <div class="feature-card">
+                                <div class="feature-card-icon">👥</div>
+                                <h3 class="feature-card-title">FIAP Tech Challenge - Users Microservice</h3>
+                                <p class="feature-card-description">
+                                    Coleção completa para testar o microserviço de usuários, incluindo autenticação, 
+                                    cadastro, atualização e gerenciamento de perfis.
+                                </p>
+                                <div class="mt-2">
+                                    <a href="https://www.postman.com/itmoura/workspace/fiap/collection/395491-d0f8153a-3fd8-491f-8fe0-fcb5b534d8e0?action=share&source=copy-link&creator=395491" 
+                                       target="_blank" class="badge badge-primary">
+                                        🔗 Abrir no Postman
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🏪</div>
+                                <h3 class="feature-card-title">Tech Challenge - Restaurants API</h3>
+                                <p class="feature-card-description">
+                                    Coleção para testar a API principal de restaurantes, incluindo gerenciamento de 
+                                    restaurantes, categorias de menu e itens do cardápio.
+                                </p>
+                                <div class="mt-2">
+                                    <a href="https://www.postman.com/itmoura/workspace/fiap/collection/395491-de9b971c-812a-4397-9770-d5b0cc39915c?action=share&source=copy-link&creator=395491" 
+                                       target="_blank" class="badge badge-primary">
+                                        🔗 Abrir no Postman
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Start -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">⚡</span>
+                        <h2 class="card-title">Como Usar as Coleções</h2>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="mb-2">Método 1: Abrir no Postman Web</h3>
+                        <ol>
+                            <li>Clique em <strong>"Abrir no Postman"</strong> em qualquer coleção</li>
+                            <li>Faça login na sua conta do Postman (ou crie uma gratuita)</li>
+                            <li>A coleção será importada automaticamente para seu workspace</li>
+                            <li>Configure as variáveis de ambiente se necessário</li>
+                        </ol>
+
+                        <h3 class="mb-2 mt-3">Método 2: Executar Diretamente</h3>
+                        <ol>
+                            <li>Clique em <strong>"Executar Direto"</strong> em qualquer coleção</li>
+                            <li>O Postman Web será aberto em uma nova aba</li>
+                            <li>A coleção será carregada automaticamente</li>
+                            <li>Você pode testar as requisições imediatamente</li>
+                        </ol>
+
+                        <h3 class="mb-2 mt-3">Método 3: Importar Manualmente</h3>
+                        <ol>
+                            <li>Abra o Postman Desktop ou Web</li>
+                            <li>Clique em <strong>Import</strong></li>
+                            <li>Cole o link da coleção desejada</li>
+                            <li>Clique em <strong>Continue</strong> e depois <strong>Import</strong></li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Environment Setup -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">⚙️</span>
+                        <h2 class="card-title">Configuração de Ambiente</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>Para usar as coleções corretamente, configure as seguintes variáveis de ambiente:</p>
+                        
+                        <div class="code-block">
+                            <pre># Variáveis Globais
+base_url: http://localhost:8080
+users_base_url: http://localhost:8081
+
+# Para autenticação (Users MS)
+auth_token: (será preenchido automaticamente após login)
+
+# Para testes
+test_user_email: test@example.com
+test_user_password: password123</pre>
+                        </div>
+
+                        <h3 class="mb-2 mt-3">Como Configurar:</h3>
+                        <ol>
+                            <li>Abra a coleção no Postman</li>
+                            <li>Clique em <strong>Environments</strong> no menu lateral</li>
+                            <li>Clique em <strong>+</strong> para criar um novo ambiente</li>
+                            <li>Adicione as variáveis acima</li>
+                            <li>Selecione o ambiente criado no dropdown superior direito</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Features -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">✨</span>
+                        <h2 class="card-title">Funcionalidades das Coleções</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="feature-cards">
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🔐</div>
+                                <h3 class="feature-card-title">Autenticação Automática</h3>
+                                <p class="feature-card-description">
+                                    Tokens de autenticação são gerenciados automaticamente entre as requisições.
+                                </p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <div class="feature-card-icon">📝</div>
+                                <h3 class="feature-card-title">Testes Automatizados</h3>
+                                <p class="feature-card-description">
+                                    Cada requisição inclui testes para validar respostas e status codes.
+                                </p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <div class="feature-card-icon">🔄</div>
+                                <h3 class="feature-card-title">Variáveis Dinâmicas</h3>
+                                <p class="feature-card-description">
+                                    IDs e tokens são capturados automaticamente para uso em requisições subsequentes.
+                                </p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <div class="feature-card-icon">📊</div>
+                                <h3 class="feature-card-title">Exemplos de Dados</h3>
+                                <p class="feature-card-description">
+                                    Dados de exemplo incluídos para facilitar os testes.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Troubleshooting -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🔧</span>
+                        <h2 class="card-title">Solução de Problemas</h2>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="mb-2">Erro 404 - Endpoint não encontrado</h3>
+                        <ul>
+                            <li>Verifique se a aplicação está rodando em <code>http://localhost:8080</code></li>
+                            <li>Confirme se o microserviço de usuários está em <code>http://localhost:8081</code></li>
+                            <li>Verifique se as variáveis de ambiente estão configuradas corretamente</li>
+                        </ul>
+
+                        <h3 class="mb-2 mt-3">Erro 401 - Não autorizado</h3>
+                        <ul>
+                            <li>Execute primeiro a requisição de login/registro</li>
+                            <li>Verifique se o token está sendo capturado automaticamente</li>
+                            <li>Confirme se o token não expirou</li>
+                        </ul>
+
+                        <h3 class="mb-2 mt-3">Erro 500 - Erro interno do servidor</h3>
+                        <ul>
+                            <li>Verifique os logs da aplicação</li>
+                            <li>Confirme se o banco de dados está conectado</li>
+                            <li>Verifique se todos os serviços estão rodando</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Função para abrir o Postman diretamente
+        function openPostmanCollection(collectionUrl) {
+            // Tenta abrir o Postman Web diretamente
+            const postmanUrl = collectionUrl.replace('?action=share&source=copy-link&creator=395491', '');
+            
+            // Abre em nova aba
+            window.open(postmanUrl, '_blank');
+            
+            // Mostra mensagem de feedback
+            showNotification('Abrindo coleção no Postman Web...', 'success');
+        }
+
+        // Função para mostrar notificações
+        function showNotification(message, type = 'info') {
+            // Cria elemento de notificação
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? 'var(--accent-success)' : 'var(--accent-primary)'};
+                color: var(--bg-primary);
+                padding: 12px 20px;
+                border-radius: 6px;
+                box-shadow: var(--shadow-md);
+                z-index: 10000;
+                font-weight: 500;
+                animation: slideIn 0.3s ease-out;
+            `;
+            notification.textContent = message;
+            
+            // Adiciona ao DOM
+            document.body.appendChild(notification);
+            
+            // Remove após 3 segundos
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease-in';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // Adiciona estilos CSS para animações
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
